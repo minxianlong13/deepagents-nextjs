@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -22,12 +23,69 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const currentYear = new Date().getFullYear();
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <header className="sticky top-0 z-40 border-b border-black/10 bg-[#f6efe7]/85 backdrop-blur">
+          <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 md:px-8">
+            <p className="text-xl font-semibold tracking-[0.08em]">AOE AI</p>
+            <p className="text-xs uppercase tracking-[0.16em] text-black/60">
+              AI for Everyone, Everywhere
+            </p>
+          </div>
+        </header>
+
+        <div className="mx-auto flex w-full max-w-7xl flex-1">
+          <aside className="hidden w-70 shrink-0 border-r border-black/10 bg-[#f4ebe2]/70 p-4 md:block">
+            <nav aria-label="Primary" className="flex flex-col gap-2">
+              <Link
+                href="/"
+                className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+              >
+                Home
+              </Link>
+              <Link
+                href="/search"
+                className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+              >
+                DeepAgents Search
+              </Link>
+            </nav>
+          </aside>
+
+          <div className="min-w-0 flex-1">
+            <div className="border-b border-black/10 bg-[#f4ebe2]/65 p-3 md:hidden">
+              <nav aria-label="Primary mobile" className="flex gap-2">
+                <Link
+                  href="/"
+                  className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/search"
+                  className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                >
+                  DeepAgents Search
+                </Link>
+              </nav>
+            </div>
+            {children}
+          </div>
+        </div>
+
+        <footer className="border-t border-black/10 bg-[#f6efe7]/92">
+          <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4 text-xs text-black/65 md:px-8">
+            <p>© {currentYear} AOE AI</p>
+            <p>Built for clear, practical answers</p>
+          </div>
+        </footer>
+      </body>
     </html>
   );
 }

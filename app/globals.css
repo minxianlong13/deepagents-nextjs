@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6efe7;
+  --foreground: #211910;
+  --font-fashion-display:
+    "Didot", "Bodoni MT", "Iowan Old Style", "Times New Roman", serif;
 }
 
 @theme inline {
@@ -14,13 +16,77 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #f2e9df;
+    --foreground: #211910;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:
+    var(--font-geist-sans), "Avenir Next", "Helvetica Neue", sans-serif;
+}
+
+.fashion-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(42px);
+  pointer-events: none;
+}
+
+.rise-in {
+  animation: rise-in 520ms ease-out both;
+}
+
+.rise-in-delayed {
+  animation: rise-in 640ms ease-out both;
+}
+
+.markdown-content p,
+.markdown-content ul,
+.markdown-content ol,
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content blockquote {
+  margin-top: 0.55rem;
+  margin-bottom: 0.55rem;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  padding-left: 1.2rem;
+}
+
+.markdown-content code {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 0.35rem;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0.08rem 0.35rem;
+  font-size: 0.86em;
+}
+
+.markdown-content pre {
+  overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 0.65rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.8rem;
+}
+
+.markdown-content a {
+  color: #9c3216;
+  text-decoration: underline;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
