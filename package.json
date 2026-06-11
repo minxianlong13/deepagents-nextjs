@@ -6,12 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "mcp:server": "node mcp/server.mjs",
+    "mcp:example": "node mcp/example-client.mjs"
   },
   "dependencies": {
     "@langchain/anthropic": "^1.4.0",
     "@langchain/core": "^1.1.48",
     "@langchain/tavily": "^1.2.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "deepagents": "^1.10.2",

@@ -34,3 +34,49 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## MCP Server Example
+
+This project includes a minimal local MCP server and a runnable client example.
+
+### Files
+
+- `mcp/server.mjs`: streamable HTTP MCP server with two tools (`hello_mcp`, `sum_numbers`)
+- `mcp/example-client.mjs`: tiny MCP client that connects to the MCP HTTP endpoint and calls both tools
+- `app/api/mcp/example/route.ts`: Next.js API route that calls the MCP HTTP server and validates payloads with Zod
+
+### Run the MCP server
+
+```bash
+pnpm mcp:server
+```
+
+Default MCP endpoint:
+
+```text
+http://127.0.0.1:8787/mcp
+```
+
+### Run the standalone MCP example client
+
+```bash
+pnpm mcp:example
+```
+
+The example client uses `MCP_SERVER_URL` if provided, otherwise defaults to `http://127.0.0.1:8787/mcp`.
+
+### Test MCP from Next.js route
+
+Start Next.js in another terminal:
+
+```bash
+pnpm dev
+```
+
+Then call:
+
+```bash
+curl -X POST http://localhost:3000/api/mcp/example \
+	-H "content-type: application/json" \
+	-d '{"name":"DeepAgents"}'
+```
