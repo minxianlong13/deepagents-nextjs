@@ -105,6 +105,11 @@ app.post(MCP_PATH, async (req, res) => {
   }
 });
 
+// Health check endpoint for Cloud Run
+app.get("/", (_req, res) => {
+  res.status(200).json({ status: "healthy" });
+});
+
 app.get(MCP_PATH, (_req, res) => {
   res.writeHead(405).end(
     JSON.stringify({
