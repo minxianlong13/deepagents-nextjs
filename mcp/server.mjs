@@ -5,8 +5,12 @@ import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/
 import { createMcpExpressApp } from "@modelcontextprotocol/sdk/server/express.js";
 import * as z from "zod/v4";
 
-const PORT = Number.parseInt(process.env.MCP_PORT ?? "8787", 10);
-const HOST = process.env.MCP_HOST ?? "127.0.0.1";
+// Respect Cloud Run's PORT env var (8080) or fall back to MCP_PORT (local dev), then default to 8787.
+const PORT = Number.parseInt(
+  process.env.PORT ?? process.env.MCP_PORT ?? "8787",
+  10,
+);
+const HOST = process.env.MCP_HOST ?? "0.0.0.0";
 const MCP_PATH = "/mcp";
 
 function createServer() {

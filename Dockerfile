@@ -11,9 +11,9 @@ RUN pnpm install --frozen-lockfile --prod
 COPY mcp ./mcp
 
 ENV NODE_ENV=production
-ENV MCP_PORT=8787
+ENV PORT=8080
 ENV MCP_HOST=0.0.0.0
 
-EXPOSE 8787
+EXPOSE 8080
 
 CMD ["node", "mcp/server.mjs"]
