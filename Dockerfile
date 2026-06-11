@@ -2,8 +2,8 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Use pnpm via Corepack and install only production dependencies.
-RUN corepack enable
+# Pin pnpm to a Node 20 compatible release.
+RUN corepack enable && corepack prepare pnpm@10.8.0 --activate
 
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prod
