@@ -1,9 +1,0 @@
-{
-  "/_global-error/page": "app/_global-error/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/chat/search/route": "app/api/chat/search/route.js",
-  "/api/mcp/example/route": "app/api/mcp/example/route.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/page": "app/page.js",
-  "/search/page": "app/search/page.js"
-}

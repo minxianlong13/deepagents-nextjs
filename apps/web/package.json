@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@langchain/anthropic": "^1.4.0",
     "@langchain/core": "^1.1.48",
     "@langchain/tavily": "^1.2.0",
     "@modelcontextprotocol/sdk": "^1.29.0",
