@@ -1,41 +1,15 @@
 {
-  "name": "deepagents-nextjs",
+  "name": "deepagents-monorepo",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
-    "mcp:server": "node mcp/server.mjs",
-    "mcp:example": "node mcp/example-client.mjs"
+    "dev:web": "pnpm --filter @deepagents/web dev",
+    "dev:mcp": "pnpm --filter @deepagents/mcp dev",
+    "build:web": "pnpm --filter @deepagents/web build",
+    "start:web": "pnpm --filter @deepagents/web start",
+    "lint:web": "pnpm --filter @deepagents/web lint",
+    "mcp:server": "pnpm --filter @deepagents/mcp dev",
+    "mcp:example": "pnpm --filter @deepagents/mcp example"
   },
-  "dependencies": {
-    "@langchain/anthropic": "^1.4.0",
-    "@langchain/core": "^1.1.48",
-    "@langchain/tavily": "^1.2.0",
-    "@modelcontextprotocol/sdk": "^1.29.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "deepagents": "^1.10.2",
-    "express": "^4.18.2",
-    "langchain": "^1.4.4",
-    "next": "16.2.7",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "react-markdown": "^10.1.0",
-    "remark-gfm": "^4.0.1",
-    "tailwind-merge": "^3.6.0",
-    "zod": "^3.22.4"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.7",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
+  "packageManager": "pnpm@11.2.2+sha512.36e6621fad506178936455e70247b8808ef4ec25797a9f437a93281a020484e2607f6a469a22e982987c3dbb8866e3071514ab10a4a1749e06edcd1ec118436f"
 }
