@@ -12,7 +12,7 @@ Use this to run an internet search for a given query. You can specify the max nu
 `;
 
 export const agent = createDeepAgent({
-  model: "anthropic:claude-sonnet-4-6",
+  model: "claude-haiku-4-5-20251001",
   tools: [internetSearch],
   systemPrompt: researchInstructions,
 });

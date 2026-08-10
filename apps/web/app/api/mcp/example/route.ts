@@ -9,6 +9,45 @@ const payloadSchema = z.object({
   name: z.string().trim().min(1).max(80).optional(),
 });
 
+const DEFAULT_LOCAL_MCP_URL = "http://127.0.0.1:8787/mcp";
+
+function normalizeMcpUrl(rawUrl: string) {
+  const trimmed = rawUrl.trim();
+  const parsed = new URL(trimmed);
+
+  if (parsed.pathname === "/") {
+    parsed.pathname = "/mcp";
+  }
+
+  return parsed.toString();
+}
+
+async function callMcpTools(serverUrl: string, name: string) {
+  const transport = new StreamableHTTPClientTransport(new URL(serverUrl));
+  const client = new Client({
+    name: "nextjs-mcp-demo-client",
+    version: "0.1.0",
+  });
+
+  try {
+    await client.connect(transport);
+
+    const hello = await client.callTool({
+      name: "hello_mcp",
+      arguments: { name },
+    });
+
+    const sum = await client.callTool({
+      name: "sum_numbers",
+      arguments: { a: 2, b: 3 },
+    });
+
+    return { hello, sum };
+  } finally {
+    await client.close();
+  }
+}
+
 export async function POST(req: Request) {
   const rawBody = await req.json().catch(() => null);
 
@@ -28,42 +67,37 @@ export async function POST(req: Request) {
   }
 
   const name = parsed.data.name ?? "DeepAgents";
-  const serverUrl = process.env.MCP_SERVER_URL ?? "http://127.0.0.1:8787/mcp";
-  const transport = new StreamableHTTPClientTransport(new URL(serverUrl));
+  const candidateUrls = [process.env.MCP_SERVER_URL, DEFAULT_LOCAL_MCP_URL]
+    .filter((value): value is string =>
+      Boolean(value && value.trim().length > 0),
+    )
+    .map(normalizeMcpUrl)
+    .filter((value, index, all) => all.indexOf(value) === index);
 
-  const client = new Client({
-    name: "nextjs-mcp-demo-client",
-    version: "0.1.0",
-  });
+  const errors: string[] = [];
 
-  try {
-    await client.connect(transport);
+  for (const serverUrl of candidateUrls) {
+    try {
+      const { hello, sum } = await callMcpTools(serverUrl, name);
 
-    const hello = await client.callTool({
-      name: "hello_mcp",
-      arguments: { name },
-    });
-
-    const sum = await client.callTool({
-      name: "sum_numbers",
-      arguments: { a: 2, b: 3 },
-    });
-
-    return NextResponse.json({
-      input: { name },
-      hello,
-      sum,
-    });
-  } catch (error: unknown) {
-    const message =
-      error instanceof Error ? error.message : "Failed to call MCP server";
-    return NextResponse.json(
-      {
-        error: message,
-      },
-      { status: 500 },
-    );
-  } finally {
-    await client.close();
+      return NextResponse.json({
+        input: { name },
+        serverUrl,
+        hello,
+        sum,
+      });
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error ? error.message : "Failed to call MCP server";
+      errors.push(`${serverUrl}: ${message}`);
+    }
   }
+
+  return NextResponse.json(
+    {
+      error: "Failed to call MCP server for all configured endpoints.",
+      attempts: errors,
+    },
+    { status: 500 },
+  );
 }

@@ -39,6 +39,8 @@ pnpm mcp:example
 
 The client reads `MCP_SERVER_URL` if set; otherwise it defaults to `http://127.0.0.1:8787/mcp`.
 
+If you see `404 Page not found` when calling MCP tools, your `MCP_SERVER_URL` is likely invalid or points to a stopped deployment. For local dev, run `pnpm mcp:server` and use `MCP_SERVER_URL=http://127.0.0.1:8787/mcp`.
+
 ## Test MCP via Next.js Route
 
 ```bash
