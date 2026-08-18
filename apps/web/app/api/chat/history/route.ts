@@ -1,5 +1,9 @@
-import { getOrCreateConversation } from "@/lib/conversation";
-import prisma from "@/lib/prisma";
+import {
+  DEFAULT_USER_ID,
+  getMessagesByConversationId,
+  listConversations,
+  createMessage,
+} from "@/lib/db";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -9,26 +13,18 @@ const createMessageSchema = z.object({
   content: z.string().trim().min(1),
 });
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
-    const conversation = await getOrCreateConversation();
+    const { searchParams } = new URL(req.url);
+    const conversationId = searchParams.get("conversationId");
 
-    const messages = await prisma.message.findMany({
-      where: {
-        conversationId: conversation.id,
-        role: {
-          in: ["user", "assistant"],
-        },
-      },
-      orderBy: [{ createdAt: "asc" }],
-      select: {
-        id: true,
-        role: true,
-        content: true,
-      },
-    });
+    if (conversationId) {
+      const messages = await getMessagesByConversationId(conversationId);
+      return NextResponse.json({ messages });
+    }
 
-    return NextResponse.json({ messages });
+    const conversations = await listConversations(DEFAULT_USER_ID);
+    return NextResponse.json({ conversations });
   } catch (error: unknown) {
     const message =
       error instanceof Error ? error.message : "Unknown server error";
@@ -48,22 +44,17 @@ export async function POST(req: Request) {
       );
     }
 
-    const conversation = parsed.data.conversationId
-      ? { id: parsed.data.conversationId }
-      : await getOrCreateConversation();
-
-    const savedMessage = await prisma.message.create({
-      data: {
-        conversationId: conversation.id,
-        role: parsed.data.role,
-        content: parsed.data.content,
-      },
-      select: {
-        id: true,
-        role: true,
-        content: true,
-      },
-    });
+    if (!parsed.data.conversationId) {
+      return NextResponse.json(
+        { error: "conversationId is required" },
+        { status: 400 },
+      );
+    }
+    const savedMessage = await createMessage(
+      parsed.data.conversationId,
+      parsed.data.role,
+      parsed.data.content,
+    );
 
     return NextResponse.json({ message: savedMessage }, { status: 201 });
   } catch (error: unknown) {

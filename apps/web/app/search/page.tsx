@@ -20,6 +20,14 @@ type ChatMessage = {
   content: string;
 };
 
+type Conversation = {
+  id: string;
+  title: string | null;
+  createdAt: string;
+  updatedAt: string;
+  messages: { content: string; role: string }[];
+};
+
 const DEFAULT_ASSISTANT_MESSAGE: ChatMessage = {
   id: "welcome-assistant",
   role: "assistant",
@@ -29,69 +37,83 @@ const DEFAULT_ASSISTANT_MESSAGE: ChatMessage = {
 
 export default function SearchPage() {
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
+    DEFAULT_ASSISTANT_MESSAGE,
+  ]);
+  const [conversations, setConversations] = useState<Conversation[]>([]);
+  const [activeConversationId, setActiveConversationId] = useState<
+    string | null
+  >(null);
   const [loading, setLoading] = useState(false);
   const [historyLoading, setHistoryLoading] = useState(true);
-  const [activeMessageId, setActiveMessageId] = useState<string | null>(null);
-  const messageRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const chatBottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     let cancelled = false;
 
-    const loadHistory = async () => {
+    const loadConversations = async () => {
       try {
         const res = await fetch("/api/chat/history", { cache: "no-store" });
-        if (!res.ok) {
-          throw new Error("Failed to load history");
-        }
+        if (!res.ok) throw new Error("Failed to load history");
 
-        const data = (await res.json()) as { messages?: ChatMessage[] };
-        if (cancelled) {
-          return;
-        }
+        const data = (await res.json()) as { conversations?: Conversation[] };
+        if (cancelled) return;
 
-        if (data.messages && data.messages.length > 0) {
-          setMessages(data.messages);
-        } else {
-          setMessages([DEFAULT_ASSISTANT_MESSAGE]);
-        }
+        setConversations(data.conversations ?? []);
       } catch {
-        if (!cancelled) {
-          setMessages([DEFAULT_ASSISTANT_MESSAGE]);
-        }
+        // leave conversations empty on error
       } finally {
-        if (!cancelled) {
-          setHistoryLoading(false);
-        }
+        if (!cancelled) setHistoryLoading(false);
       }
     };
 
-    loadHistory();
-
+    loadConversations();
     return () => {
       cancelled = true;
     };
   }, []);
 
-  const getMessagePreview = (content: string) => {
-    const plainText = content.replace(/\s+/g, " ").trim();
-    return plainText.length > 88 ? `${plainText.slice(0, 88)}...` : plainText;
+  useEffect(() => {
+    chatBottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages]);
+
+  const loadConversationMessages = async (conversation: Conversation) => {
+    if (activeConversationId === conversation.id) return;
+    setActiveConversationId(conversation.id);
+
+    try {
+      const res = await fetch(
+        `/api/chat/history?conversationId=${conversation.id}`,
+        { cache: "no-store" },
+      );
+      if (!res.ok) throw new Error("Failed to load messages");
+      const data = (await res.json()) as { messages?: ChatMessage[] };
+      setChatMessages(
+        data.messages && data.messages.length > 0
+          ? data.messages
+          : [DEFAULT_ASSISTANT_MESSAGE],
+      );
+    } catch {
+      setChatMessages([DEFAULT_ASSISTANT_MESSAGE]);
+    }
   };
 
-  const jumpToMessage = (id: string) => {
-    setActiveMessageId(id);
-    messageRefs.current[id]?.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
+  const startNewChat = () => {
+    setActiveConversationId(null);
+    setChatMessages([DEFAULT_ASSISTANT_MESSAGE]);
+  };
+
+  const getConversationPreview = (conversation: Conversation) => {
+    const firstMsg = conversation.messages[0];
+    if (!firstMsg) return "Empty conversation";
+    const plain = firstMsg.content.replace(/\s+/g, " ").trim();
+    return plain.length > 60 ? `${plain.slice(0, 60)}...` : plain;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const prompt = input.trim();
-    if (!prompt || loading) {
-      return;
-    }
+    if (!prompt || loading) return;
 
     setInput("");
     setLoading(true);
@@ -99,38 +121,60 @@ export default function SearchPage() {
     try {
       const res = await fetch("/api/chat/search", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ input: prompt }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          input: prompt,
+          ...(activeConversationId
+            ? { conversationId: activeConversationId }
+            : {}),
+        }),
       });
 
-      if (!res.ok) {
-        throw new Error("Failed to get assistant response");
-      }
+      if (!res.ok) throw new Error("Failed to get assistant response");
 
       const data = (await res.json()) as {
         output?: string;
+        conversationId?: string;
+        isNewConversation?: boolean;
         userMessage?: ChatMessage;
         assistantMessage?: ChatMessage;
       };
 
-      const { userMessage, assistantMessage } = data;
+      const {
+        userMessage,
+        assistantMessage,
+        conversationId,
+        isNewConversation,
+      } = data;
 
       if (userMessage && assistantMessage) {
-        setMessages((prev) => [...prev, userMessage, assistantMessage]);
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: `fallback-${Date.now()}`,
-            role: "assistant",
-            content: data.output || "No response received.",
-          },
-        ]);
+        setChatMessages((prev) => {
+          const base = prev[0]?.id === "welcome-assistant" ? [] : prev;
+          return [...base, userMessage, assistantMessage];
+        });
+      }
+
+      if (conversationId) {
+        setActiveConversationId(conversationId);
+
+        if (isNewConversation) {
+          // prepend the new conversation to the sidebar list
+          const title =
+            prompt.length > 60 ? `${prompt.slice(0, 60)}...` : prompt;
+          setConversations((prev) => [
+            {
+              id: conversationId,
+              title,
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
+              messages: [{ content: prompt, role: "user" }],
+            },
+            ...prev,
+          ]);
+        }
       }
     } catch {
-      setMessages((prev) => [
+      setChatMessages((prev) => [
         ...prev,
         {
           id: `error-${Date.now()}`,
@@ -171,33 +215,52 @@ export default function SearchPage() {
               <aside className="rounded-2xl border border-black/10 bg-white/70 p-3">
                 <div className="mb-3 flex items-center justify-between">
                   <p className="text-xs font-semibold uppercase tracking-[0.15em] text-black/55">
-                    Message History
+                    Conversation History
                   </p>
-                  <Badge>{messages.length}</Badge>
+                  <Badge>{conversations.length}</Badge>
                 </div>
 
-                <div className="max-h-64 space-y-2 overflow-y-auto pr-1 md:max-h-[calc(78vh-18rem)]">
+                <Button
+                  type="button"
+                  size="sm"
+                  onClick={startNewChat}
+                  className="mb-3 w-full text-xs"
+                >
+                  + New Chat
+                </Button>
+
+                <div className="max-h-64 space-y-2 overflow-y-auto pr-1 md:max-h-[calc(78vh-22rem)]">
                   {historyLoading ? (
                     <p className="px-2 text-xs text-black/55">
-                      Loading history...
+                      Loading conversations...
+                    </p>
+                  ) : conversations.length === 0 ? (
+                    <p className="px-2 text-xs text-black/40">
+                      No conversations yet.
                     </p>
                   ) : null}
-                  {messages.map((message) => (
+                  {conversations.map((conv) => (
                     <button
-                      key={`history-${message.id}`}
+                      key={conv.id}
                       type="button"
-                      onClick={() => jumpToMessage(message.id)}
+                      onClick={() => loadConversationMessages(conv)}
                       className={`w-full rounded-xl border px-3 py-2 text-left text-xs transition ${
-                        activeMessageId === message.id
+                        activeConversationId === conv.id
                           ? "border-black bg-black text-white"
                           : "border-black/10 bg-white/85 text-black/80 hover:border-black/25 hover:bg-white"
                       }`}
                     >
-                      <p className="mb-1 text-[10px] uppercase tracking-[0.14em] opacity-70">
-                        {message.role === "user" ? "You" : "Assistant"}
+                      <p className="mb-1 line-clamp-2 font-medium leading-relaxed">
+                        {conv.title || getConversationPreview(conv)}
                       </p>
-                      <p className="line-clamp-3 leading-relaxed">
-                        {getMessagePreview(message.content)}
+                      <p className="text-[10px] opacity-55">
+                        {new Date(conv.updatedAt).toLocaleDateString(
+                          undefined,
+                          {
+                            month: "short",
+                            day: "numeric",
+                          },
+                        )}
                       </p>
                     </button>
                   ))}
@@ -206,12 +269,9 @@ export default function SearchPage() {
 
               <div className="flex flex-1 flex-col gap-4">
                 <div className="flex-1 space-y-4 overflow-y-auto pr-1">
-                  {messages.map((message) => (
+                  {chatMessages.map((message) => (
                     <div
                       key={message.id}
-                      ref={(node) => {
-                        messageRefs.current[message.id] = node;
-                      }}
                       className={`max-w-[85%] rounded-2xl border px-4 py-3 text-sm shadow-sm ${
                         message.role === "user"
                           ? "ml-auto border-black bg-black text-white"
@@ -229,6 +289,7 @@ export default function SearchPage() {
                       )}
                     </div>
                   ))}
+                  <div ref={chatBottomRef} />
                 </div>
 
                 <form

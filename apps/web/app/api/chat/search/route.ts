@@ -1,12 +1,12 @@
 // app/api/chat/route.ts
 import { agent } from "@/lib/agents";
-import { getOrCreateConversation } from "@/lib/conversation";
-import prisma from "@/lib/prisma";
+import { createConversation, createMessage } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
 const requestSchema = z.object({
   input: z.string().trim().min(1),
+  conversationId: z.string().cuid().optional(),
 });
 
 const fallbackAssistantMessage =
@@ -54,21 +54,21 @@ export async function POST(req: Request) {
       );
     }
 
-    const { input } = parsed.data;
-    const conversation = await getOrCreateConversation();
+    const { input, conversationId: existingConversationId } = parsed.data;
 
-    const userMessage = await prisma.message.create({
-      data: {
-        conversationId: conversation.id,
-        role: "user",
-        content: input,
-      },
-      select: {
-        id: true,
-        role: true,
-        content: true,
-      },
-    });
+    let conversation: { id: string };
+    let isNewConversation = false;
+
+    if (existingConversationId) {
+      conversation = { id: existingConversationId };
+    } else {
+      // truncate first message as title
+      const title = input.length > 60 ? `${input.slice(0, 60)}...` : input;
+      conversation = await createConversation(title);
+      isNewConversation = true;
+    }
+
+    const userMessage = await createMessage(conversation.id, "user", input);
 
     let assistantOutput = fallbackAssistantMessage;
 
@@ -84,21 +84,16 @@ export async function POST(req: Request) {
       assistantOutput = fallbackAssistantMessage;
     }
 
-    const assistantMessage = await prisma.message.create({
-      data: {
-        conversationId: conversation.id,
-        role: "assistant",
-        content: assistantOutput,
-      },
-      select: {
-        id: true,
-        role: true,
-        content: true,
-      },
-    });
+    const assistantMessage = await createMessage(
+      conversation.id,
+      "assistant",
+      assistantOutput,
+    );
 
     return NextResponse.json({
       output: assistantMessage.content,
+      conversationId: conversation.id,
+      isNewConversation,
       userMessage,
       assistantMessage,
     });
