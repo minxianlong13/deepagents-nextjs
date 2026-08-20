@@ -1,5 +1,5 @@
 // app/api/chat/route.ts
-import { agent } from "@/lib/agents";
+import { searchAgent } from "@/lib/agents/search_agent";
 import { createConversation, createMessage } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { z } from "zod";
@@ -73,7 +73,7 @@ export async function POST(req: Request) {
     let assistantOutput = fallbackAssistantMessage;
 
     try {
-      const result = await agent.invoke({
+      const result = await searchAgent.invoke({
         messages: [{ role: "user", content: input }],
       });
       const lastMessage = result.messages[result.messages.length - 1];

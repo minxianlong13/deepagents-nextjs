@@ -55,6 +55,21 @@ export default function RootLayout({
               >
                 DeepAgents Search
               </Link>
+              <Link
+                href="/rag"
+                className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+              >
+                RAG Chat
+              </Link>
+              <div className="pt-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/45">
+                Manage
+              </div>
+              <Link
+                href="/manage/rag"
+                className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+              >
+                RAG Configuration
+              </Link>
             </nav>
           </aside>
 
@@ -72,6 +87,18 @@ export default function RootLayout({
                   className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
                 >
                   DeepAgents Search
+                </Link>
+                <Link
+                  href="/rag"
+                  className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                >
+                  RAG Chat
+                </Link>
+                <Link
+                  href="/manage/rag"
+                  className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                >
+                  Manage RAG
                 </Link>
               </nav>
             </div>

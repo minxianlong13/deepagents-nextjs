@@ -26,13 +26,21 @@ export default function HomePage() {
               DeepAgents
             </CardTitle>
             <CardDescription className="text-base leading-relaxed text-black/75">
-              Start with the DeepAgents Search experience to ask questions and
-              get web-grounded answers.
+              Ask questions with web search or retrieve answers from your RAG
+              knowledge base.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="flex flex-wrap gap-3">
             <Link href="/search" className={cn(buttonVariants({ size: "lg" }))}>
               Open DeepAgents Search
+            </Link>
+            <Link
+              href="/rag"
+              className={cn(
+                buttonVariants({ variant: "secondary", size: "lg" }),
+              )}
+            >
+              Open RAG Chat
             </Link>
           </CardContent>
         </Card>
