@@ -21,7 +21,7 @@ ENV NODE_ENV=production \
 USER node
 
 COPY --from=deps --chown=node:node /app/node_modules ./node_modules
-COPY --chown=node:node server.mjs example-client.mjs package.json ./
+COPY --chown=node:node server.mjs client.mjs package.json ./
 
 EXPOSE 8080
 

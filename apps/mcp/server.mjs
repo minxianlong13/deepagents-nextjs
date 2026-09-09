@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import "dotenv/config";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { createMcpExpressApp } from "@modelcontextprotocol/sdk/server/express.js";
@@ -27,6 +28,22 @@ const JIRA_FIELDS = [
   "created",
   "updated",
 ];
+
+function removeAvatarUrls(value) {
+  if (Array.isArray(value)) {
+    return value.map(removeAvatarUrls);
+  }
+
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value)
+        .filter(([key]) => key !== "avatarUrls")
+        .map(([key, nestedValue]) => [key, removeAvatarUrls(nestedValue)]),
+    );
+  }
+
+  return value;
+}
 
 function createServer() {
   const server = new McpServer({
@@ -59,7 +76,7 @@ function createServer() {
       }
 
       const issueUrl = new URL(
-        `/rest/api/3/issue/${encodeURIComponent(issueKey)}`,
+        `/rest/api/2/issue/${encodeURIComponent(issueKey)}`,
         `${jiraBaseUrl}/`,
       );
       issueUrl.searchParams.set("fields", JIRA_FIELDS.join(","));
@@ -86,12 +103,12 @@ function createServer() {
       }
 
       const issue = await response.json();
-      const result = {
-        issueKey,
+      const result = removeAvatarUrls({
+        "ticketNo.": issueKey,
         fields: Object.fromEntries(
           JIRA_FIELDS.map((field) => [field, issue.fields?.[field] ?? null]),
         ),
-      };
+      });
 
       return {
         content: [
