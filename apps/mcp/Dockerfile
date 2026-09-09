@@ -1,4 +1,4 @@
-FROM node:20-alpine AS deps
+FROM node:22-alpine AS deps
 
 WORKDIR /app
 
@@ -9,7 +9,7 @@ RUN corepack enable && corepack prepare pnpm@11.2.2 --activate
 COPY package.json ./
 RUN pnpm install --prod --no-frozen-lockfile
 
-FROM node:20-alpine AS runtime
+FROM node:22-alpine AS runtime
 
 WORKDIR /app
 
