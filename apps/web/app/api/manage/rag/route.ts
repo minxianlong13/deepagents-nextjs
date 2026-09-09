@@ -1,4 +1,4 @@
-import { indexLangchainDocs } from "@/lib/tools/rag_search";
+import { indexKnowledgeBase } from "@/lib/tools/rag_search";
 import { NextResponse } from "next/server";
 
 export const maxDuration = 300;
@@ -14,7 +14,7 @@ export async function POST() {
     );
   }
 
-  indexingPromise = indexLangchainDocs();
+  indexingPromise = indexKnowledgeBase();
 
   try {
     const result = await indexingPromise;

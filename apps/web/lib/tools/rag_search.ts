@@ -12,32 +12,21 @@ import { StateBackend } from "deepagents";
 import { tool } from "langchain";
 import { z } from "zod";
 
-const DOCS_BASE = "https://docs.langchain.com";
 const DOCS_DIRECTORY = path.resolve(process.cwd(), "../../docs");
+const REMOTE_METADATA_DIRECTORY = path.join(DOCS_DIRECTORY, "remote");
 const DOCUMENT_NAMESPACE = "documents";
 const MANIFEST_NAMESPACE = "rag-manifest";
 const INDEX_NAME = "aoe-langchain-docs";
-
-const DOCUMENT_URL_PATHS = [
-  "oss/javascript/langchain/agents",
-  "oss/javascript/deepagents/rag",
-  "oss/javascript/langchain/tools",
-  "oss/javascript/langchain/models",
-  "oss/javascript/deepagents/retrieval",
-  "oss/javascript/langchain/knowledge-base",
-  "oss/javascript/langchain/middleware",
-  "oss/javascript/deepagents/overview",
-  "oss/javascript/deepagents/subagents",
-  "oss/javascript/deepagents/streaming",
-  "oss/javascript/deepagents/frontend/subagent-streaming",
-  "oss/javascript/deepagents/backends",
-  "oss/javascript/langgraph/overview",
-  "oss/javascript/langgraph/quickstart",
-];
+const MANIFEST_VECTOR = [1, ...Array(1023).fill(0)];
 
 type SourceDocument = {
   source: string;
   content: string;
+};
+
+type RemoteMetadata = {
+  name?: string;
+  sources: string[];
 };
 
 async function listLocalFiles(directory: string): Promise<string[]> {
@@ -59,32 +48,66 @@ async function listLocalFiles(directory: string): Promise<string[]> {
   }
 }
 
-async function loadSourceDocuments(): Promise<SourceDocument[]> {
-  const localFiles = await listLocalFiles(DOCS_DIRECTORY);
-  const localDocuments = await Promise.all(
-    localFiles.map(async (filePath) => {
+async function loadRemoteMetadata(): Promise<RemoteMetadata[]> {
+  const metadataFiles = (
+    await listLocalFiles(REMOTE_METADATA_DIRECTORY)
+  ).filter((filePath) => path.extname(filePath).toLowerCase() === ".json");
+
+  const metadata = await Promise.all(
+    metadataFiles.map(async (filePath): Promise<RemoteMetadata | null> => {
       try {
-        return {
-          source: `local:${path.relative(DOCS_DIRECTORY, filePath)}`,
-          content: await readFile(filePath, "utf8"),
-        };
+        const parsed = JSON.parse(
+          await readFile(filePath, "utf8"),
+        ) as Partial<RemoteMetadata>;
+        if (
+          !Array.isArray(parsed.sources) ||
+          !parsed.sources.every((source) => typeof source === "string")
+        ) {
+          return null;
+        }
+        return { name: parsed.name, sources: parsed.sources };
       } catch {
         return null;
       }
     }),
   );
 
+  return metadata.filter((entry): entry is RemoteMetadata => entry !== null);
+}
+
+async function loadSourceDocuments(): Promise<SourceDocument[]> {
+  const localFiles = await listLocalFiles(DOCS_DIRECTORY);
+  const localDocuments = await Promise.all(
+    localFiles
+      .filter(
+        (filePath) =>
+          !filePath.startsWith(`${REMOTE_METADATA_DIRECTORY}${path.sep}`),
+      )
+      .map(async (filePath) => {
+        try {
+          return {
+            source: `local:${path.relative(DOCS_DIRECTORY, filePath)}`,
+            content: await readFile(filePath, "utf8"),
+          };
+        } catch {
+          return null;
+        }
+      }),
+  );
+
+  const remoteMetadata = await loadRemoteMetadata();
   const remoteDocuments = await Promise.all(
-    DOCUMENT_URL_PATHS.map(async (docPath) => {
-      const source = `${DOCS_BASE}/${docPath}.md`;
-      try {
-        const response = await fetch(source);
-        if (!response.ok) return null;
-        return { source, content: await response.text() };
-      } catch {
-        return null;
-      }
-    }),
+    remoteMetadata.flatMap((metadata) =>
+      metadata.sources.map(async (source) => {
+        try {
+          const response = await fetch(source);
+          if (!response.ok) return null;
+          return { source, content: await response.text() };
+        } catch {
+          return null;
+        }
+      }),
+    ),
   );
 
   return [
@@ -103,7 +126,7 @@ async function loadDocuments(): Promise<Document[]> {
   sources.forEach(({ source, content }) => {
     docs.push(new Document({ pageContent: content, metadata: { source } }));
   });
-  console.log(`Loaded ${docs.length} documentation pages.`);
+  console.log(`Loaded ${docs.length} personal knowledge sources.`);
   return docs;
 }
 
@@ -148,7 +171,7 @@ async function getVectorStore() {
   return vectorStore;
 }
 
-export async function indexLangchainDocs() {
+export async function indexKnowledgeBase() {
   const documents = await loadDocuments();
   const vectorStore = await getVectorStore();
   const pineconeApiKey = process.env.PINECONE_API_KEY;
@@ -201,7 +224,7 @@ export async function indexLangchainDocs() {
     await manifestNamespace.upsert([
       {
         id: manifestId,
-        values: Array(1024).fill(0),
+        values: MANIFEST_VECTOR,
         metadata: { source, hash: sourceHash, chunkIds },
       },
     ]);
@@ -243,7 +266,7 @@ export const documentSearch = tool(
   {
     name: "document_search",
     description:
-      "Search LangChain documentation and save matching chunks to the agent filesystem.",
+      "Search the personal knowledge base and save matching chunks to the agent filesystem.",
     schema: z.object({
       query: z.string().describe("Natural language search query."),
     }),

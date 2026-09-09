@@ -79,8 +79,9 @@ export default function RagConfigurationPage() {
               <h2 className="text-lg font-semibold">Knowledge base</h2>
               <p className="max-w-2xl text-sm leading-relaxed text-black/65">
                 Initialization scans files in the docs folder and configured
-                internet sources. Only new or changed sources are split,
-                embedded, and stored in Pinecone. Unchanged sources are skipped.
+                internet sources from docs/remote metadata files. Only new or
+                changed sources are split, embedded, and stored in Pinecone.
+                Unchanged sources are skipped.
               </p>
               <Button
                 type="button"

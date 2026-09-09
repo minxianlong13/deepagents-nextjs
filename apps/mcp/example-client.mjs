@@ -23,20 +23,6 @@ try {
   for (const tool of tools.tools) {
     console.log(`- ${tool.name}: ${tool.description ?? "no description"}`);
   }
-
-  const helloResult = await client.callTool({
-    name: "hello_mcp",
-    arguments: { name: "DeepAgents" },
-  });
-  console.log("\nhello_mcp result:");
-  console.log(JSON.stringify(helloResult, null, 2));
-
-  const sumResult = await client.callTool({
-    name: "sum_numbers",
-    arguments: { a: 7, b: 11 },
-  });
-  console.log("\nsum_numbers result:");
-  console.log(JSON.stringify(sumResult, null, 2));
 } finally {
   await client.close();
 }

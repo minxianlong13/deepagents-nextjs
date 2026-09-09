@@ -12,6 +12,21 @@ const PORT = Number.parseInt(
 );
 const HOST = process.env.MCP_HOST ?? "0.0.0.0";
 const MCP_PATH = "/mcp";
+const JIRA_FIELDS = [
+  "summary",
+  "description",
+  "comment",
+  "status",
+  "priority",
+  "assignee",
+  "reporter",
+  "labels",
+  "components",
+  "attachment",
+  "issuelinks",
+  "created",
+  "updated",
+];
 
 function createServer() {
   const server = new McpServer({
@@ -20,51 +35,72 @@ function createServer() {
   });
 
   server.registerTool(
-    "hello_mcp",
+    "get_jira_ticket",
     {
-      title: "Hello MCP",
-      description: "Return a greeting from the local MCP server.",
+      title: "Get Jira Ticket",
+      description:
+        "Fetch selected fields from a Jira issue using bearer-token authorization.",
       inputSchema: {
-        name: z.string().describe("Name to greet"),
+        issueKey: z
+          .string()
+          .regex(/^[A-Z][A-Z0-9]+-\d+$/)
+          .describe("Jira issue key, for example GROUP-123445"),
       },
     },
-    async ({ name }) => {
-      return {
-        content: [
-          {
-            type: "text",
-            text: `Hello, ${name}! This response came from your local MCP server.`,
-          },
-        ],
-      };
-    },
-  );
+    async ({ issueKey }) => {
+      const jiraBaseUrl = process.env.JIRA_BASE_URL?.replace(/\/$/, "");
+      const bearerToken = process.env.JIRA_BEARER_TOKEN;
 
-  server.registerTool(
-    "sum_numbers",
-    {
-      title: "Sum Numbers",
-      description: "Add two numbers and return the result.",
-      inputSchema: {
-        a: z.number().describe("First number"),
-        b: z.number().describe("Second number"),
-      },
-    },
-    async ({ a, b }) => {
-      const sum = a + b;
+      if (!jiraBaseUrl) {
+        throw new Error("JIRA_BASE_URL is not configured");
+      }
+      if (!bearerToken) {
+        throw new Error("JIRA_BEARER_TOKEN is not configured");
+      }
 
-      return {
-        content: [
-          {
-            type: "text",
-            text: `The sum of ${a} and ${b} is ${sum}.`,
-          },
-        ],
-        structuredContent: {
-          a,
-          b,
-          sum,
+      const issueUrl = new URL(
+        `/rest/api/3/issue/${encodeURIComponent(issueKey)}`,
+        `${jiraBaseUrl}/`,
+      );
+      issueUrl.searchParams.set("fields", JIRA_FIELDS.join(","));
+
+      const response = await fetch(issueUrl, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${bearerToken}`,
         },
+      });
+
+      if (!response.ok) {
+        const responseText = await response.text();
+        let detail = responseText;
+        try {
+          const errorBody = JSON.parse(responseText);
+          detail = errorBody.errorMessages?.join(" ") || responseText;
+        } catch {
+          // Keep the plain response text when Jira does not return JSON.
+        }
+        throw new Error(
+          `Jira request failed (${response.status}): ${detail || response.statusText}`,
+        );
+      }
+
+      const issue = await response.json();
+      const result = {
+        issueKey,
+        fields: Object.fromEntries(
+          JIRA_FIELDS.map((field) => [field, issue.fields?.[field] ?? null]),
+        ),
+      };
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(result, null, 2),
+          },
+        ],
+        structuredContent: result,
       };
     },
   );

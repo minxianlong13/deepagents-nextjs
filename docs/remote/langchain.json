@@ -1,0 +1,19 @@
+{
+  "name": "LangChain documentation",
+  "sources": [
+    "https://docs.langchain.com/oss/javascript/langchain/agents.md",
+    "https://docs.langchain.com/oss/javascript/deepagents/rag.md",
+    "https://docs.langchain.com/oss/javascript/langchain/tools.md",
+    "https://docs.langchain.com/oss/javascript/langchain/models.md",
+    "https://docs.langchain.com/oss/javascript/deepagents/retrieval.md",
+    "https://docs.langchain.com/oss/javascript/langchain/knowledge-base.md",
+    "https://docs.langchain.com/oss/javascript/langchain/middleware.md",
+    "https://docs.langchain.com/oss/javascript/deepagents/overview.md",
+    "https://docs.langchain.com/oss/javascript/deepagents/subagents.md",
+    "https://docs.langchain.com/oss/javascript/deepagents/streaming.md",
+    "https://docs.langchain.com/oss/javascript/deepagents/frontend/subagent-streaming.md",
+    "https://docs.langchain.com/oss/javascript/deepagents/backends.md",
+    "https://docs.langchain.com/oss/javascript/langgraph/overview.md",
+    "https://docs.langchain.com/oss/javascript/langgraph/quickstart.md"
+  ]
+}
