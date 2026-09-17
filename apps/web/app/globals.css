@@ -80,6 +80,28 @@ body {
   text-decoration: underline;
 }
 
+.resume-markdown h1 {
+  margin-top: 0;
+  border-bottom: 2px solid #211910;
+  padding-bottom: 0.65rem;
+  font-family: var(--font-fashion-display);
+  font-size: 2rem;
+  line-height: 1.15;
+}
+
+.resume-markdown h2 {
+  margin-top: 1.6rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  padding-bottom: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.resume-markdown li::marker {
+  color: #16705c;
+}
+
 @keyframes rise-in {
   from {
     opacity: 0;

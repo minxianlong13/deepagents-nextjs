@@ -1,0 +1,485 @@
+{
+  "candidate": {
+    "name": "Xianlong Min",
+    "headline": "AI-Enhanced Senior Full Stack Developer | AI Agent & Software Engineering",
+    "location": {
+      "city": "Ottawa",
+      "province": "Ontario",
+      "country": "Canada"
+    },
+    "contact": {
+      "phone": "506-897-3061",
+      "email": "xianlong.min@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/min-xianlong-89808131"
+    },
+    "years_of_experience": 15,
+    "work_authorization": "Canadian permanent resident",
+    "languages": [
+      "English",
+      "Mandarin"
+    ]
+  },
+  "career_identity": {
+    "primary_identity": "Senior software engineer with deep full-stack, cloud, microservices, and technical leadership experience, increasingly focused on AI-powered software engineering and agentic development.",
+    "core_strengths": [
+      "Full-stack software engineering",
+      "Backend and distributed systems",
+      "Cloud-native architecture",
+      "Microservices architecture",
+      "AI-augmented software development",
+      "AI agent development",
+      "Developer productivity automation",
+      "Technical leadership",
+      "System design",
+      "Performance optimization"
+    ],
+    "ai_transition": {
+      "goal": "Transition from senior full-stack engineering into AI software engineering and AI agent engineering while leveraging extensive production software engineering experience.",
+      "positioning": "Experienced software engineer applying AI, LLMs, agentic workflows, and developer automation to real-world software engineering problems.",
+      "differentiators": [
+        "15+ years of production software engineering experience",
+        "Strong full-stack and backend engineering foundation",
+        "Production experience building AI-powered automation",
+        "Experience integrating LLM/AI SDKs into enterprise workflows",
+        "Experience with AI-assisted development and code generation",
+        "Strong cloud and distributed-systems background",
+        "Ability to combine traditional software engineering with AI technologies"
+      ]
+    }
+  },
+  "target_roles": {
+    "primary": [
+      "AI Software Engineer",
+      "AI Agent Engineer",
+      "AI Engineer",
+      "Senior AI Software Engineer",
+      "Senior AI Engineer",
+      "Senior Full Stack Engineer",
+      "Senior Full Stack Developer",
+      "Staff Software Engineer",
+      "Staff AI Engineer"
+    ],
+    "secondary": [
+      "Senior Backend Engineer",
+      "Senior Software Engineer",
+      "Principal Software Engineer",
+      "AI Platform Engineer",
+      "Developer Productivity Engineer",
+      "Software Engineer - AI/ML Platform"
+    ],
+    "role_preferences": {
+      "ai_agent": "high",
+      "ai_software_engineering": "high",
+      "full_stack": "high",
+      "backend": "high",
+      "frontend": "medium",
+      "traditional_software_engineering": "high"
+    }
+  },
+  "ai_capabilities": {
+    "production_experience": [
+      {
+        "capability": "AI agent development",
+        "level": "strong",
+        "evidence_ids": [
+          "cvent-ai-agent-001"
+        ]
+      },
+      {
+        "capability": "LLM/AI SDK integration",
+        "level": "strong",
+        "technologies": [
+          "OpenAI",
+          "Anthropic"
+        ],
+        "evidence_ids": [
+          "cvent-ai-agent-001"
+        ]
+      },
+      {
+        "capability": "Natural language processing for software workflows",
+        "level": "strong",
+        "evidence_ids": [
+          "cvent-ai-agent-001"
+        ]
+      },
+      {
+        "capability": "AI-powered automation",
+        "level": "strong",
+        "evidence_ids": [
+          "cvent-ai-agent-001"
+        ]
+      },
+      {
+        "capability": "AI-assisted software development",
+        "level": "strong",
+        "technologies": [
+          "GitHub Copilot",
+          "AI-powered code review"
+        ],
+        "evidence_ids": [
+          "cvent-ai-codereview-001"
+        ]
+      }
+    ],
+    "hands_on_ai_areas": [
+      "LLM application development",
+      "AI agents",
+      "Agentic workflows",
+      "Natural language processing",
+      "AI-powered automation",
+      "AI-assisted coding",
+      "AI-powered code review",
+      "Intelligent code generation",
+      "Developer productivity automation"
+    ],
+    "ai_engineering_direction": [
+      "Retrieval-Augmented Generation",
+      "Vector search",
+      "Agent orchestration",
+      "Tool calling",
+      "MCP-based AI integrations",
+      "LLM application architecture",
+      "AI developer tools",
+      "Autonomous software engineering workflows"
+    ],
+    "ai_framework_exposure": [
+      "OpenAI",
+      "Anthropic",
+      "AI SDKs",
+      "LangChain",
+      "OpenAI Agents",
+      "MCP"
+    ],
+    "ai_framework_status": {
+      "OpenAI": "hands_on",
+      "Anthropic": "hands_on",
+      "AI_SDKs": "hands_on",
+      "LangChain": "hands_on_learning",
+      "OpenAI_Agents": "hands_on_learning",
+      "MCP": "hands_on_learning"
+    }
+  },
+  "technical_capabilities": {
+    "software_engineering": {
+      "level": "expert",
+      "areas": [
+        "Enterprise application development",
+        "Full-stack development",
+        "Backend engineering",
+        "API design",
+        "Distributed systems",
+        "Microservices",
+        "System architecture",
+        "Performance optimization",
+        "Software modernization",
+        "Automated testing"
+      ]
+    },
+    "frontend": {
+      "level": "expert",
+      "technologies": [
+        "React",
+        "Next.js",
+        "Redux",
+        "JavaScript",
+        "TypeScript",
+        "HTML5",
+        "CSS3",
+        "SASS",
+        "Tailwind CSS",
+        "Webpack",
+        "Vite",
+        "Babel",
+        "Ionic",
+        "Angular"
+      ]
+    },
+    "backend": {
+      "level": "expert",
+      "technologies": [
+        "Node.js",
+        "Express.js",
+        "Java",
+        "Spring Boot",
+        "DropWizard",
+        "GraphQL",
+        "RESTful APIs",
+        "JWT",
+        "OAuth2"
+      ]
+    },
+    "databases": {
+      "level": "strong",
+      "technologies": [
+        "PostgreSQL",
+        "MySQL",
+        "MongoDB",
+        "Oracle",
+        "Redis",
+        "Prisma ORM",
+        "Sequelize",
+        "Mongoose"
+      ]
+    },
+    "cloud_and_devops": {
+      "level": "strong",
+      "technologies": [
+        "AWS",
+        "AWS EC2",
+        "AWS Lambda",
+        "AWS RDS",
+        "AWS S3",
+        "AWS SQS",
+        "Azure",
+        "Google Cloud Platform",
+        "Docker",
+        "Kubernetes",
+        "Terraform",
+        "GitHub Actions",
+        "Jenkins"
+      ]
+    },
+    "testing_and_quality": {
+      "level": "strong",
+      "technologies": [
+        "Jest",
+        "React Testing Library",
+        "JUnit",
+        "Mockito",
+        "Cypress",
+        "Postman",
+        "Swagger",
+        "OpenAPI",
+        "ESLint",
+        "Prettier",
+        "Lighthouse CI"
+      ]
+    },
+    "architecture": {
+      "level": "expert",
+      "areas": [
+        "Microservices",
+        "Serverless",
+        "Monorepo",
+        "MVC",
+        "MVVM",
+        "SOLID",
+        "Clean Architecture",
+        "Test-Driven Development",
+        "Agile",
+        "Scrum"
+      ]
+    }
+  },
+  "ai_projects_and_learning": {
+    "purpose": "Capture AI/agent capabilities that may not yet be represented by formal employment experience.",
+    "projects": [
+      {
+        "id": "ai-rag-kb-001",
+        "name": "AI Knowledge Base",
+        "category": "rag",
+        "status": "hands_on",
+        "technologies": [
+          "PostgreSQL",
+          "pgvector",
+          "RAG",
+          "Node.js",
+          "TypeScript"
+        ],
+        "capabilities": [
+          "Retrieval-Augmented Generation",
+          "Vector search",
+          "Semantic search",
+          "AI application development"
+        ]
+      },
+      {
+        "id": "ai-mcp-vscode-001",
+        "name": "AI Knowledge Base MCP Integration",
+        "category": "mcp",
+        "status": "hands_on_learning",
+        "technologies": [
+          "MCP",
+          "Node.js",
+          "TypeScript",
+          "VS Code"
+        ],
+        "capabilities": [
+          "MCP server development",
+          "AI tool integration",
+          "Developer tooling"
+        ]
+      },
+      {
+        "id": "ai-agent-dev-001",
+        "name": "AI Agent Development",
+        "category": "agents",
+        "status": "hands_on_learning",
+        "technologies": [
+          "OpenAI Agents",
+          "LangChain",
+          "Anthropic",
+          "TypeScript"
+        ],
+        "capabilities": [
+          "Agent orchestration",
+          "Tool calling",
+          "Agent workflows",
+          "LLM application architecture"
+        ]
+      }
+    ]
+  },
+  "education": [
+    {
+      "degree": "Master of Computer Science",
+      "institution": "Tsinghua University",
+      "location": "Beijing, China",
+      "period": {
+        "start": "2003",
+        "end": "2006"
+      }
+    },
+    {
+      "degree": "Bachelor of Electronic Information Engineering",
+      "institution": "Nanjing University of Posts and Telecommunications",
+      "location": "Nanjing, China",
+      "period": {
+        "start": "1999",
+        "end": "2003"
+      }
+    }
+  ],
+  "certifications": [
+    {
+      "name": "AWS Certified Solutions Architect – Associate",
+      "status": "in_progress"
+    }
+  ],
+  "leadership": {
+    "capabilities": [
+      "Technical leadership",
+      "Architecture leadership",
+      "Mentorship",
+      "Cross-functional collaboration",
+      "Engineering enablement",
+      "Code review",
+      "Technical design reviews",
+      "Knowledge sharing"
+    ],
+    "evidence": [
+      "cvent-mentorship-001",
+      "cvent-modernization-001",
+      "luminultra-lead-001",
+      "yunjia-mentorship-001"
+    ]
+  },
+  "scale_and_impact": {
+    "users": [
+      "100K+ daily active users",
+      "50K+ enterprise customers",
+      "10K+ concurrent users"
+    ],
+    "traffic": [
+      "1M+ daily backend requests",
+      "10K+ requests/sec peak backend workload"
+    ],
+    "data": [
+      "100M+ data points processed daily"
+    ],
+    "transactions": [
+      "1M+ daily e-commerce transactions",
+      "$100M+ annual payment transactions"
+    ],
+    "architecture": [
+      "200K+ lines of monolithic code modernized",
+      "30+ microservices"
+    ]
+  },
+  "resume_positioning": {
+    "default": {
+      "headline": "AI-Enhanced Senior Full Stack Developer",
+      "emphasis": [
+        "Full-stack engineering",
+        "AI-powered development",
+        "AI agents",
+        "Cloud architecture",
+        "Microservices",
+        "Technical leadership"
+      ]
+    },
+    "ai_engineer": {
+      "headline": "Senior Software Engineer | AI Agents & AI-Powered Software Engineering",
+      "emphasis": [
+        "Production AI agent development",
+        "LLM integration",
+        "AI-powered automation",
+        "AI-assisted development",
+        "RAG",
+        "Agentic workflows",
+        "Full-stack engineering",
+        "Cloud and distributed systems"
+      ]
+    },
+    "ai_agent_engineer": {
+      "headline": "AI Agent Engineer | Senior Software Engineer",
+      "emphasis": [
+        "AI agents",
+        "Agentic workflows",
+        "LLM applications",
+        "Tool calling",
+        "MCP",
+        "RAG",
+        "Developer automation",
+        "Production software engineering"
+      ]
+    },
+    "staff_engineer": {
+      "headline": "Staff Software Engineer | Full Stack & AI Systems",
+      "emphasis": [
+        "System architecture",
+        "Technical leadership",
+        "Large-scale systems",
+        "Microservices",
+        "Cloud architecture",
+        "AI-powered engineering",
+        "Mentorship"
+      ]
+    },
+    "full_stack": {
+      "headline": "Senior Full Stack Engineer | React, TypeScript, Node.js & Java",
+      "emphasis": [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Node.js",
+        "Java",
+        "Spring Boot",
+        "AWS",
+        "Microservices"
+      ]
+    }
+  },
+  "evidence_policy": {
+    "purpose": "Prevent the AI resume agent from inventing experience.",
+    "rules": [
+      "Only claim production experience when supported by career_evidence.",
+      "AI projects must not be represented as employment experience.",
+      "Learning or exploration must not be represented as professional expertise.",
+      "Technologies without supporting evidence should not be added to experience bullets.",
+      "Metrics must be preserved exactly unless explicitly marked as derived and approved.",
+      "In-progress certifications must always be identified as in progress.",
+      "The agent may rephrase existing evidence but must not create unsupported accomplishments.",
+      "Every new factual resume claim should reference one or more evidence IDs."
+    ],
+    "evidence_types": [
+      "production_experience",
+      "project_experience",
+      "hands_on_learning",
+      "knowledge",
+      "certification",
+      "in_progress"
+    ]
+  }
+}

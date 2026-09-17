@@ -26,6 +26,7 @@
     "deepagents": "^1.12.4",
     "dotenv": "^17.4.2",
     "langchain": "^1.5.9",
+    "lucide-react": "^1.46.0",
     "next": "16.2.7",
     "pg": "^8.23.0",
     "react": "19.2.4",

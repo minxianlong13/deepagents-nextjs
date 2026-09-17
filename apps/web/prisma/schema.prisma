@@ -35,6 +35,51 @@ model Message {
   @@index([conversationId, createdAt])
 }
 
+model CandidateProfile {
+  id          String   @id @default(cuid())
+  candidateId String
+  version     Int      @default(1)
+  profile     Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  chunks      SemanticChunk[]
+
+  @@unique([candidateId, version])
+  @@index([candidateId, updatedAt])
+}
+
+model JobDescription {
+  id          String   @id @default(cuid())
+  externalId  String?
+  title       String?
+  company     String?
+  rawText     String
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  chunks      SemanticChunk[]
+
+  @@index([company, createdAt])
+}
+
+model SemanticChunk {
+  id                 String            @id @default(cuid())
+  content            String
+  ordinal            Int
+  embedding          Unsupported("vector(1024)")
+  candidateProfileId String?
+  jobDescriptionId   String?
+  createdAt          DateTime          @default(now())
+
+  candidateProfile   CandidateProfile? @relation(fields: [candidateProfileId], references: [id], onDelete: Cascade)
+  jobDescription     JobDescription?   @relation(fields: [jobDescriptionId], references: [id], onDelete: Cascade)
+
+  @@index([candidateProfileId, ordinal])
+  @@index([jobDescriptionId, ordinal])
+}
+
 enum MessageRole {
   user
   assistant

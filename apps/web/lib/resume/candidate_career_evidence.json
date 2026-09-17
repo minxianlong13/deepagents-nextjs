@@ -1,0 +1,577 @@
+[
+  {
+    "id": "cvent-ai-agent-001",
+    "company": "Cvent",
+    "role": "Senior Software Engineer",
+    "period": {
+      "start": "2019-04",
+      "end": "present"
+    },
+    "category": "ai_agent",
+    "capabilities": [
+      "AI agent development",
+      "LLM application development",
+      "AI-powered automation",
+      "Natural language processing",
+      "Workflow automation",
+      "Data generation",
+      "Validation"
+    ],
+    "technologies": [
+      "OpenAI",
+      "Anthropic",
+      "AI SDKs"
+    ],
+    "achievement": "Led development of an intelligent automation agent for hotel property creation.",
+    "implementation": [
+      "Implemented natural language requirement parsing",
+      "Implemented automated data generation",
+      "Implemented validation workflows"
+    ],
+    "impact": [
+      "Reduced QA preparation time by 90%",
+      "Enabled same-day customer onboarding"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "cvent-ai-codereview-001",
+    "company": "Cvent",
+    "role": "Senior Software Engineer",
+    "period": {
+      "start": "2019-04",
+      "end": "present"
+    },
+    "category": "ai_developer_productivity",
+    "capabilities": [
+      "AI-assisted software development",
+      "AI code review",
+      "Developer productivity",
+      "Software quality automation"
+    ],
+    "technologies": [
+      "GitHub Copilot",
+      "SonarQube"
+    ],
+    "achievement": "Integrated AI-powered code review and coding-assistance tools into the software development workflow.",
+    "implementation": [
+      "Integrated GitHub Copilot into development workflows",
+      "Integrated AI/ML-assisted code analysis",
+      "Improved developer focus on architecture and business logic"
+    ],
+    "impact": [
+      "35% faster PR approvals",
+      "40% reduction in post-deployment bugs"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "cvent-fullstack-001",
+    "company": "Cvent",
+    "role": "Senior Software Engineer",
+    "period": {
+      "start": "2019-04",
+      "end": "present"
+    },
+    "category": "full_stack",
+    "capabilities": [
+      "Full-stack development",
+      "Frontend architecture",
+      "Enterprise web applications",
+      "UX engineering"
+    ],
+    "technologies": [
+      "Next.js",
+      "React",
+      "TypeScript"
+    ],
+    "achievement": "Architected and delivered production-grade features using Next.js, React, and TypeScript.",
+    "impact": [
+      "Served 100K+ daily active users",
+      "Improved user engagement through enhanced UX workflows"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "cvent-backend-scale-001",
+    "company": "Cvent",
+    "role": "Senior Software Engineer",
+    "period": {
+      "start": "2019-04",
+      "end": "present"
+    },
+    "category": "backend_and_distributed_systems",
+    "capabilities": [
+      "Backend engineering",
+      "Distributed systems",
+      "REST API design",
+      "Microservices",
+      "Scalability"
+    ],
+    "technologies": [
+      "Java",
+      "Spring Boot",
+      "REST",
+      "Microservices"
+    ],
+    "achievement": "Engineered high-performance RESTful APIs using Java and Spring Boot within a distributed microservices ecosystem.",
+    "impact": [
+      "Handled approximately 1M+ daily requests"
+    ],
+    "keywords": [
+      "distributed systems",
+      "microservices",
+      "high scalability",
+      "high performance",
+      "API development"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "cvent-performance-001",
+    "company": "Cvent",
+    "role": "Senior Software Engineer",
+    "period": {
+      "start": "2019-04",
+      "end": "present"
+    },
+    "category": "performance_engineering",
+    "capabilities": [
+      "Performance optimization",
+      "Caching",
+      "Database optimization",
+      "Microservices"
+    ],
+    "technologies": [
+      "PostgreSQL",
+      "Redis"
+    ],
+    "achievement": "Designed and implemented a critical event-creation microservice using PostgreSQL and Redis caching.",
+    "impact": [
+      "Reduced average response time from approximately 2 seconds to approximately 400 milliseconds"
+    ],
+    "keywords": [
+      "performance optimization",
+      "latency reduction",
+      "Redis",
+      "PostgreSQL",
+      "caching"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "cvent-graphql-001",
+    "company": "Cvent",
+    "role": "Senior Software Engineer",
+    "period": {
+      "start": "2019-04",
+      "end": "present"
+    },
+    "category": "api_architecture",
+    "capabilities": [
+      "API architecture",
+      "GraphQL",
+      "Real-time systems",
+      "Frontend/backend integration"
+    ],
+    "technologies": [
+      "GraphQL"
+    ],
+    "achievement": "Pioneered GraphQL API adoption for real-time event streaming.",
+    "impact": [
+      "Eliminated 40% of redundant API calls",
+      "Reduced frontend state management complexity by 50%"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "cvent-modernization-001",
+    "company": "Cvent",
+    "role": "Senior Software Engineer",
+    "period": {
+      "start": "2019-04",
+      "end": "present"
+    },
+    "category": "software_architecture",
+    "capabilities": [
+      "System modernization",
+      "Microservices architecture",
+      "Legacy modernization",
+      "Technical leadership",
+      "Architecture"
+    ],
+    "achievement": "Led a legacy modernization initiative, refactoring 200K+ lines of monolithic code into 30+ modular, testable microservices.",
+    "impact": [
+      "30% performance improvement",
+      "70% reduction in deployment time"
+    ],
+    "keywords": [
+      "legacy modernization",
+      "microservices",
+      "monolith decomposition",
+      "architecture",
+      "technical leadership"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "cvent-mentorship-001",
+    "company": "Cvent",
+    "role": "Senior Software Engineer",
+    "period": {
+      "start": "2019-04",
+      "end": "present"
+    },
+    "category": "technical_leadership",
+    "capabilities": [
+      "Technical leadership",
+      "Mentorship",
+      "Architecture reviews",
+      "Engineering enablement"
+    ],
+    "achievement": "Mentored 5+ junior developers through structured pair programming and architectural design reviews.",
+    "impact": [
+      "Accelerated ramp-up time by 50%",
+      "Established team-wide engineering best practices"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "cvent-testing-001",
+    "company": "Cvent",
+    "role": "Senior Software Engineer",
+    "period": {
+      "start": "2019-04",
+      "end": "present"
+    },
+    "category": "quality_engineering",
+    "capabilities": [
+      "Automated testing",
+      "Quality engineering",
+      "Continuous deployment"
+    ],
+    "achievement": "Implemented an automated testing framework achieving 90% code coverage.",
+    "impact": [
+      "Reduced production incidents by 60%",
+      "Enabled confident continuous deployment"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "luminultra-lead-001",
+    "company": "LuminUltra Technologies Ltd.",
+    "role": "Front-End Lead Developer",
+    "period": {
+      "start": "2017-10",
+      "end": "2019-03"
+    },
+    "category": "technical_leadership",
+    "capabilities": [
+      "Frontend leadership",
+      "Team leadership",
+      "Cross-platform development",
+      "Mentorship"
+    ],
+    "technologies": [
+      "Ionic",
+      "Angular",
+      "TypeScript"
+    ],
+    "achievement": "Led and mentored a team of 6 frontend developers building an enterprise laboratory management application.",
+    "impact": [
+      "Served 5,000+ healthcare professionals",
+      "Supported iOS, Android, and web platforms"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "luminultra-cicd-001",
+    "company": "LuminUltra Technologies Ltd.",
+    "role": "Front-End Lead Developer",
+    "period": {
+      "start": "2017-10",
+      "end": "2019-03"
+    },
+    "category": "devops_and_automation",
+    "capabilities": [
+      "CI/CD",
+      "DevOps automation",
+      "Cloud deployment",
+      "Developer productivity"
+    ],
+    "technologies": [
+      "GitHub Actions",
+      "Docker",
+      "AWS"
+    ],
+    "achievement": "Built an automated CI/CD pipeline using GitHub Actions, Docker, and AWS.",
+    "impact": [
+      "Reduced deployment time from 3 hours to 15 minutes",
+      "Enabled daily releases",
+      "Enabled zero-downtime deployments"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "luminultra-performance-001",
+    "company": "LuminUltra Technologies Ltd.",
+    "role": "Front-End Lead Developer",
+    "period": {
+      "start": "2017-10",
+      "end": "2019-03"
+    },
+    "category": "performance_engineering",
+    "capabilities": [
+      "Frontend performance",
+      "API optimization",
+      "Caching",
+      "Latency optimization"
+    ],
+    "achievement": "Optimized application performance through API redesign, request batching, lazy loading, and caching strategies.",
+    "impact": [
+      "Reduced API calls by 50%",
+      "Achieved 2x faster page load times"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "luminultra-testing-001",
+    "company": "LuminUltra Technologies Ltd.",
+    "role": "Front-End Lead Developer",
+    "period": {
+      "start": "2017-10",
+      "end": "2019-03"
+    },
+    "category": "quality_engineering",
+    "capabilities": [
+      "TDD",
+      "Automated testing",
+      "Quality improvement"
+    ],
+    "achievement": "Increased test coverage through test-driven development practices and mentorship.",
+    "impact": [
+      "Increased test coverage from 35% to 85%",
+      "Reduced production bugs by 65%"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "yunjia-platforms-001",
+    "company": "Shanghai Yunjia Technologies Ltd.",
+    "role": "Lead Developer",
+    "period": {
+      "start": "2015-10",
+      "end": "2017-03"
+    },
+    "category": "saas_architecture",
+    "capabilities": [
+      "SaaS architecture",
+      "Frontend architecture",
+      "Design systems",
+      "Component architecture"
+    ],
+    "achievement": "Led frontend architecture and development across 5 enterprise SaaS platforms.",
+    "impact": [
+      "Reduced development time by 45%",
+      "Served 50K+ enterprise customers"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "yunjia-analytics-001",
+    "company": "Shanghai Yunjia Technologies Ltd.",
+    "role": "Lead Developer",
+    "period": {
+      "start": "2015-10",
+      "end": "2017-03"
+    },
+    "category": "real_time_systems",
+    "capabilities": [
+      "Real-time systems",
+      "Data visualization",
+      "High concurrency",
+      "Distributed data processing",
+      "Performance engineering"
+    ],
+    "technologies": [
+      "JavaScript",
+      "Node.js",
+      "Express.js",
+      "D3.js",
+      "WebSocket"
+    ],
+    "achievement": "Architected and launched a real-time analytics dashboard.",
+    "impact": [
+      "Processed 100M+ data points daily",
+      "Supported 10,000+ concurrent users",
+      "Achieved sub-second response times"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "yunjia-ecommerce-001",
+    "company": "Shanghai Yunjia Technologies Ltd.",
+    "role": "Lead Developer",
+    "period": {
+      "start": "2015-10",
+      "end": "2017-03"
+    },
+    "category": "high_scale_ecommerce",
+    "capabilities": [
+      "High-scale web applications",
+      "Micro-frontends",
+      "Performance optimization",
+      "High availability",
+      "Caching"
+    ],
+    "technologies": [
+      "Micro-frontends"
+    ],
+    "achievement": "Led development of a high-performance e-commerce platform.",
+    "impact": [
+      "Handled 1M+ daily transactions",
+      "Processed $10M+ GMV",
+      "Achieved 99.95% uptime",
+      "Achieved 50ms average response time"
+    ],
+    "implementation": [
+      "Micro-frontend architecture",
+      "Optimistic UI updates",
+      "Intelligent caching strategies"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "yunjia-performance-001",
+    "company": "Shanghai Yunjia Technologies Ltd.",
+    "role": "Lead Developer",
+    "period": {
+      "start": "2015-10",
+      "end": "2017-03"
+    },
+    "category": "frontend_performance",
+    "capabilities": [
+      "Frontend performance",
+      "Performance monitoring",
+      "Web optimization"
+    ],
+    "technologies": [
+      "Lighthouse CI"
+    ],
+    "achievement": "Established a frontend performance monitoring and optimization framework.",
+    "impact": [
+      "Achieved consistent 95+ performance scores",
+      "Reduced initial load time by 65%"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "yunjia-mentorship-001",
+    "company": "Shanghai Yunjia Technologies Ltd.",
+    "role": "Lead Developer",
+    "period": {
+      "start": "2015-10",
+      "end": "2017-03"
+    },
+    "category": "technical_leadership",
+    "capabilities": [
+      "Mentorship",
+      "Technical leadership",
+      "Knowledge sharing",
+      "Engineering practices"
+    ],
+    "achievement": "Mentored a team of 8 developers in modern JavaScript frameworks and engineering best practices.",
+    "impact": [
+      "Improved code review turnaround time by 30%"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "yunjia-abtesting-001",
+    "company": "Shanghai Yunjia Technologies Ltd.",
+    "role": "Lead Developer",
+    "period": {
+      "start": "2015-10",
+      "end": "2017-03"
+    },
+    "category": "product_engineering",
+    "capabilities": [
+      "A/B testing",
+      "Feature flags",
+      "Product experimentation",
+      "Cross-functional collaboration"
+    ],
+    "achievement": "Collaborated with product and UX teams to implement A/B testing and feature flagging capabilities.",
+    "impact": [
+      "Enabled data-driven product iterations",
+      "Reduced feature rollback incidents by 80%"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  },
+  {
+    "id": "yunjia-payment-001",
+    "company": "Shanghai Yunjia Technologies Ltd.",
+    "role": "Lead Developer",
+    "period": {
+      "start": "2015-10",
+      "end": "2017-03"
+    },
+    "category": "payments_and_security",
+    "capabilities": [
+      "Payment systems",
+      "Security",
+      "PCI compliance",
+      "High-volume transactions"
+    ],
+    "technologies": [
+      "Alipay",
+      "WeChat Pay"
+    ],
+    "achievement": "Integrated third-party payment gateways and implemented PCI-compliant checkout flows.",
+    "impact": [
+      "Processed $100M+ in annual transactions",
+      "Zero reported security incidents"
+    ],
+    "evidence_type": "production_experience",
+    "evidence_strength": "strong",
+    "resume_safe": true
+  }
+]

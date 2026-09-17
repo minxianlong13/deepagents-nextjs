@@ -42,6 +42,14 @@ export default function HomePage() {
             >
               Open RAG Chat
             </Link>
+            <Link
+              href="/resume"
+              className={cn(
+                buttonVariants({ variant: "secondary", size: "lg" }),
+              )}
+            >
+              Tailor a Resume
+            </Link>
           </CardContent>
         </Card>
       </div>
