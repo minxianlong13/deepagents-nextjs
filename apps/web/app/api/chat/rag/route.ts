@@ -1,4 +1,4 @@
-import { ragAgent } from "@/lib/agents/rag_agent";
+import { getRagAgent } from "@/lib/agents/rag_agent";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -44,6 +44,7 @@ export async function POST(req: Request) {
       );
     }
 
+    const ragAgent = await getRagAgent();
     const result = await ragAgent.invoke({
       messages: [{ role: "user", content: parsed.data.input }],
     });

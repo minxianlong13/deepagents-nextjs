@@ -9,7 +9,7 @@ const serverUrl = process.env.MCP_SERVER_URL ?? "http://127.0.0.1:8787/mcp";
 const transport = new StreamableHTTPClientTransport(new URL(serverUrl));
 
 const client = new Client({
-  name: "deepagents-mcp-example-client",
+  name: "deepagents-mcp-local-client",
   version: "0.1.0",
 });
 

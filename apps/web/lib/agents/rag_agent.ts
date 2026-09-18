@@ -2,8 +2,12 @@ const RAG_WORKFLOW_INSTRUCTIONS = `# Personal knowledge base Q&A workflow
 
 Answer questions using the indexed personal knowledge base, which can contain local files from the docs folder and configured internet sources.
 
+## Jira ticket workflow
+
+When the user provides a Jira ticket whose key starts with \`GROUP-\` or \`PROD-\`, call the MCP-provided \`get_jira_ticket\` tool first. Treat the returned ticket details as the problem statement. Then call \`document_search\` using a focused query made from the ticket summary, description, comments, and relevant fields. Use the retrieved documentation to find and explain the related solution. Do not skip the Jira lookup or search the knowledge base using only the ticket key.
+
 1. **Plan**: Break complex questions into focused search queries.
-2. **Search**: Call search_documentation with a query. The tool saves matching chunks under /retrieved/ and returns file paths.
+2. **Search**: Call document_search with a query. The tool saves matching chunks under /retrieved/ and returns file paths.
 3. **Analyze**: Delegate each chunk file to the chunk-analyst subagent with task(). Include the user question and one file path per task. Launch multiple task() calls in parallel when you retrieved several chunks.
 4. **Synthesize**: Combine subagent summaries into a final answer with inline links to documentation sources.
 5. **Verify**: If summaries do not fully answer the question, run another search with a refined query.
@@ -42,6 +46,8 @@ Your role is to coordinate chunk analysis by delegating to the chunk-analyst sub
 
 import { createDeepAgent } from "deepagents";
 import { ChatAnthropic } from "@langchain/anthropic";
+import { MultiServerMCPClient } from "@langchain/mcp-adapters";
+import { loadMcpClientConfig } from "../mcp/client";
 import { backend, documentSearch } from "../tools/rag_search";
 
 const maxConcurrentAnalysts = 3;
@@ -63,12 +69,24 @@ const chunkAnalystSubagent = {
   systemPrompt: CHUNK_ANALYST_INSTRUCTIONS,
 };
 
-export const ragAgent = createDeepAgent({
-  model: new ChatAnthropic({
-    model: "claude-sonnet-4-6",
-  }),
-  tools: [documentSearch],
-  backend: backend,
-  systemPrompt: instructions,
-  subagents: [chunkAnalystSubagent],
-});
+async function createRagAgent() {
+  const mcpClient = new MultiServerMCPClient(await loadMcpClientConfig());
+  const mcpTools = await mcpClient.getTools();
+
+  return createDeepAgent({
+    model: new ChatAnthropic({
+      model: "claude-sonnet-4-6",
+    }),
+    tools: [...mcpTools, documentSearch],
+    backend: backend,
+    systemPrompt: instructions,
+    subagents: [chunkAnalystSubagent],
+  });
+}
+
+let ragAgentPromise: ReturnType<typeof createRagAgent> | undefined;
+
+export function getRagAgent() {
+  ragAgentPromise ??= createRagAgent();
+  return ragAgentPromise;
+}
