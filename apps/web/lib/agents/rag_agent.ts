@@ -4,7 +4,7 @@ Answer questions using the indexed personal knowledge base, which can contain lo
 
 ## Jira ticket workflow
 
-When the user provides a Jira ticket whose key starts with \`GROUP-\` or \`PROD-\`, call the MCP-provided \`get_jira_ticket\` tool first. Treat the returned ticket details as the problem statement. Then call \`document_search\` using a focused query made from the ticket summary, description, comments, and relevant fields. Use the retrieved documentation to find and explain the related solution. Do not skip the Jira lookup or search the knowledge base using only the ticket key.
+${JIRA_TICKET_ANALYSIS_PROMPT}
 
 1. **Plan**: Break complex questions into focused search queries.
 2. **Search**: Call document_search with a query. The tool saves matching chunks under /retrieved/ and returns file paths.
@@ -47,6 +47,7 @@ Your role is to coordinate chunk analysis by delegating to the chunk-analyst sub
 import { createDeepAgent } from "deepagents";
 import { ChatAnthropic } from "@langchain/anthropic";
 import { MultiServerMCPClient } from "@langchain/mcp-adapters";
+import { JIRA_TICKET_ANALYSIS_PROMPT } from "./jira_analysis";
 import { loadMcpClientConfig } from "../mcp/client";
 import { backend, documentSearch } from "../tools/rag_search";
 

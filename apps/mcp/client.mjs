@@ -34,6 +34,23 @@ try {
   for (const content of result.content) {
     console.log(content.type === "text" ? content.text : content);
   }
+
+  const contentId = "1106609325";
+  console.log(`\nCalling get_wiki_content with contentId=${contentId}`);
+  const wikiResult = await client.callTool({
+    name: "get_wiki_content",
+    arguments: { contentId },
+  });
+  console.log("Wiki Markdown result:");
+  for (const content of wikiResult.content) {
+    console.log(content.type === "text" ? content.text : content);
+  }
+  if (wikiResult.structuredContent?.files) {
+    console.log("Wiki files written:");
+    for (const file of wikiResult.structuredContent.files) {
+      console.log(`- ${file.filePath}`);
+    }
+  }
 } finally {
   await client.close();
 }
