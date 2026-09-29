@@ -44,21 +44,6 @@ export async function POST(request: Request) {
         arguments: { contentId: parsed.data.contentId },
       });
 
-      const textItems = Array.isArray(wikiResult.content)
-        ? wikiResult.content.filter(
-            (item: unknown): item is { type: "text"; text: string } =>
-              typeof item === "object" &&
-              item !== null &&
-              "type" in item &&
-              item.type === "text" &&
-              "text" in item &&
-              typeof item.text === "string",
-          )
-        : [];
-      const content = textItems
-        .map((item) => item.text)
-        .join("\n\n");
-
       const structuredContent = wikiResult.structuredContent as
         | {
             parentContentId?: string;
@@ -74,7 +59,6 @@ export async function POST(request: Request) {
           structuredContent?.parentContentId ?? parsed.data.contentId,
         childPageIds: structuredContent?.childPageIds ?? [],
         files: structuredContent?.files ?? [],
-        content,
       });
     } finally {
       await connection.close();

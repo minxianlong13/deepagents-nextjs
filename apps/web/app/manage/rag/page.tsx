@@ -18,7 +18,6 @@ export default function RagConfigurationPage() {
   const [error, setError] = useState(false);
   const [wikiParentId, setWikiParentId] = useState("");
   const [wikiLoading, setWikiLoading] = useState(false);
-  const [wikiContent, setWikiContent] = useState<string | null>(null);
   const [wikiPages, setWikiPages] = useState<
     Array<{ contentId: string; title: string; filePath: string }>
   >([]);
@@ -69,7 +68,6 @@ export default function RagConfigurationPage() {
     if (wikiLoading) return;
 
     setWikiLoading(true);
-    setWikiContent(null);
     setWikiPages([]);
     setWikiError(null);
 
@@ -80,7 +78,6 @@ export default function RagConfigurationPage() {
         body: JSON.stringify({ contentId: wikiParentId.trim() }),
       });
       const data = (await response.json()) as {
-        content?: string;
         files?: Array<{ contentId: string; title: string; filePath: string }>;
         error?: string;
         details?: string;
@@ -90,7 +87,6 @@ export default function RagConfigurationPage() {
         throw new Error(data.details || data.error || "Unable to load wiki content");
       }
 
-      setWikiContent(data.content ?? "");
       setWikiPages(data.files ?? []);
     } catch (caughtError) {
       setWikiError(
@@ -178,11 +174,11 @@ export default function RagConfigurationPage() {
 
             <section className="space-y-3 border-t border-black/10 pt-6">
               <div>
-                <h2 className="text-lg font-semibold">Wiki content</h2>
+                <h2 className="text-lg font-semibold">Wiki files</h2>
                 <p className="max-w-2xl text-sm leading-relaxed text-black/65">
                   Enter a Confluence parent page ID to call the MCP
                   <code className="mx-1">get_wiki_content</code> method. The
-                  parent and its direct child pages will be retrieved together.
+                  parent and all descendant pages will be saved as files.
                 </p>
               </div>
               <label className="block max-w-xl space-y-2 text-sm font-medium">
@@ -206,7 +202,7 @@ export default function RagConfigurationPage() {
                 onClick={loadWikiContent}
                 disabled={wikiLoading || !/^\d+$/.test(wikiParentId.trim())}
               >
-                {wikiLoading ? "Loading wiki pages..." : "Load wiki content"}
+                {wikiLoading ? "Loading wiki pages..." : "Fetch wiki files"}
               </Button>
 
               {wikiError ? (
@@ -218,7 +214,7 @@ export default function RagConfigurationPage() {
                 </p>
               ) : null}
 
-              {wikiContent !== null ? (
+              {wikiPages.length > 0 ? (
                 <div className="space-y-3 rounded-xl border border-black/10 bg-white/75 p-4">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <p className="text-sm font-medium">
@@ -234,9 +230,6 @@ export default function RagConfigurationPage() {
                       </li>
                     ))}
                   </ul>
-                  <pre className="max-h-128 overflow-auto whitespace-pre-wrap rounded-lg border border-black/10 bg-[#faf8f3] p-3 text-xs leading-relaxed text-black/75">
-                    {wikiContent || "The MCP server returned no page content."}
-                  </pre>
                 </div>
               ) : null}
             </section>

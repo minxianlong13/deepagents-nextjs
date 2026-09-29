@@ -86,14 +86,6 @@ export async function loadMcpClientConfig() {
   };
 }
 
-export async function listConfiguredMcpServers() {
-  const servers = await getConfiguredServers();
-  return Object.entries(servers).map(([name, server]) => ({
-    name,
-    ...server,
-  }));
-}
-
 export async function createMcpClient(
   serverName = process.env.MCP_SERVER_NAME,
 ): Promise<McpConnection> {

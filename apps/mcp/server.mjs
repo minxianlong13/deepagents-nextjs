@@ -139,6 +139,34 @@ async function getWikiChildPageIds(wikiBaseUrl, parentContentId) {
   return [...new Set(childPageIds)];
 }
 
+async function getWikiDescendantPageIds(wikiBaseUrl, parentContentId) {
+  const descendantPageIds = [];
+  const visitedPageIds = new Set([parentContentId]);
+  const pagesToVisit = [parentContentId];
+  let nextPageIndex = 0;
+
+  while (nextPageIndex < pagesToVisit.length) {
+    const currentPageId = pagesToVisit[nextPageIndex];
+    nextPageIndex += 1;
+    const childPageIds = await getWikiChildPageIds(
+      wikiBaseUrl,
+      currentPageId,
+    );
+
+    for (const childPageId of childPageIds) {
+      if (visitedPageIds.has(childPageId)) {
+        continue;
+      }
+
+      visitedPageIds.add(childPageId);
+      descendantPageIds.push(childPageId);
+      pagesToVisit.push(childPageId);
+    }
+  }
+
+  return descendantPageIds;
+}
+
 function getWikiContentUrl(wikiBaseUrl, contentId) {
   const contentUrl = new URL(
     `/rest/api/content/${encodeURIComponent(contentId)}`,
@@ -251,7 +279,7 @@ function createServer() {
     {
       title: "Get Wiki Content",
       description:
-        "Fetch all child Confluence pages by parent ID, retrieve their storage content, and export each page to a Markdown file.",
+        "Fetch a Confluence page and all of its descendant pages by parent ID, retrieve their storage content, and export each page to a Markdown file.",
       inputSchema: {
         contentId: z
           .string()
@@ -264,10 +292,13 @@ function createServer() {
         process.env.WIKI_BASE_URL ?? DEFAULT_WIKI_BASE_URL
       ).replace(/\/$/, "");
       const parentPage = await fetchWikiPage(wikiBaseUrl, contentId);
-      const childPageIds = await getWikiChildPageIds(wikiBaseUrl, contentId);
+      const descendantPageIds = await getWikiDescendantPageIds(
+        wikiBaseUrl,
+        contentId,
+      );
       const childPages = await Promise.all(
-        childPageIds.map(async (childPageId) => {
-          return fetchWikiPage(wikiBaseUrl, childPageId);
+        descendantPageIds.map(async (descendantPageId) => {
+          return fetchWikiPage(wikiBaseUrl, descendantPageId);
         }),
       );
       const pages = [parentPage, ...childPages];
@@ -301,7 +332,7 @@ function createServer() {
         ],
         structuredContent: {
           parentContentId: contentId,
-          childPageIds,
+          childPageIds: descendantPageIds,
           files,
         },
       };
