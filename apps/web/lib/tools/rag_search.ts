@@ -25,7 +25,6 @@ type SourceDocument = {
 };
 
 type RemoteMetadata = {
-  name?: string;
   sources: string[];
 };
 
@@ -48,24 +47,52 @@ async function listLocalFiles(directory: string): Promise<string[]> {
   }
 }
 
-async function loadRemoteMetadata(): Promise<RemoteMetadata[]> {
-  const metadataFiles = (
-    await listLocalFiles(REMOTE_METADATA_DIRECTORY)
-  ).filter((filePath) => path.extname(filePath).toLowerCase() === ".json");
+function resolveDocsSubdirectory(folderName: string): string {
+  const trimmedFolderName = folderName.trim();
+  if (!trimmedFolderName) {
+    throw new Error("A docs folder or subfolder is required");
+  }
+
+  const normalizedFolderName = [".", "./", "./docs", "docs"].includes(
+    trimmedFolderName,
+  )
+    ? "."
+    : trimmedFolderName;
+  const docsSubdirectory = path.resolve(DOCS_DIRECTORY, normalizedFolderName);
+  const docsPrefix = `${DOCS_DIRECTORY}${path.sep}`;
+  if (
+    docsSubdirectory !== DOCS_DIRECTORY &&
+    !docsSubdirectory.startsWith(docsPrefix)
+  ) {
+    throw new Error("The selected folder must be inside ./docs");
+  }
+
+  return docsSubdirectory;
+}
+
+function isWithinDirectory(directory: string, filePath: string): boolean {
+  const relativePath = path.relative(directory, filePath);
+  return relativePath === "" || (!relativePath.startsWith("..") && !path.isAbsolute(relativePath));
+}
+
+async function loadRemoteMetadata(
+  directory: string,
+): Promise<RemoteMetadata[]> {
+  const metadataFiles = (await listLocalFiles(directory)).filter(
+    (filePath) => path.extname(filePath).toLowerCase() === ".json",
+  );
 
   const metadata = await Promise.all(
     metadataFiles.map(async (filePath): Promise<RemoteMetadata | null> => {
       try {
-        const parsed = JSON.parse(
-          await readFile(filePath, "utf8"),
-        ) as Partial<RemoteMetadata>;
+        const parsed = JSON.parse(await readFile(filePath, "utf8")) as Partial<RemoteMetadata>;
         if (
           !Array.isArray(parsed.sources) ||
           !parsed.sources.every((source) => typeof source === "string")
         ) {
           return null;
         }
-        return { name: parsed.name, sources: parsed.sources };
+        return { sources: parsed.sources };
       } catch {
         return null;
       }
@@ -75,14 +102,46 @@ async function loadRemoteMetadata(): Promise<RemoteMetadata[]> {
   return metadata.filter((entry): entry is RemoteMetadata => entry !== null);
 }
 
-async function loadSourceDocuments(): Promise<SourceDocument[]> {
-  const localFiles = await listLocalFiles(DOCS_DIRECTORY);
+async function loadRemoteDocuments(
+  directory: string,
+): Promise<SourceDocument[]> {
+  const metadata = await loadRemoteMetadata(directory);
+  const remoteDocuments = await Promise.all(
+    metadata.flatMap((entry) =>
+      entry.sources.map(async (source) => {
+        try {
+          const response = await fetch(source);
+          if (!response.ok) return null;
+          return { source, content: await response.text() };
+        } catch {
+          return null;
+        }
+      }),
+    ),
+  );
+
+  return remoteDocuments.filter(
+    (document): document is SourceDocument => document !== null,
+  );
+}
+
+async function loadSourceDocuments(folderName: string): Promise<SourceDocument[]> {
+  const docsSubdirectory = resolveDocsSubdirectory(folderName);
+  if (isWithinDirectory(REMOTE_METADATA_DIRECTORY, docsSubdirectory)) {
+    const remoteDocuments = await loadRemoteDocuments(docsSubdirectory);
+    if (remoteDocuments.length === 0) {
+      throw new Error(
+        `No readable remote sources were found under ./docs/${folderName}`,
+      );
+    }
+    return remoteDocuments;
+  }
+
+  const localFiles = (await listLocalFiles(docsSubdirectory)).filter(
+    (filePath) => !isWithinDirectory(REMOTE_METADATA_DIRECTORY, filePath),
+  );
   const localDocuments = await Promise.all(
     localFiles
-      .filter(
-        (filePath) =>
-          !filePath.startsWith(`${REMOTE_METADATA_DIRECTORY}${path.sep}`),
-      )
       .map(async (filePath) => {
         try {
           return {
@@ -95,33 +154,21 @@ async function loadSourceDocuments(): Promise<SourceDocument[]> {
       }),
   );
 
-  const remoteMetadata = await loadRemoteMetadata();
-  const remoteDocuments = await Promise.all(
-    remoteMetadata.flatMap((metadata) =>
-      metadata.sources.map(async (source) => {
-        try {
-          const response = await fetch(source);
-          if (!response.ok) return null;
-          return { source, content: await response.text() };
-        } catch {
-          return null;
-        }
-      }),
-    ),
+  const documents = localDocuments.filter(
+    (document): document is SourceDocument => document !== null,
   );
-
-  return [
-    ...localDocuments.filter(
-      (document): document is SourceDocument => document !== null,
-    ),
-    ...remoteDocuments.filter(
-      (document): document is SourceDocument => document !== null,
-    ),
-  ];
+  if (docsSubdirectory === DOCS_DIRECTORY) {
+    const remoteDocuments = await loadRemoteDocuments(REMOTE_METADATA_DIRECTORY);
+    documents.push(...remoteDocuments);
+  }
+  if (documents.length === 0) {
+    throw new Error(`No readable documents were found under ./docs/${folderName}`);
+  }
+  return documents;
 }
 
-async function loadDocuments(): Promise<Document[]> {
-  const sources = await loadSourceDocuments();
+async function loadDocuments(folderName: string): Promise<Document[]> {
+  const sources = await loadSourceDocuments(folderName);
   const docs: Document[] = [];
   sources.forEach(({ source, content }) => {
     docs.push(new Document({ pageContent: content, metadata: { source } }));
@@ -171,8 +218,8 @@ async function getVectorStore() {
   return vectorStore;
 }
 
-export async function indexKnowledgeBase() {
-  const documents = await loadDocuments();
+export async function indexKnowledgeBase(folderName: string) {
+  const documents = await loadDocuments(folderName);
   const vectorStore = await getVectorStore();
   const pineconeApiKey = process.env.PINECONE_API_KEY;
   if (!pineconeApiKey) throw new Error("PINECONE_API_KEY is not set");

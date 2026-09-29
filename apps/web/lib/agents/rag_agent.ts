@@ -1,6 +1,6 @@
 const RAG_WORKFLOW_INSTRUCTIONS = `# Personal knowledge base Q&A workflow
 
-Answer questions using the indexed personal knowledge base, which can contain local files from the docs folder and configured internet sources.
+Answer questions using the indexed personal knowledge base, which contains local files from the docs subfolder selected during RAG configuration.
 
 ## Jira ticket workflow
 

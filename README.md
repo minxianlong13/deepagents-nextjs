@@ -43,6 +43,8 @@ If you see `404 Page not found` when calling MCP tools, your `MCP_SERVER_URL` is
 
 ## Wiki MCP Tool
 
+The RAG configuration accepts `.` for the entire `./docs` folder, or a subfolder relative to `./docs`. Selecting `.` indexes local files plus all remote JSON metadata. Local subfolders index their files directly, while selecting `remote` or a subfolder under `docs/remote` reads JSON metadata files and fetches each URL listed in their `sources` arrays. Only the selected scope is indexed.
+
 The MCP server exposes `get_wiki_content`, which accepts a parent Confluence content ID and calls:
 
 ```text
