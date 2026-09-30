@@ -47,7 +47,7 @@ Your role is to coordinate chunk analysis by delegating to the chunk-analyst sub
 import { createDeepAgent } from "deepagents";
 import { ChatAnthropic } from "@langchain/anthropic";
 import { MultiServerMCPClient } from "@langchain/mcp-adapters";
-import { JIRA_TICKET_ANALYSIS_PROMPT } from "./jira_analysis";
+import { JIRA_TICKET_ANALYSIS_PROMPT } from "../skill/jira_analysis";
 import { loadMcpClientConfig } from "../mcp/client";
 import { backend, documentSearch } from "../tools/rag_search";
 

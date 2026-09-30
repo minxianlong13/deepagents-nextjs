@@ -6,7 +6,7 @@ import { OpenAIEmbeddings } from "@langchain/openai";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { tool } from "langchain";
 import { z } from "zod";
-import prisma from "@/lib/prisma";
+import prisma from "@/lib/db/prisma";
 import { candidateProfile } from "@/lib/resume/candidate-profile";
 
 const EMBEDDING_DIMENSIONS = 1024;

@@ -14,17 +14,6 @@ type McpConfig = {
   mcpServers?: Record<string, McpServerConfig>;
 };
 
-export type McpServerInfo = {
-  name: string;
-  url: string;
-  server?: ReturnType<Client["getServerVersion"]>;
-  capabilities?: ReturnType<Client["getServerCapabilities"]>;
-  instructions?: string;
-  tools: Awaited<ReturnType<Client["listTools"]>>["tools"];
-  resources: Awaited<ReturnType<Client["listResources"]>>["resources"];
-  prompts: Awaited<ReturnType<Client["listPrompts"]>>["prompts"];
-};
-
 export type McpConnection = {
   client: Client;
   serverName: string;
@@ -131,31 +120,4 @@ export async function createMcpClient(
     server,
     close: () => client.close(),
   };
-}
-
-export async function listMcpServerInfo(serverName?: string) {
-  const connection = await createMcpClient(serverName);
-  const { client, server, close } = connection;
-
-  try {
-    const capabilities = client.getServerCapabilities();
-    const [tools, resources, prompts] = await Promise.all([
-      client.listTools(),
-      capabilities?.resources ? client.listResources() : { resources: [] },
-      capabilities?.prompts ? client.listPrompts() : { prompts: [] },
-    ]);
-
-    return {
-      name: connection.serverName,
-      url: server.url,
-      server: client.getServerVersion(),
-      capabilities,
-      instructions: client.getInstructions(),
-      tools: tools.tools,
-      resources: resources.resources,
-      prompts: prompts.prompts,
-    } satisfies McpServerInfo;
-  } finally {
-    await close();
-  }
 }
