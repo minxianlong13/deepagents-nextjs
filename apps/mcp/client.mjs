@@ -24,7 +24,7 @@ try {
     console.log(`- ${tool.name}: ${tool.description ?? "no description"}`);
   }
 
-  const issueKey = process.env.JIRA_ISSUE_KEY ?? "GROUP-110376";
+  const issueKey = process.env.JIRA_ISSUE_KEY ?? "GROUP-132015";
   console.log(`\nCalling get_jira_ticket with issueKey=${issueKey}`);
   const result = await client.callTool({
     name: "get_jira_ticket",
