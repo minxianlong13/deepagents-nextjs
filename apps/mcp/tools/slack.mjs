@@ -82,7 +82,12 @@ export function registerSlackTools(server, redirectUrl) {
 
         return {
           content: [],
-          structuredContent: normalizeSlackSearchResult(result, input),
+          structuredContent: normalizeSlackSearchResult(
+            result.content
+              .filter((item) => item.type === "text")
+              .map((item) => item.text),
+            input,
+          ),
         };
       } finally {
         await client.close();

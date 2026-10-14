@@ -62,7 +62,12 @@ export function registerJiraTools(server) {
       });
 
       return {
-        content: [],
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(result, null, 2),
+          },
+        ],
         structuredContent: result,
       };
     },

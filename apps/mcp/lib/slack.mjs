@@ -201,6 +201,10 @@ function parseSlackMessageBlock(block, rank) {
 }
 
 function parseSlackResults(rawResults) {
+  if (typeof rawResults !== "string") {
+    return { total: null, messages: [] };
+  }
+
   const resultHeaders = [
     ...rawResults.matchAll(/^### Result (\d+) of (\d+)$/gm),
   ];
@@ -225,20 +229,52 @@ function parseSlackResults(rawResults) {
   };
 }
 
-export function normalizeSlackSearchResult(result, input) {
-  let payload = result.structuredContent ?? null;
-  const textItems = (result.content ?? []).filter(
-    (item) => item.type === "text",
-  );
-  const rawText = textItems.map((item) => item.text).join("\n");
+function unwrapSlackPayload(value) {
+  let current = value;
 
-  if (!payload && rawText) {
-    try {
-      payload = JSON.parse(rawText);
-    } catch {
-      payload = null;
+  for (let depth = 0; depth < 6; depth += 1) {
+    if (Array.isArray(current)) {
+      const textBlock = current.find(
+        (item) => item && typeof item === "object" && item.type === "text",
+      );
+      current = textBlock ? textBlock.text : current[0];
+      continue;
     }
+
+    if (typeof current === "string") {
+      try {
+        current = JSON.parse(current);
+        continue;
+      } catch {
+        return { payload: null, rawText: current };
+      }
+    }
+
+    if (!current || typeof current !== "object") {
+      return { payload: null, rawText: "" };
+    }
+
+    if (current.structuredContent) {
+      current = current.structuredContent;
+      continue;
+    }
+
+    if (Array.isArray(current.content)) {
+      current = current.content;
+      continue;
+    }
+
+    return { payload: current, rawText: "" };
   }
+
+  return {
+    payload: current && typeof current === "object" ? current : null,
+    rawText: typeof current === "string" ? current : "",
+  };
+}
+
+export function normalizeSlackSearchResult(result, input) {
+  const { payload, rawText } = unwrapSlackPayload(result);
 
   const rawResults =
     typeof payload?.results === "string"
