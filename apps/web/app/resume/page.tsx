@@ -1,16 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Clipboard, Download, FileText, Sparkles } from "lucide-react";
+import {
+  Check,
+  Clipboard,
+  Download,
+  FileText,
+  LoaderCircle,
+  Sparkles,
+} from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import type { JobAnalysis } from "@/lib/agents/resume_tailor_agent";
 
 export default function ResumePage() {
   const [jobDescription, setJobDescription] = useState("");
   const [markdown, setMarkdown] = useState("");
+  const [jobAnalysis, setJobAnalysis] = useState<JobAnalysis | null>(null);
+  const [savedFilePath, setSavedFilePath] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -24,6 +33,8 @@ export default function ResumePage() {
     setLoading(true);
     setError("");
     setCopied(false);
+    setSavedFilePath("");
+    setJobAnalysis(null);
 
     try {
       const response = await fetch("/api/resume/tailor", {
@@ -33,6 +44,9 @@ export default function ResumePage() {
       });
       const data = (await response.json()) as {
         markdown?: string;
+        jobAnalysis?: JobAnalysis;
+        fileName?: string;
+        filePath?: string;
         error?: string;
       };
 
@@ -41,6 +55,8 @@ export default function ResumePage() {
       }
 
       setMarkdown(data.markdown);
+      setJobAnalysis(data.jobAnalysis ?? null);
+      setSavedFilePath(data.filePath ?? data.fileName ?? "");
     } catch (caughtError) {
       setError(
         caughtError instanceof Error
@@ -62,146 +78,218 @@ export default function ResumePage() {
     const url = URL.createObjectURL(file);
     const anchor = document.createElement("a");
     anchor.href = url;
-    anchor.download = "xianlong-min-tailored-resume.md";
+    anchor.download = savedFilePath.split("/").at(-1) ?? "tailored-resume.md";
     anchor.click();
     URL.revokeObjectURL(url);
   };
 
   return (
-    <main className="min-h-[calc(100vh-7.5rem)] bg-[#f2f0e9] p-4 md:p-8">
-      <div className="mx-auto w-full max-w-6xl rise-in">
-        <header className="mb-7 flex flex-col justify-between gap-5 border-b border-black/15 pb-6 lg:flex-row lg:items-end">
-          <div className="max-w-2xl">
-            <Badge variant="accent" className="mb-3 w-fit">
-              Career studio
-            </Badge>
-            <h1 className="font-(--font-fashion-display) text-4xl leading-tight md:text-5xl">
-              Resume Tailor
-            </h1>
-            <p className="mt-2 max-w-xl text-sm leading-6 text-black/60">
-              Shape your verified experience around a role while keeping every
-              claim grounded in your saved resume.
-            </p>
-          </div>
-          <div className="flex items-center gap-3 border-l-2 border-[#d35b38] pl-4">
-            <FileText className="size-5 text-[#a63d22]" aria-hidden="true" />
-            <div>
-              <p className="text-sm font-semibold">Xianlong Min</p>
-              <p className="text-xs text-black/55">Source profile loaded</p>
-            </div>
-          </div>
+    <main className="min-h-[calc(100vh-7.5rem)] bg-[#f2f0e9] px-4 py-7 md:px-8 md:py-10">
+      <div className="mx-auto w-full max-w-5xl rise-in">
+        <header className="mb-7 border-b border-black/15 pb-6">
+          <p className="mb-2 text-xs font-semibold uppercase text-[#a63d22]">
+            Career studio / Resume tailor
+          </p>
+          <h1 className="font-(--font-fashion-display) text-4xl leading-tight md:text-5xl">
+            Tailor your resume
+          </h1>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-black/65">
+            Paste a job description. Your saved profile supplies the evidence;
+            the finished Markdown is saved locally after generation.
+          </p>
         </header>
 
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
-          <form
-            onSubmit={handleTailor}
-            className="flex min-h-152.5 flex-col border border-black/15 bg-[#fffdf8] shadow-[4px_4px_0_#1f1b16]"
-          >
-            <div className="border-b border-black/15 px-5 py-4">
-              <p className="text-xs font-semibold uppercase text-[#a63d22]">
-                01 / Target role
-              </p>
-              <h2 className="mt-1 text-xl font-semibold">Job description</h2>
-            </div>
-            <div className="flex flex-1 flex-col p-5">
-              <label htmlFor="job-description" className="mb-2 text-sm">
-                Paste the full LinkedIn job description
-              </label>
-              <Textarea
-                id="job-description"
-                value={jobDescription}
-                onChange={(event) => setJobDescription(event.target.value)}
-                placeholder="Paste responsibilities, qualifications, and preferred skills here..."
-                className="min-h-96 flex-1 resize-none border-black/20 bg-white leading-6"
-                maxLength={30_000}
-              />
-              <div className="mt-2 flex items-center justify-between text-xs text-black/50">
-                <span>Minimum 50 characters</span>
-                <span>{jobDescription.length.toLocaleString()} / 30,000</span>
-              </div>
-              {error ? (
-                <p role="alert" className="mt-3 text-sm text-[#a52b1a]">
-                  {error}
-                </p>
-              ) : null}
-              <Button
-                type="submit"
-                size="lg"
-                disabled={!canTailor}
-                className="mt-5 w-full gap-2 bg-[#153d34] hover:bg-[#153d34]/90"
+        <form
+          onSubmit={handleTailor}
+          className="border border-black/15 border-t-4 border-t-[#16705c] bg-[#fffdf8] p-4 shadow-[4px_4px_0_#1f1b16] md:p-6"
+        >
+          <div className="mb-4 flex items-start justify-between gap-4">
+            <div>
+              <label
+                htmlFor="job-description"
+                className="text-lg font-semibold"
               >
+                Job description
+              </label>
+              <p className="mt-1 text-sm text-black/55">
+                Include responsibilities, qualifications, and preferred skills.
+              </p>
+            </div>
+            <FileText
+              className="mt-1 size-5 shrink-0 text-[#16705c]"
+              aria-hidden="true"
+            />
+          </div>
+          <Textarea
+            id="job-description"
+            value={jobDescription}
+            onChange={(event) => setJobDescription(event.target.value)}
+            placeholder="Paste the full job description here..."
+            className="min-h-64 resize-y border-black/20 bg-white leading-6 md:min-h-72"
+            maxLength={30_000}
+            required
+            aria-describedby="job-description-hint job-description-count"
+          />
+          <div className="mt-2 flex flex-wrap justify-between gap-2 text-xs text-black/55">
+            <span id="job-description-hint">At least 50 characters</span>
+            <span id="job-description-count">
+              {jobDescription.length.toLocaleString()} / 30,000
+            </span>
+          </div>
+          {error ? (
+            <p role="alert" className="mt-3 text-sm text-[#a52b1a]">
+              {error}
+            </p>
+          ) : null}
+          <div className="mt-5 flex flex-col-reverse gap-3 border-t border-black/10 pt-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-xs leading-5 text-black/50">
+              Only supported experience and skills will be included.
+            </p>
+            <Button
+              type="submit"
+              size="lg"
+              disabled={!canTailor}
+              className="w-full gap-2 bg-[#153d34] hover:bg-[#153d34]/90 sm:w-auto"
+            >
+              {loading ? (
+                <LoaderCircle
+                  className="size-4 animate-spin"
+                  aria-hidden="true"
+                />
+              ) : (
                 <Sparkles className="size-4" aria-hidden="true" />
-                {loading ? "Tailoring resume..." : "Tailor resume"}
-              </Button>
-            </div>
-          </form>
+              )}
+              {loading ? "Tailoring resume..." : "Generate tailored resume"}
+            </Button>
+          </div>
+        </form>
 
-          <section className="flex min-h-152.5 flex-col border border-black/15 bg-white">
-            <div className="flex min-h-20 flex-wrap items-center justify-between gap-3 border-b border-black/15 px-5 py-4">
+        {jobAnalysis ? (
+          <section className="mt-6 border border-black/15 bg-[#e7f1ec] p-4 md:p-5">
+            <div className="mb-3">
+              <p className="text-xs font-semibold uppercase text-[#16705c]">
+                Job description analysis
+              </p>
+              <h2 className="mt-1 text-lg font-semibold">
+                Extracted role requirements
+              </h2>
+            </div>
+            <dl className="grid gap-4 sm:grid-cols-2">
               <div>
-                <p className="text-xs font-semibold uppercase text-[#16705c]">
-                  02 / Tailored draft
-                </p>
-                <h2 className="mt-1 text-xl font-semibold">Markdown resume</h2>
+                <dt className="text-xs font-semibold uppercase text-black/50">
+                  Company
+                </dt>
+                <dd className="mt-1 text-sm">
+                  {jobAnalysis.companyName ?? "Not specified"}
+                </dd>
               </div>
-              {markdown ? (
-                <div className="flex gap-2">
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    size="icon"
-                    onClick={handleCopy}
-                    title="Copy Markdown"
-                    aria-label="Copy Markdown"
-                  >
-                    {copied ? (
-                      <Check className="size-4" aria-hidden="true" />
-                    ) : (
-                      <Clipboard className="size-4" aria-hidden="true" />
-                    )}
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    onClick={handleDownload}
-                    className="gap-2"
-                  >
-                    <Download className="size-4" aria-hidden="true" />
-                    Download .md
-                  </Button>
-                </div>
-              ) : (
-                <Badge>Waiting for a role</Badge>
-              )}
-            </div>
-
-            <div className="flex flex-1 overflow-auto p-5 md:p-7">
-              {markdown ? (
-                <article className="markdown-content resume-markdown w-full max-w-none text-sm leading-7">
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {markdown}
-                  </ReactMarkdown>
-                </article>
-              ) : (
-                <div className="m-auto max-w-sm text-center">
-                  <div className="mx-auto mb-5 flex size-14 items-center justify-center border border-dashed border-black/25 bg-[#f2f0e9]">
-                    <FileText
-                      className="size-6 text-black/45"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <p className="font-(--font-fashion-display) text-2xl">
-                    Your draft starts here
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-black/50">
-                    Add the role on the left. Relevant skills and achievements
-                    will be prioritized without changing the underlying facts.
-                  </p>
-                </div>
-              )}
-            </div>
+              <div>
+                <dt className="text-xs font-semibold uppercase text-black/50">
+                  Position
+                </dt>
+                <dd className="mt-1 text-sm">
+                  {jobAnalysis.jobTitle ?? "Not specified"}
+                </dd>
+              </div>
+              <div className="sm:col-span-2">
+                <dt className="text-xs font-semibold uppercase text-black/50">
+                  Required skills
+                </dt>
+                <dd className="mt-1 text-sm leading-6">
+                  {jobAnalysis.requiredSkills.length
+                    ? jobAnalysis.requiredSkills.join(" · ")
+                    : "No explicit required skills identified"}
+                </dd>
+              </div>
+            </dl>
+            <details className="mt-4 border-t border-black/10 pt-3">
+              <summary className="cursor-pointer text-xs font-semibold text-[#153d34]">
+                View extracted JSON
+              </summary>
+              <pre className="mt-3 overflow-x-auto bg-white/70 p-3 text-xs leading-5">
+                {JSON.stringify(jobAnalysis, null, 2)}
+              </pre>
+            </details>
           </section>
-        </div>
+        ) : null}
+
+        <section className="mt-7 overflow-hidden border border-black/15 bg-white">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/15 px-4 py-4 md:px-6">
+            <div>
+              <p className="text-xs font-semibold uppercase text-[#16705c]">
+                Tailored draft
+              </p>
+              <h2 className="mt-1 text-xl font-semibold">Resume preview</h2>
+            </div>
+            {markdown ? (
+              <div className="flex gap-2">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="icon"
+                  onClick={handleCopy}
+                  title={copied ? "Copied Markdown" : "Copy Markdown"}
+                  aria-label={copied ? "Copied Markdown" : "Copy Markdown"}
+                >
+                  {copied ? (
+                    <Check className="size-4" aria-hidden="true" />
+                  ) : (
+                    <Clipboard className="size-4" aria-hidden="true" />
+                  )}
+                </Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={handleDownload}
+                  className="gap-2"
+                >
+                  <Download className="size-4" aria-hidden="true" />
+                  Download copy
+                </Button>
+              </div>
+            ) : null}
+          </div>
+
+          {savedFilePath ? (
+            <div
+              role="status"
+              aria-live="polite"
+              className="flex flex-wrap items-center gap-2 border-b border-[#16705c]/20 bg-[#e7f1ec] px-4 py-3 text-sm text-[#153d34] md:px-6"
+            >
+              <Check className="size-4 shrink-0" aria-hidden="true" />
+              <span>Saved locally:</span>
+              <code className="break-all font-mono text-xs">
+                {savedFilePath}
+              </code>
+            </div>
+          ) : null}
+
+          <div className="min-h-72 p-5 md:min-h-96 md:p-8">
+            {markdown ? (
+              <article className="markdown-content resume-markdown mx-auto w-full max-w-3xl text-sm leading-7">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {markdown}
+                </ReactMarkdown>
+              </article>
+            ) : (
+              <div className="flex min-h-60 flex-col items-center justify-center text-center">
+                <div className="mb-4 flex size-12 items-center justify-center border border-dashed border-black/25 bg-[#f2f0e9]">
+                  <FileText
+                    className="size-5 text-black/45"
+                    aria-hidden="true"
+                  />
+                </div>
+                <p className="font-(--font-fashion-display) text-2xl">
+                  Your draft will appear here
+                </p>
+                <p className="mt-2 max-w-sm text-sm leading-6 text-black/50">
+                  Paste a job description above to create and save a tailored
+                  Markdown resume.
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
       </div>
     </main>
   );
