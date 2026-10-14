@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:414dccdeb62c05d201e97144f33cdfd1292cf7676669861f25c3f3fc63392198",
+  "claims": [
+    {
+      "id": "claim_0f8d3e2f9bec4443a6bb13989fda5a6d",
+      "statement": "The `/search` client page loads conversation summaries on mount, loads messages for a selected conversation, submits a trimmed prompt with an optional active conversation ID to `POST /api/chat/search`, and appends the server-returned saved messages; a new-chat action only resets client state.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/search/page.tsx#L113-L188",
+          "version": "repo-lines-v1:sha256:57c984f48dff7a99f552a913695b90040a00dbb12ed118fb80644153273e720a:eyJzZWxlY3RlZExpbmVDb3VudCI6NzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5NTVlNzE3NDIwMTEyZjUwYmU2YjA1M2U0YjYyM2VmOTMxZmUwZDhlODc3ZTJlZmU4Y2JiNzY4NmQ3NDIwY2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNiMTYwYzFhODg2OTFhZThlMTFjYWRjNTU5MWFjYWU1ZGNjYTI2NTk2Mzg3MjkxMmRiYzQwNTAwNjVjMjNjNWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZmNmRjNjY4OWU0MmJlMmNiMmU2MWI4YmYyZDQxMDdkNWFhYWViYjI5NDE2MjI5OTA3YTZhNDg1NGFlMTMxNjUifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/search/page.tsx#L38-L104",
+          "version": "repo-lines-v1:sha256:1093792e97254a76e8888fdf5021a306557fbe26789976eae6ca15d2b7a29e82:eyJzZWxlY3RlZExpbmVDb3VudCI6NjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkMmFmMjE0NThmYmRhZmQyYmFjYjFjZWQ1ODc1NTMwYjBiNWFhMjhiOTRmNzlmN2E1YThiYzAzNDFjOTcxNDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjYjZjZGUzMjE5MWY3N2JlY2Q0ZGU5OGY1M2UxNjMyZmM1OWUyZGViY2VlYzk1ZGIwNjYzNTFmMGM5MzU3ZTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYwZjc2NmYzMGIzNzNjMTJjYWMyYmMyMWVmYjk5NWI4NWNiNzM4MGE2MzA1OTNlNjE2NmVlOGU4NmM4Nzc5M2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cc6fd647ada7445eb84a2d9b360f6e15",
+      "statement": "The search route validates a trimmed nonempty input and optional CUID conversation ID, creates a `local-user` conversation titled from the first prompt only when no ID is supplied, persists the user message before agent invocation, then persists an assistant message and returns both saved messages.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/chat/search/route.ts#L45-L99",
+          "version": "repo-lines-v1:sha256:3cb559565cad29a1152a01a33d134e698d264cc3bcb69e694d1499b1b8e1744f:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkMTEyOTk4NzMwNmEyNTQ4MjlmNmVhZTAxNzk1Y2EyNDQ3NDkxNmQ2YzUzOTA4YmQwY2NjYzkyN2E5YjBlOTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyZDExY2FmNDNlOTdlZjM2OWU2YmVlZDFhMjY4YmQwNTgzOGYyOWI5ZGQyNTRiZjY5YmE2NDg4NDE0NzIzNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkZTQxYTY4NTZkMTgwMWRhOWExNmRkMmI1MTExMzRhOTEwMTVlMmQ2MzU1ZTFlNzRjYjZlZDAyOTlmYjcyOTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlMjI1MzQ5NTI0MDVmYzgzYTNlZmM0ZTRkZTgxMjFlZTA1YjE5Y2U1ZTBjMDM0OTQyNjdhYWJkZTAxZjc1YTgifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/api/chat/search/route.ts#L7-L10",
+          "version": "repo-lines-v1:sha256:d524dbb870c8003b31423abc9ab0204e0c4bc2cbef5a32e6601b2dd6dbe6ab0c:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTcwZmFlOTEwMzM5Y2UxMzAxNGI0MDM3MGM3ZjMxZWZkNWU3ZmRlOThlYjU1OTMyZWQzYWYxYWExNmI3YjE2MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTFhNDc5MDMzODc0NzJkZGE5Y2Y5NWVjNDkwZGFiMGVlNjZmNjNhNDE0ZTg4ODlkZmU4MzRkMmRmMzU2N2JlMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWEwZmZkMWQ1ODU3ODJkMzJjYmI1ZDUzNmE3OTFkODNhNTc4ZmU1MGUzYzU5N2E2ZjBmZDdhMDUzN2U3MGI2NyJ9"
+        },
+        {
+          "resource": "repo://apps/web/lib/db/conversations.ts#L3-L28",
+          "version": "repo-lines-v1:sha256:541e7bd350db23170dde589a84522d2686d648710e75af8ecb6c2cf7bdf44a87:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhYWU3MmFmOWJhODk0NTUzZjM4MDE0M2I1MWVjNDM1MmRjOGZhMzZjNjJhNTMzY2FhNzdjMjkyYmQyMWMyMjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg5MGIzNDgwZjM4MmZlM2JiNWE5MDA4MjA4OGY2Y2VmZDhmMTM2MjRmNTBjM2Y0Y2QxMDJlMTJkODkyNDNmNjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI5N2Y4NThmZjU5YTA2NzM0NDI5ZjhjN2QyYjgxNjlmMWUzYzJmNGEzMDIwMDlkNDU2NDFhOTg4MTQzYjYxODgifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/db/messages.ts#L14-L22",
+          "version": "repo-lines-v1:sha256:94fe0c94c8c08b8d149e3e57327fede2d006579d6570da9d150721af041089a7:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmMzNjk4MjM5ZWE5N2I0ZTc5MTlhYzEwMTIzNGIyNjkxMjBjNmU3NDIyMWQwYTRlMDE0MmQyYjliMTFkMTRlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmQwZjJkM2EzYWFkYTI3NTg2NDU3OGQwYTQzOTE1NjM4ZDU0M2ZlY2EyYzk0ODU4ZGI5NDEyMTFlODZjZWYyYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6d1c5b0f5abe4765ad5961c4a98f0211",
+      "statement": "Each search request invokes the agent with only the newly submitted user message; persisted conversation history is not loaded into the model payload.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/chat/search/route.ts#L71-L81",
+          "version": "repo-lines-v1:sha256:1bf886ef9130a13cdeef0e26c0576fe308eee1db37f5fce90ad3a97c12ed057b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY4YThiMDk2Mzc2ODZkZDhhYWE1ODBhMmRkN2Y4ZTQ2ZmFjYjRkMWJlMjczYjA1ZjA5OTk2YmJlN2Q5M2YxNDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzMDIyMzRiYzNmZWU1NTUxZWFlMmYxNmY3OTFhZWVhMDMxZDFiNWM0NDY1YmQwYzI2MTZmNDU2ZTVmODRlZDciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRkNjUyMDFlZWI1MDBjNzZmMGFjMWIzMWM1YWE2YmI0NzRkZjhjZTg1YjUwODdiOWE1NGEwY2ViODUwZTg1ODciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkYzI1NmZkMDY3MDE4NGY5ZWYwNjhlOWU2M2EwOWI0ZjI4NmRiMzFlOTFiNDJjY2Y4NmZiNmMyNDgwNjJiMTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/db/messages.ts#L3-L11",
+          "version": "repo-lines-v1:sha256:3c061a67b45b8952ef352821bda9e66eced8e753e9a6241b8f3c4c005115dc41:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzRkNWNiNjNiNzU4ODdlOTYwZWEyOTRhNGIyYmRiY2Y4MjczZGI0NDJkMGRkNDA2ZDVlOWQ0MmJjYjk4NmRiYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODkwYjM0ODBmMzgyZmUzYmI1YTkwMDgyMDg4ZjZjZWZkOGYxMzYyNGY1MGMzZjRjZDEwMmUxMmQ4OTI0M2Y2NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2NiNDIzYTEyYTUxMjYzM2NjNWJjZjBhMGYwMjVjOWUwZWFmZjFlYWQwNGJmMzgzM2Q5ZjU0NjcwMzk1NDE0MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6176b7c7ab3c4bfd990b3d7aada6e5ef",
+      "statement": "Agent invocation errors are caught and converted into a fixed fallback assistant message that is persisted, whereas errors outside that inner invocation block return HTTP 500; because the user write precedes invocation and there is no transaction, a failed later step can leave a partial turn.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/chat/search/route.ts#L71-L104",
+          "version": "repo-lines-v1:sha256:8be4069618b503943e0929ce899a8d738b7d6ef8b303b314da3f5808fd209b94:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY4YThiMDk2Mzc2ODZkZDhhYWE1ODBhMmRkN2Y4ZTQ2ZmFjYjRkMWJlMjczYjA1ZjA5OTk2YmJlN2Q5M2YxNDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRkNjUyMDFlZWI1MDBjNzZmMGFjMWIzMWM1YWE2YmI0NzRkZjhjZTg1YjUwODdiOWE1NGEwY2ViODUwZTg1ODciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7cfc6d2c85584f809581cf4d42915daa",
+      "statement": "The search agent is a module-level DeepAgents agent using Anthropic model `claude-haiku-4-5-20251001` and the `internet_search` tool; that tool constructs Tavily with `TAVILY_API_KEY` and supports query, max-results, topic, and raw-content options.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/agents/search_agent.ts#L1-L21",
+          "version": "repo-lines-v1:sha256:36df8e1cb883f53c7f3bdaaba68edb28135e643b2f1bd0de8ae46fc4f368147f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5ZDFiY2ZkZThlZTdlNmY4OWU4NTYwNGZmMGE0NmU3NDE1ZTcwNzE0MjliNWI0ZTAwNDM4YzQ1NGRjMThhMTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/internet_search.ts#L1-L46",
+          "version": "repo-lines-v1:sha256:98232803bbdf4ee1dce500b870745a5b3dbd82d10bba4678d528a0f23369fad4:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzMzBjOWZhNjkyMDEwOTYyNWI2Yzg4MjFkYWZkMjYwNzZjYzM3MDlhZWI5NjFhYzgyNjBiYzVlNWE0Mjk5ZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5OTY3ZWMxZWQzODM2ZjhlYjE3YWZmMTcyYjViZmVmN2RlNjA0ODVhNDM5YzZjYTExYzU5MWUxNzU1NzM5YWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2b815338d98b4ee28e8d5db23dc48bcd",
+      "statement": "History GET lists conversations for the fixed `local-user` identity when no query ID is supplied, but reads messages by any supplied conversation ID without user filtering; list summaries include only the first message and messages are returned in creation order with user and assistant roles only.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/chat/history/route.ts#L16-L32",
+          "version": "repo-lines-v1:sha256:e565f3725ed6222386d8bf641d8fabda8aaaac77a547430e188c6a52106f1dfd:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwYzNiMjk2YzFlMTI3NWZkZDQ0NDlhNGMxNWFlZjljZmM5NjE2NDRmZTI0YTdjYzZkZWEyZGViMzgzNWRhMDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRmM2M5N2UzY2QzMDRiY2M3MTA1NGY0ZTlhZmM1Y2JkYzQwODg4N2I4Y2UyODQzZDc0ZTE4OGY5NThhY2RhYTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5YTJhNzEyMWU4NDBjY2EyZDM4OTA2ODA5ZDlkOGUyOWUyNWY3YzRhNzVjYzVkMzY5ZmI4OTE2ZGQ5MGM0YmUifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/db/conversations.ts#L30-L45",
+          "version": "repo-lines-v1:sha256:ebf7ff5d7e4805151bfdbaf359f9987af32ba0ed7b95019742c71d75a6eb8dc5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmNWFmMTcyNzczN2VlOGQzZmQ1N2FlYWUyM2IzMWE4Y2IyMzVkMTM0NTRkYmU3MWMyYjI4ZmRkZjk4YWU1ODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMGYyZDNhM2FhZGEyNzU4NjQ1NzhkMGE0MzkxNTYzOGQ1NDNmZWNhMmM5NDg1OGRiOTQxMjExZTg2Y2VmMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/db/messages.ts#L3-L11",
+          "version": "repo-lines-v1:sha256:3c061a67b45b8952ef352821bda9e66eced8e753e9a6241b8f3c4c005115dc41:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzRkNWNiNjNiNzU4ODdlOTYwZWEyOTRhNGIyYmRiY2Y4MjczZGI0NDJkMGRkNDA2ZDVlOWQ0MmJjYjk4NmRiYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODkwYjM0ODBmMzgyZmUzYmI1YTkwMDgyMDg4ZjZjZWZkOGYxMzYyNGY1MGMzZjRjZDEwMmUxMmQ4OTI0M2Y2NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2NiNDIzYTEyYTUxMjYzM2NjNWJjZjBhMGYwMjVjOWUwZWFmZjFlYWQwNGJmMzgzM2Q5ZjU0NjcwMzk1NDE0MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ea5682053b6f4019a39453b840149f73",
+      "statement": "The history POST validates a CUID conversation ID, `user` or `assistant` role, and nonempty trimmed content, requires the ID, and directly creates the caller-specified message with HTTP 201.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/chat/history/route.ts#L10-L14",
+          "version": "repo-lines-v1:sha256:594767c3dd5b34648a2ee26a0fee085445741f0ab4456aff010b1864af2ba70b:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWQwYmI3ZDZkYTNjZWVlYzA1NzdmMDM3Njk0ZWVlM2RlYjlhMGVjMWNlYmVhOTc1OTM1NWVlZDcyM2YzYmNjZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTFhNDc5MDMzODc0NzJkZGE5Y2Y5NWVjNDkwZGFiMGVlNjZmNjNhNDE0ZTg4ODlkZmU4MzRkMmRmMzU2N2JlMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjJkZDlmY2E1ODRkZWVkMTlkYzVkMjJkYzcwODM2ZDI1MzVjN2ZjMjhjM2Y5Mjg4NjIyODg4YjZmOWQ1YWU1MCJ9"
+        },
+        {
+          "resource": "repo://apps/web/app/api/chat/history/route.ts#L35-L64",
+          "version": "repo-lines-v1:sha256:1c38cddb5d48c793fcce4a829cb132b82710d9f36441f91166289cd4f6ce7771:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkMTEyOTk4NzMwNmEyNTQ4MjlmNmVhZTAxNzk1Y2EyNDQ3NDkxNmQ2YzUzOTA4YmQwY2NjYzkyN2E5YjBlOTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/db/messages.ts#L14-L22",
+          "version": "repo-lines-v1:sha256:94fe0c94c8c08b8d149e3e57327fede2d006579d6570da9d150721af041089a7:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmMzNjk4MjM5ZWE5N2I0ZTc5MTlhYzEwMTIzNGIyNjkxMjBjNmU3NDIyMWQwYTRlMDE0MmQyYjliMTFkMTRlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmQwZjJkM2EzYWFkYTI3NTg2NDU3OGQwYTQzOTE1NjM4ZDU0M2ZlY2EyYzk0ODU4ZGI5NDEyMTFlODZjZWYyYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_680052f7c8ac49a8a206238e42a3b3fe",
+      "statement": "Current chat ownership is a local/demo convention rather than authorization: helpers default to `local-user`, but routes trust client-provided existing conversation IDs after at most syntactic validation and contain no actor ownership check.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/chat/history/route.ts#L16-L27",
+          "version": "repo-lines-v1:sha256:3d2c8a8a5938e3c40761324ff57c96b30e90fd42e264b9e005addb388d111b70:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwYzNiMjk2YzFlMTI3NWZkZDQ0NDlhNGMxNWFlZjljZmM5NjE2NDRmZTI0YTdjYzZkZWEyZGViMzgzNWRhMDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg3MmZjYjY2NmI0MWI0ODk4YzQwOWZhMWVlZWI0ZTVhOTA5ZjkyMmIwZTk0OWRkNDMzNjdlZWM2MDMxYWQ3YjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRmM2M5N2UzY2QzMDRiY2M3MTA1NGY0ZTlhZmM1Y2JkYzQwODg4N2I4Y2UyODQzZDc0ZTE4OGY5NThhY2RhYTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlMjI1MzQ5NTI0MDVmYzgzYTNlZmM0ZTRkZTgxMjFlZTA1YjE5Y2U1ZTBjMDM0OTQyNjdhYWJkZTAxZjc1YTgifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/api/chat/history/route.ts#L35-L57",
+          "version": "repo-lines-v1:sha256:42ddaaad762a21a45ef8a1f672471128ee3ac64ff9a5fbb3f0722a7ec1c8db3d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkMTEyOTk4NzMwNmEyNTQ4MjlmNmVhZTAxNzk1Y2EyNDQ3NDkxNmQ2YzUzOTA4YmQwY2NjYzkyN2E5YjBlOTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0ZTQyMDhjZDZmZmI4YzRhMzU0N2IyZjU0YWRhMTk5NzhjM2YzNjVlNzhmOTUwMmVmNTE0NWNkZDJhYTg1NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRmNzY1YmEwMmQ4YTYzY2U4OGRkOTUyZjI2YmJjNTkwYmViODRiNDZkMmY0M2UzMTYxY2ZlYTUxNThiZmE5ZmYifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/api/chat/search/route.ts#L57-L71",
+          "version": "repo-lines-v1:sha256:2bcd2ba5eb545a8562bd81426ebf4ebcacbd7a9450f9154552224ef65f83973e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE0NWY4YzVkYzZhZGIxYTBiNGQ2ZjhkMDBhN2MwNGQ5ZTgxNjZlMzU1ZTIwYThjOGRiMWNiYjhiZWNiMDJjMTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY4YThiMDk2Mzc2ODZkZDhhYWE1ODBhMmRkN2Y4ZTQ2ZmFjYjRkMWJlMjczYjA1ZjA5OTk2YmJlN2Q5M2YxNDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmYTdmNDA4MWRlMzU1YzM5MmIwYzFkOTZjMTdiYzQ0MTg3ZDllOTlmZTMzMWFiN2FlYWI3NmNhZTc1Njg5ZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY0NGFjZmZlNTA3YmE1MTZkY2VjMDI3ZWE1MTQ4OTJkYTlhZDA1Y2U4N2ZkMjk2MDliMWEwM2ViM2Q1ZWQyMTYifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/db/conversations.ts#L3-L27",
+          "version": "repo-lines-v1:sha256:6fabfe9ad6b9e9a6e0be89ad576207b8817197e5192f757793f71b3fffd4dfb3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhYWU3MmFmOWJhODk0NTUzZjM4MDE0M2I1MWVjNDM1MmRjOGZhMzZjNjJhNTMzY2FhNzdjMjkyYmQyMWMyMjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg5MGIzNDgwZjM4MmZlM2JiNWE5MDA4MjA4OGY2Y2VmZDhmMTM2MjRmNTBjM2Y0Y2QxMDJlMTJkODkyNDNmNjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdhNWUxZjM3NmIxYmRmODQ1MWQyNWU5N2NjOGM4YmNjZjU5NmU3ZWM5ZjQ3ZmUzNThmZmI2MzU1YTUwZDQ4ZTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b610953159d949f78b9a441c94a8c21d",
+      "statement": "PostgreSQL stores a one-to-many Conversation-to-Message relationship with CUID IDs; messages have a required foreign key that cascades on conversation deletion, and indexes support user/update-time conversation access and conversation/creation-time message access.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/prisma/migrations/20260810160821_init_chat_history_prisma7/migration.sql#L1-L33",
+          "version": "repo-lines-v1:sha256:1ff72d1d6644a3eb3c5ae7bce47b13adf706bd78dd44a7c984856b404ff683af:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5MjdhYTY1NDM3MDJlNWZjNThlMDdjNjM2Mjk0YjMyOGJmMDM3ODAxNjBkZjEwNWM1N2JjYmEzN2ZlY2UzODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkYWI1MGYzYTg5M2UxMDQzNzI5ZmNiNTI2YzkzZTExOGM2MTJlMDI5MDUxYTA1ZjA1YmU3Nzk2ZDdkNzNkY2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://apps/web/prisma/schema.prisma#L14-L35",
+          "version": "repo-lines-v1:sha256:36761733ab7bec60882870a27c1b8857bb2784f0efb6352acdbd7566590f4d34:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5MDE3OWE5OWFkYzY3ZTJmOWIwOTQwZmVlZGQ0ODFiNmQ3MzNiNWY0NTM0OTQ2M2UwM2RlOTIwMDI1ZTFhMWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhN2ZkOTMzZWVlMjI3ZjA4NWQzN2I4MGZmYzczZDZlNGFiMDBhMTg3NTlhZGZiZDk1NGMxMGM5MDMyM2ZkMTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhM2EzZjZjY2IwNGFmYTM3NTFiYzk4ZmE4ODkyNTk3NzFhOGM1MTQyMmU0MjdkNzFhYThlNDA4ZDczMGYyOWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY3NjhiYzRmYjcxNWYzZmI0OTc2YjY2ODU5ZGFhOWYyNmYzODY3ZjE3MmUzNjZiZTI0OGIwOGM1NjhhY2MzMmUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ff726aa333a749f59179e55f2844b846",
+      "statement": "The schema permits `system` and `tool` message roles, but the current creation and history APIs restrict their operational behavior to `user` and `assistant`.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/chat/history/route.ts#L10-L14",
+          "version": "repo-lines-v1:sha256:594767c3dd5b34648a2ee26a0fee085445741f0ab4456aff010b1864af2ba70b:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWQwYmI3ZDZkYTNjZWVlYzA1NzdmMDM3Njk0ZWVlM2RlYjlhMGVjMWNlYmVhOTc1OTM1NWVlZDcyM2YzYmNjZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTFhNDc5MDMzODc0NzJkZGE5Y2Y5NWVjNDkwZGFiMGVlNjZmNjNhNDE0ZTg4ODlkZmU4MzRkMmRmMzU2N2JlMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjJkZDlmY2E1ODRkZWVkMTlkYzVkMjJkYzcwODM2ZDI1MzVjN2ZjMjhjM2Y5Mjg4NjIyODg4YjZmOWQ1YWU1MCJ9"
+        },
+        {
+          "resource": "repo://apps/web/lib/db/messages.ts#L3-L22",
+          "version": "repo-lines-v1:sha256:cbaeb12be2a714aef83e5561cb886f2072eaa2ebdb9f77e6c05d99385ef10d5a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM0ZDVjYjYzYjc1ODg3ZTk2MGVhMjk0YTRiMmJkYmNmODI3M2RiNDQyZDBkZDQwNmQ1ZTlkNDJiY2I5ODZkYmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg5MGIzNDgwZjM4MmZlM2JiNWE5MDA4MjA4OGY2Y2VmZDhmMTM2MjRmNTBjM2Y0Y2QxMDJlMTJkODkyNDNmNjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/prisma/schema.prisma#L83-L88",
+          "version": "repo-lines-v1:sha256:874bc7dbbbe9b71b0789e150de2b477794d9c47145735fff4c8013d6439342b0:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDM1YzZkMjYxOTRlN2U1N2FmMmM5MDNhYzZjZDY0MDAxYzZjODA5MGM5ZWVjZWM3ZWZjN2M3Y2Q0YjAwNTcwMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGEwY2Y3MTczMGFlODJjN2QwYzQ0ZTNlNjk5NzA2ZWNmNWE0ZGU1NzYwZDg2YjQ5NDVmNTVhOGZkNWNjMDRjYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c2c0f26139634dabb85473a301de99af",
+      "statement": "Creating a message does not update its parent conversation, so `updatedAt`-ordered conversation lists are not reliably ordered by the most recent message.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/db/conversations.ts#L30-L45",
+          "version": "repo-lines-v1:sha256:ebf7ff5d7e4805151bfdbaf359f9987af32ba0ed7b95019742c71d75a6eb8dc5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmNWFmMTcyNzczN2VlOGQzZmQ1N2FlYWUyM2IzMWE4Y2IyMzVkMTM0NTRkYmU3MWMyYjI4ZmRkZjk4YWU1ODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMGYyZDNhM2FhZGEyNzU4NjQ1NzhkMGE0MzkxNTYzOGQ1NDNmZWNhMmM5NDg1OGRiOTQxMjExZTg2Y2VmMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/db/messages.ts#L14-L22",
+          "version": "repo-lines-v1:sha256:94fe0c94c8c08b8d149e3e57327fede2d006579d6570da9d150721af041089a7:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmMzNjk4MjM5ZWE5N2I0ZTc5MTlhYzEwMTIzNGIyNjkxMjBjNmU3NDIyMWQwYTRlMDE0MmQyYjliMTFkMTRlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmQwZjJkM2EzYWFkYTI3NTg2NDU3OGQwYTQzOTE1NjM4ZDU0M2ZlY2EyYzk0ODU4ZGI5NDEyMTFlODZjZWYyYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        },
+        {
+          "resource": "repo://apps/web/prisma/schema.prisma#L14-L24",
+          "version": "repo-lines-v1:sha256:f2db1beef8ebea53dd67046ea2df34e3530018513f88e99b244b97c0df38fbb7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5MDE3OWE5OWFkYzY3ZTJmOWIwOTQwZmVlZGQ0ODFiNmQ3MzNiNWY0NTM0OTQ2M2UwM2RlOTIwMDI1ZTFhMWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhM2EzZjZjY2IwNGFmYTM3NTFiYzk4ZmE4ODkyNTk3NzFhOGM1MTQyMmU0MjdkNzFhYThlNDA4ZDczMGYyOWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5NzM4ZDFhMGNiY2EzZDYxM2UwMjczMWQ4ZmU5OTMzNzk4MjczZWVjMGYwYmRiZDczNWIxZTE0YzFlYWY3NzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8c4b08f505474b389007f18ac59756e8",
+      "statement": "The Prisma database adapter requires `DATABASE_URL`, uses a pg Pool with PrismaPg, and caches the Prisma client globally outside production; the web package provides lint and build scripts but no test script.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/db/prisma.ts#L1-L25",
+          "version": "repo-lines-v1:sha256:3016e05daec9766205bf8d94861295c8adaaba4c9539e9be4a2ee92b34d33321:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1NWU3MjYxMDA1NjRmZWZlY2Y0NDk2MTBjODVmNzQ5NzgzMzM0ZWFlNjRmN2Y0N2E2YzcxN2JkZTVjY2U1ODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyMmQ2MGZlN2M5ZDQyNmQ1YzkzOGYwMDRkOTM2ZjYzZjY5ZTMwNDdiNTMyY2I0YzU0ZDE5Mzk5OThhNTZhYmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://apps/web/package.json#L1-L10",
+          "version": "repo-lines-v1:sha256:0b998a068cb3fff06cd9ac93e17df2e6878c2f326c53703a60ffcde47511b34f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE2MTM5MDVhZjk0ZTZiODc4YzAzOWNkYjZjZDU3MzViMzNjNjc0OTYzNmE0ZTcxMWUxMzY5Y2VkNTZhOTM2ODQifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-10-04T23:14:27.814Z"
+  }
+}

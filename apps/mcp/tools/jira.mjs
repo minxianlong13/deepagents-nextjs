@@ -1,33 +1,5 @@
 import * as z from "zod/v4";
-
-const JIRA_FIELDS = [
-  "summary",
-  "description",
-  "comment",
-  "status",
-  "priority",
-  "labels",
-  "components",
-  "attachment",
-  "created",
-  "updated",
-];
-
-function removeAvatarUrls(value) {
-  if (Array.isArray(value)) {
-    return value.map(removeAvatarUrls);
-  }
-
-  if (value && typeof value === "object") {
-    return Object.fromEntries(
-      Object.entries(value)
-        .filter(([key]) => key !== "avatarUrls")
-        .map(([key, nestedValue]) => [key, removeAvatarUrls(nestedValue)]),
-    );
-  }
-
-  return value;
-}
+import { JIRA_FIELDS, removeAvatarUrls } from "../lib/jira.mjs";
 
 export function registerJiraTools(server) {
   server.registerTool(
@@ -90,12 +62,7 @@ export function registerJiraTools(server) {
       });
 
       return {
-        content: [
-          {
-            type: "text",
-            text: JSON.stringify(result, null, 2),
-          },
-        ],
+        content: [],
         structuredContent: result,
       };
     },

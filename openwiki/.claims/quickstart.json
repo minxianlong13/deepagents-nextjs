@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:052a482d0c0186d9ff818ef73a339cd89b678a1691c8aee4d56e3f8d830ceb9d",
+  "claims": [
+    {
+      "id": "claim_ceff249387ce4b94a7d7ee874e638ff7",
+      "statement": "The repository is a pnpm workspace containing two deployable applications: `apps/web` is the Next.js application and `apps/mcp` is the MCP HTTP server with a standalone client; root scripts dispatch web and MCP development commands to those packages.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L1-L32",
+          "version": "repo-lines-v1:sha256:2e8a360ad13e240130cc0738e9656b14d5ba64eba26f388fb664225319139432:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4NDBjYzE4YjM4NzI3MjdkN2UxM2IxZTYzYTAzYzBjNzAyNzZiYjk1ZDc1ZDJlZWE5MDNiYjE3YTFhZjRiYTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YzA2YzU2MWQ1YzMyNzM0MzY4NTI2OGE0NmIzMzkxZjM5OThlZWU4OTBkMmJlNTFmMGQyMWNjNGE1M2FlNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwNjI3YmI0ZWFjYTM1NDMzZTM1ZjdlYzQ4NDk3OGUxMDZhMjZiYjI4MjkzMzhlYzA5NzhkYzI3ODIwNDdmYzEifQ"
+        },
+        {
+          "resource": "repo://package.json#L5-L14",
+          "version": "repo-lines-v1:sha256:727bb4966134bf6a312d19885cce3986a569d4f804127cc03686b0b445bbb6a5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0ODMzZDU5NDljMDNhNDBjYTk1MjQ5MTYxMGE2NjU5NjQ0YjNhYTQ2NjM2MmY3OTkwMjBkYmYxOTgxNTQ3ZGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2Njg2OWE1ZjE2NzZmYTQ4YzVhMTk3YThjNGIyMWNmMmFmNjg0NzcxZTEzMzhhODUyODVjZGU4MDUyMjdkN2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhMzk0OGMzNzQxYjQ4ODBmZGI5OTNmYzg4ZGU2OTc4ODc4YTY5MDE3ZTU2NTA4Y2Y0OGViOTdiOTI1Y2UxMDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://pnpm-workspace.yaml#L1-L8",
+          "version": "repo-lines-v1:sha256:daaf26afe00d3abda7b8a27a5f2c85a7d6784c3baaebc57c6ad158ce203b3fb8:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWRiMDc2ZWI4MGFkZTE5ZmVhM2UwYTQzMTk4NmI2NTVmNWZhNTllZDYyNjdlMTA3ZDY4OGI2MWMzZjQyMTc5NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmI5YzdiMjY1OTY4ZGFkODJhOTdhYTk0YmUzMTA4NzRlZGE4ZGM4YmUzMDg4MGRkY2Y1MzliZGMzOWExOTNjZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTc2ZDY3YmE5N2U3YTQ2NGQwZGI3YzljMzcwMDdmYWZlNDY0YWI5ZTIzZWU1NWRhZjM0NGM4ZWE1YWUxYmRiZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_9db40142abd340c8b39328cadaff1c42",
+      "statement": "The web application exposes product entry pages for search chat, RAG chat, resume tailoring, and RAG configuration at `/search`, `/rag`, `/resume`, and `/manage/rag` respectively.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/layout.tsx#L43-L115",
+          "version": "repo-lines-v1:sha256:0b079d7d36e0755113ed89feb7ad14f63ec10b8b185c198bd780a7cdb30a5d65:eyJzZWxlY3RlZExpbmVDb3VudCI6NzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVlMjhhNjE2N2YyMWM4NjIxZDE3NDg5ZGY1NTdkNzM4NjYwOTZjZGEyNGEyNTMyMjExYjIxNzdmYmJlMDUxNzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkYmUxMTM2YWJlMjQzMDZmMzJiMmQ0ODJiNmVkM2YwODEwMWFjNmEwMGU2OTgwYmEzZGQwYWZlZTc4Y2JhYjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhOTA0OTU2YWFiNDY5Zjk0NzBjOTUyZjcxN2Y1NDkyMmU2MzkzNzQyM2U2ZWZhMDkxMTgyMWJjMTNiZmI5NDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwMDY0OThjNzFiNWMwYmU0OGY4Yjc3MmIyMjllNzFlMWJjYmM3ODgzNTk2YTY1MmJiMjEwZDYxOTViYWQyYWQifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/page.tsx#L28-L53",
+          "version": "repo-lines-v1:sha256:de0f5d3d4dd3aa93c075bc39835ad9c430138f7833b2a714e65bc871bbe5713f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwZWQzNjZkNzIwNTUwOTcyZTFmZDgyYjg3NzE4YTk3YmJiYzVmZTNiOGQ3MWQ3MWFkZjVmODY5NmJmYjRmMzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRkNzQ0YThjMWY2ODQ3NTIyOWUwZWI0NzIxYWE3N2ZkMGQ1ODE4NTg3OTJmYmIwMjUyMjJhNDY4YThlMmY1OGYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE4YWJjODA5ZGVhZTJmZjEzOTM5NDRmNDdlMGQ4OTlhMzJmNGRmYjFiMjg0YmFmMmU2NGY3MjE5MTNiMzZkNGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjOTM4MDYwZTVhNTZlY2ZkMDM2NWJlMzFlZGNmZWZhZDdjNmMyNmRjM2Y1ZTdlM2YyMDAxOTUxN2Q4NzMyNzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d0cd01d98c6d415eadde821258d379eb",
+      "statement": "The supplied local pgvector Compose service creates a `deepagents` PostgreSQL database, maps host port 5433 to container port 5432, persists data in a named volume, and has a readiness healthcheck; the web environment example targets that service through `DATABASE_URL`.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/.env.example#L1-L2",
+          "version": "repo-lines-v1:sha256:5cab68e997702e301b02aab2dd2929dcbccaaf373cc5a8f04727653d41d7c313:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDNjZjJhMWE3ODc2NTlmNDhmYmQ5OWE4ODg4OTkzZWU2Y2E0YTMzYmQ3NDNkYzAzNTMyMmFlZTI0NWM0MThhMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTk5YzQwYjQ3MWE3Y2I4NjIzNjlkOTE5ZDJhMzA2MWM4MDZmZmM1NzUxN2E2MjQ3NTFmYTJlODA0ZTNmZWNjMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://docker-compose.pgvector.yml#L1-L20",
+          "version": "repo-lines-v1:sha256:09da4bd505b0aa35c5e3a2063e2e827cb6a8e04b0c556e6fda5fd529144d9604:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhNzNmY2NkYzk5ZWE4MzU5NjdjN2RlZTdlZmJlZDFmM2NhODcyNjBkOTI5MzE4NTBmZGQ2NmRhOGNiMTJmMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkYmVhYjgyZjE0YmViNjlkY2MyODRkNDQ2YTI2NTUzNzIwZGU2ZWVlNTY3ZmY0OGRkM2NjMTQ2NWNjOWE4MDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_22eaca4b0b4947e5b461920e417f02d7",
+      "statement": "The web Prisma configuration reads `DATABASE_URL`, uses the committed `prisma/migrations` directory, and the resume/vector migration creates the PostgreSQL `vector` extension.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/prisma.config.ts#L1-L14",
+          "version": "repo-lines-v1:sha256:c1bcbd0ff267c8b6885cd467ed8122cf6508bdac6c929d69f9b512ccde65a033:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2ODYyMTY0N2ZkZWE2YTNlYTkwOWY1NTk2YjVmMDc3ZGY3NGRjMTVmOWVkMjc4OWNjNTRhMDE2M2M4MjBmMGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://apps/web/prisma/migrations/20260916120000_add_resume_pgvector/migration.sql#L1-L3",
+          "version": "repo-lines-v1:sha256:d181ee003e4ba9859fdd132f216983974f1f70fd52e72b8ada63dbe4fa0daa0b:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWU5YjJjZmVjNDc1MTlmNDllZTczY2I1MzNjNDU5ZTIyZjhjYTU0ZmU1YmExY2JlYzU5ZjNkNTg4M2ZlMTkxYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWYxMDk3NDQ3ODg5MmVmM2U1ZWQwZTBjZTRmYTRmYTg0ZjMxNzRiODhmYzRlY2ZjMDlmZTVhMzEwNTJhMDZiMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWYwZTM0ZTkyMjk1ZTg1MmY0YmQ4NGIwYzI0NGZkMGRmN2JjYTM0MTY0NGE4NDYyMzFjYzRmMzQzYzI5NThmMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6fd7dd323d5a43a19a711ece358f0f9f",
+      "statement": "The MCP service creates a fresh MCP server and stateless Streamable HTTP transport for each `POST /mcp` request, registers Jira, Slack, and wiki tools, exposes `GET /` as a health endpoint, and rejects GET and DELETE requests to `/mcp`.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/server.mjs#L17-L29",
+          "version": "repo-lines-v1:sha256:53d9b6e3cef3ab6c12b1ad3e8d64f0bf910478ba4b3ca6500b3e599ab83cec20:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlNDhjYzRhOGJhMTQ4ZDM2NWJmOTA2ZjI5YTYxYzg1ZDk0Zjc2ZWZmNTY2NGYwZmViMWE3YmIzNWZiOGRlMDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwMTU4OWRiNWYxMDI3YjYzMmU5NDE4NTAyNGYwZjQwNWViNmFkZGNjOTZmYjY1MDdiMmNlMDM0ZDcxMzIxNDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjMGUyZjRkODM3OWRjNzRmM2I2MjMwODU2YTRjNDU1MDk3Y2JhZDEwZmYzZGMzYzFmZmFmYzEzOWVkZTk2ZjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRjNmFkNzhmNGU1OGU3MDMxNTZhZWE1ZWY0ZDkwOTc1Nzk0YTA2OGYzZWYzMWFlNGY2YTZlODc1MzNhN2UwM2EifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/server.mjs#L32-L94",
+          "version": "repo-lines-v1:sha256:27857a642dc8a3ad0756daaf3cf9937368a9f6f322e4c28c4aa146cf008d98cc:eyJzZWxlY3RlZExpbmVDb3VudCI6NjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3YzA0NWUyYWFmMjIxYjY5YTMxOWY2NTc0Y2U3MGMxZWRhZWFkZWRkYWRjMjI2NDkwYWI1YjQ3ZjJmZjY5NWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYyNzQyZDBkMGVlM2QyYTljNTc1NzhhNTE2MGQ2NzM4YjE5ODdmZGQzOWNlZmQ3MTM5YzBiMmE1NjNmNjg5YmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM5ZTliNDZkMWE0MTkxNjcyZWVhYTk2NWEzNmM4OTg0YWQzNTUwYWVkMTUyNmFjZGYxZjc0YWQ2MTZjNWFmNDkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e4b3cb5df89f4961aee65722b57cf77e",
+      "statement": "MCP listener configuration gives `PORT` precedence over `MCP_PORT`, defaults to port 8787 and host `0.0.0.0`, while the checked-in local MCP configuration uses `http://127.0.0.1:8787/mcp`.",
+      "evidence": [
+        {
+          "resource": "repo://.vscode/mcp.json#L1-L8",
+          "version": "repo-lines-v1:sha256:f408d63f26942786e0fc7a7a7748933e71a9f20b02fa3ee16549bc9fe61b23c2:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTZmYjA4ZmRhMWFjYjk1N2I2MTE2YmQzNzgxMWExZmU0MWEwMTYxMWMwNjMxZWRiZjc4NmQ2ODg5YTI3YTU1YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://apps/mcp/server.mjs#L11-L17",
+          "version": "repo-lines-v1:sha256:ef4f1938e46a78ef59604fcd796336f1eb1c99595f72a1bb9e3eab2776f94a1f:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDJhOGIzMmRhYTVlZjExMmNjNTI1ZmZlMmQ2OWM2OTA4NzBhN2YwMDM4ZWM1ZjI4MGRiZWQzMmIyMjliNDcxNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWU0OGNjNGE4YmExNDhkMzY1YmY5MDZmMjlhNjFjODVkOTRmNzZlZmY1NjY0ZjBmZWIxYTdiYjM1ZmI4ZGUwMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWI0ZTE3ZGFiOTc0NWI3ZTg1NDVmODc0ODAyM2JlNjllN2Q4MjZjMzZmZmFiMjUwM2Q4ZTkyN2UxMWNiNDg0ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGY0YjA0YTZlZTBlMTllZGNlNzlmMjI1NmJmZTg4M2IxNmNiODQwMzNmNDA0YTY4NmVkMTI5OWRlMzJlNWZmZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_23163b4971a84778bf0e229e444fa981",
+      "statement": "The web MCP client resolves configuration in order from `MCP_CONFIG_PATH`, a working-directory `.vscode/mcp.json`, then the repository-root configuration; it selects `MCP_SERVER_NAME` or the first server and accepts only HTTP transports.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/mcp/client.ts#L24-L30",
+          "version": "repo-lines-v1:sha256:c9be3f3457fcc8966347cb8c642fb6b96f3ba9d62a2bc9048fcf166a10136f60:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2NiNGVmYjVhMjYzZjUxNzZhZTlkOGExYzI3NmFkN2MwYjA0YTc3ZWYzYzg0MjNiMWMxMjNjMzUyM2IxMzc0MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTkwZGMwZTQ1NjlhZjBmMGQxNTY2ODdhZTNkOTI4ZWVjNTAwYThhODk5ZGYzZTNhYWNkM2Q3OTJlMjhmNDVjOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGRjNWU1MGU4YTA5NmQyMWFiY2E1NDQ1MWE4NTU1NjgzNzEzN2Q5OThhNjE0MjM0MGIxMDU4OWMzMTg2YjAyMCJ9"
+        },
+        {
+          "resource": "repo://apps/web/lib/mcp/client.ts#L78-L115",
+          "version": "repo-lines-v1:sha256:7ac504ba75ca168fce42b291c906ce9f8ca270ebb4c3aa0df2f10c2ef473b5e8:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzN2Q0ZDA4NGRlMzEwZWRmZWE0YWUzNTBmMjA0MWY2ODliMTQ2M2ZmZmQ1YjliMDAzYWZlZjQxOWZkODI1Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdmNTg3NjkwNjY3ZDE3ODYwMTQzNDU1ZDE5YWUxZWVhMDJjMjQ2MDg4MmNiMjVhODkzODlhYTEyZDJiYjZiZDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_71aca31127244b56bba6ed32c5f0e8bc",
+      "statement": "The MCP package's `test` script runs `client.mjs`, whose `list` selection connects to the configured MCP URL and lists tools; it defaults to `http://127.0.0.1:8787/mcp` when `MCP_SERVER_URL` is unset.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/client.mjs#L1-L15",
+          "version": "repo-lines-v1:sha256:0ea45df490818cf441f4dc3c1a8a901bf9269db7f07e9458715e34e2ccae0f8b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE1OWM0Nzg3MmI3MWYxMjU4OTk0Mjg5MjQ2NGU3NjRjMGRiMzUwYzIwYjcyMjI4NjQ1NjE1Y2MzNmUwYTA3MjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0Zjk4YTlmMzNhMDU4MTk5MmFmYTQwNzMwYTU0MjdjYmJkYzg3OGMzY2EzNjQyMGU5MDYyZGNhMDE1ODI4MzgifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/client.mjs#L86-L116",
+          "version": "repo-lines-v1:sha256:520dc00855126f8d38052120e176ee57cbff2b9a1c3302faf693ebd35ef624c6:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY1ZDhlNWFiYmM3ZWMxNzg3YjdiOWQ5NTA0Yjk2ZGRkOTdiNjU0ZGQ3ODBhN2IxYWU0MWFkMTg5YWUwOTBiNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhNzlhYjE1OTUyMWJkMjBhYTA4NzMyNjcyYzBjNDY2NmU5YTA3ZjQyZjg3MjdlMmJlNjM5YzEwNmViNGRkNTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4ZGExN2Y3ZWQ3OWFlNjkxMzkxNzhkYThmODNmM2JiNTdhOWIwYjAxNDY5ZGRkOWU0MzM4YWM0MWEzZTgwNmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwNjdhZmZkZTZkOWQwYzliZTc4ZTRmN2IyNmFiMjVmODM5ZjE4NzA2NWI1M2MyOTYwZWZiMjRmNmIwNjdlMTAifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/package.json#L5-L9",
+          "version": "repo-lines-v1:sha256:7abe7f7b03996756a2d7767a1494e51f205f1d2e1b12379c5f027240341db9eb:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjU2ZDgzMDkwYzZmYjkzNDYzYWQ0ZjJmODVmOGNhNTU3NmY3ZTg1ZTEyMWQ5NThhNTM3MThlMjFkOWY3NmU2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzBmNGEwMjMxNzgyY2Q0MDEyZjhiMGI0YTc3MmM1YTU5NmVkNWU0YTBmYTY5MmEzOTExMzU1Yzk3YmI0MjJmNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGNlNjZjZDEyZjM3YzczN2NlYzA2N2MzNDM5NGE4NGJmZDg4YzQzZTRhYjY3NjMyZWMzN2Q1YzhjODNlN2M4NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_59f7aa08bc8b45f5ad7e61f3a413e2f8",
+      "statement": "The root exposes `lint:web` and `build:web` but no automated test script; the web package likewise has development, build, start, and lint scripts, whereas the MCP package's `test` command is its standalone client.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/package.json#L5-L9",
+          "version": "repo-lines-v1:sha256:7abe7f7b03996756a2d7767a1494e51f205f1d2e1b12379c5f027240341db9eb:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjU2ZDgzMDkwYzZmYjkzNDYzYWQ0ZjJmODVmOGNhNTU3NmY3ZTg1ZTEyMWQ5NThhNTM3MThlMjFkOWY3NmU2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzBmNGEwMjMxNzgyY2Q0MDEyZjhiMGI0YTc3MmM1YTU5NmVkNWU0YTBmYTY5MmEzOTExMzU1Yzk3YmI0MjJmNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGNlNjZjZDEyZjM3YzczN2NlYzA2N2MzNDM5NGE4NGJmZDg4YzQzZTRhYjY3NjMyZWMzN2Q1YzhjODNlN2M4NSJ9"
+        },
+        {
+          "resource": "repo://apps/web/package.json#L5-L10",
+          "version": "repo-lines-v1:sha256:3a3892b07b08568972148ebd35ee98c8cbfde1e0316d4134feaf64ff70d109ad:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzA5NjljZGRmNTNjMGVjZTNkMmJkNDJlYTViNDA4OGQzZTgyNzg4NmE0YWI3YzljYWRlMDQ5ZjUxNDU5MjdjYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTYxMzkwNWFmOTRlNmI4NzhjMDM5Y2RiNmNkNTczNWIzM2M2NzQ5NjM2YTRlNzExZTEzNjljZWQ1NmE5MzY4NCJ9"
+        },
+        {
+          "resource": "repo://package.json#L5-L13",
+          "version": "repo-lines-v1:sha256:be9eac6d6f5a8ea62714801df6d225a4900269e994a02f7d07cd66c353df2813:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGEzOTQ4YzM3NDFiNDg4MGZkYjk5M2ZjODhkZTY5Nzg4NzhhNjkwMTdlNTY1MDhjZjQ4ZWI5N2I5MjVjZTEwNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzdhYmIzMzQzYTgxZGFmNWZlNTM4ZjM1Y2E4Mzk5YTlkYzEwZTM3MDljNTg0MWM3ZDlmMmU2ZTU2NDhiODZiMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5aabbd61e9cb4578bf47a04017fb7a96",
+      "statement": "The MCP Dockerfile builds a Node 22 Alpine image that runs as the non-root `node` user, defaults `PORT` to 8080 and `MCP_HOST` to `0.0.0.0`, exposes port 8080, and healthchecks `GET /`.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/Dockerfile#L1-L31",
+          "version": "repo-lines-v1:sha256:3967a98aa2a7194d3aa96e2d7fa334f941fab203039ba9bce08f1cc1805802b1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxNjUwM2Q5NDY5YjVmNDVjYmIzYmI4MGUyNTUzNWQ0ZTMyMTIzOTkwMzUyZjZjZTg2MDMwZDYxNjJmZWU1Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE3NzY4ODVmNDE4NjkyZWM2MmZiMzZmN2NmYWFkZjUyNzgwYzA3ZDRiYTllZGQyNTM2YTIzOTRiMjdjMmIxODkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4ad6b36746364f90bf02c5f7d12e2cc5",
+      "statement": "The RAG administration route allows only one in-process indexing operation at a time, returning HTTP 409 while an indexing promise is active, and accepts a required docs folder or subfolder.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/manage/rag/route.ts#L4-L44",
+          "version": "repo-lines-v1:sha256:62505991cb261254fb47c2441bb3aaf10662069f409fb4742cd5495a0a3d5c1e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0Njc0NjUwNDY3MTc4OTQwYTQ3MzZhYTZjNTVlOTFlMzQ4NDY1NGZhMGVlY2UzMjk4MTc3NTliZDQ5ZmI2YTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgwNmRkM2I1MjkyYzEzMTBjNzZjMTY3MjQxMDk1MDhjYjUwNzg3YWY2ZDUxYzUzNzEzMzZhZTE3YTY3YjBlODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a450e9dba3a64f068bffd95442781897",
+      "statement": "The resume tailoring route requires a trimmed job description of 50 to 30,000 characters and instructs its Anthropic model to use only source-resume facts and ignore instructions contained in the job description.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L47-L82",
+          "version": "repo-lines-v1:sha256:639c1fb1a6349fa75e178c612f35bcc972fa5c847042e6ec56015eac4064f201:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwMzI3MTM1MDI5NzgwNjMxYzhhMWEzMDYyNjM0M2Y5YzA1NmE1YTMyNDA5ZWEyNGJmYzM3YWRjZGExNGQ5OTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiODVjYWRjYWI0M2ZjM2M4YzgwMDY3ZDJkMWNlYjFjZDQ0N2M5YjU4MGY1Nzg4YmJhYTZiODkyNGM3MWU4MzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkZTQxYTY4NTZkMTgwMWRhOWExNmRkMmI1MTExMzRhOTEwMTVlMmQ2MzU1ZTFlNzRjYjZlZDAyOTlmYjcyOTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRmNzM5YTA2YzFjYmIxMjQ0ZTMzNjNkMzhiY2Y5ZmE1MGNlODRmZWQzOTljMjE5M2EzYzdmMDhkNTk5MThiMmEifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L6-L21",
+          "version": "repo-lines-v1:sha256:8a7267d7c8b9c807afdb7bb2daa2d8c6d7d1e268d6326acf71e7c6d5c93954fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU3MGZhZTkxMDMzOWNlMTMwMTRiNDAzNzBjN2YzMWVmZDVlN2ZkZTk4ZWI1NTkzMmVkM2FmMWFhMTZiN2IxNjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViOGZmMTg5N2ExZmRjYjJmZGM4YjAwZDU2Y2JiYjY4NTlkZjNlZDdhMTI5OWY1ZGJmMjRmOTIwYzc5YWM1OGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjliM2VhZDNiODE0NWI4YmNmNjcwNjcwN2UyZmQ3ZWMwNWJlZTk5MWI2ZmUwNjcxODhlMjlhZDk3ZjVlMDhkZWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwMjRkZGIwYjg4MmI1OTdmYTQzYzg4M2EwZTI3YTc1ZTJhYzEzOTgwMGU0OTc1ZmJmMGYyYWQ4NmE5ZDYxZmEifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-10-04T23:14:27.814Z"
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:4f7ad6919e9e81175b7f36165fba9e6fa99572fbfdb271e0e9f7f6881fa572ae",
+  "claims": [
+    {
+      "id": "claim_97088c83231447c79bbd4c1d906faeb6",
+      "statement": "The MCP gateway serves `POST /mcp` using a fresh server and Streamable HTTP transport per request, disables session IDs, and closes both transport and server when the response closes; handler failures become a JSON-RPC internal error when headers are still available.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/server.mjs#L19-L62",
+          "version": "repo-lines-v1:sha256:4775d4d433d98c4b6587335fd2d1cc24d7d0da4da0acb8001241b163ea850b2f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNiNmExMzU3YjI2YjMwZDljZjkzMTlhZGE4MzFkNWQ5MTNlMTdmZmUxMGU4NjExYjQyMjBiOTIxMzMzMGE0NzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJiZDczOGEzZTE5OGMwYTY1OWVhYmJjMWVkOTA2MDg3OWU3ZGJjOGNkNGJjNDM4MGUxN2JjM2E0MDRlOTVmNmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU5ODRjNjNmNDcxMmM0ZDM4MGVmMjVjMDE4YTg2ZjJkMjhmODM3YWQ2ZTBiNmUzNTc0OWI3ODM1MWRlZGU3ZDkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_87b2e946d84046aeade5532eba6aa82f",
+      "statement": "The gateway listens on `MCP_HOST` and `PORT`/`MCP_PORT` defaults, exposes `GET /` as a health response, and rejects GET and DELETE on `/mcp` with JSON-RPC method-not-allowed errors.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/server.mjs#L11-L17",
+          "version": "repo-lines-v1:sha256:ef4f1938e46a78ef59604fcd796336f1eb1c99595f72a1bb9e3eab2776f94a1f:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDJhOGIzMmRhYTVlZjExMmNjNTI1ZmZlMmQ2OWM2OTA4NzBhN2YwMDM4ZWM1ZjI4MGRiZWQzMmIyMjliNDcxNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWU0OGNjNGE4YmExNDhkMzY1YmY5MDZmMjlhNjFjODVkOTRmNzZlZmY1NjY0ZjBmZWIxYTdiYjM1ZmI4ZGUwMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWI0ZTE3ZGFiOTc0NWI3ZTg1NDVmODc0ODAyM2JlNjllN2Q4MjZjMzZmZmFiMjUwM2Q4ZTkyN2UxMWNiNDg0ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGY0YjA0YTZlZTBlMTllZGNlNzlmMjI1NmJmZTg4M2IxNmNiODQwMzNmNDA0YTY4NmVkMTI5OWRlMzJlNWZmZiJ9"
+        },
+        {
+          "resource": "repo://apps/mcp/server.mjs#L65-L102",
+          "version": "repo-lines-v1:sha256:575e372638e6feba0d034bc1074d8d37f0124949ee4644d362c4ad6a7c8d3af7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc2OTRiNjlhZWFlNDczNzg0Y2ZlMDkyYTRlZjRjMzM2ZTUzZGQwZGJkZGVkZWYzNjlhNDk1NTEzM2EzMWQzN2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyODQwNzcwMTE2YTczOTYwOTAzZjNiMTc3N2I2ZWI0MTlkYjQ0YzA0ODI5NDE4MWMwNjg2OGM0MjhmYWVmODMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViMWVhMTVhMGY3YjFkNzc0MWMwOTJkZTgwMmQzOWZkYTQ0MzRlY2YwNWY5NDM1OGM2ZjM2OWNhOTExNmUyMmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e8da88a577da4f93aee3d01295fe745f",
+      "statement": "The MCP gateway registers the Jira, Slack, and Confluence tool sets, and its request handler contains no caller authentication or authorization middleware.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/server.mjs#L19-L43",
+          "version": "repo-lines-v1:sha256:f4f5ef4b4a3477cdd434136169a035167298ba28eef2a46ca86db92a69a9eea3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNiNmExMzU3YjI2YjMwZDljZjkzMTlhZGE4MzFkNWQ5MTNlMTdmZmUxMGU4NjExYjQyMjBiOTIxMzMzMGE0NzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzOGJkYjMzMTRmMzQ4MTIyZTJjMDQxYzI4NzlhMDVkYjliYzhkNGZjOGYxZmMyMzYyODY2MDAwODk4YzU0ZDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJiZDczOGEzZTE5OGMwYTY1OWVhYmJjMWVkOTA2MDg3OWU3ZGJjOGNkNGJjNDM4MGUxN2JjM2E0MDRlOTVmNmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmY2ZmNTIzMjRjZjFmM2JjNWRhYWUyYWMyOGNiMThiMGUzMmMzOGNhMDIwM2FiYjQ3YzExMWY3Yjc3YmYzYjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d2739316bd464ba49ba5f3eefbfe6dab",
+      "statement": "The standalone MCP CLI connects to `MCP_SERVER_URL` or the local default, discovers tools before invocation, maps friendly selectors to canonical names, surfaces MCP tool errors as process failures, and closes client and transport in its finally block.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/client.mjs#L7-L15",
+          "version": "repo-lines-v1:sha256:098c06d293447bbcbd8ed5c9742b437abb4ae096ffa67521a269c35137d6b7bb:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDIwYjA5MTViYTcyNzI3NDY0ZTc5ZDM3YTg1ZjZhZDM3YjExZjE4ZGJhMDc2NzY4NzVkODFiZDRkNWMxNjAxMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWExZDFhNjMzOTAyMjljNzk4MzQ3ZTgzYTA0MDU0NDFjOTQwMDAzNTI4NGFkMTY4YzFiZjZjZGYxZDcwYTM3MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODg0MzFjM2JiMTIzY2E5NzgwZTBmYTg1ZmFhNGQ2N2IzZGRjNzQyNTYxNzNlZDE1ZjVkNTc1NzBhODJmMGMyNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjRmOThhOWYzM2EwNTgxOTkyYWZhNDA3MzBhNTQyN2NiYmRjODc4YzNjYTM2NDIwZTkwNjJkY2EwMTU4MjgzOCJ9"
+        },
+        {
+          "resource": "repo://apps/mcp/client.mjs#L86-L139",
+          "version": "repo-lines-v1:sha256:009a9529912a73ecf0c533f58c35ccd37ed72503595a9a68263bbccc776bafd7:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY1ZDhlNWFiYmM3ZWMxNzg3YjdiOWQ5NTA0Yjk2ZGRkOTdiNjU0ZGQ3ODBhN2IxYWU0MWFkMTg5YWUwOTBiNDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4ZGExN2Y3ZWQ3OWFlNjkxMzkxNzhkYThmODNmM2JiNTdhOWIwYjAxNDY5ZGRkOWU0MzM4YWM0MWEzZTgwNmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a46ccad8b4e142a18fb07c548c3a2eac",
+      "statement": "The web MCP client searches `MCP_CONFIG_PATH` and two `.vscode/mcp.json` locations in order, accepts either `servers` or `mcpServers`, supports only HTTP, forwards configured headers, and selects `MCP_SERVER_NAME` or the first configured server.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/mcp/client.ts#L24-L57",
+          "version": "repo-lines-v1:sha256:85866dd63baf4a925e182a5d65bc37cde62035e53b977e4c08d9df4272aded8d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjYjRlZmI1YTI2M2Y1MTc2YWU5ZDhhMWMyNzZhZDdjMGIwNGE3N2VmM2M4NDIzYjFjMTIzYzM1MjNiMTM3NDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MGRjMGU0NTY5YWYwZjBkMTU2Njg3YWUzZDkyOGVlYzUwMGE4YTg5OWRmM2UzYWFjZDNkNzkyZTI4ZjQ1YzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2ZDU0YTQxYzkzNDY2ZGNhM2Y3ZTQ2NmVjYWJjMWFhYmU5ZGZjZWYwOWJmMjc1MjFkMmI4Nzk0MGVjODAxMDQifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/mcp/client.ts#L78-L122",
+          "version": "repo-lines-v1:sha256:657e75a1f7bf5fb370e9f0e7f8cd23676085bb2f11ca713d145e82804aa16449:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzN2Q0ZDA4NGRlMzEwZWRmZWE0YWUzNTBmMjA0MWY2ODliMTQ2M2ZmZmQ1YjliMDAzYWZlZjQxOWZkODI1Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9629b32347bd4fe49aa53142291a1cb2",
+      "statement": "The web configuration adapter emits all configured MCP servers with loading errors enabled and no server-name prefixes; the RAG agent obtains its MCP tools from that adapter during construction.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/agents/rag_agent.ts#L73-L85",
+          "version": "repo-lines-v1:sha256:78c013346291454f98b8d833f6ccf545290c38bc6be36076f72588cc0fa9c5d7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE0Mjg3ODZiODBkNDU0MzljNTllMGRmNWEwMGM3OTE4M2VmYmMwOGU4YzNmZDg0ZWM2N2ExOGE0NmNmYzc5MTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5MTU4Y2YzNTYxNTUzMDFiMTNjMjJlZTRhNzljMzY4NGUyNTY3NmNlNjU5Njk3MWZiNmEyZjY5OGU3YzkwZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUzZWFjNjI5ODRjY2IxNWQwM2IyYzBiMjUzY2QwNTI3MDc2MjM5NGExNDVlYmQ3NWM4YzAxMjVmMGI1MWIyYjUifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/mcp/client.ts#L59-L75",
+          "version": "repo-lines-v1:sha256:3e493b3dfb11e1fbd38b9a45018637267f5f9474be1c4d0239a33220fde87b9f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyMGYzZWFlMTUwZWY4YTg5MDA5NzU5Mzc4ODI4ZjIwMjgzZTkzZDNmZGVhZWU0NzI5MTA3MTI4NDRmYmYwNTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2NThmNzUwYWI0MDUyM2ZlOWJmNTg0NjVjYjQwYTBlYTZmZTg0N2ZkNjJiNmFlN2QwMGIxOWFjNDI0OWNlNGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0ZTVmNzQzZWIxNzY5NzViOTQ4NWRlMWM2YmE2YzVhMTk4YWM3NTUyNmYxOTA1ZTUyODIwNDA5MWRkMTEzNWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_23c9a4238baf49ccaa9094e5f4f1a2bc",
+      "statement": "The wiki-management API validates a numeric content ID, invokes `get_wiki_content` through a newly created MCP client, closes that connection in finally, and maps invalid input to HTTP 400 and invocation/configuration failures to HTTP 500.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/manage/wiki/route.ts#L5-L76",
+          "version": "repo-lines-v1:sha256:c6f3f737b8332424426c6121a2bad57be71564ac2b0f26e49fc15e7456658c82:eyJzZWxlY3RlZExpbmVDb3VudCI6NzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1MGJlOWYyMzdlNzJkYmE3OTZlOTc5OTQ3OGZhNTQ4MjEzYTJjZjkzZGEwZjgyM2Y1MTJlMzdmMTkzMDQyNWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0ZTQyMDhjZDZmZmI4YzRhMzU0N2IyZjU0YWRhMTk5NzhjM2YzNjVlNzhmOTUwMmVmNTE0NWNkZDJhYTg1NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViZjVjMGRhYzM2ZGFjZDE4Mzg4MzIyNjY4MDU5NTgxZmNhOTQ5OTNhNWQ1MjUwMTQwZDk3MWQxZDcxZTViZmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRmNzM5YTA2YzFjYmIxMjQ0ZTMzNjNkMzhiY2Y5ZmE1MGNlODRmZWQzOTljMjE5M2EzYzdmMDhkNTk5MThiMmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5438a78d40a44a50b457972b99aa4c52",
+      "statement": "The Jira tool validates issue-key shape, requires base URL and bearer token, requests only its fixed Jira field allowlist, recursively removes `avatarUrls`, and returns both text JSON and structured content with nulls for absent selected fields.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/tools/jira.mjs#L3-L30",
+          "version": "repo-lines-v1:sha256:fde08a2d57a42fa143243f8eb993bd2502ef668660cec680c4b2e38c3d516255:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIxOTgwMTFlOGNkNjlhNjQ0MjdkMWVjNjUxYWJkZTk1MDEzODE3MGY2Y2M5ZDEzM2UxZmVmYWY2YjE1YjY0YTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIyNGRiZWM5MTQ1YTA3MDU1YjMxMGRkMTQ2MjViNjI0NGRiMjIwOWY0NzZiMzVkMjcwMmI3YTQzMDQwZjM3YTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM4YjM4ZDAwZjhmNmMyMzU2NTg4ZTExNjZjYzYwYzQ1ODI0NjA3N2QyODUxOWViZWE2NDNlNzNhODM4YzE2NDgifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/tools/jira.mjs#L32-L100",
+          "version": "repo-lines-v1:sha256:64a8de729fcc673ffed00b075c76052fb845a7bb1465cef145dc7b59090aa98b:eyJzZWxlY3RlZExpbmVDb3VudCI6NjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkNWNjMzE0NmE2NmI5ZmQzNjZjMjgyNjhjYzRiMmU4NjliZDNhMjk4MmJiM2NlYzQxNGQwZTY4ODkzZGQ5ZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZlMzNkYzczMWU3ZDA3YjFmMGMwNWNmZWJkN2UxOTIyMDIzZTYwNzdiYzBhZTdiYTMwMTQ4ZjUwODMzYTI1YTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxODg3MGE4MDQwOWY4YzRjOTk0ODA3YWY4MjU5Y2MwNGJkMGM1Y2EyZTlmMWMzYjEzZGVmMTBiMTYyNzg2ZDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxYmM0YTE4OTY0YTM2YTQzYzliMmQ4YjUyMjg0NjgzYzdkM2Q0MTQwZWJhOThkN2M1MTM2MWUwOWRjNTM1ODkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9aa2ccc1fa434be9ba551abade185f9d",
+      "statement": "The Jira connector turns a non-success upstream response into an error carrying the status and Jira error messages when parsable, otherwise the response text or status text.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/tools/jira.mjs#L63-L82",
+          "version": "repo-lines-v1:sha256:4dae381c10c7ef29998e614b1643b0804fec66b629972bbff693969f43936c8f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE3NTU0NzcwYjYxNmNkYTI4M2M4ZWEyMmNhMWFiYTc0NDBlMzllZmVlZjA0Y2Q0NGVhZTJiNTk4YmVmNjBjYjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjOWE5ZTQzYzlkNzBkNDBjMWYyMjU3ZGUwNGM2YjY1NGI3MGZmZDZmM2ZiOTM3ZTY2MTViOThhYzZiOTIxZDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgxNjViMDlkMjNiNzVkYjRjMDBjZTRiMzUxZTg4ZTY5OTI3ZDk3ZWQ4MTBhYjZlYTdlN2M4MjVjMWM5NTJhMDMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_762f55398f67460cbcf9d18748c7e56f",
+      "statement": "The Slack tool is a remote-MCP proxy that requires keywords or a filter, connects per invocation to configured/default Slack MCP, verifies `slack_search_public_and_private` is advertised, forwards only defined inputs, and closes remote client and transport on both connection and invocation failure paths.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/tools/slack.mjs#L30-L45",
+          "version": "repo-lines-v1:sha256:9712f8559ff83f0f8fdc66b37169ba9258bf768080642990500573180efd73dc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MWE5NDVkNWI1MTY4OWQ1ODM4OWQ3ZWI3MGMyYzU1YTkyNjdlNDEzZWM3YzA1Y2JjZmY3ZjBkZTE5MmU4ZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVmZTNmYTQzZWI3YzliYTJjMTY4YTVlZjY2ZjllMTZlZDhiMjRkZTcyZWUwZjUxYzJhNTRhMTM1YmM4YTgxOTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2MGQ4OGVlMDNkMGM2ZjYxYjRlODE0Y2FjMzY5YjYyMmI1ZTRhZGY5ZTJlODJiNWMxNjQxZGRjZWQxZjBiN2IifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/tools/slack.mjs#L47-L96",
+          "version": "repo-lines-v1:sha256:4bbcb8f73dcc8038087a11ff0ffb227d27e835da6ec396f0da1b208a29195287:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhYjA2ZmNlNzU5NDQ0N2Y2M2E3NGJmZmE4MzlhNmMxYzIxNWJmZGNlYTRhNzZhOWVhNzlkM2Y3NjYyMTEyMDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmMGNkYjk3MmE3YmZiN2VkMjQ2ZjlmZjY3MjM4NWU1NWY0OTY4ZmMxMTA0M2RjNWI2ODRkNTFkZmEzMWRiY2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdiOGI2MDBhNWI0NDhiMWU0ZDAyZGYwOTc0NmVkM2NhMzE3MmY3NWM0YWFiYjAxZGRlMDgwZTM2Y2FiMDc0YjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4ac3bdb186d8443f8f8fc8b195bab7d8",
+      "statement": "The Confluence tool supports bearer or Basic credentials sourced exclusively from environment variables, defaults its base URL to `https://wiki.cvent.com`, and rejects missing or unsupported authentication configuration before the upstream request.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/tools/wiki.mjs#L167-L175",
+          "version": "repo-lines-v1:sha256:899da82619e31b177ff549b64d8af15fb64d9c3672d74334de1e037bbb719942:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWYxNGQxOTIzM2NjMTNkNWE4ODE5ZTE0MmNhYjAzNDhhOTUzOGI3Y2M4NzYxNzVmYTM4ODZkNWUzZTI3OGMwOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmVmNjkwMDdhN2U3NWNjZGIyYzE5ZWZhOWQ5NWM0M2JmNzg3ZjMzYTJiOWM4MjY1YzRhNWNlNjQyZmU2ZGJlYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTMwNmVhYzI2MzY3MTliZjkyNDQ2MjVmMmFlNzVlMDBjNzVmNzZkZmM4YWRmZDkyODM1MjFjYjg2MzE4N2YzNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjc2Y2M0OTJmNWIyODY0MTcxYjE4MWEwMGJjZWFkMzcyZmFiNjM2YzNkMjI3ZWM2NzY3ZDY0MzE5YTYyYTgxYyJ9"
+        },
+        {
+          "resource": "repo://apps/mcp/tools/wiki.mjs#L5-L57",
+          "version": "repo-lines-v1:sha256:b16920643f85849ab702f1b084437e287ede059d4ed47c9e8248222db06a0f55:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiMmE1NjUxMzk0ZGFhMzM3MjhiMzkxZGM4ZjE4ODA3M2M3NTIyMTc4ODIwMjFmZTA0ZTlkMTM0Yjc0N2FkMzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNkNjM4YTIyYzBmMTYyNmYxNDAyOWY3MGU3M2RmZTA0YmMyODlhNzg2OTM0NWQwMzU1ZmFkNmMyYmM0ZDYyNjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBhNjJiM2UyM2Y0YjI0OGYwYjc5NjkwNzg1MDRjNjIzMTcxM2Q5ZjhhYjUzMWE2MTkyYmMxNzhmNjczZDUzMmUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_91b977a01f7b49c4a87249daf32357bc",
+      "statement": "The Confluence exporter discovers descendant pages breadth-first, pages child requests at 100 items using `_links.next` or offset progression, retains only numeric IDs, and uses a visited set to deduplicate and prevent repeated traversal.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/tools/wiki.mjs#L59-L124",
+          "version": "repo-lines-v1:sha256:99be86e3091b77e7d0382500c3f1db3c2809b2b82e509783db8cdea873e2c4be:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyMDk4OTc4MDE0YWFjMjljMGQyM2YzZDVhMjQ1ZDMxOTQwMTk2NWMzZjk3NWYyMWYxZTJlMDcwMjg2N2Q3YmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwOTM0NGY1ZTA0OTg3NzcxZWQ3NTY3ZGU1Nzg5ODY3MTcwMzIzZjAxOTg2MGQ0NDZmNWY5OTJkMzM3MDY1YzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY5OGUwNWJlNzNjMWExYjQ5ZjBjZGRmMDc0NTRkYTEzMjIxZTIwNmZlZjFiY2E0OTJmOGJiODI1NWE0ZGFhOWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ebc9c06d35b74c36a9df4bd45e5fe5cd",
+      "statement": "The Confluence tool fetches the parent and all descendants' storage bodies, writes one `wiki-{contentId}.md` file per page under `WIKI_OUTPUT_DIR` or the process working directory, and returns parent-first combined text plus parent ID, descendant IDs, and file metadata; fetch or write rejection aborts the tool without rollback.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/tools/wiki.mjs#L126-L150",
+          "version": "repo-lines-v1:sha256:bb341314612e9f035179032699b64d5b3f149a709c6ebb319dd480811b343eea:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxNzYwODM0OTg5ODEzZmZmNTk5NmNmZTUxODhhMmUyODA5MDliYTI2NmM4NzFiZGM5MTc2NzBlNWNlYTgxZWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk1MDhiOWY0NzgyMjAwNGJjYzJjYWJlNWIzYWM3ZDkzMDM2ZGNlODFlYmMzNmI1YTM3YmJiNzgyMzI5YzBhOTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZmNWNiYzgxZTRjZGFlNmFhN2RiOWQ4Mjg4OGEzMWNlMWUyZTk2Yzg5NGQ1MGJjY2E2YmE3OTUzY2EyZDJhNjMifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/tools/wiki.mjs#L171-L215",
+          "version": "repo-lines-v1:sha256:d35c6843c1bb133613aa15c2df44c0533c10d940e15939a4bbbe710afa5bdaa7:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhYTE3ODZiZmZjYzRmMGZlZDg4YWExNDc5ZWU2Zjk3OWIxOTFlMWFmMDVmODQ4YTk1NjJkMjNhNzFlNjM3MWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZlMzNkYzczMWU3ZDA3YjFmMGMwNWNmZWJkN2UxOTIyMDIzZTYwNzdiYzBhZTdiYTMwMTQ4ZjUwODMzYTI1YTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJlMjhjYmQ2MTk5YTk0NTE1MDU5NmI1NTgwMWY2YzA0MzA5MTIzNGYzNTEzMTllY2E4NzM4MDM1NDc3ZWYwYTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxYmM0YTE4OTY0YTM2YTQzYzliMmQ4YjUyMjg0NjgzYzdkM2Q0MTQwZWJhOThkN2M1MTM2MWUwOWRjNTM1ODkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e6a2b860af66443c90434c451b3e3661",
+      "statement": "The checked-in local MCP client declaration targets the HTTP gateway at `http://127.0.0.1:8787/mcp`.",
+      "evidence": [
+        {
+          "resource": "repo://.vscode/mcp.json#L1-L8",
+          "version": "repo-lines-v1:sha256:f408d63f26942786e0fc7a7a7748933e71a9f20b02fa3ee16549bc9fe61b23c2:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTZmYjA4ZmRhMWFjYjk1N2I2MTE2YmQzNzgxMWExZmU0MWEwMTYxMWMwNjMxZWRiZjc4NmQ2ODg5YTI3YTU1YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6eac6b6a04394d5a8905e296b1d4a5e7",
+      "statement": "The MCP container runtime stage does not copy the `tools/` directory even though `server.mjs` imports its modules, so the Docker image as written cannot resolve the registered tool modules at startup.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/Dockerfile#L12-L31",
+          "version": "repo-lines-v1:sha256:96afaedaf9e8a7c197c38e61c719ba711bf2b056dceb6dfb4630e09e024cab5a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiN2EyYmExZDUxOWI1NmMwYmNjNDYxOGZkNGQ2OTQyMTI4MDA5NDA5MDMzNTk0N2E4MmY1NmE5ZDMwZDFmZWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE3NzY4ODVmNDE4NjkyZWM2MmZiMzZmN2NmYWFkZjUyNzgwYzA3ZDRiYTllZGQyNTM2YTIzOTRiMjdjMmIxODkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIzY2NkOGEyNGVjNjUzYmJkMDIyOTFmN2ZhYmE1YTBmNmVkNTM5OTA2NDg3ZWU5NWQxMGQxODE4MTJjZDgzZGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/server.mjs#L4-L9",
+          "version": "repo-lines-v1:sha256:63728fc8b3e15af83d61e6c69d5d1704c3c65d20f9add288dba4cbf470dc4a75:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTkwNWNlNzUxMjI4YjgwZGQ1NDYzNWNlZmMxNWQ0MzdmM2M2YWNjMGZlOTk2M2E4M2MxMjVkZWQwNWIzZTk3NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGVjMGM5OTZkY2M1Njk0MGZmMzI1MjYwODBiNDYzNThlMzViMmVhNDJjZmE1YWNiZTcxODMyMDQ4MWQ0MzNlMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTJiNTJjZWY0ZDM3MWI3NmMyNDY4NTFmODUyMDA3ZWViNTU1OTg3OWI1NzI3MWYzMzU5NjIyMmYzNWY2YWE0NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjBhMWYzNjI5ZWM3NmZkYWJkNTY3MWU4MTU3YjQ3Zjc5NmMyYmM4YjYwNTExODJhMWU1YjAwNWViYjljOGE2NiJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-10-04T23:14:27.814Z"
+  }
+}

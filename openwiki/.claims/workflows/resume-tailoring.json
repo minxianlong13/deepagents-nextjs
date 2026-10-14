@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:7c73006ddf35e6951a8320811a9ed3d606a3eeb8d0bb26e7729d59804de6fe18",
+  "claims": [
+    {
+      "id": "claim_701ef77c1eb142879f1e160c9ee0e4fc",
+      "statement": "The active resume-tailoring workflow is a stateless direct path: the `/resume` client posts `jobDescription` to `POST /api/resume/tailor`, which directly invokes Anthropic with the bundled `candidateProfile`; it does not use the RAG/MCP path or Prisma persistence.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L47-L78",
+          "version": "repo-lines-v1:sha256:46f5fb8fa30639c27676fcaa6e0886970a36d6b39a48e29bcdf34ad3fd578d62:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwMzI3MTM1MDI5NzgwNjMxYzhhMWEzMDYyNjM0M2Y5YzA1NmE1YTMyNDA5ZWEyNGJmYzM3YWRjZGExNGQ5OTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI0YmM3YjM4NzgwNmEzMmMzNGUwYWY2MmYzN2RhNzBiMzJiMmUwZGNmMDA5YWNlM2FiNjU3OGM5Yjg2YTc5MTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkZTQxYTY4NTZkMTgwMWRhOWExNmRkMmI1MTExMzRhOTEwMTVlMmQ2MzU1ZTFlNzRjYjZlZDAyOTlmYjcyOTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwM2ZmMjZjYTY0N2NkYjQwNTFhODI1MzY4ZmJiNTFhMDAzNjFmNmI1MTgwZTJiYjUyZDkwZDQ5NTUzY2E3MzYifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/resume/page.tsx#L20-L53",
+          "version": "repo-lines-v1:sha256:6a62d52992f9ff016b46643f1c02ccde21193586c875d4402345eb47f206b7be:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2MzI3MDg5YzM5YjJmYWZlYzBiZGE2YTgwMmJjODEzOGM3ZDA0M2UwOTdmNWYwZjFlMzFkMDM2YjEzMDBkODIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlmOTE4MjIxN2IyNGZlNGI3MjQ0NGMxODFjM2YzYjRlM2Y5YTcyZDQ3OWQyNGU3MTU3ZDM5NWMyNjZiMjViZjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZkYzZlOTRmMzBhOWIyNzQwOThmNjAxMWE3YWUwNzllMTNkZmQzYzgyOWMyM2QxMmU3N2YyZDViZmJiNTkxNTcifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/resume/candidate-profile.ts#L1-L9",
+          "version": "repo-lines-v1:sha256:6210ee6198f9ba0b20476c99a6a5bc65d3a6f921f59c1f2832ce869658bbe107:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmRkMDg5NWQ5OTIxNjJkMWZlNmMzNTExODc0Y2NmZmRhN2Y1MTZmY2Q1OWE1OTNiN2QwODI3ODg2NjFkYjA3NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWE3NDIzODJjZTJlMTZjOWI3YzUwMDFlNTFjODFiYjgzN2E3MGE0ZDU5ZDMwM2MxMzlmYzA1NzY0MDYzYzY1NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_bc842de8283f4e9abe5127a60bed741a",
+      "statement": "The browser disables tailoring while loading or until the trimmed job description reaches 50 characters, caps textarea input at 30,000 characters, and sends JSON to the tailoring endpoint; it holds the returned Markdown and errors only in client component state.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/resume/page.tsx#L107-L135",
+          "version": "repo-lines-v1:sha256:a42ff2ebc12171af3963c272e9b732e8c09a8309dea484dce4ead02d056c4327:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEyODM4YzA4Y2U5NmRlMjVkZTBhM2JkYzZjYTNmNjdkMGY3ZTBhOTZjNzk5N2NiNTRlYmJlOWZhYzk2ODNiMTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMWEwNmUyODRlNDQ4Mzc5YTU2ZDM4MzBjNTYzY2RhY2ViY2M0ZWI1NzQ1ZWNhODVkN2FmN2FkZTNlZTI3MzYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4YjA4MzUyM2Q3MDYwNjEwNmYxYzc3NmYxZTIyMzI2ZTE0N2VhMTNiNDI5ODRiM2NjMGM4ZWRjMDdhOTFlN2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5ODk0Njc2YzEzMGQ3MzcxNzEwYjE4OTExZTRmMTA3N2RjZDAzMWQ1YjA4NjI5N2NjODk4ODAzZDVmZjgzNzMifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/resume/page.tsx#L11-L53",
+          "version": "repo-lines-v1:sha256:994a75b0e7c711b28419a644aef62f0efb71be6238fba1ddd61a4929ad8cf960:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyODQwMDdiMmY1MTQ1NDU0ODdlYjIyZjQ1MTVkZmIwOTFmODQxYjJmYWU5OWM5ZGQ2YWFmOTMzMzUwNDI5OTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjZGYyMDdmNDNhZGNmMTMxYTBjZGIxMmRkZTUyNGExMDM4ZTE4YzA3ZmM5N2M4NmI2ZTNiMTliYjIyMGFmZGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZkYzZlOTRmMzBhOWIyNzQwOThmNjAxMWE3YWUwNzllMTNkZmQzYzgyOWMyM2QxMmU3N2YyZDViZmJiNTkxNTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_122d2ae9527d4cb680b9aa694ad53956",
+      "statement": "The API independently validates a trimmed string job description between 50 and 30,000 characters and returns HTTP 400 for a parsed payload that fails this schema, preventing direct callers from bypassing the UI input limits.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L47-L59",
+          "version": "repo-lines-v1:sha256:70cfc99020d8652173386eedd2807dc84bcc37dacf7e43a3c9df1c81de0f4397:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwMzI3MTM1MDI5NzgwNjMxYzhhMWEzMDYyNjM0M2Y5YzA1NmE1YTMyNDA5ZWEyNGJmYzM3YWRjZGExNGQ5OTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkZTQxYTY4NTZkMTgwMWRhOWExNmRkMmI1MTExMzRhOTEwMTVlMmQ2MzU1ZTFlNzRjYjZlZDAyOTlmYjcyOTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcyOTgxYjViY2E1ODM5MTFiZWI1ODljYjc1NGY5YzYyNjQ1MTkzNjYxZjkxYzA5MDMwZDAwN2E1ODc4YjA2MDUifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L6-L8",
+          "version": "repo-lines-v1:sha256:bb9288b5c4cd62dd09893601bd40c91fef119c489e8c46aa6b29a2fef6f02ef4:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTcwZmFlOTEwMzM5Y2UxMzAxNGI0MDM3MGM3ZjMxZWZkNWU3ZmRlOThlYjU1OTMyZWQzYWYxYWExNmI3YjE2MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWIzZWFkM2I4MTQ1YjhiY2Y2NzA2NzA3ZTJmZDdlYzA1YmVlOTkxYjZmZTA2NzE4OGUyOWFkOTdmNWUwOGRlZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmI2MTcxN2U0NzhkOGNlMDU3MWJiYjg5NTFkNzRlZDI2ZDc2MTU0MTA4MDQzMzIyZGI3Zjc1OTdmYzc5NDA4YiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b9dd32213cc641c9aa64c3ca6c29ab49",
+      "statement": "The handler calls `claude-sonnet-4-6` at temperature 0 and supplies the serialized static profile under `SOURCE_RESUME` separately from the user-supplied `JOB_DESCRIPTION`.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L61-L71",
+          "version": "repo-lines-v1:sha256:826a26879658a3fedfea80cd1653f2cda8c5021c843344883b7a750a06f7dd0b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhYzM5ZGExODRkMzEyMWQ0ZjI3NmZkOWNkYWRlOTM0NTFlMDBlNDE3NTMwYWIxMDkyMDgxMWY0ZWMxOGYxOGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkwOTNlMTI5MDZhNjFmZDVjMDg5ZmVlOGZjYWZkOTUyZTU3YTU5MDlhMjQ5ZGQxMjUwOTQ5OGQyNzFhNzFjOTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmYTdmNDA4MWRlMzU1YzM5MmIwYzFkOTZjMTdiYzQ0MTg3ZDllOTlmZTMzMWFiN2FlYWI3NmNhZTc1Njg5ZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUxZjk2NGI4NmEwZThkNTY1MmJhMjE4OTgxNjk0OGJhMWFjNjQzMmZhMTA2OTJmYTdkZTI4NDQ3MjhjNTg3ZDQifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/resume/candidate-profile.ts#L1-L9",
+          "version": "repo-lines-v1:sha256:6210ee6198f9ba0b20476c99a6a5bc65d3a6f921f59c1f2832ce869658bbe107:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmRkMDg5NWQ5OTIxNjJkMWZlNmMzNTExODc0Y2NmZmRhN2Y1MTZmY2Q1OWE1OTNiN2QwODI3ODg2NjFkYjA3NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWE3NDIzODJjZTJlMTZjOWI3YzUwMDFlNTFjODFiYjgzN2E3MGE0ZDU5ZDMwM2MxMzlmYzA1NzY0MDYzYzY1NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e2ac3f2fd97c41e081eacc577fb95f5d",
+      "statement": "The system prompt directs the model to use only source-resume facts, preserve dates and titles, ignore instructions embedded in the untrusted job description, and return only unfenced Markdown beginning with the candidate name as H1; these constraints are prompt-level because the route does not programmatically validate generated claims.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L10-L21",
+          "version": "repo-lines-v1:sha256:31b3ea675aafb9274ea7075c4054061c1fefdd8d4ab0edc4486afb51fcbf05dc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkxYTA2YTZhY2ZlMThjY2VmZWQ4MDEyZGFhYzRiYWQ1OTRjNGMwMzMxM2U2NmE3NGM4NjY5NDFkM2VmNWVhZDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViOGZmMTg5N2ExZmRjYjJmZGM4YjAwZDU2Y2JiYjY4NTlkZjNlZDdhMTI5OWY1ZGJmMjRmOTIwYzc5YWM1OGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5NzhjNDAxMzA0MTkwMmQ2MjI1NWUyN2M3ODM4MTQyYWMxMTRkMWRhOGZkYTcwZDgyMDAwMGE5NzZiMDEyMjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwMjRkZGIwYjg4MmI1OTdmYTQzYzg4M2EwZTI3YTc1ZTJhYzEzOTgwMGU0OTc1ZmJmMGYyYWQ4NmE5ZDYxZmEifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L65-L78",
+          "version": "repo-lines-v1:sha256:640616bd74dc5f246546728ca93f2ee5cb85962fd8312f701c9a31f5a23eda40:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkNDExZjUzZWRhZWNjYmI0NzQ2MjAwYTRhNjdiODliNWYxZDcyNWQ1NTllMDRiOGZkNDIwMmQyNTY3MTAxNjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI0YmM3YjM4NzgwNmEzMmMzNGUwYWY2MmYzN2RhNzBiMzJiMmUwZGNmMDA5YWNlM2FiNjU3OGM5Yjg2YTc5MTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk0MmRmMWE1NDkyNmJkODBkMjc2Zjk4MjgzMmJiY2U0YTFhNjBmNjA1MWNmZjliMTc3YmIwODdmYTkwMTZkOTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwM2ZmMjZjYTY0N2NkYjQwNTFhODI1MzY4ZmJiNTFhMDAzNjFmNmI1MTgwZTJiYjUyZDkwZDQ5NTUzY2E3MzYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f59d45adf8f249859870f1d6f045b53d",
+      "statement": "The API normalizes either string content or text-bearing content blocks into Markdown, rejects an empty normalized response, returns `{ markdown }` on success, and maps caught errors to HTTP 500 with an Error message when available.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L23-L45",
+          "version": "repo-lines-v1:sha256:3211132a3ad1823839520452a634192bea7b3747a191b16111d937386e13c352:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczMzZlYmVlMGQ5NTgyMDI3NTNjMzFhOTQ1MDBmNWE4MzIxMzZhZmI5MTI0YmQ3NmQzYzU3MWE5NGQyZGVlYTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0N2IyZWFjMmM4OTNmZjg0NTJiM2Y5OTcyOTJhYWE2MmE1NGUzNzY3Y2IwZTcyN2U0YjFiMWE5ZDFlZTM1OTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY0MjRjZmY2NzIzZTQzMDRkZDkzYzhhZDU5OTNmNDkyMDc0ODNhYTNjOTZhYjNmYzY0NjNlM2IxMWJhOGYwZTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L72-L83",
+          "version": "repo-lines-v1:sha256:4a5964594a18a5cdfe75c608690659585e01134970c6611eff9fd19a11bb3b7d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyYjY1YmU4NjFkODhhNDY2MGIzMjhhNzk3NTBmZjFiZWIxMjRkYzk2MDliYmYyOWZhNjQ5NzcyYzg0MWM5ODEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNiNDI3MjJjODI0NTk5NDAzMTUxOTJkNmY4ZmJkODVmM2VkMzM1NmY4MzgxZTFiNWRjM2Y1MzNiZTNlY2JhMTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d6a4376e56d94a2ca71f840380a224ff",
+      "statement": "The client previews successful output with `ReactMarkdown` and `remarkGfm`; it can copy the raw Markdown to the clipboard or download it locally as `xianlong-min-tailored-resume.md` without another server request.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/resume/page.tsx#L147-L184",
+          "version": "repo-lines-v1:sha256:052b125810fe49ab0818992e8d987a7e1048ddb3b456b519a034109921fc8791:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4OTk0YTQwN2Y2ODY1NGIzODY2ZThmOGJlNjFjZDcyYzE5MGJjZTlkMmIxNWRmMzYzNDI0NjQ3YmU1ZWEyNzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxYWNlMDUwZTUxZTA0YmU3NDYwYjNjZjU4M2ZhNTdmMDg0YTljOTNmOTU0MTlmMzUzZjFmNGQ3YTczZDM3ZjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4ZGVjMWU0ZWIxMzQyZGNlOTNhMWYxYTVlYmQyMGQ4YWU4Y2ZjYTNiZmI3NGZkZmJhMzg4Zjg4ZDlkNDI0MGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI2ZmExYzE0ZjMwNDg3YjI4NzU5ZjM2NDIxNGJkNDQ5OWI1ZWQxZjVhMmIxOTZhMGY1OTFlNzk3MGIzNjllZjMifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/resume/page.tsx#L55-L68",
+          "version": "repo-lines-v1:sha256:1d4e640315801b24b363e32092df89328568dcb50a8aecb01d5d959c842e58f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjNzMyNDI2ZTUzZmRmODdjNWVkOGYxMzY2YTQ3NzNiYTk4Y2EyZmJlMmUxYWI5MjJiNjljZGMyMDczMjgyZmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUxZTM3MjVkYTAwMmI0NmVkOGI0ZGU4ODAwM2FkOTcxMGRjYWYxOGQ1N2M0NzAxZGMzYmVmZjBiMmM1Y2IxM2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg4YzQwODRiZGFkODA4ZTFmZjhhMzNlMTcwZGE5OTg3YTk1YTA5MzIxZWJiZWRlZGNjZmUyYjEyOWM5ZDljMGUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fe6b5037d07444249c49e8d4e4ba13eb",
+      "statement": "The tailoring handler has no authentication or authorization check, so endpoint exposure and the bundled profile's disclosure must be protected by deployment-level access controls appropriate to the intended audience.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L1-L83",
+          "version": "repo-lines-v1:sha256:00dda365be16b33bce3bcd510b2ad8ba20549813ef86f0529f39d53cf477cfa9:eyJzZWxlY3RlZExpbmVDb3VudCI6ODMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4MThiODkyYTdjYWQwNzM5ZGY1NDUzNDBhZWM5MDg4NDQ1MzQyN2ExOWI1NDA5MzI2MzgzNDc4NTc2ZmVjNmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fc395ce026bc4595aebdd01c8820ff24",
+      "statement": "`candidateProfile` is a static combination of `candidate_profile.json` and `candidate_career_evidence.json`; this combined object is the tailoring route's factual input, while the neighboring `basic_resume.md` is not imported by that route.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L1-L5",
+          "version": "repo-lines-v1:sha256:da98df1d0e11b2cd9216d1645e75f88b28e5536eb6ead8dc1875c4dc7fbf2ba0:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjgxOGI4OTJhN2NhZDA3MzlkZjU0NTM0MGFlYzkwODg0NDUzNDI3YTE5YjU0MDkzMjYzODM0Nzg1NzZmZWM2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmI5Mjg4YjVjNGNkNjJkZDA5ODkzNjAxYmQ0MGM5MWZlZjExOWM0ODllOGM0NmFhNmIyOWEyZmVmNmYwMmVmNCJ9"
+        },
+        {
+          "resource": "repo://apps/web/lib/resume/basic_resume.md#L1-L18",
+          "version": "repo-lines-v1:sha256:8b733f3c28a1f466627a3a0fe795390d71c8b65bed8c034aed617eb18f0864b6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YTdiNjE4NDNmMDdhNjNlMzMyNmU0ZjEzMzM2MzM1Y2E1MTA2NmNlMTI5YWExMGIxZjdlM2JkOWM0MGE3OTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZmMjA1YTdmYzBiYjU0M2Q2MjYxZjYzNzk3YzVmMWUyZjMzZDgwNjkyYjEwNzg1MGFkOTEwM2RhNjZmMTM2ZGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAwMWYyZWMxNzU5M2MxMDU0ZWI0NjM2N2Q4NDUzZWYyNGExNzNjZTk2YjcxMTdkOTFmOWE2OGQ0NGZlZjhiMDEifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/resume/candidate-profile.ts#L1-L9",
+          "version": "repo-lines-v1:sha256:6210ee6198f9ba0b20476c99a6a5bc65d3a6f921f59c1f2832ce869658bbe107:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmRkMDg5NWQ5OTIxNjJkMWZlNmMzNTExODc0Y2NmZmRhN2Y1MTZmY2Q1OWE1OTNiN2QwODI3ODg2NjFkYjA3NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWE3NDIzODJjZTJlMTZjOWI3YzUwMDFlNTFjODFiYjgzN2E3MGE0ZDU5ZDMwM2MxMzlmYzA1NzY0MDYzYzY1NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_30eb3f2eaca0403d954ec94c5e287685",
+      "statement": "Although Prisma and its migration provision `CandidateProfile`, `JobDescription`, and pgvector-backed `SemanticChunk` records with a 1024-dimensional vector and HNSW cosine index, the active tailoring route does not read or write those models.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L1-L83",
+          "version": "repo-lines-v1:sha256:00dda365be16b33bce3bcd510b2ad8ba20549813ef86f0529f39d53cf477cfa9:eyJzZWxlY3RlZExpbmVDb3VudCI6ODMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4MThiODkyYTdjYWQwNzM5ZGY1NDUzNDBhZWM5MDg4NDQ1MzQyN2ExOWI1NDA5MzI2MzgzNDc4NTc2ZmVjNmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/prisma/migrations/20260916120000_add_resume_pgvector/migration.sql#L1-L60",
+          "version": "repo-lines-v1:sha256:9d05ebbd8ed51027e10c59c2f10d0fe528258bf2ba93b7f56c08b99eb3a64fb9:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjllOWIyY2ZlYzQ3NTE5ZjQ5ZWU3M2NiNTMzYzQ1OWUyMmY4Y2E1NGZlNWJhMWNiZWM1OWYzZDU4ODNmZTE5MWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI4NDMyMTcwNzE1ZDkyMTAyYjJmNDRkNTRlOGMzODZlNmExYzU4Zjk4ODMwN2U4NDFkNjlhYTAwZjI2ZjZmZTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://apps/web/prisma/schema.prisma#L38-L81",
+          "version": "repo-lines-v1:sha256:ebc5622ed1d164821d163d9209cf53c304b3035a58f6d7d2cde4b15bf34a8a0f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI4ZWJjYWE3ZGRhNDRiOTEyNWYxZGJiZjI4ZDA2YjVmNTg1NzVkZDMyMzMyNGJiMGE4NGQ4YTU4NzExMjlhOTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5M2E5NjdkYTZlN2E0M2IxNjk4NTlmN2ZkYzQyMjcwMmM0MjM1Yzk0YzZkNTNiNTI3OTI3MjU4YmNlNGJmODAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1MDg0MDRhZTZiNmI4NjVjNWM1ZjY3Njg1MTNiNzhjOWMzNWY3NzYzNzZhMTRkNmFkODA4NzZmOWZiYjI0ZTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_04c8f5a540eb4f79a864b9f33fce1a17",
+      "statement": "The separate `index_candidate_profile` tool is an unused extension path: it chunks static career evidence, creates 1024-dimensional OpenAI embeddings, then transactionally upserts a versioned candidate profile, deletes old profile chunks, and inserts replacements; no resume page or tailoring-route code invokes it.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L1-L83",
+          "version": "repo-lines-v1:sha256:00dda365be16b33bce3bcd510b2ad8ba20549813ef86f0529f39d53cf477cfa9:eyJzZWxlY3RlZExpbmVDb3VudCI6ODMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4MThiODkyYTdjYWQwNzM5ZGY1NDUzNDBhZWM5MDg4NDQ1MzQyN2ExOWI1NDA5MzI2MzgzNDc4NTc2ZmVjNmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/resume/page.tsx#L20-L53",
+          "version": "repo-lines-v1:sha256:6a62d52992f9ff016b46643f1c02ccde21193586c875d4402345eb47f206b7be:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2MzI3MDg5YzM5YjJmYWZlYzBiZGE2YTgwMmJjODEzOGM3ZDA0M2UwOTdmNWYwZjFlMzFkMDM2YjEzMDBkODIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlmOTE4MjIxN2IyNGZlNGI3MjQ0NGMxODFjM2YzYjRlM2Y5YTcyZDQ3OWQyNGU3MTU3ZDM5NWMyNjZiMjViZjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZkYzZlOTRmMzBhOWIyNzQwOThmNjAxMWE3YWUwNzllMTNkZmQzYzgyOWMyM2QxMmU3N2YyZDViZmJiNTkxNTcifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/resume_tailor.ts#L12-L16",
+          "version": "repo-lines-v1:sha256:a9490731ebde7ba75da393b46ac56ff60ae1a06465cc562a9576d2cf2a9efbac:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzM1ZDc2ZjFkOWRiYjNmMWE1ZGM2ZDM4Y2JiMzNhOTUzYmZiOTBiZTU4YmFkMzJiYzc1ODE0ODUzYmJiNDRkNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzAwZTgyNDZkZTUzN2Q4MWNkNmE3NTQ4M2FiNTI0M2I5YjM2MjE1MTkxNDM0NWE5Y2EzOTkzYWM4NTgxNmNkZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzA3NDAwMTQxYjQ0MWQzOTg4NmE5N2RlZjUzOGU3ZGMxM2ZkOGY5OTkwOTAzM2ZkYjU5NmY1MjdkY2ZlZDI2NyJ9"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/resume_tailor.ts#L142-L160",
+          "version": "repo-lines-v1:sha256:9df7066232f17c78a81aaa024430d8e303e03515d76f28d27b1343e37f2ee6ff:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhOTY1MGMyYjkzZTg1ZDBiMDM3MmJjM2U3OGQwY2ViYjAyYTc1NTU0YTEzMzUzZTNjZDAwMmNiMzkwMTU3YWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5OTY3ZWMxZWQzODM2ZjhlYjE3YWZmMTcyYjViZmVmN2RlNjA0ODVhNDM5YzZjYTExYzU5MWUxNzU1NzM5YWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMGYyZDNhM2FhZGEyNzU4NjQ1NzhkMGE0MzkxNTYzOGQ1NDNmZWNhMmM5NDg1OGRiOTQxMjExZTg2Y2VmMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/resume_tailor.ts#L17-L55",
+          "version": "repo-lines-v1:sha256:938f3a7133f4fe186adca3981f4ee82692c5206036a81e5921946fa501ceea50:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgxNThiM2ViNDA4ZTE3YWUxNzY4Njg5ZWZhMDJkOTg1NjhkZDllYWRlNzg2MjI4YjVlNGJiZjVhNjg2MTZkZmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJlMWI1ODM1YTBjZDg2OWE3OWI5YjlmMDljY2ZiYTUzODYyOWU4NTExYjg4NWZhNjE2OGZlYWRhOTM0ZDhlMzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZkMWJjMTk3ZWM0ODZmZDgzZjE0OWViYjJjMDIwZDIzNzA3M2YxNjA0NmFlZmZkNzcyOWFlMDBhMDljYjBjNzMifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/resume_tailor.ts#L64-L139",
+          "version": "repo-lines-v1:sha256:b469da263cb05c44db0f9a97d9aaf37a86537cfbaf630d26b5a0aac8424cc62f:eyJzZWxlY3RlZExpbmVDb3VudCI6NzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM1ODdmYmIyY2ViYzdhNWM4MzQ1ZTg5NzEwOTgwZTQzNzkyZjUzMDdjZWQ3ZGU1YmEwYTc0ZDFlZTJkODcwMWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMGYyZDNhM2FhZGEyNzU4NjQ1NzhkMGE0MzkxNTYzOGQ1NDNmZWNhMmM5NDg1OGRiOTQxMjExZTg2Y2VmMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRiMGM5MThlOTcyODhiZGIyZTg5OWZkOTlkMGI4NTU2NmZmMWUyZmJjNjNiZjViODQ3M2RjMjBmYzc5NGE1N2EifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6fd48418b14d4e01a60e526d9d4f5721",
+      "statement": "The web package has lint and build scripts but no test script, so this workflow has no repository-configured first-party automated test command.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/package.json#L1-L10",
+          "version": "repo-lines-v1:sha256:0b998a068cb3fff06cd9ac93e17df2e6878c2f326c53703a60ffcde47511b34f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE2MTM5MDVhZjk0ZTZiODc4YzAzOWNkYjZjZDU3MzViMzNjNjc0OTYzNmE0ZTcxMWUxMzY5Y2VkNTZhOTM2ODQifQ"
+        },
+        {
+          "resource": "repo://package.json#L1-L14",
+          "version": "repo-lines-v1:sha256:8841d79fab6a1b53d5a4930fee35f5680ef3386ed0e6c6c94dbe73745b8bbece:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2Njg2OWE1ZjE2NzZmYTQ4YzVhMTk3YThjNGIyMWNmMmFmNjg0NzcxZTEzMzhhODUyODVjZGU4MDUyMjdkN2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-10-04T23:14:27.814Z"
+  }
+}

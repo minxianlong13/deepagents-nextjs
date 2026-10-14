@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:4d90ae7eea8fb63b4fb7532f1d166dd763ed5998599ed85b6324e3bf70b6b8f3",
+  "claims": [
+    {
+      "id": "claim_0b49a8976ee54bb9b8ace8f402dfb0ec",
+      "statement": "The RAG workflow indexes documentation into the fixed Pinecone index `aoe-langchain-docs` and exposes separate management and chat API entrypoints: management calls `indexKnowledgeBase`, while chat validates nonblank input and invokes the RAG agent.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/chat/rag/route.ts#L5-L62",
+          "version": "repo-lines-v1:sha256:3461bc855a9c950c7cef5610d6a192b4444e6920c3b23daf1389896442fe842f:eyJzZWxlY3RlZExpbmVDb3VudCI6NTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU3MGZhZTkxMDMzOWNlMTMwMTRiNDAzNzBjN2YzMWVmZDVlN2ZkZTk4ZWI1NTkzMmVkM2FmMWFhMTZiN2IxNjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUxYTQ3OTAzMzg3NDcyZGRhOWNmOTVlYzQ5MGRhYjBlZTY2ZjYzYTQxNGU4ODg5ZGZlODM0ZDJkZjM1NjdiZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/api/manage/rag/route.ts#L1-L44",
+          "version": "repo-lines-v1:sha256:407601525451f91dc4f7b23149bfc330fc53b285787a2ca29593031bc924a9ef:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM4NGY4NWFjNDE5MDUyMDhiNzhiOTYxMDljMjJmYjRhY2JiNzY5YTNmZWRkODQxM2FlYmYwOGUwZWM2MzQ2NGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L15-L20",
+          "version": "repo-lines-v1:sha256:0a3a74285bfd534b0f0f668690302621a19a55372fb6a5c61f078742b7c13033:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDVjYmJlNTQzMjllMjA4OTA2ZjcxN2Y2NDlmYjVjYjU0ZjVhNTdkYTljMTRkYWEzNGVkZmMyNmU3N2EyZjIwZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWQ3MTAyZTMwZGMzNDkxNGEzM2ZmOGU5MDFkY2ZlZTFkZTg4ZTI3OTczNWM4MTMzMzc4ZjJkZDI0YmM3NzIwMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmM2Zjc0NTFkMDdkOGQ3ZTlhN2Y1NWQ0NDNhNzM3MThlMjlmYTk3M2NmMzRjOTIxNzg5YTEwY2NhZTgwM2RjZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTE1ZTY5YzBhYzQ0ZWFjZDRlY2E0Yzc2OTlhYWMwMWI4YTQwNjQ3N2FlMzQ5YTA5ZGZhMDFhNDdkZmIzNDAwMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d5aec1bcf4264577a771fadf83dce607",
+      "statement": "Docs selection is constrained to the repository `docs` directory; root aliases select local files excluding remote metadata and add all remote documents, whereas selections inside `docs/remote` interpret JSON `sources` metadata and fetch the referenced URLs.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L31-L71",
+          "version": "repo-lines-v1:sha256:4a1f98d77719674283bcd428c94455eeb502212f034bbe8b7cc0456d07023484:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ5ZDE0NWNhZWZkMjAxM2RiNWNiZTc0NDBlZTI3ZTc2MzJiZjAzM2M1OGNhMDE2ZDhkZmE5MWI5YTMyZmM5NGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmNDc1MWU3YWJkZjY0NTJjMDUzZTEwMTc3NGU5ZTE4NDRhZmZlOGE0ZTZhYWIzM2IwNTU3Yjk2YzIwYTNiMzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1YjkyYzM3ZWZiYjc5YjJhN2NjZWZhMzk2ZDUzYWM3YzliY2FlN2I3Zjg1NGU1YjlhYTk5ZmRkMzQ4ZjA3NGMifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L78-L168",
+          "version": "repo-lines-v1:sha256:4c9d305931c5183b00cdcf6bc486485c2b1896ddc6207de1bcd0cf616a79694e:eyJzZWxlY3RlZExpbmVDb3VudCI6OTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzMzQ2MmYxYmQyMTdiYTM3NTg1MmM2YTdiM2IzMmFmOTZmNzU2NTFiZTQxYjQ4MjVlMDhlZjc3OGU3YjEyZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2Y2E3MTRjYzgzNTRmOGE3M2ZjYzJiYzdjYjNjYjFiZGY3NjJlODdjYWY1YzVjYzRjYWM1NWU3YTI0ZWQ4YzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1ZWZmNzlhM2VkN2E1ZWI1NmMyOTUxNTk0NDQ5NWRhMTUwZTJlZjRmMTIyZmVjYWFhYzRhOWM5OGJmYWM4ZjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9b59737e2fa343ea8772108749eff376",
+      "statement": "Indexing tolerates malformed remote metadata, unreadable local files, and failed remote fetches by omitting them, but fails when the selected scope yields no readable documents.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L140-L167",
+          "version": "repo-lines-v1:sha256:4bd9536ef5138ccfbf888d51d86a9e4e25dec62c2dd4d2f38efc725bc1648195:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI3YjMzNzc5MmZmM2VjY2QzMmZiODY0NDUyYmE1NGVhOWFlMWIxNzQ0MTBjOGIwYjViNzE1OTRjMWMxMWNiNjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4YjU2MDBmNzZlMGJiNjhmMjBiMTE4OTMxNzViZWZkYTExYjNjMDQ2MjkyN2NjYWQ1YzJkMzJkZWQ5ZTFjY2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3MDQ3NDkxYmQ5NjhkNjhkYWFjMjYxYmEwMDAyN2E1NDgxY2QyYzUyYTgwOTA0N2JkY2YxN2JmZGZhMTllYzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk3ZWJmZmRlMGIyOTkyNjkyZWE3OWU5NjZjOTM4ODdhM2JkNTA4N2NjMGQ2M2VlZjFjZGVjMGM1OTAxYzI2YjYifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L85-L125",
+          "version": "repo-lines-v1:sha256:6adca54e523bca07d9e8919e48a75389dcad36fd03d887ab3d63d87ada97a114:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJjMGNlMjU1ZGQ3ODlmZTgyN2JhYmI4MDEyNjI4NWQzZWUxNGI2NmVjZGJjZDczZTVkOTI5ODRhNTQ5OTQyNjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1ZWYwMWJjMDhkYmMzYjYzZTRlNzVlYTNkMjZhNWI5NDE4OTE4NzdlMjdhZDg5MTMyOWM4NDExZDdkOGRjNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFhYTRlOTYxZmUzZTk4OTA4ZWFjZWRkNjA0ZTg1ZjE0MjY0MGZlZmY4ZGU2NjQxODA4ZDBmNWU5ODVlNmMyZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQyYTcyNzc4YWQ4ODJlMTYxYzg1MzBmYzk4NTlkZjdmNDQ4ZjQwZWM5YjZmMDlhZWM2Zjc1ODI5NWI4MTVhNzAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a73d0737449f4155861039157b1b58e6",
+      "statement": "The indexer implements per-source incremental replacement by comparing a SHA-256 content hash stored in a `rag-manifest` record; changed sources delete prior listed chunk IDs, write newly split and embedded chunks to `documents`, then upsert source/hash/chunk-ID metadata, while identical sources are skipped.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L221-L289",
+          "version": "repo-lines-v1:sha256:a679b7a45362d8ab53d77e9825742d948430cf24cfe400d77c18481622c9435f:eyJzZWxlY3RlZExpbmVDb3VudCI6NjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhZGU2ZTc5ZWYxYTljZDI1NTc5Yjg2YzM4NjBhYTJmZTExZTE5OTE2N2RjZTE1MmRiZjFhMWU0ZGNlMmJlYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjNTY1YmNmMzA2ZTViMDBkMmVhMzcxNWZhZmUzNmNjOWJiOTA3ZjA1Y2RmMThmZTBhMzEwNGU5MjhlNDMxOGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzNDAyOTFlYjIzMjhmNGZiMjA0ZDYzYjYxZjQyMzk4ZjI3MTZkZTY0NzYzOGM0MzhjMWYyOTVkNjY5NDE1MDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d5dc2212475d4af88611440ec6278def",
+      "statement": "Documents are split into 1,000-character chunks with 200-character overlap, embedded by `text-embedding-3-small` at 1,024 dimensions, and indexed in batches of eight with a 10-second pause between nonfinal batches.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L180-L209",
+          "version": "repo-lines-v1:sha256:abb1daad1c8c65c3149fd4e1692aeffd57f31a466714cbaeca26cee82e037a4d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkYWZiZGRkNWVkYWI2NWE3NmE2MGZlN2M3ZmI2NTZmMTMwNGUwM2RmYjY1YTY4OWVkMGUxZDg5NWJiYzQ3MjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2YTFhYzkwYzQ4ODJlYjk3NDE3NDNhYjNkMWMwZDA4ZDE4ZmQzZjQzODBiNTZkNDJjOWRhY2RiMTVjZDdjNjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwNTc5NTgwNDZkZTE3NjFmYWVkNmRlMjVhOTNiNjM4ODczOGUxNjJkYjIyYzY1YTU1YjBmNDQ5Y2UwMTAwMWUifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L258-L268",
+          "version": "repo-lines-v1:sha256:a92cca6d96702f81ec3d02aeff67e1130c4555576766e80aa5d1cb886055ce08:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdiODVlNThlZjU2ZmU5NzEzZGRlOWQwMzU2OGFkZDA0MTdhMGMxY2QwNGYyNTc4M2JlZjQ4N2FkMTM0ZjAyMzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMzOTRkMjEzZjdmODY1YjhlZjAyNmFjYTdhY2ZlNjVlYmFhNDVjZWIzZGU3NmNkYThjODE1ZjE4MzdhZmZmYjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY3MzcxOTZlZjc0NTg4YmQ4ODc5MGNhMjk5MmZjZmRiZTVkYTM2OTMzNDU5OGQwN2Y0NDEwNGMzMWE2YTFmMDYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_bba76aa113d144c286d8e8a63c573486",
+      "statement": "Index replacement is not transactional: old chunks are deleted before new chunks and manifest metadata are fully written, so an intervening failure can leave the source absent or incomplete; sources omitted from a later selection are not pruned by this loop.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L236-L280",
+          "version": "repo-lines-v1:sha256:0f1fb9bc0a57c068cdbc296989fa093748befae561c4e8f66023dfa89169df8e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRkYjlhZGZlMTAyMzlhOTYxZWMwMTBiNGU2ZmQzNmI3ZTI5ZjU4ZWUzNTVkMmU4MzdiNGYxNTVmMmFkZjUyNmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQxYTc3ZjFjMWM5N2Y5ZTBmNjNjY2JkYzRjZjE0YjQ3NDZiNjg1ZGM5NzI3YTUzODVhZDVmMGIwZWU4Y2ExZGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRkMDNhZmY4OWViOWQ5ZTgwZGQ1YzIzMTg4NTNhY2JmNGU4OWYzZGNkNWMzNzJjYmFhYjg2MzVkMmQ4NGNjMTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c7fbc18b99c14d5d937a86ae931a62bc",
+      "statement": "The management route permits only one in-flight indexing promise per loaded module, returning HTTP 409 to concurrent requests and clearing the guard in `finally` so both failed and successful runs can be retried; it returns 400 for blank folder input and 500 for indexing errors.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/manage/rag/route.ts#L4-L44",
+          "version": "repo-lines-v1:sha256:62505991cb261254fb47c2441bb3aaf10662069f409fb4742cd5495a0a3d5c1e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0Njc0NjUwNDY3MTc4OTQwYTQ3MzZhYTZjNTVlOTFlMzQ4NDY1NGZhMGVlY2UzMjk4MTc3NTliZDQ5ZmI2YTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgwNmRkM2I1MjkyYzEzMTBjNzZjMTY3MjQxMDk1MDhjYjUwNzg3YWY2ZDUxYzUzNzEzMzZhZTE3YTY3YjBlODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_896138e26df5415a86f0fd08bab38e3f",
+      "statement": "`document_search` retrieves at most four similarity hits, writes Markdown files with source headers under randomized `/retrieved/<id>/chunk_N.md` paths to a shared `StateBackend`, and returns those paths for agent-side analysis.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L292-L321",
+          "version": "repo-lines-v1:sha256:1053368aec50fc8ed45ce016a856fc32220b6358a348820965d21d19392d5853:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2OGI5ZWUzYzg5YTg5YTMxNWU3MTNkM2ZmZWYzYjE0YTQ5NDlkNjM5NjU3ZTBlMTdhZDMwNTRmYzg3N2JkYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5OTY3ZWMxZWQzODM2ZjhlYjE3YWZmMTcyYjViZmVmN2RlNjA0ODVhNDM5YzZjYTExYzU5MWUxNzU1NzM5YWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_21472b3375e14a688d01db51fa95ef6e",
+      "statement": "The RAG Deep Agent combines MCP-discovered tools and `document_search`, uses the shared retrieval-file backend, and is instructed to delegate one retrieved chunk path per `chunk-analyst` task with at most three parallel analysts before synthesizing a sourced answer.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/agents/rag_agent.ts#L1-L45",
+          "version": "repo-lines-v1:sha256:c921c0a787988bd62ffea7624cf61c4f06ca122b3dd9b86bbe20684d85c193c7:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4NDQ4N2JiNWI4Zjg4YmZhMjEzNjIzOGQzZDc1MTA5ODIwMjZiOGUwMWE5YzAxNmE4NDQxZTNjZDNmNjg4YzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0NzA5MmUzZmJjNDkxODcxMDhlZWRhMTI3ZTYwMDBhYjUyOTFmZGJmY2E5MWUzNzc0ZGZjZTg1MWU5NjU5OGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgzNzFjZjY5ZGFhMGE2YjI2MTA4ZmQ1ZDM4NzZiZGExOTA5NzNmZWUzMzk5OTNjYjFjMmM0N2FmYjE3ZjlkZGMifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/agents/rag_agent.ts#L47-L85",
+          "version": "repo-lines-v1:sha256:4edc5db2770df545321582d4c5d6499efb4140d177b0d0186099a9c17364c7c0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5ZDFiY2ZkZThlZTdlNmY4OWU4NTYwNGZmMGE0NmU3NDE1ZTcwNzE0MjliNWI0ZTAwNDM4YzQ1NGRjMThhMTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZkMDcxYWM0MjI4OWRmNWMyNGY3NTJmNDMwZGRmYWJkOTBjY2VkNDg0MWYwNTExNjM2YzhmNjRlYTc4OTAzNDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUzZWFjNjI5ODRjY2IxNWQwM2IyYzBiMjUzY2QwNTI3MDc2MjM5NGExNDVlYmQ3NWM4YzAxMjVmMGI1MWIyYjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a0a2660516024f108c76933d8959de6f",
+      "statement": "Retrieved documentation is explicitly treated as untrusted reference data by both the coordinator and chunk analyst instructions, which direct the analyst to read its assigned file and include the source URL in a concise summary.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/agents/rag_agent.ts#L15-L28",
+          "version": "repo-lines-v1:sha256:383467613fff792785cb1561f21bea9db6f7245b23a9d35ae314c109dad00713:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyNDI4YjcyZWJhZjIwNmQ3MDI3Yjk0OGY2ZWFkODViMzgwZTVjMDFiODA2NjBmNDY2N2JmZjBmZmI4N2Y2ZDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg3YzA2NDFhMTcyMjFlNWI5YWRhYTQ1ZmE0ZTUzZjVmOGE4N2FkMmJiZDg1M2MzOGRlOTY2ZDcwZDEyOTg0NjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcwZjJhYjI2MGQ1Mzg5MmE0Y2EwNDc3NTQ5MDAzNDgyMjgyNzE2NWM4YWFhZTAzYWUwZTJiYzlkMDk0ZmY4MTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA0YjU4YTY3YmUwMWU5OTZhY2RjNDgxYTg3NmFlYWQ5NmJjNTlhMDY4Nzg2NTAxZDAxZGEzZTk1MWYzOGQxMzMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d87caf3577694a5abaa69d7f44c98f59",
+      "statement": "For GROUP- or PROD-prefixed Jira analysis requests, RAG instructions require `get_jira_ticket`, focused documentation search based on ticket details, an evidence-versus-inference distinction, and no invented ticket details on retrieval failure.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/skill/jira_analysis.ts#L27-L47",
+          "version": "repo-lines-v1:sha256:eb5c9a5e0a90416ce6a8b4a42114a2b926ca1aba4a00e6ba2021410b20845c3f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0MmM2NGRlZjI2YWY5ZjhlODM1Zjg2MDFhY2FmOTg0MTIwOGY0MGUzZDdlZmZjNzEwYTkxZDNhNmY1ODIyYWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyMzIxMjNkZDRkZDkwZjM1YmVmMTcwZjE2NTkxNWM3NDU2MmU4NzJkMmMxZDQ2NDgxNzllMWQ3ZGFkMTgxN2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI1YTc1ZTNkNzA0ZjA3NGRhOTVjMzFlNjQyOTExMDMwMzA5YWUxZjNlOTYxNWQ1MDZlMjk3YWIzNWVhODRhYjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a642994eb6a04591a5c3bea043ce9f0d",
+      "statement": "The RAG agent is promise-memoized: its first construction loads MCP configuration and tools, and later calls reuse the same promise; MCP tool names are intentionally not server-prefixed.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/agents/rag_agent.ts#L73-L92",
+          "version": "repo-lines-v1:sha256:5ac3f178bd1638bd771cdeebe128eb5ea2c91f0df0b7276535f1537d9efc53c3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE0Mjg3ODZiODBkNDU0MzljNTllMGRmNWEwMGM3OTE4M2VmYmMwOGU4YzNmZDg0ZWM2N2ExOGE0NmNmYzc5MTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3ODRlMjk3Zjk5NDdjYTM3MTVhNThkYWIxMmFjYTE2MjNkMjM2MDdmODdkZGIzMDkxZGY2Njg2YjIzMGNmMWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5MTU4Y2YzNTYxNTUzMDFiMTNjMjJlZTRhNzljMzY4NGUyNTY3NmNlNjU5Njk3MWZiNmEyZjY5OGU3YzkwZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/mcp/client.ts#L59-L75",
+          "version": "repo-lines-v1:sha256:3e493b3dfb11e1fbd38b9a45018637267f5f9474be1c4d0239a33220fde87b9f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyMGYzZWFlMTUwZWY4YTg5MDA5NzU5Mzc4ODI4ZjIwMjgzZTkzZDNmZGVhZWU0NzI5MTA3MTI4NDRmYmYwNTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2NThmNzUwYWI0MDUyM2ZlOWJmNTg0NjVjYjQwYTBlYTZmZTg0N2ZkNjJiNmFlN2QwMGIxOWFjNDI0OWNlNGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0ZTVmNzQzZWIxNzY5NzViOTQ4NWRlMWM2YmE2YzVhMTk4YWM3NTUyNmYxOTA1ZTUyODIwNDA5MWRkMTEzNWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c71db3bb6f544cfca67cb35507f24bb2",
+      "statement": "Web MCP configuration is resolved from `MCP_CONFIG_PATH` followed by two `.vscode/mcp.json` locations, accepts either `servers` or `mcpServers`, and errors when none is readable or when the resulting server map is empty.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/mcp/client.ts#L24-L57",
+          "version": "repo-lines-v1:sha256:85866dd63baf4a925e182a5d65bc37cde62035e53b977e4c08d9df4272aded8d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjYjRlZmI1YTI2M2Y1MTc2YWU5ZDhhMWMyNzZhZDdjMGIwNGE3N2VmM2M4NDIzYjFjMTIzYzM1MjNiMTM3NDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MGRjMGU0NTY5YWYwZjBkMTU2Njg3YWUzZDkyOGVlYzUwMGE4YTg5OWRmM2UzYWFjZDNkNzkyZTI4ZjQ1YzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2ZDU0YTQxYzkzNDY2ZGNhM2Y3ZTQ2NmVjYWJjMWFhYmU5ZGZjZWYwOWJmMjc1MjFkMmI4Nzk0MGVjODAxMDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1714eb995bc244d8b6f34dfb68820a86",
+      "statement": "Pinecone store construction requires `PINECONE_API_KEY`, and both indexing and retrieval obtain the module-cached vector store.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L190-L225",
+          "version": "repo-lines-v1:sha256:f8701d8b9ce56c5c0d4add2384b30267e80dbaa1280a8a16762773d35a275334:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1M2FhMzE1MTIxM2ZmOWI5MDI5MmFmNWRmZGNiMzM2ZjkxMGY0ODEyNmNmODZlOTZlNThjNWE3NWNmYzUyOGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlOGM2NTMyOWJkNWRhN2JlNjQwMGQyNDM5YWE3YzEwNzZkMDUyMGIwODk4NDM4MTIxOGQwOThjYzc0MDE5NDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2MzdkM2JhOWQ4NjYyZmNjMDU1MjE1ZGU0ZDNmZDdjZGZkN2RkY2U4ZmIyMDRjNmMwZDc0NGIwNTkwNDliN2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1ZTlhZGQwZDc1OWIwNzI4MzhiOWIyMDBjODBmYTA1NWU4ZWZkYzE2MGM5YWQ4NjY2YTU2NTQzMThlMjk1OTgifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L294-L298",
+          "version": "repo-lines-v1:sha256:90dfc4fd33dba1688f6cd2c520e54598176565dc990195992878c8f39e0d49e9:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWI5MjFmZTJhNmM0NmI1MTFkZTFjNTViYzk2YzRkMzQyOTVmNzJmMzVhNjliMjhkN2YzYTY1OTdiZGU0OTcwNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGM3MWE1MjVkZmE1NDNiMmYyOTNkNjBkMmM2OWYyZmE1MGU1NTMzMGM5N2Q4NDBmYjhkNGZkMDY2YjU4ZTlmMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjRkMzNiYmQ2N2JhMjgwNDBjNTVjN2FkYmMwZTgyMGMwMDNjYTFkMTI4MmZhMTA5MjQ2YTRmYzNlNjRkODg2MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2Y5NzFlMjgyMzkxMDZlYzZhZmMzNjcxM2RiYzNlMzFhNzMzZjZjNDY1Yzk0YjY3MzIxNzJiYjA0NDI4YjEzMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c0f529f1db4444eeb7b30e3977331cc4",
+      "statement": "The repository has no first-party automated test suite for the RAG workflow; the web package provides lint and build scripts rather than a test script.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/package.json#L5-L10",
+          "version": "repo-lines-v1:sha256:3a3892b07b08568972148ebd35ee98c8cbfde1e0316d4134feaf64ff70d109ad:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzA5NjljZGRmNTNjMGVjZTNkMmJkNDJlYTViNDA4OGQzZTgyNzg4NmE0YWI3YzljYWRlMDQ5ZjUxNDU5MjdjYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTYxMzkwNWFmOTRlNmI4NzhjMDM5Y2RiNmNkNTczNWIzM2M2NzQ5NjM2YTRlNzExZTEzNjljZWQ1NmE5MzY4NCJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-10-04T23:14:27.814Z"
+  }
+}

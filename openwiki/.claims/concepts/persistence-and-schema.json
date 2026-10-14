@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:aaf1f0d44f86201452300a133cdbfecdc49164dfd8dd33858981a4757b78c506",
+  "claims": [
+    {
+      "id": "claim_3caa5d7e0f18479cba641fae4c6ed50f",
+      "statement": "The web application uses separate persistence planes: PostgreSQL is configured through Prisma for relational chat and candidate/job/chunk records, while the active documentation RAG store is Pinecone index `aoe-langchain-docs` in its `documents` namespace.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L15-L20",
+          "version": "repo-lines-v1:sha256:0a3a74285bfd534b0f0f668690302621a19a55372fb6a5c61f078742b7c13033:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDVjYmJlNTQzMjllMjA4OTA2ZjcxN2Y2NDlmYjVjYjU0ZjVhNTdkYTljMTRkYWEzNGVkZmMyNmU3N2EyZjIwZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWQ3MTAyZTMwZGMzNDkxNGEzM2ZmOGU5MDFkY2ZlZTFkZTg4ZTI3OTczNWM4MTMzMzc4ZjJkZDI0YmM3NzIwMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmM2Zjc0NTFkMDdkOGQ3ZTlhN2Y1NWQ0NDNhNzM3MThlMjlmYTk3M2NmMzRjOTIxNzg5YTEwY2NhZTgwM2RjZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTE1ZTY5YzBhYzQ0ZWFjZDRlY2E0Yzc2OTlhYWMwMWI4YTQwNjQ3N2FlMzQ5YTA5ZGZhMDFhNDdkZmIzNDAwMyJ9"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L190-L211",
+          "version": "repo-lines-v1:sha256:d1037dabcf7534bd08bd964f7762e61925a43884ea91353aca285da7e91ace12:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1M2FhMzE1MTIxM2ZmOWI5MDI5MmFmNWRmZGNiMzM2ZjkxMGY0ODEyNmNmODZlOTZlNThjNWE3NWNmYzUyOGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5YjgyYTUzZWJiNTY3ZDczOTc0ZWFjMDEyZDcxZTA1OTRhNDY1ZWFkNzUzMTZjZWQyYmQ2YTA0Yjg5OThjMGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2MzdkM2JhOWQ4NjYyZmNjMDU1MjE1ZGU0ZDNmZDdjZGZkN2RkY2U4ZmIyMDRjNmMwZDc0NGIwNTkwNDliN2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQxZDU1NTYxYWViZDAzNjRmOTY3YjZhYzIyYTg3ZTBmYjAwYTZmMmMwMDQ3OTQ3ODFhYTJkZTE4ODZmMzg3NmMifQ"
+        },
+        {
+          "resource": "repo://apps/web/prisma/schema.prisma#L10-L81",
+          "version": "repo-lines-v1:sha256:4028dc20698e835e348cd4a3f32bef06fd5f6ae4eca33315fe6778e67af8a539:eyJzZWxlY3RlZExpbmVDb3VudCI6NzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA5NjcwNDg5Yjc3YWE4ZTc1MmNlZTNkNTMxYTk4ZDEwNWY4MzlkMjE1NGUzNTYyOTg4YjdjNTRkOWI5NzRkMDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjczN2IxMmNhNjIyMzg0NTg4MmRiNDgyZGY0NGU1ZTlmNzM1NmU2YjcwNTdmMTk5ZjE5YTQ3MjM5ZDkxM2ZjZGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1MDg0MDRhZTZiNmI4NjVjNWM1ZjY3Njg1MTNiNzhjOWMzNWY3NzYzNzZhMTRkNmFkODA4NzZmOWZiYjI0ZTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_db4b14280b7e4e91a1bb12186c6aada8",
+      "statement": "A Conversation has a required user ID, optional title, timestamps, and many Message rows; a Message requires a Conversation and a MessageRole, and the database foreign key cascades deletes and updates from a conversation to its messages.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/prisma/migrations/20260810160821_init_chat_history_prisma7/migration.sql#L5-L33",
+          "version": "repo-lines-v1:sha256:bf7b2ac82c7116ed8231643d5f0421117e3986bde15c2d57c5319179d86a8c9d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyMWY3MWJjOTYxNDNkZWVmMGFmY2NiZWJkNWUxNjQ5NDNlZjIwNDU3OWMyMGE4ZjA2ODM3YTljODgxZDkyMTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJkYWI1MGYzYTg5M2UxMDQzNzI5ZmNiNTI2YzkzZTExOGM2MTJlMDI5MDUxYTA1ZjA1YmU3Nzk2ZDdkNzNkY2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxY2U0YTI5YWQxNTQ3ODI3ZTkxNjE5YmE0NDQyMDhkMDQzYWY0ZDNkZjViNjAwZGI3ODFjZmRhZDUzZGM4ZWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://apps/web/prisma/schema.prisma#L14-L36",
+          "version": "repo-lines-v1:sha256:f7853b55f27c74a32cebbc70375fe6579641e86b7f8cbe08fb7ab191293efc14:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5MDE3OWE5OWFkYzY3ZTJmOWIwOTQwZmVlZGQ0ODFiNmQ3MzNiNWY0NTM0OTQ2M2UwM2RlOTIwMDI1ZTFhMWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhM2EzZjZjY2IwNGFmYTM3NTFiYzk4ZmE4ODkyNTk3NzFhOGM1MTQyMmU0MjdkNzFhYThlNDA4ZDczMGYyOWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRmZjVjODViYzNmOTNjNDRkNzI2OWVhZDdlMzFhZWZjMDEzZTJhYzM2YzNhMDk5NjJjZjc0ZTNlZTRhN2VjZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4c91852de074452a898a605aa6e46fdb",
+      "statement": "Chat persistence currently uses `local-user` by default, and API history lookup accepts a CUID conversation ID without a user-ownership predicate; this is not a multi-tenant authorization boundary.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/chat/history/route.ts#L16-L27",
+          "version": "repo-lines-v1:sha256:3d2c8a8a5938e3c40761324ff57c96b30e90fd42e264b9e005addb388d111b70:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwYzNiMjk2YzFlMTI3NWZkZDQ0NDlhNGMxNWFlZjljZmM5NjE2NDRmZTI0YTdjYzZkZWEyZGViMzgzNWRhMDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg3MmZjYjY2NmI0MWI0ODk4YzQwOWZhMWVlZWI0ZTVhOTA5ZjkyMmIwZTk0OWRkNDMzNjdlZWM2MDMxYWQ3YjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRmM2M5N2UzY2QzMDRiY2M3MTA1NGY0ZTlhZmM1Y2JkYzQwODg4N2I4Y2UyODQzZDc0ZTE4OGY5NThhY2RhYTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlMjI1MzQ5NTI0MDVmYzgzYTNlZmM0ZTRkZTgxMjFlZTA1YjE5Y2U1ZTBjMDM0OTQyNjdhYWJkZTAxZjc1YTgifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/api/chat/search/route.ts#L57-L72",
+          "version": "repo-lines-v1:sha256:037b8f11aa6716d750c45f7760ee2580fdcaddfee5a87f5f149fd5610017228d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE0NWY4YzVkYzZhZGIxYTBiNGQ2ZjhkMDBhN2MwNGQ5ZTgxNjZlMzU1ZTIwYThjOGRiMWNiYjhiZWNiMDJjMTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmYTdmNDA4MWRlMzU1YzM5MmIwYzFkOTZjMTdiYzQ0MTg3ZDllOTlmZTMzMWFiN2FlYWI3NmNhZTc1Njg5ZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNhYmYwZmU2OWI1M2Q0NmFkZWQ3OWQ3NzA2YWNhNDQ3N2ExZTRhYmQyNzBhZDExZjFjOTU2ODRiNDQ1MzhiYTUifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/api/chat/search/route.ts#L7-L10",
+          "version": "repo-lines-v1:sha256:d524dbb870c8003b31423abc9ab0204e0c4bc2cbef5a32e6601b2dd6dbe6ab0c:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTcwZmFlOTEwMzM5Y2UxMzAxNGI0MDM3MGM3ZjMxZWZkNWU3ZmRlOThlYjU1OTMyZWQzYWYxYWExNmI3YjE2MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTFhNDc5MDMzODc0NzJkZGE5Y2Y5NWVjNDkwZGFiMGVlNjZmNjNhNDE0ZTg4ODlkZmU4MzRkMmRmMzU2N2JlMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWEwZmZkMWQ1ODU3ODJkMzJjYmI1ZDUzNmE3OTFkODNhNTc4ZmU1MGUzYzU5N2E2ZjBmZDdhMDUzN2U3MGI2NyJ9"
+        },
+        {
+          "resource": "repo://apps/web/lib/db/conversations.ts#L3-L45",
+          "version": "repo-lines-v1:sha256:eb77b60b09b1276d312b5787cb34f61e5b070da9599898555edb94db293e24b2:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhYWU3MmFmOWJhODk0NTUzZjM4MDE0M2I1MWVjNDM1MmRjOGZhMzZjNjJhNTMzY2FhNzdjMjkyYmQyMWMyMjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg5MGIzNDgwZjM4MmZlM2JiNWE5MDA4MjA4OGY2Y2VmZDhmMTM2MjRmNTBjM2Y0Y2QxMDJlMTJkODkyNDNmNjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c6bf9d1db85d405f95a774695843e582",
+      "statement": "Message creation does not update the parent Conversation, even though conversation listing orders by `updatedAt`; therefore a newly inserted message does not currently advance the parent recency timestamp.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/db/conversations.ts#L30-L45",
+          "version": "repo-lines-v1:sha256:ebf7ff5d7e4805151bfdbaf359f9987af32ba0ed7b95019742c71d75a6eb8dc5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmNWFmMTcyNzczN2VlOGQzZmQ1N2FlYWUyM2IzMWE4Y2IyMzVkMTM0NTRkYmU3MWMyYjI4ZmRkZjk4YWU1ODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMGYyZDNhM2FhZGEyNzU4NjQ1NzhkMGE0MzkxNTYzOGQ1NDNmZWNhMmM5NDg1OGRiOTQxMjExZTg2Y2VmMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/db/messages.ts#L14-L22",
+          "version": "repo-lines-v1:sha256:94fe0c94c8c08b8d149e3e57327fede2d006579d6570da9d150721af041089a7:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmMzNjk4MjM5ZWE5N2I0ZTc5MTlhYzEwMTIzNGIyNjkxMjBjNmU3NDIyMWQwYTRlMDE0MmQyYjliMTFkMTRlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmQwZjJkM2EzYWFkYTI3NTg2NDU3OGQwYTQzOTE1NjM4ZDU0M2ZlY2EyYzk0ODU4ZGI5NDEyMTFlODZjZWYyYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        },
+        {
+          "resource": "repo://apps/web/prisma/schema.prisma#L14-L24",
+          "version": "repo-lines-v1:sha256:f2db1beef8ebea53dd67046ea2df34e3530018513f88e99b244b97c0df38fbb7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5MDE3OWE5OWFkYzY3ZTJmOWIwOTQwZmVlZGQ0ODFiNmQ3MzNiNWY0NTM0OTQ2M2UwM2RlOTIwMDI1ZTFhMWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhM2EzZjZjY2IwNGFmYTM3NTFiYzk4ZmE4ODkyNTk3NzFhOGM1MTQyMmU0MjdkNzFhYThlNDA4ZDczMGYyOWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5NzM4ZDFhMGNiY2EzZDYxM2UwMjczMWQ4ZmU5OTMzNzk4MjczZWVjMGYwYmRiZDczNWIxZTE0YzFlYWY3NzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_18c0b9ba90774062878184085287cd6a",
+      "statement": "The resume migration enables pgvector and provisions CandidateProfile, JobDescription, and SemanticChunk, whose required embedding is `vector(1024)`; candidate and job deletion cascades to referenced chunks.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/prisma/migrations/20260916120000_add_resume_pgvector/migration.sql#L1-L37",
+          "version": "repo-lines-v1:sha256:8f6dae5b51582e6ab0733b45a512ea141b8178d8d2e28ccb80393a0c02437ded:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjllOWIyY2ZlYzQ3NTE5ZjQ5ZWU3M2NiNTMzYzQ1OWUyMmY4Y2E1NGZlNWJhMWNiZWM1OWYzZDU4ODNmZTE5MWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5OTY3ZWMxZWQzODM2ZjhlYjE3YWZmMTcyYjViZmVmN2RlNjA0ODVhNDM5YzZjYTExYzU5MWUxNzU1NzM5YWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM3YTk2YjNmZTllZGYzMzM1YTMwMTRjMWJmOTIwNTI1MGExMDEzNDFhMDJkODk0NjVhNjliNzY5Y2VlNzBlN2QifQ"
+        },
+        {
+          "resource": "repo://apps/web/prisma/migrations/20260916120000_add_resume_pgvector/migration.sql#L52-L60",
+          "version": "repo-lines-v1:sha256:5d55dfd0cbb2664742cbc29e3e8dab215e1bf7523e22754b480811f009402853:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjg1ODc4NjM2OWNjMDQzZDdiMTViMTBiYjhhM2MxMDk4YjdmZjI5OTUwODk2ODI0YWYzMThkMDY0MWIzYzEzOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjg0MzIxNzA3MTVkOTIxMDJiMmY0NGQ1NGU4YzM4NmU2YTFjNThmOTg4MzA3ZTg0MWQ2OWFhMDBmMjZmNmZlNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDZkYWM2OTdiMTg4ODA2MmYzNjcwZmYzN2YyZGIzOGU0OWU2NmI1OWJjODc5NjA3Mzc1OTBmYjllMzdjYzU3NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://apps/web/prisma/schema.prisma#L38-L81",
+          "version": "repo-lines-v1:sha256:ebc5622ed1d164821d163d9209cf53c304b3035a58f6d7d2cde4b15bf34a8a0f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI4ZWJjYWE3ZGRhNDRiOTEyNWYxZGJiZjI4ZDA2YjVmNTg1NzVkZDMyMzMyNGJiMGE4NGQ4YTU4NzExMjlhOTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5M2E5NjdkYTZlN2E0M2IxNjk4NTlmN2ZkYzQyMjcwMmM0MjM1Yzk0YzZkNTNiNTI3OTI3MjU4YmNlNGJmODAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1MDg0MDRhZTZiNmI4NjVjNWM1ZjY3Njg1MTNiNzhjOWMzNWY3NzYzNzZhMTRkNmFkODA4NzZmOWZiYjI0ZTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b97cb2365ba84c458f39cb249ddc9813",
+      "statement": "SemanticChunk can reference candidate profile and job description independently because both foreign-key columns are nullable and no database constraint enforces exactly one owner.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/prisma/migrations/20260916120000_add_resume_pgvector/migration.sql#L27-L37",
+          "version": "repo-lines-v1:sha256:3ef0e73c8e894bc31188cdac834cc622ac461c07d0b259b4e9fa44c74100b94c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjZDU4N2JhZTMwNDcyYzZlZGFlM2JiZmMwODg5YzkyMWRjMDFjZjFhNDNjN2Y4MGEwOGEwNGEyN2ZiYTYzOTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5OTY3ZWMxZWQzODM2ZjhlYjE3YWZmMTcyYjViZmVmN2RlNjA0ODVhNDM5YzZjYTExYzU5MWUxNzU1NzM5YWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwMjBjZGRhYjI2ZWVjNTc4ZjUyYTE1ZjYwMGMzNjUyODlhY2Y5YTkwZGM0YjAzNDE1M2NkOWZlMTk4M2UyYWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM3YTk2YjNmZTllZGYzMzM1YTMwMTRjMWJmOTIwNTI1MGExMDEzNDFhMDJkODk0NjVhNjliNzY5Y2VlNzBlN2QifQ"
+        },
+        {
+          "resource": "repo://apps/web/prisma/migrations/20260916120000_add_resume_pgvector/migration.sql#L52-L60",
+          "version": "repo-lines-v1:sha256:5d55dfd0cbb2664742cbc29e3e8dab215e1bf7523e22754b480811f009402853:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjg1ODc4NjM2OWNjMDQzZDdiMTViMTBiYjhhM2MxMDk4YjdmZjI5OTUwODk2ODI0YWYzMThkMDY0MWIzYzEzOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjg0MzIxNzA3MTVkOTIxMDJiMmY0NGQ1NGU4YzM4NmU2YTFjNThmOTg4MzA3ZTg0MWQ2OWFhMDBmMjZmNmZlNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDZkYWM2OTdiMTg4ODA2MmYzNjcwZmYzN2YyZGIzOGU0OWU2NmI1OWJjODc5NjA3Mzc1OTBmYjllMzdjYzU3NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://apps/web/prisma/schema.prisma#L67-L81",
+          "version": "repo-lines-v1:sha256:4639705fddf3864e9ae321494a2926fb97139590fe89f4a99ee9a2f051384ebb:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwNmU5NmZkN2I2MTRlZjQ3ODc2ZDhmNTU3YThmYzMwY2FhZTNmNzcwMDIyYjE0MjZkYmYxZWE0NzJmZTMyZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMzZGM1MWVhZGVlZWI1ZWM0MjdhMmFiZjYzNWQzYTYxZmE1NGQ1ZjM0MWM2MDVlNjZmZThjZTRhYzVlNTgzN2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1MDg0MDRhZTZiNmI4NjVjNWM1ZjY3Njg1MTNiNzhjOWMzNWY3NzYzNzZhMTRkNmFkODA4NzZmOWZiYjI0ZTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_793edc7b906446d783e550eed92276f8",
+      "statement": "The migration enforces unique CandidateProfile `(candidateId, version)` and creates a cosine HNSW index on SemanticChunk embeddings, alongside indexes for chat recency/history and profile, job, and owner-ordinal access paths.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/prisma/migrations/20260810160821_init_chat_history_prisma7/migration.sql#L26-L30",
+          "version": "repo-lines-v1:sha256:e6977b5b5e7ff77769c54b36debde3295357ac7afd95d09f26d527cb3d2554d4:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzU3ZmNkM2VhNTI5MzUyNjU0MjE4MWE3ZThkYzVjODU2OTIyYTI1YWU0YTI4ODZmZmNmNmU5NGU4YjI4MzY5ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjcwMTgzZDI2MTllMTRiYTI4YTBlZjMxMmRlNmZiYjY0MGU5MTgxNDkxMTY0ZWQxMTUxZTg2OTI2ZWMzZjBiYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTcwZjVjZTJhOWIzMTQzMGEzMDc0ZGNlMGM2YTgzNGM5MmZhY2IwODg3ZTZiNTVlNzBkYTg3YWRkYjdkYWQzOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjkwMWQ2MDMyODMzZTY4N2I5NWY0MTgwODI1ZjkyZjRkMTYwMzE5MjY2YzI3NTgyM2E0ZDlmY2IyZTQyNDRmNyJ9"
+        },
+        {
+          "resource": "repo://apps/web/prisma/migrations/20260916120000_add_resume_pgvector/migration.sql#L39-L50",
+          "version": "repo-lines-v1:sha256:6c5f0b7cad01a8752d8556aa5ce890e96cbb7742f94ff75f43b8d7118204166a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwNmQ5M2JlN2NjMGZjNGQ0ZWFhZjk5MjBkZmQ0MGE4Y2Q1ZjY4ZTkzMTQ2NWVlMzJhNWI1YmI5YzRlZmU2YzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5YzBhMGYyOWJhOGMzZTcwZDczOTQ5YmFmMjdiYjMwOTA2NmNmMDY5MDEzOTc2YTZlMTQ3M2EwOWM2NTM5ZWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmNTk4MTk1NDYwYjJjZWViNWVmNTJjM2EyNTRlYjA1MGY0NTI3MDE4Y2Q2ZGMwNDYyODFkMzJiZGE1NmViNDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzZGVjNDI4YzM4ODY1ZDA2MDM1ODAxOWUyNzdkZWI3ODk5MDY3NzU3OTYwMjM3NzY2NThjMzI4NWY0ZGM0ZjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a35cf87dcfbb4888b66b7fe113ea49f6",
+      "statement": "`indexCandidateProfile` embeds bundled candidate evidence with `text-embedding-3-small` at 1024 dimensions, then transactionally upserts a profile by candidate/version, deletes its old chunks, and inserts ordinal replacement chunks using raw SQL pgvector casts.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/tools/resume_tailor.ts#L12-L15",
+          "version": "repo-lines-v1:sha256:9f963adae5cdd0c68cb3310dedc69028dd07227082e9587b09ec0de0208a80e1:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzM1ZDc2ZjFkOWRiYjNmMWE1ZGM2ZDM4Y2JiMzNhOTUzYmZiOTBiZTU4YmFkMzJiYzc1ODE0ODUzYmJiNDRkNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDQ4MjdlMTcyZTdmNDA2OGUzY2Q0YTBkMDNlNjIyOTRlZWJlNjMzY2ZkZjc3Nzg2ODAxNmFmOTkwOTAzMjdmNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzAwZTgyNDZkZTUzN2Q4MWNkNmE3NTQ4M2FiNTI0M2I5YjM2MjE1MTkxNDM0NWE5Y2EzOTkzYWM4NTgxNmNkZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjkzMjA3NjdmYzFlMTczNmI0MDg1Nzc2OWY4ZGMxOWExMjk3ZTJhOWUzMDliNzE0ZWU3MjMwODhkM2ZlNDcxNyJ9"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/resume_tailor.ts#L36-L70",
+          "version": "repo-lines-v1:sha256:c8ae24c5ef0abde4072f5a2bb56fd6d69c98bc707f1b9c58015e972d8581eced:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkZWZmYzZjMzY2NDA5MjU5NjZmZjUxMGE4ZGU2NjU0ZjgyMTg4NWZkMWM3NWFlZGEwYmI1MDczNGI5NmQ0NDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiYzQ1NWZhYjlmMjdjNDg0ZDU3ZWZhMTgxNThiZjE0MzgwMDcwYjJkNTUxODZkZGJjMzNmNmYxZTBlNTU2ODAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMGYyZDNhM2FhZGEyNzU4NjQ1NzhkMGE0MzkxNTYzOGQ1NDNmZWNhMmM5NDg1OGRiOTQxMjExZTg2Y2VmMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIxNTE5MjZjNDBmYTk5MjUwZmQxMDYwMGI0ZDk4YTgxNGE2OTM2MDk5Njg0MjI2YzZmNjgyYTc3YTMyYTNiODcifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/resume_tailor.ts#L73-L139",
+          "version": "repo-lines-v1:sha256:0f7476d103c1d95327f2c05a40fface808987cfe8b05a2d90865b3ab5138655d:eyJzZWxlY3RlZExpbmVDb3VudCI6NjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZhYjRkOGRhZmUzMDczMzZlZjczMWE3NzE1YTUxMmNkMWY4OGNiNTZkZjUwYmNiZGZhNTA3Zjg5MTkxYWEyZGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ3NTVhNjg1MWMwODM4OTMzYjM3MzBiOTg4ZGZkMTVhY2UyNzVjNzliZDE0NWQyMTdlZjM5YmNmNTNiNzhhMzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRiMGM5MThlOTcyODhiZGIyZTg5OWZkOTlkMGI4NTU2NmZmMWUyZmJjNjNiZjViODQ3M2RjMjBmYzc5NGE1N2EifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_86c889a91dfe4e6f93748f93dad52427",
+      "statement": "The browser resume-tailoring endpoint sends the bundled candidate profile and submitted job description directly to Anthropic and does not invoke the PostgreSQL candidate-profile indexing tool.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L1-L8",
+          "version": "repo-lines-v1:sha256:d0e9cafdba09688fe930d136ad5d89172c371f5f5c58039adccb3d8dfe59911e:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjgxOGI4OTJhN2NhZDA3MzlkZjU0NTM0MGFlYzkwODg0NDUzNDI3YTE5YjU0MDkzMjYzODM0Nzg1NzZmZWM2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmI2MTcxN2U0NzhkOGNlMDU3MWJiYjg5NTFkNzRlZDI2ZDc2MTU0MTA4MDQzMzIyZGI3Zjc1OTdmYzc5NDA4YiJ9"
+        },
+        {
+          "resource": "repo://apps/web/app/api/resume/tailor/route.ts#L61-L78",
+          "version": "repo-lines-v1:sha256:684df39d412edb8561face98711cf726a51978c6bd931384a93de73a98e2bffe:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhYzM5ZGExODRkMzEyMWQ0ZjI3NmZkOWNkYWRlOTM0NTFlMDBlNDE3NTMwYWIxMDkyMDgxMWY0ZWMxOGYxOGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI0YmM3YjM4NzgwNmEzMmMzNGUwYWY2MmYzN2RhNzBiMzJiMmUwZGNmMDA5YWNlM2FiNjU3OGM5Yjg2YTc5MTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmYTdmNDA4MWRlMzU1YzM5MmIwYzFkOTZjMTdiYzQ0MTg3ZDllOTlmZTMzMWFiN2FlYWI3NmNhZTc1Njg5ZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwM2ZmMjZjYTY0N2NkYjQwNTFhODI1MzY4ZmJiNTFhMDAzNjFmNmI1MTgwZTJiYjUyZDkwZDQ5NTUzY2E3MzYifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/resume_tailor.ts#L142-L159",
+          "version": "repo-lines-v1:sha256:9b7e418335b6d59679b92121818a041b0d920bcd1164449345397819819c2b9b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhOTY1MGMyYjkzZTg1ZDBiMDM3MmJjM2U3OGQwY2ViYjAyYTc1NTU0YTEzMzUzZTNjZDAwMmNiMzkwMTU3YWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMGYyZDNhM2FhZGEyNzU4NjQ1NzhkMGE0MzkxNTYzOGQ1NDNmZWNhMmM5NDg1OGRiOTQxMjExZTg2Y2VmMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5OTY3ZWMxZWQzODM2ZjhlYjE3YWZmMTcyYjViZmVmN2RlNjA0ODVhNDM5YzZjYTExYzU5MWUxNzU1NzM5YWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_13c7bdf2c0ea46608ab9c5c9ddda0afc",
+      "statement": "Pinecone RAG ingestion uses a separate `rag-manifest` namespace to skip unchanged sources by content hash; for a changed source it deletes manifest-recorded document chunk IDs, writes replacement chunks to `documents`, then upserts source, hash, and chunk IDs into the manifest.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L221-L289",
+          "version": "repo-lines-v1:sha256:a679b7a45362d8ab53d77e9825742d948430cf24cfe400d77c18481622c9435f:eyJzZWxlY3RlZExpbmVDb3VudCI6NjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhZGU2ZTc5ZWYxYTljZDI1NTc5Yjg2YzM4NjBhYTJmZTExZTE5OTE2N2RjZTE1MmRiZjFhMWU0ZGNlMmJlYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjNTY1YmNmMzA2ZTViMDBkMmVhMzcxNWZhZmUzNmNjOWJiOTA3ZjA1Y2RmMThmZTBhMzEwNGU5MjhlNDMxOGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzNDAyOTFlYjIzMjhmNGZiMjA0ZDYzYjYxZjQyMzk4ZjI3MTZkZTY0NzYzOGM0MzhjMWYyOTVkNjY5NDE1MDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6d80bc5108fe47348f33e7cec45c30bf",
+      "statement": "`document_search` queries the Pinecone `documents` store for four similar documents and uploads wrapped results to the DeepAgents StateBackend as `/retrieved/...` files rather than returning raw content.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L292-L320",
+          "version": "repo-lines-v1:sha256:861a720b88d12687675c6392c6a3067a27c9a67f57df0223c9642ac915751780:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2OGI5ZWUzYzg5YTg5YTMxNWU3MTNkM2ZmZWYzYjE0YTQ5NDlkNjM5NjU3ZTBlMTdhZDMwNTRmYzg3N2JkYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5OTY3ZWMxZWQzODM2ZjhlYjE3YWZmMTcyYjViZmVmN2RlNjA0ODVhNDM5YzZjYTExYzU5MWUxNzU1NzM5YWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_44116b1414194d93907a8015ac6bc26f",
+      "statement": "The RAG management route rejects concurrent indexing only within its web process by using a module-level promise, returning HTTP 409 while that promise is set.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/manage/rag/route.ts#L31-L44",
+          "version": "repo-lines-v1:sha256:79e2f6642cdcf31c543179b79e9021ea26fa87ffdd514549494627d63383ddbb:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVmZGUwOGY4OTJjZWZhZDViNmJkMTE0ZjUwZmE5MTFhODYyNDE2MzcyZDY4OWI2ZTk5Y2M1ZjhjZTIxNWYxNDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFkYjNlN2NkMGMzYTYyMzA0NzY2ODE2MWQxMDRlOTlkODYyMDljYTNlNzc1NGEyNWIxMTlhNDkwNzg3ODA0MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/api/manage/rag/route.ts#L4-L15",
+          "version": "repo-lines-v1:sha256:03576aee5a80ca37eea4ee972d9f73ba8bcb2346be28a972e556c5ca5671a3d7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0Njc0NjUwNDY3MTc4OTQwYTQ3MzZhYTZjNTVlOTFlMzQ4NDY1NGZhMGVlY2UzMjk4MTc3NTliZDQ5ZmI2YTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgwNmRkM2I1MjkyYzEzMTBjNzZjMTY3MjQxMDk1MDhjYjUwNzg3YWY2ZDUxYzUzNzEzMzZhZTE3YTY3YjBlODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhhNTY5NWEyY2E4ZWQ1YTI4YThmZjlkZmEwNTRmMDJhZDI0OGRiY2ZhNmRhNDdkNzcxOTYyNDkyZWQxOTQ0YzUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_106c612e2009456eb6d729bb1c7d7dec",
+      "statement": "The Prisma database adapter fails fast without `DATABASE_URL`, creates a `pg` pool and PrismaPg adapter, and caches the Prisma client globally outside production; Prisma CLI configuration reads the same URL and uses the committed migrations directory.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/db/prisma.ts#L1-L25",
+          "version": "repo-lines-v1:sha256:3016e05daec9766205bf8d94861295c8adaaba4c9539e9be4a2ee92b34d33321:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1NWU3MjYxMDA1NjRmZWZlY2Y0NDk2MTBjODVmNzQ5NzgzMzM0ZWFlNjRmN2Y0N2E2YzcxN2JkZTVjY2U1ODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyMmQ2MGZlN2M5ZDQyNmQ1YzkzOGYwMDRkOTM2ZjYzZjY5ZTMwNDdiNTMyY2I0YzU0ZDE5Mzk5OThhNTZhYmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://apps/web/prisma.config.ts#L1-L14",
+          "version": "repo-lines-v1:sha256:c1bcbd0ff267c8b6885cd467ed8122cf6508bdac6c929d69f9b512ccde65a033:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2ODYyMTY0N2ZkZWE2YTNlYTkwOWY1NTk2YjVmMDc3ZGY3NGRjMTVmOWVkMjc4OWNjNTRhMDE2M2M4MjBmMGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d5c1f0290e68473bbb56c360d6fd2deb",
+      "statement": "The supplied local database compose service uses PostgreSQL 17 with pgvector, exposes it on host port 5433, persists data in `deepagents-pgvector-data`, and has a `pg_isready` health check.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/.env.example#L1-L2",
+          "version": "repo-lines-v1:sha256:5cab68e997702e301b02aab2dd2929dcbccaaf373cc5a8f04727653d41d7c313:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDNjZjJhMWE3ODc2NTlmNDhmYmQ5OWE4ODg4OTkzZWU2Y2E0YTMzYmQ3NDNkYzAzNTMyMmFlZTI0NWM0MThhMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTk5YzQwYjQ3MWE3Y2I4NjIzNjlkOTE5ZDJhMzA2MWM4MDZmZmM1NzUxN2E2MjQ3NTFmYTJlODA0ZTNmZWNjMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://docker-compose.pgvector.yml#L1-L20",
+          "version": "repo-lines-v1:sha256:09da4bd505b0aa35c5e3a2063e2e827cb6a8e04b0c556e6fda5fd529144d9604:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhNzNmY2NkYzk5ZWE4MzU5NjdjN2RlZTdlZmJlZDFmM2NhODcyNjBkOTI5MzE4NTBmZGQ2NmRhOGNiMTJmMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkYmVhYjgyZjE0YmViNjlkY2MyODRkNDQ2YTI2NTUzNzIwZGU2ZWVlNTY3ZmY0OGRkM2NjMTQ2NWNjOWE4MDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-10-04T23:14:27.814Z"
+  }
+}

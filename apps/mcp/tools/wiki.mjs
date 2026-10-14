@@ -104,10 +104,7 @@ async function getWikiDescendantPageIds(wikiBaseUrl, parentContentId) {
   while (nextPageIndex < pagesToVisit.length) {
     const currentPageId = pagesToVisit[nextPageIndex];
     nextPageIndex += 1;
-    const childPageIds = await getWikiChildPageIds(
-      wikiBaseUrl,
-      currentPageId,
-    );
+    const childPageIds = await getWikiChildPageIds(wikiBaseUrl, currentPageId);
 
     for (const childPageId of childPageIds) {
       if (visitedPageIds.has(childPageId)) {
@@ -193,20 +190,8 @@ export function registerWikiTools(server) {
           };
         }),
       );
-      const combinedContent = pages
-        .map(
-          (page) =>
-            `<!-- ${page.title} (${page.contentId}) -->\n${page.content}`,
-        )
-        .join("\n\n");
-
       return {
-        content: [
-          {
-            type: "text",
-            text: combinedContent,
-          },
-        ],
+        content: [],
         structuredContent: {
           parentContentId: contentId,
           childPageIds: descendantPageIds,

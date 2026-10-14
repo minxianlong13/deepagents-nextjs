@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:319abe84393f49731bc99cb508371240378eeb3ac483a886b4d62feaf11ea1ea",
+  "claims": [
+    {
+      "id": "claim_546533503b2b4cc48714b61808269fb8",
+      "statement": "The repository is a pnpm workspace containing the two application packages `apps/web` (`@deepagents/web`) and `apps/mcp` (`@deepagents/mcp`), with root scripts that target them through pnpm filters.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/package.json#L1-L14",
+          "version": "repo-lines-v1:sha256:47077de6917d67de01ae5a66c2ad53a1c0c946af139a817ae8c0aed7686b2f72:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/package.json#L1-L10",
+          "version": "repo-lines-v1:sha256:0b998a068cb3fff06cd9ac93e17df2e6878c2f326c53703a60ffcde47511b34f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE2MTM5MDVhZjk0ZTZiODc4YzAzOWNkYjZjZDU3MzViMzNjNjc0OTYzNmE0ZTcxMWUxMzY5Y2VkNTZhOTM2ODQifQ"
+        },
+        {
+          "resource": "repo://package.json#L5-L14",
+          "version": "repo-lines-v1:sha256:727bb4966134bf6a312d19885cce3986a569d4f804127cc03686b0b445bbb6a5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0ODMzZDU5NDljMDNhNDBjYTk1MjQ5MTYxMGE2NjU5NjQ0YjNhYTQ2NjM2MmY3OTkwMjBkYmYxOTgxNTQ3ZGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2Njg2OWE1ZjE2NzZmYTQ4YzVhMTk3YThjNGIyMWNmMmFmNjg0NzcxZTEzMzhhODUyODVjZGU4MDUyMjdkN2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhMzk0OGMzNzQxYjQ4ODBmZGI5OTNmYzg4ZGU2OTc4ODc4YTY5MDE3ZTU2NTA4Y2Y0OGViOTdiOTI1Y2UxMDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://pnpm-workspace.yaml#L1-L8",
+          "version": "repo-lines-v1:sha256:daaf26afe00d3abda7b8a27a5f2c85a7d6784c3baaebc57c6ad158ce203b3fb8:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWRiMDc2ZWI4MGFkZTE5ZmVhM2UwYTQzMTk4NmI2NTVmNWZhNTllZDYyNjdlMTA3ZDY4OGI2MWMzZjQyMTc5NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmI5YzdiMjY1OTY4ZGFkODJhOTdhYTk0YmUzMTA4NzRlZGE4ZGM4YmUzMDg4MGRkY2Y1MzliZGMzOWExOTNjZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTc2ZDY3YmE5N2U3YTQ2NGQwZGI3YzljMzcwMDdmYWZlNDY0YWI5ZTIzZWU1NWRhZjM0NGM4ZWE1YWUxYmRiZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a4bfad84f9e84713a5da70c08e2aa764",
+      "statement": "The Next.js web application and MCP server are independently started runtimes; the MCP entry point is `node server.mjs`, while the web package uses Next.js dev, build, and start scripts.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/package.json#L5-L9",
+          "version": "repo-lines-v1:sha256:7abe7f7b03996756a2d7767a1494e51f205f1d2e1b12379c5f027240341db9eb:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjU2ZDgzMDkwYzZmYjkzNDYzYWQ0ZjJmODVmOGNhNTU3NmY3ZTg1ZTEyMWQ5NThhNTM3MThlMjFkOWY3NmU2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzBmNGEwMjMxNzgyY2Q0MDEyZjhiMGI0YTc3MmM1YTU5NmVkNWU0YTBmYTY5MmEzOTExMzU1Yzk3YmI0MjJmNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGNlNjZjZDEyZjM3YzczN2NlYzA2N2MzNDM5NGE4NGJmZDg4YzQzZTRhYjY3NjMyZWMzN2Q1YzhjODNlN2M4NSJ9"
+        },
+        {
+          "resource": "repo://apps/web/package.json#L5-L10",
+          "version": "repo-lines-v1:sha256:3a3892b07b08568972148ebd35ee98c8cbfde1e0316d4134feaf64ff70d109ad:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGQ1Y2QyZmI0ZjNkZjg4NDUxNTI1NWIzOTUyM2YyZjhiNTQ3MmJlZWE5ZjU2NmZmY2EyMDRkYjgwMjU2MTA0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzA5NjljZGRmNTNjMGVjZTNkMmJkNDJlYTViNDA4OGQzZTgyNzg4NmE0YWI3YzljYWRlMDQ5ZjUxNDU5MjdjYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTYxMzkwNWFmOTRlNmI4NzhjMDM5Y2RiNmNkNTczNWIzM2M2NzQ5NjM2YTRlNzExZTEzNjljZWQ1NmE5MzY4NCJ9"
+        },
+        {
+          "resource": "repo://package.json#L5-L12",
+          "version": "repo-lines-v1:sha256:1906cfa883cf75422132deca8cfdb2648a838953d743f6039c0c63b0ac6d0d4a:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzQ4MzNkNTk0OWMwM2E0MGNhOTUyNDkxNjEwYTY2NTk2NDRiM2FhNDY2MzYyZjc5OTAyMGRiZjE5ODE1NDdkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjkxMGUzNjY2ZmVmMDE5NDNhZTEyZDc3ZjA0NTY2MzY5OWY2ZDQzNjQyZmM4ZWU0MTYxNGJlOGYzN2I4OGM3ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGEzOTQ4YzM3NDFiNDg4MGZkYjk5M2ZjODhkZTY5Nzg4NzhhNjkwMTdlNTY1MDhjZjQ4ZWI5N2I5MjVjZTEwNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmNhYjE2NmUzOWE0YmE1NDQ1OGI0NTJlMTJjYzM0MmMxMjE3NWY3Njc4MzY5ZWJkYWI4MTlmMmQ0YTUwNDE1MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b98194d34ec04510874ab510b28f5966",
+      "statement": "The checked-in MCP configuration declares an HTTP server at `http://127.0.0.1:8787/mcp`, and the web MCP client resolves configuration from `MCP_CONFIG_PATH` or candidate `.vscode/mcp.json` paths before connecting with Streamable HTTP.",
+      "evidence": [
+        {
+          "resource": "repo://.vscode/mcp.json#L1-L8",
+          "version": "repo-lines-v1:sha256:f408d63f26942786e0fc7a7a7748933e71a9f20b02fa3ee16549bc9fe61b23c2:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTZmYjA4ZmRhMWFjYjk1N2I2MTE2YmQzNzgxMWExZmU0MWEwMTYxMWMwNjMxZWRiZjc4NmQ2ODg5YTI3YTU1YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://apps/web/lib/mcp/client.ts#L24-L46",
+          "version": "repo-lines-v1:sha256:46aa25e5564d4aac0a026036e7f1866d0bbdc72553bd86b3dec358938b4b51a8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjYjRlZmI1YTI2M2Y1MTc2YWU5ZDhhMWMyNzZhZDdjMGIwNGE3N2VmM2M4NDIzYjFjMTIzYzM1MjNiMTM3NDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MGRjMGU0NTY5YWYwZjBkMTU2Njg3YWUzZDkyOGVlYzUwMGE4YTg5OWRmM2UzYWFjZDNkNzkyZTI4ZjQ1YzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY1MmQwNDY5OGQwYzhkOTk3YmMyZWZjNjBlMWE1OWVmNGE2MTUzM2Y4NWM3ZTRlYWY1NGJlMmQzMTY5ZWNjNTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/mcp/client.ts#L78-L122",
+          "version": "repo-lines-v1:sha256:657e75a1f7bf5fb370e9f0e7f8cd23676085bb2f11ca713d145e82804aa16449:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzN2Q0ZDA4NGRlMzEwZWRmZWE0YWUzNTBmMjA0MWY2ODliMTQ2M2ZmZmQ1YjliMDAzYWZlZjQxOWZkODI1Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ab5c6856d3c24d1cb434708e9c7d319a",
+      "statement": "The web MCP client accepts only HTTP-configured servers, forwards configured headers to the transport, closes a failed connection before rethrowing, and exposes all configured servers to the LangChain MCP adapter without server-name tool prefixes.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/mcp/client.ts#L59-L75",
+          "version": "repo-lines-v1:sha256:3e493b3dfb11e1fbd38b9a45018637267f5f9474be1c4d0239a33220fde87b9f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyMGYzZWFlMTUwZWY4YTg5MDA5NzU5Mzc4ODI4ZjIwMjgzZTkzZDNmZGVhZWU0NzI5MTA3MTI4NDRmYmYwNTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2NThmNzUwYWI0MDUyM2ZlOWJmNTg0NjVjYjQwYTBlYTZmZTg0N2ZkNjJiNmFlN2QwMGIxOWFjNDI0OWNlNGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0ZTVmNzQzZWIxNzY5NzViOTQ4NWRlMWM2YmE2YzVhMTk4YWM3NTUyNmYxOTA1ZTUyODIwNDA5MWRkMTEzNWUifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/mcp/client.ts#L91-L115",
+          "version": "repo-lines-v1:sha256:bbcc0e92a8681100dfc8c8dfbf3caae1b7bdd4de5d874946f71bb97d0c1ceb65:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwYTg3ODljOWY3ZTNiYTIyZWE4MTJmYzhhYmJhNjRjZTA1NTUyOGIwYjdiMzU5MDk3OGRlZWEwOGVhYzk5NjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFkYjNlN2NkMGMzYTYyMzA0NzY2ODE2MWQxMDRlOTlkODYyMDljYTNlNzc1NGEyNWIxMTlhNDkwNzg3ODA0MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdmNTg3NjkwNjY3ZDE3ODYwMTQzNDU1ZDE5YWUxZWVhMDJjMjQ2MDg4MmNiMjVhODkzODlhYTEyZDJiYjZiZDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_539a9c82f87b4e66afb112ba32ab1db2",
+      "statement": "The MCP server listens using `PORT`, then `MCP_PORT`, then 8787 and exposes a stateless Streamable HTTP MCP endpoint only through `POST /mcp`; it provides a health response at `GET /` and rejects GET and DELETE on `/mcp`.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/server.mjs#L11-L17",
+          "version": "repo-lines-v1:sha256:ef4f1938e46a78ef59604fcd796336f1eb1c99595f72a1bb9e3eab2776f94a1f:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDJhOGIzMmRhYTVlZjExMmNjNTI1ZmZlMmQ2OWM2OTA4NzBhN2YwMDM4ZWM1ZjI4MGRiZWQzMmIyMjliNDcxNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWU0OGNjNGE4YmExNDhkMzY1YmY5MDZmMjlhNjFjODVkOTRmNzZlZmY1NjY0ZjBmZWIxYTdiYjM1ZmI4ZGUwMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWI0ZTE3ZGFiOTc0NWI3ZTg1NDVmODc0ODAyM2JlNjllN2Q4MjZjMzZmZmFiMjUwM2Q4ZTkyN2UxMWNiNDg0ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGY0YjA0YTZlZTBlMTllZGNlNzlmMjI1NmJmZTg4M2IxNmNiODQwMzNmNDA0YTY4NmVkMTI5OWRlMzJlNWZmZiJ9"
+        },
+        {
+          "resource": "repo://apps/mcp/server.mjs#L32-L94",
+          "version": "repo-lines-v1:sha256:27857a642dc8a3ad0756daaf3cf9937368a9f6f322e4c28c4aa146cf008d98cc:eyJzZWxlY3RlZExpbmVDb3VudCI6NjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3YzA0NWUyYWFmMjIxYjY5YTMxOWY2NTc0Y2U3MGMxZWRhZWFkZWRkYWRjMjI2NDkwYWI1YjQ3ZjJmZjY5NWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYyNzQyZDBkMGVlM2QyYTljNTc1NzhhNTE2MGQ2NzM4YjE5ODdmZGQzOWNlZmQ3MTM5YzBiMmE1NjNmNjg5YmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM5ZTliNDZkMWE0MTkxNjcyZWVhYTk2NWEzNmM4OTg0YWQzNTUwYWVkMTUyNmFjZGYxZjc0YWQ2MTZjNWFmNDkifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/server.mjs#L96-L102",
+          "version": "repo-lines-v1:sha256:2cc4b91fa96c06ecd574a1975b38bf1f0cd289b097b0799fd1d4cacac20fe340:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDMwMmQyZDhlZWNiZGM1YjE2OWIwMjVhOWM3YzhlZWMzM2EwNmQ3MThjZmZhZTIxODA3NzVkNTIzZTZkNjU2YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjI4NDA3NzAxMTZhNzM5NjA5MDNmM2IxNzc3YjZlYjQxOWRiNDRjMDQ4Mjk0MTgxYzA2ODY4YzQyOGZhZWY4MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjgwZDJkZDRmMjg5ZDI2ZGM3NTdjMmI2NWEwNmMzOTIyN2E2NzE3YzRiNDhiNWEzOTc5MmM5ZjExZTQxYWVhNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3bc2f8f7bc2040ea8a20e226629f3c6d",
+      "statement": "Each MCP POST constructs a new server with Jira, Slack, and Wiki tools and a transport without a session ID generator, then closes the transport and server on response close; unhandled handler errors become JSON-RPC internal errors when possible.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/server.mjs#L19-L29",
+          "version": "repo-lines-v1:sha256:ad070cff0365c2037fdbe3ce8bfed86ee9f67b217ee8ad17ba1318916b171687:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNiNmExMzU3YjI2YjMwZDljZjkzMTlhZGE4MzFkNWQ5MTNlMTdmZmUxMGU4NjExYjQyMjBiOTIxMzMzMGE0NzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwMTU4OWRiNWYxMDI3YjYzMmU5NDE4NTAyNGYwZjQwNWViNmFkZGNjOTZmYjY1MDdiMmNlMDM0ZDcxMzIxNDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJiZDczOGEzZTE5OGMwYTY1OWVhYmJjMWVkOTA2MDg3OWU3ZGJjOGNkNGJjNDM4MGUxN2JjM2E0MDRlOTVmNmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRjNmFkNzhmNGU1OGU3MDMxNTZhZWE1ZWY0ZDkwOTc1Nzk0YTA2OGYzZWYzMWFlNGY2YTZlODc1MzNhN2UwM2EifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/server.mjs#L34-L62",
+          "version": "repo-lines-v1:sha256:448cbad00968d2402a4ab18e7597765a1181fd4470c6f6c031413b2e0b93e796:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBiZWM2ODc4MGQyZjg1Y2I5NDYxYmRmOGE3MzFlODdiZWEyMzRkODM3M2IwMjQ5OWZlMjE4MTYzZDMwNjY1MTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjllN2JhYjFjMWUxNGI2Yzg0YjBhMTlkMzU5MmM0ODI0ODgxNzk3NDg2OTUxMmNkNTYzZTlkNWRiYTE0YzkyZDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU5ODRjNjNmNDcxMmM0ZDM4MGVmMjVjMDE4YTg2ZjJkMjhmODM3YWQ2ZTBiNmUzNTc0OWI3ODM1MWRlZGU3ZDkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0a8b24c9bf414d2db38bfb487ff860da",
+      "statement": "The search chat route validates input, creates or uses a conversation, persists both user and assistant messages, invokes the search agent, and persists a fallback assistant message if agent invocation fails.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/chat/search/route.ts#L45-L103",
+          "version": "repo-lines-v1:sha256:3bebc71cbbb8b7117a221197301cd0425719bc9308d5ea0e054589f9d5f14c81:eyJzZWxlY3RlZExpbmVDb3VudCI6NTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkMTEyOTk4NzMwNmEyNTQ4MjlmNmVhZTAxNzk1Y2EyNDQ3NDkxNmQ2YzUzOTA4YmQwY2NjYzkyN2E5YjBlOTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiODVjYWRjYWI0M2ZjM2M4YzgwMDY3ZDJkMWNlYjFjZDQ0N2M5YjU4MGY1Nzg4YmJhYTZiODkyNGM3MWU4MzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkZTQxYTY4NTZkMTgwMWRhOWExNmRkMmI1MTExMzRhOTEwMTVlMmQ2MzU1ZTFlNzRjYjZlZDAyOTlmYjcyOTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRmNzM5YTA2YzFjYmIxMjQ0ZTMzNjNkMzhiY2Y5ZmE1MGNlODRmZWQzOTljMjE5M2EzYzdmMDhkNTk5MThiMmEifQ"
+        },
+        {
+          "resource": "repo://apps/web/app/api/chat/search/route.ts#L7-L13",
+          "version": "repo-lines-v1:sha256:b262798f511c9be700503c6cb47bb0e6a5c0ad4d30e62e7ecf6c2d7fc1b94cdb:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTcwZmFlOTEwMzM5Y2UxMzAxNGI0MDM3MGM3ZjMxZWZkNWU3ZmRlOThlYjU1OTMyZWQzYWYxYWExNmI3YjE2MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWYzZjc5NGY5NmIwNzEwNDA3OWU1MmMxM2FkNjNjYjY0Mjk5OWM3NDg5OWZlNjkzNmQ2NDE2ZGQxNDg5MDVhOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTFhNDc5MDMzODc0NzJkZGE5Y2Y5NWVjNDkwZGFiMGVlNjZmNjNhNDE0ZTg4ODlkZmU4MzRkMmRmMzU2N2JlMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjAwMTI1YzQxYTUzM2M5MjlmNjQ4NmFhMDFlMWU3ODQ4ZTIxNThmNjVkMGQxMDU3M2ZlMjRlNTIwMDNmZGIzZSJ9"
+        },
+        {
+          "resource": "repo://apps/web/lib/db/conversations.ts#L20-L45",
+          "version": "repo-lines-v1:sha256:e52edaa1299b788fb1d59d9e80d0f20c994d814ac21147098831bad6ded2e703:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwMTdlYjdlYmE3NTcxYTFlZGZkZmY3OTA1MjE5NWMzMzBmMjUyYzJkOTA5MzhlOGRkMzhlMTg4MzNlZTQ1NTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMGYyZDNhM2FhZGEyNzU4NjQ1NzhkMGE0MzkxNTYzOGQ1NDNmZWNhMmM5NDg1OGRiOTQxMjExZTg2Y2VmMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/db/messages.ts#L14-L22",
+          "version": "repo-lines-v1:sha256:94fe0c94c8c08b8d149e3e57327fede2d006579d6570da9d150721af041089a7:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmMzNjk4MjM5ZWE5N2I0ZTc5MTlhYzEwMTIzNGIyNjkxMjBjNmU3NDIyMWQwYTRlMDE0MmQyYjliMTFkMTRlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmQwZjJkM2EzYWFkYTI3NTg2NDU3OGQwYTQzOTE1NjM4ZDU0M2ZlY2EyYzk0ODU4ZGI5NDEyMTFlODZjZWYyYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5c10f79e53674fadbad6a0e5fc8dfc05",
+      "statement": "The search agent uses Anthropic `claude-haiku-4-5-20251001` with a Tavily-backed `internet_search` tool, so search depends on both the Anthropic model provider and `TAVILY_API_KEY`-configured Tavily access.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/agents/search_agent.ts#L1-L21",
+          "version": "repo-lines-v1:sha256:36df8e1cb883f53c7f3bdaaba68edb28135e643b2f1bd0de8ae46fc4f368147f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5ZDFiY2ZkZThlZTdlNmY4OWU4NTYwNGZmMGE0NmU3NDE1ZTcwNzE0MjliNWI0ZTAwNDM4YzQ1NGRjMThhMTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/internet_search.ts#L5-L45",
+          "version": "repo-lines-v1:sha256:8c0e080b65d99ede17ac640b95696c512ffe048556d5564c1685e14427ab43f3:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhYzM3ZWVhMzcyOGJiZGNlYzE3Y2RlMTcxYmE1Yzg5ZTQ4OTA1NWVmN2NmZGEwMzZiMGVmOGRiZTg5MDMxYTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5OTBlYjZjY2RiMGZlZmNjM2M5YTg4M2M4NzljOTg2NmJlMzM5MzFjYWFhYmYzNjYyZDdhYzRjNDEzZWM4YjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdkODUzNjk3YjU0NDg3MGVjNzEwODNjMjkyMzcxNmIxMjdlMTZkNDEzODA1YTI4YzlkN2Y2NjRlNjQyMzU2ZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNlNTExMWJmYjQyN2ZiOGUxY2E2MTg5MzU0NTJlNTE5NWVmYzc4ODg0YmIxN2I3MTk1MWM2YTgxNjNjYWNhYWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4873667f52ed4da1956a06a617690175",
+      "statement": "The RAG agent is initialized once per web-process lifetime, loads configured MCP tools, and combines them with document search, a state backend, Anthropic `claude-sonnet-4-6`, and a chunk-analyst subagent.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/chat/rag/route.ts#L35-L62",
+          "version": "repo-lines-v1:sha256:7700dab38a08cbd197df88705a94d033c552f71014cddf884f883c1e2c70baae:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkMTEyOTk4NzMwNmEyNTQ4MjlmNmVhZTAxNzk1Y2EyNDQ3NDkxNmQ2YzUzOTA4YmQwY2NjYzkyN2E5YjBlOTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkZTQxYTY4NTZkMTgwMWRhOWExNmRkMmI1MTExMzRhOTEwMTVlMmQ2MzU1ZTFlNzRjYjZlZDAyOTlmYjcyOTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/agents/rag_agent.ts#L47-L92",
+          "version": "repo-lines-v1:sha256:267eb978fb3dce4a76f34d120971c2dae1c3a62b95059ce8775b7e92a5d7066f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5ZDFiY2ZkZThlZTdlNmY4OWU4NTYwNGZmMGE0NmU3NDE1ZTcwNzE0MjliNWI0ZTAwNDM4YzQ1NGRjMThhMTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3ODRlMjk3Zjk5NDdjYTM3MTVhNThkYWIxMmFjYTE2MjNkMjM2MDdmODdkZGIzMDkxZGY2Njg2YjIzMGNmMWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZkMDcxYWM0MjI4OWRmNWMyNGY3NTJmNDMwZGRmYWJkOTBjY2VkNDg0MWYwNTExNjM2YzhmNjRlYTc4OTAzNDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_480378915e14464d80fbdae1c4e1de25",
+      "statement": "RAG indexing confines selected folders to the repository `docs` directory; it can load local files or URL sources declared in JSON metadata under `docs/remote`, and indexing the root docs directory includes both local and remote sources.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L15-L20",
+          "version": "repo-lines-v1:sha256:0a3a74285bfd534b0f0f668690302621a19a55372fb6a5c61f078742b7c13033:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDVjYmJlNTQzMjllMjA4OTA2ZjcxN2Y2NDlmYjVjYjU0ZjVhNTdkYTljMTRkYWEzNGVkZmMyNmU3N2EyZjIwZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWQ3MTAyZTMwZGMzNDkxNGEzM2ZmOGU5MDFkY2ZlZTFkZTg4ZTI3OTczNWM4MTMzMzc4ZjJkZDI0YmM3NzIwMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmM2Zjc0NTFkMDdkOGQ3ZTlhN2Y1NWQ0NDNhNzM3MThlMjlmYTk3M2NmMzRjOTIxNzg5YTEwY2NhZTgwM2RjZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTE1ZTY5YzBhYzQ0ZWFjZDRlY2E0Yzc2OTlhYWMwMWI4YTQwNjQ3N2FlMzQ5YTA5ZGZhMDFhNDdkZmIzNDAwMyJ9"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L50-L70",
+          "version": "repo-lines-v1:sha256:83330798040bf8aeafb8008b93fd8f664cbc379135370a7253c896161a8662ca:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY3OWFjMjY0NDQyMzNhMmJkMzNlNzRhNGI2YjJmZDRmMmVlZGU4MzcwMTA2ZGY1NTZhZjFmNTZjNTEwMjA5NTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVjODE4MWRlZDZiY2MwYzBiNmUxYmZiOTNlN2NlMGYzZDEyZjFmOTk4M2EyZTRiODNkMTAwNTM1YTI3Y2NmZjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU5Yzc4MWQ1ZTA2MGMwNmE3MDZkNDQzNmUxODIzMzhlMzE0MTRmNjQ5ZjM3YmNhNGM0MTdkMGYwYWY3NmY5ZWMifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L78-L167",
+          "version": "repo-lines-v1:sha256:0106c1271bdee2f4eb06686841d7d12a4cc4147c841922c4d53c858cf5783a2b:eyJzZWxlY3RlZExpbmVDb3VudCI6OTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEzMzQ2MmYxYmQyMTdiYTM3NTg1MmM2YTdiM2IzMmFmOTZmNzU2NTFiZTQxYjQ4MjVlMDhlZjc3OGU3YjEyZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4YjU2MDBmNzZlMGJiNjhmMjBiMTE4OTMxNzViZWZkYTExYjNjMDQ2MjkyN2NjYWQ1YzJkMzJkZWQ5ZTFjY2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2Y2E3MTRjYzgzNTRmOGE3M2ZjYzJiYzdjYjNjYjFiZGY3NjJlODdjYWY1YzVjYzRjYWM1NWU3YTI0ZWQ4YzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk3ZWJmZmRlMGIyOTkyNjkyZWE3OWU5NjZjOTM4ODdhM2JkNTA4N2NjMGQ2M2VlZjFjZGVjMGM1OTAxYzI2YjYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7a565e7410c241998bb7160d11d3d6a7",
+      "statement": "Knowledge-base RAG uses 1,024-dimensional OpenAI `text-embedding-3-small` embeddings and Pinecone index `aoe-langchain-docs`; a hash-and-chunk-ID manifest skips unchanged sources and deletes a changed source's old chunks before insertion.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L180-L219",
+          "version": "repo-lines-v1:sha256:fce7b863409183354d95f806aea26075677992a327f1d451e72aedac43d59055:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkYWZiZGRkNWVkYWI2NWE3NmE2MGZlN2M3ZmI2NTZmMTMwNGUwM2RmYjY1YTY4OWVkMGUxZDg5NWJiYzQ3MjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc2YTFhYzkwYzQ4ODJlYjk3NDE3NDNhYjNkMWMwZDA4ZDE4ZmQzZjQzODBiNTZkNDJjOWRhY2RiMTVjZDdjNjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU0YTgwZWUwNmZkMjRkMzQ3NjA3YzcxNTc1YTI2MTI3MDUyODU1MGQ1OTBiMjJmZjg1NDZiMmFiZmQ0YTE5ODkifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L221-L289",
+          "version": "repo-lines-v1:sha256:a679b7a45362d8ab53d77e9825742d948430cf24cfe400d77c18481622c9435f:eyJzZWxlY3RlZExpbmVDb3VudCI6NjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhZGU2ZTc5ZWYxYTljZDI1NTc5Yjg2YzM4NjBhYTJmZTExZTE5OTE2N2RjZTE1MmRiZjFhMWU0ZGNlMmJlYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjNTY1YmNmMzA2ZTViMDBkMmVhMzcxNWZhZmUzNmNjOWJiOTA3ZjA1Y2RmMThmZTBhMzEwNGU5MjhlNDMxOGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzNDAyOTFlYjIzMjhmNGZiMjA0ZDYzYjYxZjQyMzk4ZjI3MTZkZTY0NzYzOGM0MzhjMWYyOTVkNjY5NDE1MDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1c05b2fbd8604a1f815ed580daddbe12",
+      "statement": "RAG indexing serializes requests within a web process using a module-level promise, returning HTTP 409 while an indexing operation is in progress.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/manage/rag/route.ts#L4-L44",
+          "version": "repo-lines-v1:sha256:62505991cb261254fb47c2441bb3aaf10662069f409fb4742cd5495a0a3d5c1e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0Njc0NjUwNDY3MTc4OTQwYTQ3MzZhYTZjNTVlOTFlMzQ4NDY1NGZhMGVlY2UzMjk4MTc3NTliZDQ5ZmI2YTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgwNmRkM2I1MjkyYzEzMTBjNzZjMTY3MjQxMDk1MDhjYjUwNzg3YWY2ZDUxYzUzNzEzMzZhZTE3YTY3YjBlODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b3dc318ea17d415aa6f11c1ce9c1d497",
+      "statement": "The web database layer requires `DATABASE_URL`, uses a PostgreSQL pool through Prisma's pg adapter, and the schema persists conversation/message data plus 1,024-dimensional pgvector semantic chunks; the supplied compose service runs PostgreSQL with pgvector on host port 5433 and a named persistent volume.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/db/prisma.ts#L1-L25",
+          "version": "repo-lines-v1:sha256:3016e05daec9766205bf8d94861295c8adaaba4c9539e9be4a2ee92b34d33321:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1NWU3MjYxMDA1NjRmZWZlY2Y0NDk2MTBjODVmNzQ5NzgzMzM0ZWFlNjRmN2Y0N2E2YzcxN2JkZTVjY2U1ODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyMmQ2MGZlN2M5ZDQyNmQ1YzkzOGYwMDRkOTM2ZjYzZjY5ZTMwNDdiNTMyY2I0YzU0ZDE5Mzk5OThhNTZhYmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://apps/web/prisma/schema.prisma#L14-L81",
+          "version": "repo-lines-v1:sha256:c5f207c1bec620dcdc9c913c5dd5df94b559e87e0664c5b5773e1b51c6540827:eyJzZWxlY3RlZExpbmVDb3VudCI6NjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5MDE3OWE5OWFkYzY3ZTJmOWIwOTQwZmVlZGQ0ODFiNmQ3MzNiNWY0NTM0OTQ2M2UwM2RlOTIwMDI1ZTFhMWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhM2EzZjZjY2IwNGFmYTM3NTFiYzk4ZmE4ODkyNTk3NzFhOGM1MTQyMmU0MjdkNzFhYThlNDA4ZDczMGYyOWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1MDg0MDRhZTZiNmI4NjVjNWM1ZjY3Njg1MTNiNzhjOWMzNWY3NzYzNzZhMTRkNmFkODA4NzZmOWZiYjI0ZTUifQ"
+        },
+        {
+          "resource": "repo://docker-compose.pgvector.yml#L1-L20",
+          "version": "repo-lines-v1:sha256:09da4bd505b0aa35c5e3a2063e2e827cb6a8e04b0c556e6fda5fd529144d9604:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhNzNmY2NkYzk5ZWE4MzU5NjdjN2RlZTdlZmJlZDFmM2NhODcyNjBkOTI5MzE4NTBmZGQ2NmRhOGNiMTJmMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkYmVhYjgyZjE0YmViNjlkY2MyODRkNDQ2YTI2NTUzNzIwZGU2ZWVlNTY3ZmY0OGRkM2NjMTQ2NWNjOWE4MDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_561c7eb5e65844b9b91ec7a160613b08",
+      "statement": "The MCP Jira tool uses bearer credentials from its environment and returns a filtered Jira REST result, the Wiki tool authenticates to Confluence and exports a parent page plus all descendants to files, and the Slack tool proxies a call to another MCP service after verifying its remote search tool.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/tools/jira.mjs#L32-L101",
+          "version": "repo-lines-v1:sha256:8c792046447c0ea4940110f0d90d845e658873c6fb6cee48903153ac69fee39d:eyJzZWxlY3RlZExpbmVDb3VudCI6NzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkNWNjMzE0NmE2NmI5ZmQzNjZjMjgyNjhjYzRiMmU4NjliZDNhMjk4MmJiM2NlYzQxNGQwZTY4ODkzZGQ5ZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmMGNkYjk3MmE3YmZiN2VkMjQ2ZjlmZjY3MjM4NWU1NWY0OTY4ZmMxMTA0M2RjNWI2ODRkNTFkZmEzMWRiY2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxODg3MGE4MDQwOWY4YzRjOTk0ODA3YWY4MjU5Y2MwNGJkMGM1Y2EyZTlmMWMzYjEzZGVmMTBiMTYyNzg2ZDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdiOGI2MDBhNWI0NDhiMWU0ZDAyZGYwOTc0NmVkM2NhMzE3MmY3NWM0YWFiYjAxZGRlMDgwZTM2Y2FiMDc0YjQifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/tools/slack.mjs#L30-L95",
+          "version": "repo-lines-v1:sha256:69e113c88004dd517b32f4bca5c04082ee176e8754a7fb178fd8b024bce836bf:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MWE5NDVkNWI1MTY4OWQ1ODM4OWQ3ZWI3MGMyYzU1YTkyNjdlNDEzZWM3YzA1Y2JjZmY3ZjBkZTE5MmU4ZjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVmZTNmYTQzZWI3YzliYTJjMTY4YTVlZjY2ZjllMTZlZDhiMjRkZTcyZWUwZjUxYzJhNTRhMTM1YmM4YTgxOTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxYmM0YTE4OTY0YTM2YTQzYzliMmQ4YjUyMjg0NjgzYzdkM2Q0MTQwZWJhOThkN2M1MTM2MWUwOWRjNTM1ODkifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/tools/wiki.mjs#L7-L56",
+          "version": "repo-lines-v1:sha256:64a6a063736502f272650a011c9792b3bbdde5e52fdc6fd83de1dffd16e33f46:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjNzI3MjY1MzNlMjZiMGY2YmUzNjJkNDZmZWFkYTI1M2E2ZDk1MDdiYWI4NjU1NWRlYzM2Njc0YzA0YjI1MmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3OTI0NmVkNzYwM2U2YWIzNzUxMjNlYTdkNzExMDFmMzc3ZTk0NzIzZWMwZTViYjViMzg1ODk5YWZjZDZhYjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFmZWJhY2QxZTBjNDc4ZmNkM2EwMzEzOWJkMTAyYjc5MDVhNTcyZDM2OWNmOTk4ODYzMGVkNjljYjc2NTc4NzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxZWVmZDQzYWFjMjQwMzI2MDhiNmE1ZjYwZWY3ZDA5MjhhNTZmYTBhNmE5ODRmY2M2OWFkZDQ0NDZhZWQ4MWEifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/tools/wiki.mjs#L98-L215",
+          "version": "repo-lines-v1:sha256:04c70a3d28fdb3ea42478cf3465f0b701f4aa472ce066046e7db04cd45f35da4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTE4LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJmODk5NzY1OWIxYzJjYjg3Y2YxMDBmMzAyMzA0YjA1MDZiZTExYTdhNzdkODlkMDc1ZjI1MTIyYmE1MGI2YmM0IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJmZTMzZGM3MzFlN2QwN2IxZjBjMDVjZmViZDdlMTkyMjAyM2U2MDc3YmMwYWU3YmEzMDE0OGY1MDgzM2EyNWE5IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiIwNjUwYTA0YjI2MTk4ODExMmM1NjNjNmYxNDY0MDc3NmNmYjJmYzQ2NDBlNDY0MjUxOTI1ZmM2M2YyMGFmN2Y2IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJmMWJjNGExODk2NGEzNmE0M2M5YjJkOGI1MjI4NDY4M2M3ZDNkNDE0MGViYTk4ZDdjNTEzNjFlMDlkYzUzNTg5In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_67c37605d8af4401b2218c3fae8868ad",
+      "statement": "The MCP Docker runtime stage does not copy the `tools/` directory even though `server.mjs` imports its three tool modules, so the image as written cannot resolve those imports at startup.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/Dockerfile#L12-L31",
+          "version": "repo-lines-v1:sha256:96afaedaf9e8a7c197c38e61c719ba711bf2b056dceb6dfb4630e09e024cab5a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJiN2EyYmExZDUxOWI1NmMwYmNjNDYxOGZkNGQ2OTQyMTI4MDA5NDA5MDMzNTk0N2E4MmY1NmE5ZDMwZDFmZWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE3NzY4ODVmNDE4NjkyZWM2MmZiMzZmN2NmYWFkZjUyNzgwYzA3ZDRiYTllZGQyNTM2YTIzOTRiMjdjMmIxODkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIzY2NkOGEyNGVjNjUzYmJkMDIyOTFmN2ZhYmE1YTBmNmVkNTM5OTA2NDg3ZWU5NWQxMGQxODE4MTJjZDgzZGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/server.mjs#L4-L9",
+          "version": "repo-lines-v1:sha256:63728fc8b3e15af83d61e6c69d5d1704c3c65d20f9add288dba4cbf470dc4a75:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTkwNWNlNzUxMjI4YjgwZGQ1NDYzNWNlZmMxNWQ0MzdmM2M2YWNjMGZlOTk2M2E4M2MxMjVkZWQwNWIzZTk3NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGVjMGM5OTZkY2M1Njk0MGZmMzI1MjYwODBiNDYzNThlMzViMmVhNDJjZmE1YWNiZTcxODMyMDQ4MWQ0MzNlMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTJiNTJjZWY0ZDM3MWI3NmMyNDY4NTFmODUyMDA3ZWViNTU1OTg3OWI1NzI3MWYzMzU5NjIyMmYzNWY2YWE0NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjBhMWYzNjI5ZWM3NmZkYWJkNTY3MWU4MTU3YjQ3Zjc5NmMyYmM4YjYwNTExODJhMWU1YjAwNWViYjljOGE2NiJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-10-04T23:14:27.814Z"
+  }
+}

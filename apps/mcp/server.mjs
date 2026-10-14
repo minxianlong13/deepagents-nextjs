@@ -5,6 +5,8 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { createMcpExpressApp } from "@modelcontextprotocol/sdk/server/express.js";
 import { registerJiraTools } from "./tools/jira.mjs";
+import { registerSlackOAuthCallback } from "./lib/slack.mjs";
+import { registerSlackTools } from "./tools/slack.mjs";
 import { registerWikiTools } from "./tools/wiki.mjs";
 
 // Respect Cloud Run's PORT env var (8080) or fall back to MCP_PORT (local dev), then default to 8787.
@@ -14,6 +16,9 @@ const PORT = Number.parseInt(
 );
 const HOST = process.env.MCP_HOST ?? "0.0.0.0";
 const MCP_PATH = "/mcp";
+const SLACK_OAUTH_REDIRECT_URL =
+  process.env.SLACK_OAUTH_REDIRECT_URL ??
+  `http://localhost:${PORT}/slack/oauth/callback`;
 
 function createServer() {
   const server = new McpServer({
@@ -22,12 +27,14 @@ function createServer() {
   });
 
   registerJiraTools(server);
+  registerSlackTools(server, SLACK_OAUTH_REDIRECT_URL);
   registerWikiTools(server);
 
   return server;
 }
 
 const app = createMcpExpressApp({ host: HOST });
+registerSlackOAuthCallback(app);
 
 app.post(MCP_PATH, async (req, res) => {
   const server = createServer();

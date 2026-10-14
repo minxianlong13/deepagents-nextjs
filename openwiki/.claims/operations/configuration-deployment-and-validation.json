@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:529e00b4b8ebfccd1fccaf1ca867e63003675054edfa6cfe26d345bbda89b0e3",
+  "claims": [
+    {
+      "id": "claim_ae5c3314abe549eba76cb07a4c124886",
+      "statement": "The repository is a pnpm workspace containing the `apps/web` Next.js application and the `apps/mcp` MCP HTTP service; root scripts delegate web development, build, lint, and MCP commands to those packages.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L1-L26",
+          "version": "repo-lines-v1:sha256:470c4c1d59b77edef7a50c9e1e18c674bb319fe402df0bea0c26fae3b13f9bb5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4NDBjYzE4YjM4NzI3MjdkN2UxM2IxZTYzYTAzYzBjNzAyNzZiYjk1ZDc1ZDJlZWE5MDNiYjE3YTFhZjRiYTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YzA2YzU2MWQ1YzMyNzM0MzY4NTI2OGE0NmIzMzkxZjM5OThlZWU4OTBkMmJlNTFmMGQyMWNjNGE1M2FlNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlY2ZlZTVmN2UyZDI5ZGE2OGJkN2E2NDVhMzA2ODdiOWE2OTM2MTYxNzQyZjQ4MzVhNzRlMjUwYTljNjFiYTUifQ"
+        },
+        {
+          "resource": "repo://package.json#L5-L14",
+          "version": "repo-lines-v1:sha256:727bb4966134bf6a312d19885cce3986a569d4f804127cc03686b0b445bbb6a5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0ODMzZDU5NDljMDNhNDBjYTk1MjQ5MTYxMGE2NjU5NjQ0YjNhYTQ2NjM2MmY3OTkwMjBkYmYxOTgxNTQ3ZGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2Njg2OWE1ZjE2NzZmYTQ4YzVhMTk3YThjNGIyMWNmMmFmNjg0NzcxZTEzMzhhODUyODVjZGU4MDUyMjdkN2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhMzk0OGMzNzQxYjQ4ODBmZGI5OTNmYzg4ZGU2OTc4ODc4YTY5MDE3ZTU2NTA4Y2Y0OGViOTdiOTI1Y2UxMDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://pnpm-workspace.yaml#L1-L7",
+          "version": "repo-lines-v1:sha256:9a00c9eda650f7613757e586c178d6ba0c4cc4e608d1df622b721a4f0160892d:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWRiMDc2ZWI4MGFkZTE5ZmVhM2UwYTQzMTk4NmI2NTVmNWZhNTllZDYyNjdlMTA3ZDY4OGI2MWMzZjQyMTc5NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzlmNTNhMGMyNmU1NDRmYjg5NDhiNTgzMGM5MmRjZmRiMGE0ZGI2MWJmNWVkOWUwMGU1YWFmMDZkZWUwMDNkZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTBkMzQzMmU3NDkyMzBlNjliZGZkZTIyNDhmNGIxYjNhNjE2YjI0OTQ4NGI3MmU5NDVhY2Q5NzY4YWQ1MWMxMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d7fb57a4c0074869bf847ac7412feefb",
+      "statement": "Local web persistence is configured through `DATABASE_URL`: the tracked example targets PostgreSQL on localhost port 5433, while the Compose service runs pgvector PostgreSQL 17 with a persistent named volume and a `pg_isready` health check.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/.env.example#L1-L2",
+          "version": "repo-lines-v1:sha256:5cab68e997702e301b02aab2dd2929dcbccaaf373cc5a8f04727653d41d7c313:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDNjZjJhMWE3ODc2NTlmNDhmYmQ5OWE4ODg4OTkzZWU2Y2E0YTMzYmQ3NDNkYzAzNTMyMmFlZTI0NWM0MThhMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTk5YzQwYjQ3MWE3Y2I4NjIzNjlkOTE5ZDJhMzA2MWM4MDZmZmM1NzUxN2E2MjQ3NTFmYTJlODA0ZTNmZWNjMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://docker-compose.pgvector.yml#L1-L20",
+          "version": "repo-lines-v1:sha256:09da4bd505b0aa35c5e3a2063e2e827cb6a8e04b0c556e6fda5fd529144d9604:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhNzNmY2NkYzk5ZWE4MzU5NjdjN2RlZTdlZmJlZDFmM2NhODcyNjBkOTI5MzE4NTBmZGQ2NmRhOGNiMTJmMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkYmVhYjgyZjE0YmViNjlkY2MyODRkNDQ2YTI2NTUzNzIwZGU2ZWVlNTY3ZmY0OGRkM2NjMTQ2NWNjOWE4MDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4e4ec944b4194aadaf6b6824077c0e13",
+      "statement": "The web Prisma client fails when `DATABASE_URL` is absent, uses a `pg` pool through `PrismaPg`, and caches the client globally outside production; Prisma CLI configuration loads dotenv and uses the same variable.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/db/prisma.ts#L1-L25",
+          "version": "repo-lines-v1:sha256:3016e05daec9766205bf8d94861295c8adaaba4c9539e9be4a2ee92b34d33321:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1NWU3MjYxMDA1NjRmZWZlY2Y0NDk2MTBjODVmNzQ5NzgzMzM0ZWFlNjRmN2Y0N2E2YzcxN2JkZTVjY2U1ODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyMmQ2MGZlN2M5ZDQyNmQ1YzkzOGYwMDRkOTM2ZjYzZjY5ZTMwNDdiNTMyY2I0YzU0ZDE5Mzk5OThhNTZhYmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://apps/web/prisma.config.ts#L1-L14",
+          "version": "repo-lines-v1:sha256:c1bcbd0ff267c8b6885cd467ed8122cf6508bdac6c929d69f9b512ccde65a033:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2ODYyMTY0N2ZkZWE2YTNlYTkwOWY1NTk2YjVmMDc3ZGY3NGRjMTVmOWVkMjc4OWNjNTRhMDE2M2M4MjBmMGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_932082692467460392ea267a4b01fe30",
+      "statement": "The committed pgvector migration enables the `vector` extension and creates a required 1024-dimensional embedding column with an HNSW cosine index, making pgvector availability a schema prerequisite.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/prisma/migrations/20260916120000_add_resume_pgvector/migration.sql#L1-L50",
+          "version": "repo-lines-v1:sha256:d8f35256944ebbcf4bca8d0cc33f49090ca87fc3f93d203a71a2323584c7c977:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjllOWIyY2ZlYzQ3NTE5ZjQ5ZWU3M2NiNTMzYzQ1OWUyMmY4Y2E1NGZlNWJhMWNiZWM1OWYzZDU4ODNmZTE5MWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5YzBhMGYyOWJhOGMzZTcwZDczOTQ5YmFmMjdiYjMwOTA2NmNmMDY5MDEzOTc2YTZlMTQ3M2EwOWM2NTM5ZWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzZGVjNDI4YzM4ODY1ZDA2MDM1ODAxOWUyNzdkZWI3ODk5MDY3NzU3OTYwMjM3NzY2NThjMzI4NWY0ZGM0ZjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d0281dbaf2d94f1d873efca8450e0873",
+      "statement": "The web MCP client resolves configuration by trying `MCP_CONFIG_PATH`, then `.vscode/mcp.json` under the current directory, then `../../.vscode/mcp.json`; it accepts `servers` or `mcpServers`, selects `MCP_SERVER_NAME` or the first server, and rejects empty maps and non-HTTP transports.",
+      "evidence": [
+        {
+          "resource": "repo://.vscode/mcp.json#L1-L8",
+          "version": "repo-lines-v1:sha256:f408d63f26942786e0fc7a7a7748933e71a9f20b02fa3ee16549bc9fe61b23c2:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTZmYjA4ZmRhMWFjYjk1N2I2MTE2YmQzNzgxMWExZmU0MWEwMTYxMWMwNjMxZWRiZjc4NmQ2ODg5YTI3YTU1YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://apps/web/lib/mcp/client.ts#L24-L57",
+          "version": "repo-lines-v1:sha256:85866dd63baf4a925e182a5d65bc37cde62035e53b977e4c08d9df4272aded8d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjYjRlZmI1YTI2M2Y1MTc2YWU5ZDhhMWMyNzZhZDdjMGIwNGE3N2VmM2M4NDIzYjFjMTIzYzM1MjNiMTM3NDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MGRjMGU0NTY5YWYwZjBkMTU2Njg3YWUzZDkyOGVlYzUwMGE4YTg5OWRmM2UzYWFjZDNkNzkyZTI4ZjQ1YzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2ZDU0YTQxYzkzNDY2ZGNhM2Y3ZTQ2NmVjYWJjMWFhYmU5ZGZjZWYwOWJmMjc1MjFkMmI4Nzk0MGVjODAxMDQifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/mcp/client.ts#L78-L123",
+          "version": "repo-lines-v1:sha256:b4d411d589981d05d478df2f55b3f5a176705fe4cfb0444608ddca90fdb92a75:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzN2Q0ZDA4NGRlMzEwZWRmZWE0YWUzNTBmMjA0MWY2ODliMTQ2M2ZmZmQ1YjliMDAzYWZlZjQxOWZkODI1Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9276039fef814e388abe1bc5b1b2d52c",
+      "statement": "The MCP service listener uses `PORT`, then `MCP_PORT`, then port 8787 and defaults to host `0.0.0.0`; it creates a fresh stateless MCP server and transport per `POST /mcp`, closes them when the response closes, exposes `/` as a 200 health endpoint, and rejects GET/DELETE on `/mcp`.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/server.mjs#L11-L17",
+          "version": "repo-lines-v1:sha256:ef4f1938e46a78ef59604fcd796336f1eb1c99595f72a1bb9e3eab2776f94a1f:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDJhOGIzMmRhYTVlZjExMmNjNTI1ZmZlMmQ2OWM2OTA4NzBhN2YwMDM4ZWM1ZjI4MGRiZWQzMmIyMjliNDcxNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWU0OGNjNGE4YmExNDhkMzY1YmY5MDZmMjlhNjFjODVkOTRmNzZlZmY1NjY0ZjBmZWIxYTdiYjM1ZmI4ZGUwMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWI0ZTE3ZGFiOTc0NWI3ZTg1NDVmODc0ODAyM2JlNjllN2Q4MjZjMzZmZmFiMjUwM2Q4ZTkyN2UxMWNiNDg0ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGY0YjA0YTZlZTBlMTllZGNlNzlmMjI1NmJmZTg4M2IxNmNiODQwMzNmNDA0YTY4NmVkMTI5OWRlMzJlNWZmZiJ9"
+        },
+        {
+          "resource": "repo://apps/mcp/server.mjs#L19-L102",
+          "version": "repo-lines-v1:sha256:f0696c053e1b2a0c301990be4c5ca0d358995c18e13ab1d5c820cb65627a3e4a:eyJzZWxlY3RlZExpbmVDb3VudCI6ODQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNiNmExMzU3YjI2YjMwZDljZjkzMTlhZGE4MzFkNWQ5MTNlMTdmZmUxMGU4NjExYjQyMjBiOTIxMzMzMGE0NzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyODQwNzcwMTE2YTczOTYwOTAzZjNiMTc3N2I2ZWI0MTlkYjQ0YzA0ODI5NDE4MWMwNjg2OGM0MjhmYWVmODMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJiZDczOGEzZTE5OGMwYTY1OWVhYmJjMWVkOTA2MDg3OWU3ZGJjOGNkNGJjNDM4MGUxN2JjM2E0MDRlOTVmNmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7ce78479386148fb8e3a5d7856f0816f",
+      "statement": "The MCP image is a multi-stage Node 22 Alpine build that installs production dependencies with pnpm, runs as non-root, sets port 8080 and host `0.0.0.0`, exposes a health check against `/`, and starts `server.mjs`; its build context ignores `.env`, so secrets are not copied into the image.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/.dockerignore#L1-L10",
+          "version": "repo-lines-v1:sha256:e6eb17d5ade99c232431138bb28a71409b3d10294db391b35e615e1f2d7f8650:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2ZDMwZTQ0NjIxODlmYjE0ZGQ2MTFiZGI3MDhjNTEwNjMwYzU3NmExZjM1YjkzODNlODlhNDM1MmRhMzZjOTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkMzRjN2RkOWU3ODFmODM4MmFjY2ZjZTg3MzJmMDM3ZmY3MzBjNjg3MjU4ZTdiYjkxZmEzNTkxZWIzYjZjY2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/Dockerfile#L1-L31",
+          "version": "repo-lines-v1:sha256:3967a98aa2a7194d3aa96e2d7fa334f941fab203039ba9bce08f1cc1805802b1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxNjUwM2Q5NDY5YjVmNDVjYmIzYmI4MGUyNTUzNWQ0ZTMyMTIzOTkwMzUyZjZjZTg2MDMwZDYxNjJmZWU1Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE3NzY4ODVmNDE4NjkyZWM2MmZiMzZmN2NmYWFkZjUyNzgwYzA3ZDRiYTllZGQyNTM2YTIzOTRiMjdjMmIxODkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cb2f944b99a04be8bd32285e1aac1048",
+      "statement": "The standalone MCP client defaults to `http://127.0.0.1:8787/mcp`, can be redirected with `MCP_SERVER_URL`, lists tools, and supports Jira/wiki default identifiers from environment variables; its package `test` command is this live client rather than an automated test runner.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/client.mjs#L1-L15",
+          "version": "repo-lines-v1:sha256:0ea45df490818cf441f4dc3c1a8a901bf9269db7f07e9458715e34e2ccae0f8b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE1OWM0Nzg3MmI3MWYxMjU4OTk0Mjg5MjQ2NGU3NjRjMGRiMzUwYzIwYjcyMjI4NjQ1NjE1Y2MzNmUwYTA3MjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI0Zjk4YTlmMzNhMDU4MTk5MmFmYTQwNzMwYTU0MjdjYmJkYzg3OGMzY2EzNjQyMGU5MDYyZGNhMDE1ODI4MzgifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/client.mjs#L33-L139",
+          "version": "repo-lines-v1:sha256:b1f2ba3b294d78e383c5d38d49a1118e711f0cf1be6d287fc2ce2e8f5ff19430:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA3LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJmZDJiNTk1MGRiZTBhMDQ2ZjEyYThjMGY4NTI4ZDJhZWI5YThmMmU2ZWE3NjU5NWJjMWVhNzJkMTQ1ZTU2YTcxIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI5NTNkNDZjMGQwYjQ5MjhjYTU3ZWJiZWQwNzE4ZTc2ZmZlYzcwMDU1ZWNmYjk0YzNkOWUzZWFmYzlmMWI2NWI3IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        },
+        {
+          "resource": "repo://apps/mcp/package.json#L1-L14",
+          "version": "repo-lines-v1:sha256:47077de6917d67de01ae5a66c2ad53a1c0c946af139a817ae8c0aed7686b2f72:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_032cfa2e34ad411aa2343784bc674e9f",
+      "statement": "Jira MCP calls require `JIRA_BASE_URL` and `JIRA_BEARER_TOKEN`; wiki calls support bearer or basic credentials and export files to `WIKI_OUTPUT_DIR` or the working directory; Slack uses `SLACK_MCP_URL` or its default remote endpoint and requires keywords or filters.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/tools/jira.mjs#L32-L81",
+          "version": "repo-lines-v1:sha256:ee84fb46125c0651a9adcc46e46b066be98ba0ea668a0fcc29dcef19f58c481a:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkNWNjMzE0NmE2NmI5ZmQzNjZjMjgyNjhjYzRiMmU4NjliZDNhMjk4MmJiM2NlYzQxNGQwZTY4ODkzZGQ5ZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlNzVjNzBkOTQ2MzYyNWUxMDc5ZmQ4ZmM4ZWU2MmFkMmU5MmM0MmJlYWFiZmQ4NWI3OGQ4ZTBhNDk3OWI5NGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxODg3MGE4MDQwOWY4YzRjOTk0ODA3YWY4MjU5Y2MwNGJkMGM1Y2EyZTlmMWMzYjEzZGVmMTBiMTYyNzg2ZDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4YmFhOTI2NmMwMTZjNjBlYWUwNzA1ZDc0MzBhNjU3MWQ0Y2RlYjc4MTVjZWVhN2Q1YTllZjkyZjJiZWRlMDIifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/tools/slack.mjs#L47-L95",
+          "version": "repo-lines-v1:sha256:a4d68d1d2823052a165ef8bb0f623933a729d2bf59eee5070ac456a77394ca84:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRhYjA2ZmNlNzU5NDQ0N2Y2M2E3NGJmZmE4MzlhNmMxYzIxNWJmZGNlYTRhNzZhOWVhNzlkM2Y3NjYyMTEyMDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliNjJmNjBkODU5MGE1NzljZjQ2ZjhkNjczNzhjNGM1NzJiOTYyY2VjY2RiOTBjN2E1ZjdiNDJiOTYwNzgyYTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxYmM0YTE4OTY0YTM2YTQzYzliMmQ4YjUyMjg0NjgzYzdkM2Q0MTQwZWJhOThkN2M1MTM2MWUwOWRjNTM1ODkifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/tools/wiki.mjs#L153-L215",
+          "version": "repo-lines-v1:sha256:2db1f1742f524ad5723845cb8bb38bbf6ee6112c0d85c3738408d598a184520d:eyJzZWxlY3RlZExpbmVDb3VudCI6NjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhNzc3YzFkOTkyZGY3YmM4N2FhYzk3NjVhNmFjM2NjM2M4MDg5YjFmNGU0NTFiZWYxOWU0ZDJhZDcxODY4OTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZlMzNkYzczMWU3ZDA3YjFmMGMwNWNmZWJkN2UxOTIyMDIzZTYwNzdiYzBhZTdiYTMwMTQ4ZjUwODMzYTI1YTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxYmM0YTE4OTY0YTM2YTQzYzliMmQ4YjUyMjg0NjgzYzdkM2Q0MTQwZWJhOThkN2M1MTM2MWUwOWRjNTM1ODkifQ"
+        },
+        {
+          "resource": "repo://apps/mcp/tools/wiki.mjs#L5-L36",
+          "version": "repo-lines-v1:sha256:da06f4d41e57d3c05d3cdeaa06eee223d8bf8e6c0d175400c10bb2ad59829188:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiMmE1NjUxMzk0ZGFhMzM3MjhiMzkxZGM4ZjE4ODA3M2M3NTIyMTc4ODIwMjFmZTA0ZTlkMTM0Yjc0N2FkMzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1ZWYwMWJjMDhkYmMzYjYzZTRlNzVlYTNkMjZhNWI5NDE4OTE4NzdlMjdhZDg5MTMyOWM4NDExZDdkOGRjNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNkNjM4YTIyYzBmMTYyNmYxNDAyOWY3MGU3M2RmZTA0YmMyODlhNzg2OTM0NWQwMzU1ZmFkNmMyYmM0ZDYyNjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiMTU5NjMzMGY2Y2EzZWY3MDY5MzU1Njg0M2Q1ZjAyNzk5NWRkMDgzODRiZjFjMDEyNDlhYTUzMmI1NDk2ODUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0e047ae9bcbb48579b578c6a7bc2de05",
+      "statement": "RAG ingestion requires `PINECONE_API_KEY`, targets fixed `aoe-langchain-docs` namespaces, and the management route admits only one in-process indexing operation at a time, returning 409 to concurrent requests and clearing its lock in `finally`.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/app/api/manage/rag/route.ts#L4-L44",
+          "version": "repo-lines-v1:sha256:62505991cb261254fb47c2441bb3aaf10662069f409fb4742cd5495a0a3d5c1e:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0Njc0NjUwNDY3MTc4OTQwYTQ3MzZhYTZjNTVlOTFlMzQ4NDY1NGZhMGVlY2UzMjk4MTc3NTliZDQ5ZmI2YTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgwNmRkM2I1MjkyYzEzMTBjNzZjMTY3MjQxMDk1MDhjYjUwNzg3YWY2ZDUxYzUzNzEzMzZhZTE3YTY3YjBlODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L15-L20",
+          "version": "repo-lines-v1:sha256:0a3a74285bfd534b0f0f668690302621a19a55372fb6a5c61f078742b7c13033:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDVjYmJlNTQzMjllMjA4OTA2ZjcxN2Y2NDlmYjVjYjU0ZjVhNTdkYTljMTRkYWEzNGVkZmMyNmU3N2EyZjIwZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWQ3MTAyZTMwZGMzNDkxNGEzM2ZmOGU5MDFkY2ZlZTFkZTg4ZTI3OTczNWM4MTMzMzc4ZjJkZDI0YmM3NzIwMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmM2Zjc0NTFkMDdkOGQ3ZTlhN2Y1NWQ0NDNhNzM3MThlMjlmYTk3M2NmMzRjOTIxNzg5YTEwY2NhZTgwM2RjZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTE1ZTY5YzBhYzQ0ZWFjZDRlY2E0Yzc2OTlhYWMwMWI4YTQwNjQ3N2FlMzQ5YTA5ZGZhMDFhNDdkZmIzNDAwMyJ9"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L190-L219",
+          "version": "repo-lines-v1:sha256:4299f7ce798e416611a43a78ea3fc6c6c8e6c2381761a5f5ea9431c3d4ce43fd:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1M2FhMzE1MTIxM2ZmOWI5MDI5MmFmNWRmZGNiMzM2ZjkxMGY0ODEyNmNmODZlOTZlNThjNWE3NWNmYzUyOGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2MzdkM2JhOWQ4NjYyZmNjMDU1MjE1ZGU0ZDNmZDdjZGZkN2RkY2U4ZmIyMDRjNmMwZDc0NGIwNTkwNDliN2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU0YTgwZWUwNmZkMjRkMzQ3NjA3YzcxNTc1YTI2MTI3MDUyODU1MGQ1OTBiMjJmZjg1NDZiMmFiZmQ0YTE5ODkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b79c1d1ef3154d149e0f8875c4678974",
+      "statement": "RAG indexing constrains selected folders to `./docs`, separates local files from remote metadata sources, adds remote documents when the root docs scope is selected, and incrementally replaces changed source chunks using source hashes and a manifest.",
+      "evidence": [
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L221-L289",
+          "version": "repo-lines-v1:sha256:a679b7a45362d8ab53d77e9825742d948430cf24cfe400d77c18481622c9435f:eyJzZWxlY3RlZExpbmVDb3VudCI6NjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhZGU2ZTc5ZWYxYTljZDI1NTc5Yjg2YzM4NjBhYTJmZTExZTE5OTE2N2RjZTE1MmRiZjFhMWU0ZGNlMmJlYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJjNTY1YmNmMzA2ZTViMDBkMmVhMzcxNWZhZmUzNmNjOWJiOTA3ZjA1Y2RmMThmZTBhMzEwNGU5MjhlNDMxOGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYzNDAyOTFlYjIzMjhmNGZiMjA0ZDYzYjYxZjQyMzk4ZjI3MTZkZTY0NzYzOGM0MzhjMWYyOTVkNjY5NDE1MDIifQ"
+        },
+        {
+          "resource": "repo://apps/web/lib/tools/rag_search.ts#L50-L168",
+          "version": "repo-lines-v1:sha256:18a99d4529168e2d3b7d9cb4d9637f4435dcfeac6e574219e2cd1f9244cac3e7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTE5LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJmNzlhYzI2NDQ0MjMzYTJiZDMzZTc0YTRiNmIyZmQ0ZjJlZWRlODM3MDEwNmRmNTU2YWYxZjU2YzUxMDIwOTUxIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJmYjU4MGU5NjRmODNhNDczZjQzZDQ0Mzg0NjI5NDlkNjhiNTYwMGZkYTc4N2YxNjM3NDVkMDBkZTg5Y2JmMzZhIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJkNWVmZjc5YTNlZDdhNWViNTZjMjk1MTU5NDQ0OTVkYTE1MGUyZWY0ZjEyMmZlY2FhYWM0YTljOThiZmFjOGYwIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_ae4b9ad88e5d40df910cdfd30da3ad12",
+      "statement": "The Cloud Run workflow is not production-ready as committed: its trigger uses a literal quoted branch value, project/service values and workload identity provider are TODO placeholders, and it deploys source from repository root.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/google-cloudrun-source.yml#L1-L40",
+          "version": "repo-lines-v1:sha256:506ac9e7b65a1e7c2d3d52e465e719d4e2c5bdc5848e81f2656b7694342d8cd8:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJlODZjOTQ4N2MyMmU5YmFjZDhiYzcyMGZjMDBiZjliZDA2MGE1M2M0NTkzMTAzNzkzN2NkOTBmYzUzYTJmODAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0M2YxZDg0M2M0N2Y3YzUxZDc4ODNjZTY3OTkzMTk5Y2QxODEwZDhmOTgxODAzY2QxNjZkYjYyZjhlZWVhOGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkwMDE0YmEzYjgyODg4YWEwOGM1MzYyYTA1Y2JiM2E2YTBiMDVlYmRkZDlkY2VjY2RlMGNlZmMzZWM5ODVmMWEifQ"
+        },
+        {
+          "resource": "repo://.github/workflows/google-cloudrun-source.yml#L54-L75",
+          "version": "repo-lines-v1:sha256:6ae402dd6b64ed6ee7c80b5ff78b6330f30191c68e8128ab7dedf66710d3d681:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3MTYzOGNmOTdiMGYxNjllMzY3NmMxMzg4NDRjNmNjOGIwZTBlYzgwY2JiNGU0YzJmM2Q4ZDRhNjk4ZGIxZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhYTIzMzUwMjk0OTYyMzU3ZDY0ZDMwNzllZDA3Y2MxZjUzMWE1NmY3YWZiNjZiZjQzM2M4ZGM5MGQ5ZDc1YmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQzNWYxMGJlNjcwNzVjMDc2MDhmNTBjNmE0MTJlZGViNzgwYjZmOTYwODdiZTBhOTEzMWUxNjk3ZTFiMTBkZmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9d9060389fbb48b288662e024ef6bf5b",
+      "statement": "The OpenWiki workflow runs on manual dispatch and a daily schedule, uses full git history for incremental updates, continues after an OpenWiki command error long enough to open a PR with completed progress, then propagates failure as a failing workflow.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/openwiki-update.yml#L1-L48",
+          "version": "repo-lines-v1:sha256:81ac008e9dce95c09100fafb3268c9874dbaa9de363db5abc370654cd24c592f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MDI3ODdhZjZkY2MwODM0ZGUxMjFjYmIxY2I5NWY5NDU5YjcyMWVhYjAzNDlmMTA1MDFiOTk2YzFjNzdmZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4ZjhiODAyNzQxYWZjN2ZiMzg0MGZlY2RjNDNkN2Y4ZTQwMjNiYmZjYjViN2VjNjVlZTA4ODc5OGQ4NTE3MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU0ZTc5NGRkZjMyYTNlMmRhYWFkODgyNjMxM2MyNGY0ZTRjZGE2ZjYxYWJmNDE3ZTQ4OWJlMzlkNWI5OGE1NTkifQ"
+        },
+        {
+          "resource": "repo://.github/workflows/openwiki-update.yml#L50-L77",
+          "version": "repo-lines-v1:sha256:d51f0040449194558ad6ab1ae46dd0a0d54fac780c4f3d02edc3834aaafc5bb7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3OWM4ODBmNjJkNDIyNTM4YmNhODRjYjU1ZWNlOGZlMTBlOTY1OGIwNjExMTVjM2ZhYmNkYzdiM2JlY2Y0NDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NzE4ZjA2N2I1ZTVjMWYwOTkxYTZlNzQ3MjZmZTJhMjNkMjY0MzQ1ZTA4ZTRlYWQwNGZhZjczYzI3ZWQ0NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQxOTEzNzMyNTgyYzNlNjAzNTkwNzg2Yzg2ODM2OTUxZmYzNWU5YjJkMGY4ZDMxMDY3ZDRmNGM4NzQzZGIyYWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_63fadef6faf045f89ea84db9b30641ff",
+      "statement": "The inspected root and web package manifests provide no automated test script: root offers workspace dev/build/lint/MCP scripts, while the MCP `test` script invokes its live client.",
+      "evidence": [
+        {
+          "resource": "repo://apps/mcp/package.json#L1-L14",
+          "version": "repo-lines-v1:sha256:47077de6917d67de01ae5a66c2ad53a1c0c946af139a817ae8c0aed7686b2f72:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://apps/web/package.json#L1-L52",
+          "version": "repo-lines-v1:sha256:7588e730cf53272125437099f9fcae332f19720cf0bddeca19ee950691c16026:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://package.json#L1-L15",
+          "version": "repo-lines-v1:sha256:857be7af79aa3e99bce06f49ad0a4ffdbdbb86db6099e9dab15ffc2c9d6c5062:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-10-04T23:14:27.814Z"
+  }
+}

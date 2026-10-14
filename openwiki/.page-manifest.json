@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "/openwiki/architecture/system-overview.md": {
+      "pageVersion": "sha256:319abe84393f49731bc99cb508371240378eeb3ac483a886b4d62feaf11ea1ea",
+      "completedBy": "openwiki/0.5.1",
+      "completedRunId": "26ae4243-99ca-42b8-8cfc-6bdd709400d1",
+      "gitHead": "39955886ae0025191ba0058d3d98ae813792b0e4",
+      "sourceFingerprint": "sha256:f4e624aa7276a33f153d3b1152c2fdb5c5cb5b7c618d1126aadb22d3a3ca75d2"
+    },
+    "/openwiki/concepts/persistence-and-schema.md": {
+      "pageVersion": "sha256:aaf1f0d44f86201452300a133cdbfecdc49164dfd8dd33858981a4757b78c506",
+      "completedBy": "openwiki/0.5.1",
+      "completedRunId": "26ae4243-99ca-42b8-8cfc-6bdd709400d1",
+      "gitHead": "39955886ae0025191ba0058d3d98ae813792b0e4",
+      "sourceFingerprint": "sha256:f4e624aa7276a33f153d3b1152c2fdb5c5cb5b7c618d1126aadb22d3a3ca75d2"
+    },
+    "/openwiki/integrations/mcp-service-and-connectors.md": {
+      "pageVersion": "sha256:4f7ad6919e9e81175b7f36165fba9e6fa99572fbfdb271e0e9f7f6881fa572ae",
+      "completedBy": "openwiki/0.5.1",
+      "completedRunId": "26ae4243-99ca-42b8-8cfc-6bdd709400d1",
+      "gitHead": "39955886ae0025191ba0058d3d98ae813792b0e4",
+      "sourceFingerprint": "sha256:f4e624aa7276a33f153d3b1152c2fdb5c5cb5b7c618d1126aadb22d3a3ca75d2"
+    },
+    "/openwiki/operations/configuration-deployment-and-validation.md": {
+      "pageVersion": "sha256:529e00b4b8ebfccd1fccaf1ca867e63003675054edfa6cfe26d345bbda89b0e3",
+      "completedBy": "openwiki/0.5.1",
+      "completedRunId": "26ae4243-99ca-42b8-8cfc-6bdd709400d1",
+      "gitHead": "39955886ae0025191ba0058d3d98ae813792b0e4",
+      "sourceFingerprint": "sha256:f4e624aa7276a33f153d3b1152c2fdb5c5cb5b7c618d1126aadb22d3a3ca75d2"
+    },
+    "/openwiki/quickstart.md": {
+      "pageVersion": "sha256:052a482d0c0186d9ff818ef73a339cd89b678a1691c8aee4d56e3f8d830ceb9d",
+      "completedBy": "openwiki/0.5.1",
+      "completedRunId": "26ae4243-99ca-42b8-8cfc-6bdd709400d1",
+      "gitHead": "39955886ae0025191ba0058d3d98ae813792b0e4",
+      "sourceFingerprint": "sha256:f4e624aa7276a33f153d3b1152c2fdb5c5cb5b7c618d1126aadb22d3a3ca75d2"
+    },
+    "/openwiki/workflows/rag-knowledge-base.md": {
+      "pageVersion": "sha256:4d90ae7eea8fb63b4fb7532f1d166dd763ed5998599ed85b6324e3bf70b6b8f3",
+      "completedBy": "openwiki/0.5.1",
+      "completedRunId": "26ae4243-99ca-42b8-8cfc-6bdd709400d1",
+      "gitHead": "39955886ae0025191ba0058d3d98ae813792b0e4",
+      "sourceFingerprint": "sha256:f4e624aa7276a33f153d3b1152c2fdb5c5cb5b7c618d1126aadb22d3a3ca75d2"
+    },
+    "/openwiki/workflows/resume-tailoring.md": {
+      "pageVersion": "sha256:7c73006ddf35e6951a8320811a9ed3d606a3eeb8d0bb26e7729d59804de6fe18",
+      "completedBy": "openwiki/0.5.1",
+      "completedRunId": "26ae4243-99ca-42b8-8cfc-6bdd709400d1",
+      "gitHead": "39955886ae0025191ba0058d3d98ae813792b0e4",
+      "sourceFingerprint": "sha256:f4e624aa7276a33f153d3b1152c2fdb5c5cb5b7c618d1126aadb22d3a3ca75d2"
+    },
+    "/openwiki/workflows/search-conversations.md": {
+      "pageVersion": "sha256:414dccdeb62c05d201e97144f33cdfd1292cf7676669861f25c3f3fc63392198",
+      "completedBy": "openwiki/0.5.1",
+      "completedRunId": "26ae4243-99ca-42b8-8cfc-6bdd709400d1",
+      "gitHead": "39955886ae0025191ba0058d3d98ae813792b0e4",
+      "sourceFingerprint": "sha256:f4e624aa7276a33f153d3b1152c2fdb5c5cb5b7c618d1126aadb22d3a3ca75d2"
+    }
+  }
+}

@@ -1,90 +1,128 @@
 # Xianlong Min
 
-Ottawa, Ontario, Canada · 506-897-3061 · xianlong.min@gmail.com · [LinkedIn](https://www.linkedin.com/in/min-xianlong-89808131)
+**Senior Full-Stack Engineer | AI Engineering | React · TypeScript · Java · Node.js · AWS**
 
-## Senior Software Engineer | AI Agents, Full-Stack Systems & Cloud Architecture
+Ottawa, Ontario, Canada · 506-897-3061 · [xianlong.min@gmail.com](mailto:xianlong.min@gmail.com)
+[LinkedIn](https://www.linkedin.com/in/min-xianlong-89808131)
 
-Senior software engineer with 15+ years of experience building enterprise software, distributed systems, and high-scale web applications. Combines deep full-stack engineering experience with hands-on production work in AI agents, LLM-powered automation, and AI-assisted software development. Strong record of improving delivery speed, system performance, software quality, and developer productivity through thoughtful architecture and technical leadership.
+**Canadian Permanent Resident · Authorized to work in Canada**
 
-## Core Competencies
+---
 
-- AI agent development and LLM application integration
-- AI-powered automation, natural-language workflows, and AI-assisted development
-- Full-stack engineering with React, Next.js, TypeScript, Node.js, Java, and Spring Boot
-- Distributed systems, REST and GraphQL APIs, microservices, and event-driven services
-- Cloud-native architecture, CI/CD, performance optimization, and automated testing
-- Legacy modernization, system design, technical leadership, mentorship, and code quality
+## PROFESSIONAL SUMMARY
 
-## Professional Experience
+Senior Full-Stack Engineer with **15+ years of experience** designing, building, modernizing, and operating enterprise SaaS applications, distributed systems, APIs, and data-intensive platforms.
 
-### Cvent — Senior Software Engineer
-April 2019–Present
+Hands-on across **system architecture, full-stack development, cloud infrastructure, CI/CD, automated testing, performance optimization, and production operations**, with deep expertise in **React/TypeScript and Java/Spring Boot/Node.js**. Experienced in designing scalable services, modernizing legacy platforms, defining service boundaries, and delivering AWS-based distributed systems.
 
-- Led development of an intelligent automation agent for hotel property creation, combining natural-language requirement parsing, automated data generation, and validation workflows; reduced QA preparation time by 90% and enabled same-day customer onboarding.
-- Integrated OpenAI, Anthropic, and other AI SDK capabilities into production software workflows to automate complex engineering and business processes.
-- Integrated GitHub Copilot and AI/ML-assisted code analysis into development workflows; accelerated pull-request approvals by 35% and reduced post-deployment bugs by 40%.
-- Architected and delivered production features with Next.js, React, and TypeScript for systems serving more than 100,000 daily active users.
-- Engineered high-performance REST APIs with Java and Spring Boot in a distributed microservices environment handling approximately 1M+ daily requests.
-- Designed a critical event-creation microservice with PostgreSQL and Redis caching, reducing average response time from approximately 2 seconds to approximately 400 milliseconds.
-- Pioneered GraphQL adoption for real-time event streaming, eliminating 40% of redundant API calls and reducing frontend state-management complexity by 50%.
-- Led modernization of 200K+ lines of monolithic code into 30+ modular, testable microservices; improved performance by 30% and reduced deployment time by 70%.
-- Implemented an automated testing framework achieving 90% code coverage, reducing production incidents by 60% and supporting confident continuous deployment.
-- Mentored 5+ junior developers through pair programming and architecture reviews, accelerating ramp-up time by 50% and establishing team-wide engineering practices.
+Increasingly focused on **practical AI engineering and AI-native software development**, including **LLM applications, RAG, vector search, PostgreSQL/pgvector, MCP, AI agents, and AI-assisted development workflows**. Combines strong software engineering fundamentals with modern AI tools to accelerate development, improve engineering productivity, and build reliable production systems.
 
-### LuminUltra Technologies Ltd. — Front-End Lead Developer
-October 2017–March 2019
+---
 
-- Led and mentored a team of 6 frontend developers building an enterprise laboratory-management application for more than 5,000 healthcare professionals across iOS, Android, and web platforms.
-- Built a CI/CD pipeline with GitHub Actions, Docker, and AWS; reduced deployment time from 3 hours to 15 minutes, enabled daily releases, and supported zero-downtime deployments.
-- Improved application performance through API redesign, request batching, lazy loading, and caching; reduced API calls by 50% and achieved 2x faster page loads.
-- Increased test coverage from 35% to 85% through test-driven development and mentorship, reducing production bugs by 65%.
+## CORE TECHNOLOGIES
 
-### Shanghai Yunjia Technologies Ltd. — Lead Developer
-October 2015–March 2017
+**Frontend:** React, Next.js, TypeScript, JavaScript, Angular, Ionic, HTML5, CSS3, Tailwind CSS, responsive UI, component architecture
 
-- Led frontend architecture and development across 5 enterprise SaaS platforms, reducing development time by 45% and serving more than 50,000 enterprise customers.
-- Architected and launched a real-time analytics dashboard processing 100M+ data points daily, supporting 10,000+ concurrent users, and achieving sub-second response times.
-- Led development of a high-performance e-commerce platform handling 1M+ daily transactions and $10M+ in gross merchandise value, with 99.95% uptime and 50ms average response time.
-- Established a frontend performance-monitoring and optimization framework that achieved consistent 95+ performance scores and reduced initial load time by 65%.
-- Integrated Alipay and WeChat Pay into PCI-compliant checkout flows processing $100M+ in annual transactions with zero reported security incidents.
-- Mentored a team of 8 developers in modern JavaScript frameworks and engineering practices, improving code-review turnaround time by 30%.
-- Collaborated with product and UX teams to implement A/B testing and feature flags, reducing feature rollback incidents by 80%.
+**Backend:** Java, Spring Boot, Node.js, Express, REST APIs, GraphQL, WebSocket, microservices, distributed systems, asynchronous processing
 
-## Selected AI Projects
+**Data:** PostgreSQL, SQL, Redis, MongoDB, MySQL, Oracle, DynamoDB, pgvector, database design, query optimization
 
-### AI Knowledge Base
+**Cloud & Infrastructure:** AWS, EC2, Lambda, RDS, DynamoDB, S3, SQS, CloudFront, Docker, Kubernetes, Terraform
 
-Personal project exploring Retrieval-Augmented Generation and semantic search with PostgreSQL, pgvector, Node.js, and TypeScript. Includes vector search and AI application workflows.
+**AI Engineering:** LLM applications, RAG, vector search, pgvector, MCP, AI agents, prompt engineering, OpenAI, Anthropic, GitHub Copilot, AI-assisted development
 
-### AI Knowledge Base MCP Integration
+**CI/CD & Quality:** Jenkins, GitHub Actions, Maven, npm, Git, automated testing, unit testing, integration testing, API testing, SonarQube
 
-Hands-on learning project integrating an AI knowledge base with an MCP server using Node.js, TypeScript, and VS Code to explore AI tool integration and developer tooling.
+**Architecture & Leadership:** System design, SaaS architecture, legacy modernization, API design, performance optimization, technical leadership, mentoring, code review, production troubleshooting
 
-### AI Agent Development
+---
 
-Hands-on learning with OpenAI Agents, LangChain, Anthropic, and TypeScript, focused on agent orchestration, tool calling, agent workflows, and LLM application architecture.
+## PROFESSIONAL EXPERIENCE
 
-## Technical Skills
+### Senior Software Engineer | Cvent
 
-**AI:** OpenAI, Anthropic, AI SDKs, AI agents, LLM applications, agentic workflows, RAG, vector search, semantic search, tool calling, MCP, AI-powered automation, AI-assisted development, AI code review
+_Canada · Apr 2019 – Present_
 
-**Languages and frameworks:** TypeScript, JavaScript, Java, React, Next.js, Node.js, Express.js, Spring Boot, Dropwizard, Angular, Ionic, GraphQL, REST APIs, HTML5, CSS3, SASS, Tailwind CSS
+- **Architect and deliver full-stack enterprise SaaS capabilities** using React, Next.js, TypeScript, Java, Spring Boot, Node.js, REST, GraphQL, PostgreSQL, and Redis, supporting applications used by **100K+ daily users**.
+- **Defined service boundaries and modernization strategies** for a **200K+ line legacy backend**, decomposing the platform into **30+ independently deployable microservices** while improving system performance by approximately **30%** and reducing deployment time by approximately **70%**.
+- **Designed and optimized high-volume backend services** handling approximately **1M+ API requests per day** and peak workloads exceeding **10K requests/second**, reducing critical response times from approximately **2 seconds to 400 ms** through service, database, caching, and API optimization.
+- **Architected React/Next.js frontend capabilities** using TypeScript, GraphQL, reusable components, and modern data-fetching patterns, reducing redundant API calls by approximately **40%** and simplifying application state management.
+- **Engineered AWS-based distributed services** using EC2, Lambda, RDS, DynamoDB, S3, SQS, and CloudFront, collaborating across product, UX, QA, architecture, security, and operations to deliver production systems.
+- **Redesigned CI/CD workflows** across Jenkins and GitHub Actions, reducing pipeline execution time from approximately **3 hours to 15–30 minutes** and enabling faster development and release cycles.
+- **Strengthened automated quality and reliability**, expanding unit, integration, and API testing to approximately **90% coverage** and contributing to a significant reduction in production incidents across targeted services.
+- **Improved engineering productivity and code quality** by integrating GitHub Copilot and SonarQube into development workflows and establishing AI-assisted development practices for code exploration, implementation, refactoring, testing, debugging, and documentation.
+- **Lead complex production investigations and technical troubleshooting** across application code, APIs, databases, infrastructure, configuration, and third-party integrations, driving durable fixes and improving system reliability.
+- **Mentor 5+ developers** through code reviews, architecture discussions, technical guidance, onboarding, and knowledge sharing.
 
-**Data and infrastructure:** PostgreSQL, MySQL, MongoDB, Oracle, Redis, Prisma, Sequelize, Mongoose, AWS, Azure, Google Cloud Platform, Docker, Kubernetes, Terraform
+#### AI Engineering & AI-Assisted Development
 
-**Engineering and quality:** Microservices, distributed systems, serverless, monorepos, system design, legacy modernization, performance optimization, CI/CD, GitHub Actions, Jenkins, Jest, React Testing Library, JUnit, Mockito, Cypress, OpenAPI, Swagger, SonarQube, Lighthouse CI
+- **Built an AI-powered engineering knowledge assistant** using PostgreSQL/pgvector, RAG, LLMs, and MCP to index engineering documentation, retrieve relevant technical context, and provide context-grounded responses.
+- Designed AI knowledge-retrieval workflows covering **document ingestion, chunking, embeddings, vector search, context retrieval, and LLM-generated responses**, with validation mechanisms to improve relevance and reduce unsupported output.
+- Applied **OpenAI and Anthropic models** to structured information extraction, knowledge retrieval, code analysis, development automation, and engineering workflows.
+- Integrated **AI coding assistants and agentic workflows** into software development for codebase exploration, implementation, refactoring, debugging, test generation, documentation, code review, and technical investigation.
+- Established validation practices for AI-generated output using **automated testing, static analysis, security review, performance analysis, human code review, and production verification**.
 
-## Education
+---
 
-**Master of Computer Science**, Tsinghua University — Beijing, China · 2003–2006
+### Front-End Lead Developer | LuminUltra Technologies Ltd.
 
-**Bachelor of Electronic Information Engineering**, Nanjing University of Posts and Telecommunications — Nanjing, China · 1999–2003
+_Fredericton, New Brunswick, Canada · Oct 2017 – Mar 2019_
 
-## Certification
+- **Led a team of 6 developers** building a laboratory application with Ionic, Angular, TypeScript, JavaScript, HTML, and CSS, supporting **5,000+ healthcare professionals** across iOS, Android, and web.
+- **Architected a reusable frontend component library** with **50+ shared components**, increasing component reuse by approximately **60%** and reducing feature development time by approximately **40%**.
+- **Optimized frontend data access and API consumption** through batching, lazy loading, and caching, reducing API calls by approximately **50%** and reducing frontend-related latency by approximately **50%**.
+- **Modernized deployment pipelines** with GitHub Actions, Docker, and AWS, reducing deployment time from approximately **3 hours to 15 minutes** and supporting frequent zero-downtime releases.
+- **Expanded automated test coverage** from approximately **35% to 85%**, contributing to a substantial reduction in production defects and improving release confidence.
+- Coordinated **technical design, frontend architecture, code reviews, production troubleshooting, and cross-functional delivery** with product, backend, QA, and engineering stakeholders.
 
-AWS Certified Solutions Architect – Associate — In progress
+---
 
-## Additional Information
+### Lead Developer | Shanghai Yunjia Technologies Ltd.
 
-- Languages: English and Mandarin
-- Work authorization: Canadian permanent resident
+_Shanghai, China · Oct 2015 – Mar 2017_
+
+- **Led frontend architecture across 5 SaaS platforms serving 50K+ customers**, establishing shared UI patterns and reusable components that reduced development effort by approximately **45%**.
+- **Engineered analytics applications** using Node.js, Express, D3, and WebSocket, processing **100M+ data points per day** for more than **10K concurrent users** while maintaining sub-second response times.
+- **Built and optimized a high-volume e-commerce platform** processing **1M+ daily transactions** and more than **$10M in daily GMV**, achieving approximately **99.95% uptime** and response times as low as **50 ms**.
+- **Integrated Alipay and WeChat Pay** into high-volume checkout workflows supporting more than **$100M in annual transactions**, with a focus on secure and reliable payment processing.
+- Guided **architecture, technical implementation, testing, deployment, and production support** across frontend and backend systems in collaboration with product and engineering stakeholders.
+- **Mentored 8 developers** through technical guidance, code reviews, architecture discussions, and engineering practices.
+
+---
+
+### Earlier Software Engineering Experience
+
+_2006 – 2015_
+
+[Add earlier roles, companies, technologies, and 3–5 representative accomplishments here.]
+
+---
+
+## SELECTED AI PROJECT
+
+### AI Engineering Knowledge Assistant
+
+- Built an AI-powered engineering knowledge assistant using **PostgreSQL, pgvector, RAG, vector search, LLMs, and MCP** to retrieve relevant technical documentation and provide context-aware responses.
+- Designed an end-to-end retrieval workflow covering **document ingestion, chunking, embeddings, semantic retrieval, context assembly, and LLM generation**.
+- Integrated the assistant with AI-assisted development workflows to support **codebase exploration, technical investigation, implementation, debugging, testing, and documentation**.
+- Evaluated AI-generated results through **automated tests, static analysis, code review, and production-oriented validation**.
+
+---
+
+## EDUCATION
+
+### Master of Computer Science | Tsinghua University
+
+_2003 – 2006_
+
+### Bachelor of Engineering | Nanjing University of Posts and Telecommunications
+
+_1999 – 2003_
+
+---
+
+## ADDITIONAL INFORMATION
+
+**Location:** Ottawa, Ontario, Canada
+**Work Authorization:** Canadian Permanent Resident
+**Languages:** English, Mandarin
