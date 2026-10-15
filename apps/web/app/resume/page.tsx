@@ -5,6 +5,7 @@ import {
   Check,
   Clipboard,
   Download,
+  FileDown,
   FileText,
   LoaderCircle,
   Sparkles,
@@ -13,13 +14,15 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import type { ResumeTailorResult } from "@/lib/agents/resume_tailor_agent";
+import type { ResumeTailorResult } from "@/lib/agents/resume_tailor_agents";
 
 export default function ResumePage() {
   const [jobDescription, setJobDescription] = useState("");
   const [markdown, setMarkdown] = useState("");
+  const [coverLetter, setCoverLetter] = useState("");
   const [analysis, setAnalysis] = useState<ResumeTailorResult | null>(null);
   const [savedFilePath, setSavedFilePath] = useState("");
+  const [savedCoverLetterPath, setSavedCoverLetterPath] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -34,7 +37,9 @@ export default function ResumePage() {
     setError("");
     setCopied(false);
     setSavedFilePath("");
+    setSavedCoverLetterPath("");
     setAnalysis(null);
+    setCoverLetter("");
 
     try {
       const response = await fetch("/api/resume/tailor", {
@@ -47,10 +52,13 @@ export default function ResumePage() {
         jobTitle?: string | null;
         requirements?: ResumeTailorResult["requirements"];
         tailoredResume?: string;
+        coverLetter?: string;
         missingRequirements?: string[];
         changes?: string[];
         fileName?: string;
         filePath?: string;
+        coverLetterFileName?: string;
+        coverLetterFilePath?: string;
         error?: string;
       };
 
@@ -59,6 +67,7 @@ export default function ResumePage() {
       }
 
       setMarkdown(data.tailoredResume);
+      setCoverLetter(data.coverLetter ?? "");
       setAnalysis({
         companyName: data.companyName ?? null,
         jobTitle: data.jobTitle ?? null,
@@ -68,6 +77,9 @@ export default function ResumePage() {
         changes: data.changes ?? [],
       });
       setSavedFilePath(data.filePath ?? data.fileName ?? "");
+      setSavedCoverLetterPath(
+        data.coverLetterFilePath ?? data.coverLetterFileName ?? "",
+      );
     } catch (caughtError) {
       setError(
         caughtError instanceof Error
@@ -94,8 +106,125 @@ export default function ResumePage() {
     URL.revokeObjectURL(url);
   };
 
+  const printAsPdf = (
+    contentSelector: string,
+    filePath: string,
+    fallbackFileName: string,
+    frameTitle: string,
+  ) => {
+    const content = document.querySelector(contentSelector);
+    if (!content) return;
+
+    const markdownFileName = filePath.split("/").at(-1);
+    const pdfFileName = markdownFileName
+      ? markdownFileName.replace(/\.md$/i, ".pdf")
+      : fallbackFileName;
+    const originalDocumentTitle = document.title;
+    const pdfTitle = pdfFileName
+      .replace(/\.pdf$/i, "")
+      .replace(/^Xianlong_Min_(?:Resume|CoverLetter)_/i, "Xianlong_Min_");
+    const printFrame = document.createElement("iframe");
+    printFrame.setAttribute("aria-hidden", "true");
+    printFrame.title = frameTitle;
+    Object.assign(printFrame.style, {
+      position: "fixed",
+      width: "1px",
+      height: "1px",
+      right: "0",
+      bottom: "0",
+      border: "0",
+      opacity: "0",
+      pointerEvents: "none",
+    });
+    document.body.append(printFrame);
+
+    const printDocument = printFrame.contentDocument;
+    const printWindow = printFrame.contentWindow;
+    if (!printDocument || !printWindow) {
+      printFrame.remove();
+      setError("Unable to prepare the PDF print view.");
+      return;
+    }
+
+    printDocument.open();
+    printDocument.write(`<!doctype html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <title></title>
+          <style>
+            @page { size: letter; margin: 0.65in; }
+            html, body { margin: 0; padding: 0; background: #fff; }
+            body { color: #111; font: 10pt/1.35 Arial, Helvetica, sans-serif; }
+            h1 { margin: 0 0 0.65rem; border-bottom: 2px solid #222; padding-bottom: 0.5rem; font: 22pt/1.15 Georgia, serif; }
+            h2 { margin: 1rem 0 0.4rem; border-bottom: 1px solid #ccc; padding-bottom: 0.2rem; font-size: 10pt; break-after: avoid; }
+            h3 { break-after: avoid; }
+            p, ul, ol, blockquote { margin: 0.45rem 0; }
+            ul, ol { padding-left: 1.2rem; }
+            li { break-inside: avoid; }
+            a { color: #111; text-decoration: underline; }
+            pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+          </style>
+        </head>
+        <body><main></main></body>
+      </html>`);
+    printDocument.close();
+    printDocument.title = pdfFileName;
+    const printRoot = printDocument.querySelector("main");
+    if (!printRoot) {
+      printFrame.remove();
+      setError("Unable to prepare the PDF print view.");
+      return;
+    }
+    printRoot.innerHTML = content.innerHTML;
+    printWindow.addEventListener(
+      "afterprint",
+      () => {
+        document.title = originalDocumentTitle;
+        printFrame.remove();
+      },
+      { once: true },
+    );
+    printWindow.requestAnimationFrame(() => {
+      document.title = pdfTitle;
+      printWindow.focus();
+      printWindow.print();
+    });
+  };
+
+  const handleSavePdf = () => {
+    printAsPdf(
+      ".resume-print-content .resume-markdown",
+      savedFilePath,
+      "Xianlong_Min_Tailored_Resume.pdf",
+      "Resume PDF print view",
+    );
+  };
+
+  const handleDownloadCoverLetter = () => {
+    const file = new Blob([coverLetter], {
+      type: "text/markdown;charset=utf-8",
+    });
+    const url = URL.createObjectURL(file);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download =
+      savedCoverLetterPath.split("/").at(-1) ?? "cover-letter.md";
+    anchor.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleSaveCoverLetterPdf = () => {
+    printAsPdf(
+      ".cover-letter-print-content",
+      savedCoverLetterPath,
+      "Xianlong_Min_CoverLetter.pdf",
+      "Cover letter PDF print view",
+    );
+  };
+
   return (
-    <main className="min-h-[calc(100vh-7.5rem)] bg-[#f2f0e9] px-4 py-7 md:px-8 md:py-10">
+    <main className="resume-page min-h-[calc(100vh-7.5rem)] bg-[#f2f0e9] px-4 py-7 md:px-8 md:py-10">
       <div className="mx-auto w-full max-w-5xl rise-in">
         <header className="mb-7 border-b border-black/15 pb-6">
           <p className="mb-2 text-xs font-semibold uppercase text-[#a63d22]">
@@ -285,7 +414,7 @@ export default function ResumePage() {
           </section>
         ) : null}
 
-        <section className="mt-7 overflow-hidden border border-black/15 bg-white">
+        <section className="resume-printable mt-7 overflow-hidden border border-black/15 bg-white">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/15 px-4 py-4 md:px-6">
             <div>
               <p className="text-xs font-semibold uppercase text-[#16705c]">
@@ -316,7 +445,15 @@ export default function ResumePage() {
                   className="gap-2"
                 >
                   <Download className="size-4" aria-hidden="true" />
-                  Download copy
+                  Download Markdown
+                </Button>
+                <Button
+                  type="button"
+                  onClick={handleSavePdf}
+                  className="gap-2 bg-[#153d34] hover:bg-[#153d34]/90"
+                >
+                  <FileDown className="size-4" aria-hidden="true" />
+                  Save as PDF
                 </Button>
               </div>
             ) : null}
@@ -336,7 +473,7 @@ export default function ResumePage() {
             </div>
           ) : null}
 
-          <div className="min-h-72 p-5 md:min-h-96 md:p-8">
+          <div className="resume-print-content min-h-72 p-5 md:min-h-96 md:p-8">
             {markdown ? (
               <article className="markdown-content resume-markdown mx-auto w-full max-w-3xl text-sm leading-7">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -362,6 +499,54 @@ export default function ResumePage() {
             )}
           </div>
         </section>
+
+        {coverLetter ? (
+          <section className="mt-6 overflow-hidden border border-black/15 bg-white">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/15 px-4 py-4 md:px-6">
+              <div>
+                <p className="text-xs font-semibold uppercase text-[#a63d22]">
+                  Application letter
+                </p>
+                <h2 className="mt-1 text-xl font-semibold">Cover letter</h2>
+              </div>
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={handleDownloadCoverLetter}
+                className="gap-2"
+              >
+                <Download className="size-4" aria-hidden="true" />
+                Download Markdown
+              </Button>
+              <Button
+                type="button"
+                onClick={handleSaveCoverLetterPdf}
+                className="gap-2 bg-[#153d34] hover:bg-[#153d34]/90"
+              >
+                <FileDown className="size-4" aria-hidden="true" />
+                Save as PDF
+              </Button>
+            </div>
+            {savedCoverLetterPath ? (
+              <div
+                role="status"
+                aria-live="polite"
+                className="flex flex-wrap items-center gap-2 border-b border-[#16705c]/20 bg-[#e7f1ec] px-4 py-3 text-sm text-[#153d34] md:px-6"
+              >
+                <Check className="size-4 shrink-0" aria-hidden="true" />
+                <span>Saved locally:</span>
+                <code className="break-all font-mono text-xs">
+                  {savedCoverLetterPath}
+                </code>
+              </div>
+            ) : null}
+            <article className="cover-letter-print-content markdown-content resume-markdown mx-auto w-full max-w-3xl p-5 text-sm leading-7 md:p-8">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {coverLetter}
+              </ReactMarkdown>
+            </article>
+          </section>
+        ) : null}
       </div>
     </main>
   );

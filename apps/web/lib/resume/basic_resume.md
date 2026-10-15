@@ -18,13 +18,16 @@ Experienced in modernizing legacy applications, decomposing monolithic systems i
 
 *Canada · Apr 2019 – Present*
 
-- **Modernize legacy enterprise applications** by contributing to the redevelopment of two legacy web applications using React, Next.js, and TypeScript, while helping transition backend capabilities to Node.js and Java/Spring Boot microservices.
-- **Contribute to large-scale backend modernization** involving a legacy codebase exceeding 200K lines and its decomposition into 30+ independently deployable microservices; the broader modernization effort improved system performance by approximately 30% and reduced deployment time by approximately 70%.
-- **Optimize backend service performance** using Java, Spring Boot, database optimization, caching, and API improvements, reducing critical response times from approximately 2 seconds to 400 milliseconds while supporting approximately 1M+ daily API requests and peak workloads exceeding 10K requests per second.
-- **Improve frontend efficiency and maintainability** using React, Next.js, TypeScript, and GraphQL, reducing redundant API calls by approximately 40% through more efficient data-fetching patterns and simplifying application state management.
-- **Improve local development efficiency and software quality** by streamlining local deployment workflows, simplifying debugging in local environments, and expanding unit, integration, and API testing to approximately 90% coverage.
-- **Develop a personal AI-powered engineering assistant** combining multi-agent workflows and retrieval-augmented generation (RAG) to analyze development tasks, retrieve relevant technical context, and support implementation through collaboration with coding agents.
-- **Support production reliability and team effectiveness** by investigating complex issues across application code, APIs, databases, infrastructure, and integrations, while mentoring 5+ developers through code reviews, technical guidance, and knowledge sharing.
+- **Modernize legacy enterprise applications** by contributing to the redevelopment of two legacy web applications using React, Next.js, and TypeScript, while supporting the migration of backend capabilities to Node.js and Java/Spring Boot microservices.
+- **Drive large-scale backend modernization** of a legacy codebase exceeding 200K lines by contributing to its decomposition into 30+ independently deployable microservices. The broader modernization initiative improved system performance by approximately 30% and reduced deployment time by approximately 70%.
+- **Optimize backend performance and scalability** using Java, Spring Boot, database optimization, caching, and API improvements, reducing critical response times from approximately 2 seconds to 400 milliseconds while supporting over 1M daily API requests and peak workloads exceeding 10K requests per second.
+- **Enhance frontend performance and maintainability** using React, Next.js, TypeScript, and GraphQL, reducing redundant API calls by approximately 40% through optimized data-fetching patterns and more efficient application state management.
+- **Streamline local development and improve software quality** by simplifying local deployment workflows, improving debugging capabilities in local environments, and expanding unit, integration, and API testing to approximately 90% coverage.
+- **Develop an AI-powered engineering assistant** integrating multi-agent workflows and retrieval-augmented generation (RAG) to analyze development tasks, retrieve relevant technical context, and collaborate with coding agents to support implementation.
+- **Improve production reliability and observability** by leveraging Datalog and Jenkins to investigate application errors, analyze logs and telemetry, identify root causes, and troubleshoot issues across services and integrations.
+- **Lead technical design and architectural reviews** for selected features and APIs, proactively identifying technical risks, dependencies, and delivery blockers while producing technical specifications and architecture documentation to align implementation across teams.
+- **Collaborate effectively in Agile/Scrum teams** by participating in sprint planning, backlog refinement, daily stand-ups, and retrospectives, coordinating cross-functional delivery, and proactively resolving technical dependencies to keep development on track.
+- **Mentor engineers and strengthen engineering practices** through code reviews, technical guidance, knowledge sharing, and ongoing support for 5+ developers.
 
 ### Front-End Lead Developer | LuminUltra Technologies Ltd.
 

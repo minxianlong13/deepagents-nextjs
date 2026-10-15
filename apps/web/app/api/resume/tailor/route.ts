@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { tailorResume } from "@/lib/agents/resume_tailor_agent";
-import { saveTailoredResume } from "@/lib/resume/save-tailored-resume";
+import { runResumeTailorWorkflow } from "@/lib/workflow/resume_tailor";
 
 const requestSchema = z.object({
   jobDescription: z.string().trim().min(50).max(30_000),
@@ -21,14 +20,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const result = await tailorResume(parsed.data.jobDescription);
-    const savedFile = await saveTailoredResume(
-      result.tailoredResume,
-      result.companyName,
-      result.jobTitle,
-    );
-
-    return NextResponse.json({ ...result, ...savedFile });
+    const result = await runResumeTailorWorkflow(parsed.data.jobDescription);
+    return NextResponse.json(result);
   } catch (error: unknown) {
     const message =
       error instanceof Error ? error.message : "Unable to tailor the resume.";
