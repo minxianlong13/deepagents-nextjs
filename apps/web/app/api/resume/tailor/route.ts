@@ -21,12 +21,14 @@ export async function POST(request: Request) {
       );
     }
 
-    const { jobAnalysis, markdown } = await tailorResume(
-      parsed.data.jobDescription,
+    const result = await tailorResume(parsed.data.jobDescription);
+    const savedFile = await saveTailoredResume(
+      result.tailoredResume,
+      result.companyName,
+      result.jobTitle,
     );
-    const savedFile = await saveTailoredResume(markdown);
 
-    return NextResponse.json({ jobAnalysis, markdown, ...savedFile });
+    return NextResponse.json({ ...result, ...savedFile });
   } catch (error: unknown) {
     const message =
       error instanceof Error ? error.message : "Unable to tailor the resume.";

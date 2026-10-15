@@ -13,12 +13,12 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import type { JobAnalysis } from "@/lib/agents/resume_tailor_agent";
+import type { ResumeTailorResult } from "@/lib/agents/resume_tailor_agent";
 
 export default function ResumePage() {
   const [jobDescription, setJobDescription] = useState("");
   const [markdown, setMarkdown] = useState("");
-  const [jobAnalysis, setJobAnalysis] = useState<JobAnalysis | null>(null);
+  const [analysis, setAnalysis] = useState<ResumeTailorResult | null>(null);
   const [savedFilePath, setSavedFilePath] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,7 @@ export default function ResumePage() {
     setError("");
     setCopied(false);
     setSavedFilePath("");
-    setJobAnalysis(null);
+    setAnalysis(null);
 
     try {
       const response = await fetch("/api/resume/tailor", {
@@ -43,19 +43,30 @@ export default function ResumePage() {
         body: JSON.stringify({ jobDescription }),
       });
       const data = (await response.json()) as {
-        markdown?: string;
-        jobAnalysis?: JobAnalysis;
+        companyName?: string | null;
+        jobTitle?: string | null;
+        requirements?: ResumeTailorResult["requirements"];
+        tailoredResume?: string;
+        missingRequirements?: string[];
+        changes?: string[];
         fileName?: string;
         filePath?: string;
         error?: string;
       };
 
-      if (!response.ok || !data.markdown) {
+      if (!response.ok || !data.tailoredResume) {
         throw new Error(data.error || "Unable to tailor the resume.");
       }
 
-      setMarkdown(data.markdown);
-      setJobAnalysis(data.jobAnalysis ?? null);
+      setMarkdown(data.tailoredResume);
+      setAnalysis({
+        companyName: data.companyName ?? null,
+        jobTitle: data.jobTitle ?? null,
+        requirements: data.requirements ?? [],
+        tailoredResume: data.tailoredResume,
+        missingRequirements: data.missingRequirements ?? [],
+        changes: data.changes ?? [],
+      });
       setSavedFilePath(data.filePath ?? data.fileName ?? "");
     } catch (caughtError) {
       setError(
@@ -164,7 +175,7 @@ export default function ResumePage() {
           </div>
         </form>
 
-        {jobAnalysis ? (
+        {analysis ? (
           <section className="mt-6 border border-black/15 bg-[#e7f1ec] p-4 md:p-5">
             <div className="mb-3">
               <p className="text-xs font-semibold uppercase text-[#16705c]">
@@ -180,7 +191,7 @@ export default function ResumePage() {
                   Company
                 </dt>
                 <dd className="mt-1 text-sm">
-                  {jobAnalysis.companyName ?? "Not specified"}
+                  {analysis.companyName ?? "Not specified"}
                 </dd>
               </div>
               <div>
@@ -188,26 +199,87 @@ export default function ResumePage() {
                   Position
                 </dt>
                 <dd className="mt-1 text-sm">
-                  {jobAnalysis.jobTitle ?? "Not specified"}
+                  {analysis.jobTitle ?? "Not specified"}
                 </dd>
               </div>
               <div className="sm:col-span-2">
                 <dt className="text-xs font-semibold uppercase text-black/50">
-                  Required skills
+                  Job requirements
                 </dt>
                 <dd className="mt-1 text-sm leading-6">
-                  {jobAnalysis.requiredSkills.length
-                    ? jobAnalysis.requiredSkills.join(" · ")
-                    : "No explicit required skills identified"}
+                  {analysis.requirements.length
+                    ? analysis.requirements
+                        .map(
+                          (requirement) =>
+                            `${requirement.term} (${requirement.importance})`,
+                        )
+                        .join(" · ")
+                    : "No requirements identified"}
                 </dd>
               </div>
             </dl>
+            <div className="mt-4 overflow-x-auto border-t border-black/10 pt-4">
+              <h3 className="mb-2 text-sm font-semibold">Evidence match</h3>
+              <table className="w-full min-w-[38rem] border-collapse text-left text-xs">
+                <thead>
+                  <tr className="border-b border-black/15 text-black/55">
+                    <th className="py-2 pr-3 font-semibold">Requirement</th>
+                    <th className="py-2 pr-3 font-semibold">Importance</th>
+                    <th className="py-2 pr-3 font-semibold">Match</th>
+                    <th className="py-2 font-semibold">Resume evidence</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {analysis.requirements.map((requirement, index) => (
+                    <tr
+                      key={`${requirement.term}-${index}`}
+                      className="border-b border-black/10 align-top last:border-0"
+                    >
+                      <td className="py-2 pr-3 font-medium">
+                        {requirement.term}
+                      </td>
+                      <td className="py-2 pr-3">{requirement.importance}</td>
+                      <td className="py-2 pr-3">
+                        {requirement.supported ? "Supported" : "Missing"}
+                      </td>
+                      <td className="py-2">
+                        {requirement.evidence.length
+                          ? requirement.evidence.join("; ")
+                          : "No supporting evidence"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {analysis.missingRequirements.length ? (
+              <div className="mt-4 border-t border-black/10 pt-4">
+                <h3 className="text-sm font-semibold">
+                  Unsupported requirements
+                </h3>
+                <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
+                  {analysis.missingRequirements.map((requirement) => (
+                    <li key={requirement}>{requirement}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+            {analysis.changes.length ? (
+              <div className="mt-4 border-t border-black/10 pt-4">
+                <h3 className="text-sm font-semibold">Tailoring decisions</h3>
+                <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
+                  {analysis.changes.map((change) => (
+                    <li key={change}>{change}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
             <details className="mt-4 border-t border-black/10 pt-3">
               <summary className="cursor-pointer text-xs font-semibold text-[#153d34]">
                 View extracted JSON
               </summary>
               <pre className="mt-3 overflow-x-auto bg-white/70 p-3 text-xs leading-5">
-                {JSON.stringify(jobAnalysis, null, 2)}
+                {JSON.stringify(analysis, null, 2)}
               </pre>
             </details>
           </section>
