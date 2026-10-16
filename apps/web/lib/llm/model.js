@@ -1,7 +1,7 @@
 import { ChatAnthropic } from "@langchain/anthropic";
 import { OpenAIEmbeddings } from "@langchain/openai";
 
-export const OPENAI_EMBEDDING_DIMENSIONS = 1024;
+const OPENAI_EMBEDDING_DIMENSIONS = 1024;
 
 export function createClaudeSonnetModel() {
   return new ChatAnthropic({ model: "claude-sonnet-4-6" });

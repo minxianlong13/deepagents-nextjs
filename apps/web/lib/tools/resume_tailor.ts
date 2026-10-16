@@ -6,10 +6,7 @@ import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { tool } from "langchain";
 import { z } from "zod";
 import prisma from "@/lib/db/prisma";
-import {
-  createOpenAIEmbeddingModel,
-  OPENAI_EMBEDDING_DIMENSIONS,
-} from "@/lib/llm/model.js";
+import { createOpenAIEmbeddingModel } from "@/lib/llm/model.js";
 import { candidateProfile } from "@/lib/resume/candidate-profile";
 
 const CHUNK_SIZE = 1000;
@@ -132,7 +129,6 @@ export async function indexCandidateProfile(version = 1) {
       profileId: storedProfileId,
       version,
       chunks: chunks.length,
-      dimensions: OPENAI_EMBEDDING_DIMENSIONS,
     };
   });
 }
