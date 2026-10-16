@@ -2,15 +2,16 @@ import "dotenv/config";
 
 import { randomUUID } from "node:crypto";
 import { Document } from "@langchain/core/documents";
-import { OpenAIEmbeddings } from "@langchain/openai";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { tool } from "langchain";
 import { z } from "zod";
 import prisma from "@/lib/db/prisma";
+import {
+  createOpenAIEmbeddingModel,
+  OPENAI_EMBEDDING_DIMENSIONS,
+} from "@/lib/llm/model.js";
 import { candidateProfile } from "@/lib/resume/candidate-profile";
 
-const EMBEDDING_DIMENSIONS = 1024;
-const EMBEDDING_MODEL = "text-embedding-3-small";
 const CHUNK_SIZE = 1000;
 const CHUNK_OVERLAP = 200;
 
@@ -55,10 +56,7 @@ export async function splitProfile(): Promise<Document[]> {
 }
 
 async function createEmbeddings() {
-  return new OpenAIEmbeddings({
-    model: EMBEDDING_MODEL,
-    dimensions: EMBEDDING_DIMENSIONS,
-  });
+  return createOpenAIEmbeddingModel();
 }
 
 export async function indexCandidateProfile(version = 1) {
@@ -134,7 +132,7 @@ export async function indexCandidateProfile(version = 1) {
       profileId: storedProfileId,
       version,
       chunks: chunks.length,
-      dimensions: EMBEDDING_DIMENSIONS,
+      dimensions: OPENAI_EMBEDDING_DIMENSIONS,
     };
   });
 }

@@ -45,11 +45,11 @@ Your role is to coordinate chunk analysis by delegating to the chunk-analyst sub
 - Prefer concrete steps and code-oriented guidance from the documentation.`;
 
 import { createDeepAgent } from "deepagents";
-import { ChatAnthropic } from "@langchain/anthropic";
 import { MultiServerMCPClient } from "@langchain/mcp-adapters";
 import { JIRA_TICKET_ANALYSIS_PROMPT } from "../skill/jira_analysis";
 import { loadMcpClientConfig } from "../mcp/client";
 import { backend, documentSearch } from "../tools/rag_search";
+import { createClaudeSonnetModel } from "../llm/model.js";
 
 const maxConcurrentAnalysts = 3;
 
@@ -75,9 +75,7 @@ async function createRagAgent() {
   const mcpTools = await mcpClient.getTools();
 
   return createDeepAgent({
-    model: new ChatAnthropic({
-      model: "claude-sonnet-4-6",
-    }),
+    model: createClaudeSonnetModel(),
     tools: [...mcpTools, documentSearch],
     backend: backend,
     systemPrompt: instructions,

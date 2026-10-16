@@ -1,6 +1,6 @@
 import { createDeepAgent } from "deepagents";
-import { ChatAnthropic } from "@langchain/anthropic";
 import { internetSearch } from "../tools/internet_search";
+import { createClaudeHaikuModel } from "../llm/model.js";
 
 // System prompt to steer the agent to be an expert researcher
 const researchInstructions = `You are an expert researcher. Your job is to conduct thorough research and then write a polished report.
@@ -13,9 +13,7 @@ Use this to run an internet search for a given query. You can specify the max nu
 `;
 
 export const searchAgent = createDeepAgent({
-  model: new ChatAnthropic({
-    model: "claude-haiku-4-5-20251001",
-  }),
+  model: createClaudeHaikuModel(),
   tools: [internetSearch],
   systemPrompt: researchInstructions,
 });

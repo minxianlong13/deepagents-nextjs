@@ -1,7 +1,7 @@
-import { ChatAnthropic } from "@langchain/anthropic";
 import { createDeepAgent } from "deepagents";
 import { toolStrategy } from "langchain";
 import { z } from "zod";
+import { createDeterministicClaudeSonnetModel } from "../llm/model.js";
 import {
   COVER_LETTER_INSTRUCTIONS,
   RESUME_TAILOR_INSTRUCTIONS,
@@ -33,13 +33,13 @@ const resumeTailorOutputSchema = z.object({
 export type ResumeTailorResult = z.infer<typeof resumeTailorOutputSchema>;
 
 const resumeTailorAgent = createDeepAgent({
-  model: new ChatAnthropic({ model: "claude-sonnet-4-6", temperature: 0 }),
+  model: createDeterministicClaudeSonnetModel(),
   systemPrompt: RESUME_TAILOR_INSTRUCTIONS,
   responseFormat: toolStrategy(resumeTailorOutputSchema),
 });
 
 const coverLetterAgent = createDeepAgent({
-  model: new ChatAnthropic({ model: "claude-sonnet-4-6", temperature: 0 }),
+  model: createDeterministicClaudeSonnetModel(),
   systemPrompt: COVER_LETTER_INSTRUCTIONS,
 });
 

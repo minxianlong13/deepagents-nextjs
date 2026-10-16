@@ -5,12 +5,12 @@ import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { Document } from "@langchain/core/documents";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
-import { OpenAIEmbeddings } from "@langchain/openai";
 import { PineconeStore } from "@langchain/pinecone";
 import { Pinecone as PineconeClient } from "@pinecone-database/pinecone";
 import { StateBackend } from "deepagents";
 import { tool } from "langchain";
 import { z } from "zod";
+import { createOpenAIEmbeddingModel } from "../llm/model.js";
 
 const DOCS_DIRECTORY = path.resolve(process.cwd(), "../../docs");
 const REMOTE_METADATA_DIRECTORY = path.join(DOCS_DIRECTORY, "remote");
@@ -72,7 +72,10 @@ function resolveDocsSubdirectory(folderName: string): string {
 
 function isWithinDirectory(directory: string, filePath: string): boolean {
   const relativePath = path.relative(directory, filePath);
-  return relativePath === "" || (!relativePath.startsWith("..") && !path.isAbsolute(relativePath));
+  return (
+    relativePath === "" ||
+    (!relativePath.startsWith("..") && !path.isAbsolute(relativePath))
+  );
 }
 
 async function loadRemoteMetadata(
@@ -85,7 +88,9 @@ async function loadRemoteMetadata(
   const metadata = await Promise.all(
     metadataFiles.map(async (filePath): Promise<RemoteMetadata | null> => {
       try {
-        const parsed = JSON.parse(await readFile(filePath, "utf8")) as Partial<RemoteMetadata>;
+        const parsed = JSON.parse(
+          await readFile(filePath, "utf8"),
+        ) as Partial<RemoteMetadata>;
         if (
           !Array.isArray(parsed.sources) ||
           !parsed.sources.every((source) => typeof source === "string")
@@ -125,7 +130,9 @@ async function loadRemoteDocuments(
   );
 }
 
-async function loadSourceDocuments(folderName: string): Promise<SourceDocument[]> {
+async function loadSourceDocuments(
+  folderName: string,
+): Promise<SourceDocument[]> {
   const docsSubdirectory = resolveDocsSubdirectory(folderName);
   if (isWithinDirectory(REMOTE_METADATA_DIRECTORY, docsSubdirectory)) {
     const remoteDocuments = await loadRemoteDocuments(docsSubdirectory);
@@ -141,28 +148,31 @@ async function loadSourceDocuments(folderName: string): Promise<SourceDocument[]
     (filePath) => !isWithinDirectory(REMOTE_METADATA_DIRECTORY, filePath),
   );
   const localDocuments = await Promise.all(
-    localFiles
-      .map(async (filePath) => {
-        try {
-          return {
-            source: `local:${path.relative(DOCS_DIRECTORY, filePath)}`,
-            content: await readFile(filePath, "utf8"),
-          };
-        } catch {
-          return null;
-        }
-      }),
+    localFiles.map(async (filePath) => {
+      try {
+        return {
+          source: `local:${path.relative(DOCS_DIRECTORY, filePath)}`,
+          content: await readFile(filePath, "utf8"),
+        };
+      } catch {
+        return null;
+      }
+    }),
   );
 
   const documents = localDocuments.filter(
     (document): document is SourceDocument => document !== null,
   );
   if (docsSubdirectory === DOCS_DIRECTORY) {
-    const remoteDocuments = await loadRemoteDocuments(REMOTE_METADATA_DIRECTORY);
+    const remoteDocuments = await loadRemoteDocuments(
+      REMOTE_METADATA_DIRECTORY,
+    );
     documents.push(...remoteDocuments);
   }
   if (documents.length === 0) {
-    throw new Error(`No readable documents were found under ./docs/${folderName}`);
+    throw new Error(
+      `No readable documents were found under ./docs/${folderName}`,
+    );
   }
   return documents;
 }
@@ -188,10 +198,7 @@ async function splitDocuments(documents: Document[]): Promise<Document[]> {
 }
 
 async function createVectorStore() {
-  const embeddings = new OpenAIEmbeddings({
-    model: "text-embedding-3-small",
-    dimensions: 1024,
-  });
+  const embeddings = createOpenAIEmbeddingModel();
 
   const pineconeApiKey = process.env.PINECONE_API_KEY;
   if (!pineconeApiKey) {
