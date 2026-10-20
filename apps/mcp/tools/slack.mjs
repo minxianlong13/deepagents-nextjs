@@ -80,14 +80,16 @@ export function registerSlackTools(server, redirectUrl) {
           );
         }
 
+        const normalizedResult = normalizeSlackSearchResult(
+          result.content
+            .filter((item) => item.type === "text")
+            .map((item) => item.text),
+          input,
+        );
+
         return {
-          content: [],
-          structuredContent: normalizeSlackSearchResult(
-            result.content
-              .filter((item) => item.type === "text")
-              .map((item) => item.text),
-            input,
-          ),
+          content: [{ type: "text", text: JSON.stringify(normalizedResult) }],
+          structuredContent: normalizedResult,
         };
       } finally {
         await client.close();

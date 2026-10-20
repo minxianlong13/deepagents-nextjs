@@ -1,4 +1,4 @@
-FROM node:22-alpine AS deps
+FROM mcr.microsoft.com/playwright:v1.64.1-noble AS deps
 
 WORKDIR /app
 
@@ -9,7 +9,7 @@ RUN corepack enable && corepack prepare pnpm@11.2.2 --activate
 COPY package.json ./
 RUN pnpm install --prod --no-frozen-lockfile
 
-FROM node:22-alpine AS runtime
+FROM mcr.microsoft.com/playwright:v1.64.1-noble AS runtime
 
 WORKDIR /app
 
@@ -18,10 +18,10 @@ ENV NODE_ENV=production \
     MCP_HOST=0.0.0.0
 
 # Run as non-root for better container security.
-USER node
+USER pwuser
 
-COPY --from=deps --chown=node:node /app/node_modules ./node_modules
-COPY --chown=node:node server.mjs client.mjs package.json ./
+COPY --from=deps --chown=pwuser:pwuser /app/node_modules ./node_modules
+COPY --chown=pwuser:pwuser server.mjs client.mjs package.json ./
 
 EXPOSE 8080
 

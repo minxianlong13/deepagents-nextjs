@@ -12,6 +12,8 @@ const toolAliases = {
   get_wiki_content: "get_wiki_content",
   slack: "search_slack_messages",
   search_slack_messages: "search_slack_messages",
+  webpage: "ingest_webpage",
+  ingest_webpage: "ingest_webpage",
 };
 
 function printUsage() {
@@ -23,11 +25,13 @@ Tools and examples:
   jira [issueKey]       pnpm test jira GROUP-132015
   wiki [contentId]      pnpm test wiki 1106609325
   slack <keywords...>   pnpm test slack XSS acknowledgement email
+  webpage [url]         pnpm test webpage https://example.com/article
 
 You can also pass a JSON object matching the selected tool's input schema:
   pnpm test get_jira_ticket '{"issueKey":"GROUP-132015"}'
   pnpm test get_wiki_content '{"contentId":"1106609325"}'
-  pnpm test search_slack_messages '{"keywords":["XSS"]}'`);
+  pnpm test search_slack_messages '{"keywords":["XSS"]}'
+  pnpm test ingest_webpage '{"url":"https://example.com/article"}'`);
 }
 
 function parseToolArguments(toolName, suppliedArguments) {
@@ -37,6 +41,15 @@ function parseToolArguments(toolName, suppliedArguments) {
     }
     if (toolName === "get_wiki_content") {
       return { contentId: process.env.WIKI_CONTENT_ID ?? "1106609325" };
+    }
+    if (toolName === "ingest_webpage") {
+      const url = process.env.WEBPAGE_URL;
+      if (!url) {
+        throw new Error(
+          "Webpage ingestion requires a URL argument or WEBPAGE_URL.",
+        );
+      }
+      return { url };
     }
     throw new Error(
       "Slack search requires keywords or filters. Pass JSON arguments or one or more keywords.",
@@ -63,6 +76,15 @@ function parseToolArguments(toolName, suppliedArguments) {
       throw new Error("Wiki accepts one positional argument: contentId.");
     }
     return { contentId: suppliedArguments[0] };
+  }
+
+  if (toolName === "ingest_webpage") {
+    if (suppliedArguments.length !== 1) {
+      throw new Error(
+        "Webpage ingestion accepts one positional argument: url.",
+      );
+    }
+    return { url: suppliedArguments[0] };
   }
 
   return {
@@ -123,7 +145,13 @@ try {
       );
     }
 
-    if (
+    if (toolName === "ingest_webpage") {
+      const markdown = result.content
+        .filter((item) => item.type === "text")
+        .map((item) => item.text)
+        .join("\n");
+      console.log(markdown || result.structuredContent?.markdown || "");
+    } else if (
       ["get_jira_ticket", "get_wiki_content", "search_slack_messages"].includes(
         toolName,
       ) &&

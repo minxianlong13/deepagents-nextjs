@@ -208,7 +208,7 @@ function parseSlackResults(rawResults) {
   const resultHeaders = [
     ...rawResults.matchAll(/^### Result (\d+) of (\d+)$/gm),
   ];
-  const messages = resultHeaders.map((header, index) => {
+  let messages = resultHeaders.map((header, index) => {
     const blockStart = header.index + header[0].length;
     const blockEnd = resultHeaders[index + 1]?.index ?? rawResults.length;
     return parseSlackMessageBlock(
@@ -216,6 +216,61 @@ function parseSlackResults(rawResults) {
       Number(header[1]),
     );
   });
+
+  if (messages.length === 0) {
+    const conciseRows = [];
+    let currentRow;
+
+    for (const line of rawResults.split(/\r?\n/)) {
+      const rowMatch = /^\s*(\d+)\.\s+(.+?)\s+-\s+([^:\n]+):(?:\s+(.*))?$/.exec(
+        line,
+      );
+      if (rowMatch) {
+        currentRow = {
+          rank: Number(rowMatch[1]),
+          channel: rowMatch[2].trim(),
+          author: rowMatch[3].trim(),
+          text: rowMatch[4] ?? "",
+        };
+        conciseRows.push(currentRow);
+      } else if (currentRow && !/^\s*---\s*$/.test(line)) {
+        currentRow.text += `\n${line}`;
+      }
+    }
+
+    messages = conciseRows.map((row) => {
+      const timeMatch = row.text.match(
+        /\s+(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} [A-Z]{2,5})$/,
+      );
+      const permalink = row.text.match(
+        /<(https?:\/\/[^|>]+)(?:\|[^>]*)?>/,
+      )?.[1];
+      const text = timeMatch
+        ? row.text.slice(0, timeMatch.index).trimEnd()
+        : row.text;
+
+      return {
+        rank: row.rank,
+        channel: {
+          name: row.channel.replace(/^#/, ""),
+          id: null,
+        },
+        author: {
+          name: row.author,
+          id: null,
+          isBot: false,
+        },
+        time: timeMatch?.[1] ?? null,
+        messageTs: null,
+        permalink: permalink ?? null,
+        replyCount: null,
+        text,
+        contextBefore: null,
+        contextAfter: null,
+      };
+    });
+  }
+
   const resultCount = rawResults.match(/^## Messages \((\d+) results?\)/m)?.[1];
   const headingTotal = resultHeaders[0]?.[2];
 
@@ -232,7 +287,7 @@ function parseSlackResults(rawResults) {
 function unwrapSlackPayload(value) {
   let current = value;
 
-  for (let depth = 0; depth < 6; depth += 1) {
+  for (let depth = 0; depth < 32; depth += 1) {
     if (Array.isArray(current)) {
       const textBlock = current.find(
         (item) => item && typeof item === "object" && item.type === "text",

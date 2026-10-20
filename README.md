@@ -39,18 +39,20 @@ From `apps/mcp`, list the tools exposed by the local server:
 pnpm test list
 ```
 
-Select one tool to call. Jira and Wiki accept positional IDs or JSON arguments; Slack accepts search keywords or JSON arguments:
+Select one tool to call. Jira and Wiki accept positional IDs or JSON arguments; Slack accepts search keywords or JSON arguments; webpage ingestion accepts a URL or JSON arguments:
 
 ```bash
 pnpm test jira GROUP-132015
 pnpm test wiki 1106609325
 pnpm test slack XSS acknowledgement email
 pnpm test search_slack_messages '{"keywords":["XSS"],"response_format":"concise"}'
+pnpm test webpage https://developer.mozilla.org/en-US/docs/Web/JavaScript
+pnpm test ingest_webpage '{"url":"https://developer.mozilla.org/en-US/docs/Web/JavaScript"}'
 ```
 
-The client reads `MCP_SERVER_URL` if set; otherwise it defaults to `http://127.0.0.1:8787/mcp`. Jira and Wiki inputs can be configured with `JIRA_ISSUE_KEY` and `WIKI_CONTENT_ID` when calling those tools without positional arguments. Slack search needs a `query`, at least one keyword, or a `filters` value. On the first Slack search, the local proxy opens the Cvent OAuth sign-in page and receives the authorization callback at `http://localhost:8787/slack/oauth/callback`. The local OAuth client and tokens are kept in memory and are lost when the MCP server process exits.
+The client reads `MCP_SERVER_URL` if set; otherwise it defaults to `http://127.0.0.1:8787/mcp`. Jira, Wiki, and webpage inputs can be configured with `JIRA_ISSUE_KEY`, `WIKI_CONTENT_ID`, and `WEBPAGE_URL` when calling those tools without positional arguments. Slack search needs a `query`, at least one keyword, or a `filters` value. On the first Slack search, the local proxy opens the Cvent OAuth sign-in page and receives the authorization callback at `http://localhost:8787/slack/oauth/callback`. The local OAuth client and tokens are kept in memory and are lost when the MCP server process exits.
 
-Slack search preserves the upstream text response and also returns parsed JSON in `structuredContent`, using schema `slack-search/v1`:
+Slack search returns normalized JSON as text in `content` and as structured data in `structuredContent`, using schema `slack-search/v1`:
 
 ```json
 {
@@ -117,6 +119,24 @@ WIKI_PASSWORD=your-password
 Credentials are read only by the MCP server and are never accepted as tool arguments or included in the Markdown output. The tool calls the content endpoint with `Accept: application/json`.
 
 To test this tool through the standalone client, run `pnpm test wiki 1106609325` from `apps/mcp`.
+
+## Webpage MCP Tool
+
+The MCP server exposes `ingest_webpage`, which accepts a public HTTP or HTTPS URL, renders it in Chromium with Playwright (including JavaScript-driven pages), extracts the main content, and converts it to Markdown. Markdown is returned as text in `content`; `structuredContent` also includes the final URL and page title. Local or private-network hosts, non-HTML responses, rendered pages larger than 5 MB, and redirects beyond the limit are rejected.
+
+For local runs, install the Playwright Chromium browser once from `apps/mcp`:
+
+```bash
+pnpm exec playwright install chromium
+```
+
+The MCP Docker image uses the matching Playwright base image with Chromium included. To test the tool through the standalone client, run from `apps/mcp`:
+
+```bash
+pnpm test webpage https://developer.mozilla.org/en-US/docs/Web/JavaScript
+```
+
+You can also pass the input as JSON with `pnpm test ingest_webpage '{"url":"https://example.com/article"}'`, or set `WEBPAGE_URL` to use it when no URL argument is provided.
 
 ## Test MCP via Next.js Route
 
