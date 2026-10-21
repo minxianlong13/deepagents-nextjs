@@ -22,6 +22,14 @@ export default function RagConfigurationPage() {
     Array<{ contentId: string; title: string; filePath: string }>
   >([]);
   const [wikiError, setWikiError] = useState<string | null>(null);
+  const [webpageUrl, setWebpageUrl] = useState("");
+  const [webpageLoading, setWebpageLoading] = useState(false);
+  const [webpageFile, setWebpageFile] = useState<{
+    title: string;
+    url: string;
+    filePath: string;
+  } | null>(null);
+  const [webpageError, setWebpageError] = useState<string | null>(null);
 
   const initializeKnowledgeBase = async () => {
     if (initializing) return;
@@ -84,7 +92,9 @@ export default function RagConfigurationPage() {
       };
 
       if (!response.ok) {
-        throw new Error(data.details || data.error || "Unable to load wiki content");
+        throw new Error(
+          data.details || data.error || "Unable to load wiki content",
+        );
       }
 
       setWikiPages(data.files ?? []);
@@ -96,6 +106,49 @@ export default function RagConfigurationPage() {
       );
     } finally {
       setWikiLoading(false);
+    }
+  };
+
+  const ingestWebpage = async () => {
+    if (webpageLoading) return;
+
+    setWebpageLoading(true);
+    setWebpageFile(null);
+    setWebpageError(null);
+
+    try {
+      const response = await fetch("/api/manage/webpage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: webpageUrl.trim() }),
+      });
+      const data = (await response.json()) as {
+        title?: string;
+        url?: string;
+        filePath?: string;
+        error?: string;
+        details?: string;
+      };
+
+      if (!response.ok) {
+        throw new Error(
+          data.details || data.error || "Unable to ingest webpage",
+        );
+      }
+
+      setWebpageFile({
+        title: data.title ?? "Webpage",
+        url: data.url ?? webpageUrl.trim(),
+        filePath: data.filePath ?? "docs/webpage",
+      });
+    } catch (caughtError) {
+      setWebpageError(
+        caughtError instanceof Error
+          ? caughtError.message
+          : "Unable to ingest webpage",
+      );
+    } finally {
+      setWebpageLoading(false);
     }
   };
 
@@ -125,8 +178,8 @@ export default function RagConfigurationPage() {
               <h2 className="text-lg font-semibold">Knowledge base</h2>
               <p className="max-w-2xl text-sm leading-relaxed text-black/65">
                 Choose <code>.</code> to index all local docs plus remote
-                metadata, or choose a subfolder under <code>./docs</code>.
-                Local folders are indexed from their files; folders under
+                metadata, or choose a subfolder under <code>./docs</code>. Local
+                folders are indexed from their files; folders under
                 <code>remote</code> use their JSON metadata to fetch remote
                 sources. Unchanged sources are skipped.
               </p>
@@ -226,10 +279,69 @@ export default function RagConfigurationPage() {
                   <ul className="space-y-1 text-xs text-black/65">
                     {wikiPages.map((page) => (
                       <li key={page.contentId}>
-                        {page.title} <span className="text-black/40">({page.contentId})</span>
+                        {page.title}{" "}
+                        <span className="text-black/40">
+                          ({page.contentId})
+                        </span>
                       </li>
                     ))}
                   </ul>
+                </div>
+              ) : null}
+            </section>
+
+            <section className="space-y-3 border-t border-black/10 pt-6">
+              <div>
+                <h2 className="text-lg font-semibold">Webpage files</h2>
+                <p className="max-w-2xl text-sm leading-relaxed text-black/65">
+                  Enter a public webpage URL to render it through the MCP
+                  <code className="mx-1">ingest_webpage</code> tool and save the
+                  extracted Markdown in <code>docs/webpage</code>.
+                </p>
+              </div>
+              <label className="block max-w-xl space-y-2 text-sm font-medium">
+                Webpage URL
+                <input
+                  type="url"
+                  value={webpageUrl}
+                  onChange={(event) => setWebpageUrl(event.target.value)}
+                  placeholder="https://example.com/article"
+                  className="w-full rounded-xl border border-black/15 bg-white/90 px-3 py-2 font-normal outline-none focus:border-black"
+                  disabled={webpageLoading}
+                />
+              </label>
+              <Button
+                type="button"
+                size="lg"
+                onClick={ingestWebpage}
+                disabled={webpageLoading || !webpageUrl.trim()}
+              >
+                {webpageLoading ? "Extracting webpage..." : "Save as Markdown"}
+              </Button>
+
+              {webpageError ? (
+                <p
+                  role="alert"
+                  className="rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800"
+                >
+                  {webpageError}
+                </p>
+              ) : null}
+
+              {webpageFile ? (
+                <div className="space-y-2 rounded-xl border border-black/10 bg-white/75 p-4">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <p className="text-sm font-medium">
+                      Saved {webpageFile.title}
+                    </p>
+                    <Badge variant="accent">MCP: ingest_webpage</Badge>
+                  </div>
+                  <p className="break-all text-xs text-black/55">
+                    {webpageFile.url}
+                  </p>
+                  <p className="text-xs text-black/65">
+                    File: <code>{webpageFile.filePath}</code>
+                  </p>
                 </div>
               ) : null}
             </section>

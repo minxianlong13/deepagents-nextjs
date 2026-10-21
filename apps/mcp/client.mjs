@@ -14,6 +14,8 @@ const toolAliases = {
   search_slack_messages: "search_slack_messages",
   webpage: "ingest_webpage",
   ingest_webpage: "ingest_webpage",
+  openwiki: "query_openwiki",
+  query_openwiki: "query_openwiki",
 };
 
 function printUsage() {
@@ -26,6 +28,7 @@ Tools and examples:
   wiki [contentId]      pnpm test wiki 1106609325
   slack <keywords...>   pnpm test slack XSS acknowledgement email
   webpage [url]         pnpm test webpage https://example.com/article
+  openwiki <json>       pnpm test openwiki '{"action":"search","root":"/path/to/repo","query":"MCP server"}'
 
 You can also pass a JSON object matching the selected tool's input schema:
   pnpm test get_jira_ticket '{"issueKey":"GROUP-132015"}'
@@ -35,6 +38,15 @@ You can also pass a JSON object matching the selected tool's input schema:
 }
 
 function parseToolArguments(toolName, suppliedArguments) {
+  if (
+    toolName === "query_openwiki" &&
+    (suppliedArguments.length !== 1 || !suppliedArguments[0].startsWith("{"))
+  ) {
+    throw new Error(
+      "OpenWiki requires JSON arguments with action, root, and query (search) or page and sections (read).",
+    );
+  }
+
   if (suppliedArguments.length === 0) {
     if (toolName === "get_jira_ticket") {
       return { issueKey: process.env.JIRA_ISSUE_KEY ?? "GROUP-132015" };
@@ -152,9 +164,12 @@ try {
         .join("\n");
       console.log(markdown || result.structuredContent?.markdown || "");
     } else if (
-      ["get_jira_ticket", "get_wiki_content", "search_slack_messages"].includes(
-        toolName,
-      ) &&
+      [
+        "get_jira_ticket",
+        "get_wiki_content",
+        "search_slack_messages",
+        "query_openwiki",
+      ].includes(toolName) &&
       result.structuredContent
     ) {
       console.log(JSON.stringify(result.structuredContent, null, 2));

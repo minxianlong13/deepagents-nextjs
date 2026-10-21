@@ -7,7 +7,10 @@ This repository is now a pnpm workspace with two sub-projects:
 
 ## Workspace Setup
 
+Use Node.js 24.16.0 (pinned in `.tool-versions`) and pnpm 11.2.2. With asdf, install the project runtime before installing dependencies:
+
 ```bash
+asdf install
 pnpm install
 ```
 
@@ -137,6 +140,28 @@ pnpm test webpage https://developer.mozilla.org/en-US/docs/Web/JavaScript
 ```
 
 You can also pass the input as JSON with `pnpm test ingest_webpage '{"url":"https://example.com/article"}'`, or set `WEBPAGE_URL` to use it when no URL argument is provided.
+
+## OpenWiki MCP Tool
+
+The `query_openwiki` tool proxies read-only retrieval to an OpenWiki MCP subprocess. It launches `openwiki mcp --host my-rag-server`, calls `openwiki_search` or `openwiki_read`, and returns the upstream content, structured data, and errors unchanged. Each request closes its client and subprocess afterward.
+
+Install OpenWiki v0.7.2 or another version exposing both retrieval tools on the MCP server's PATH. Set `OPENWIKI_COMMAND` to an executable path if needed, or `OPENWIKI_MCP_HOST` to override the stable lowercase host identifier. The absolute repository root must be accessible to the MCP process and contain a generated `openwiki/` directory. For containers, install OpenWiki and mount the repository; a host-only path is not accessible automatically.
+
+From `apps/mcp`, with the MCP server running:
+
+```bash
+pnpm test openwiki '{"action":"search","root":"/absolute/path/to/repo","query":"How does the MCP server work?","limit":5}'
+pnpm test openwiki '{"action":"read","root":"/absolute/path/to/repo","page":"openwiki/quickstart.md","sections":["choose-the-right-guide-before-changing-code"]}'
+```
+
+For search, optional `paths` boost related results and `workspace` selects a workspace. For read, use the exact page and heading anchors from search refs and include `wiki` when a result identifies a linked wiki. Search requires Node's SQLite build to support FTS5; a build without it causes an upstream search error even when reads work.
+
+OpenWiki uses the project's Node 24 runtime, so no separate Node executable override is needed. Global npm packages are separate for each asdf Node installation; install OpenWiki under the project runtime from the repository root:
+
+```bash
+npm install --global openwiki@0.7.2
+asdf reshim nodejs
+```
 
 ## Test MCP via Next.js Route
 

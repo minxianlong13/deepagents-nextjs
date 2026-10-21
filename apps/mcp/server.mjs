@@ -9,6 +9,7 @@ import { registerSlackOAuthCallback } from "./lib/slack.mjs";
 import { registerSlackTools } from "./tools/slack.mjs";
 import { registerWikiTools } from "./tools/wiki.mjs";
 import { registerWebpageTools } from "./tools/webpage.mjs";
+import { registerOpenWikiTools } from "./tools/openwiki.mjs";
 
 // Respect Cloud Run's PORT env var (8080) or fall back to MCP_PORT (local dev), then default to 8787.
 const PORT = Number.parseInt(
@@ -31,6 +32,7 @@ function createServer() {
   registerSlackTools(server, SLACK_OAUTH_REDIRECT_URL);
   registerWikiTools(server);
   registerWebpageTools(server);
+  registerOpenWikiTools(server);
 
   return server;
 }
