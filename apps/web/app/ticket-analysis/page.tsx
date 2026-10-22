@@ -12,14 +12,32 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import type { TicketTechnicalAnalysis } from "@/lib/agents/ticket_analysis_agent";
 
 const ticketKeyPattern = /^(GROUP|PROD)-\d+$/;
+
+type SlackFinding = {
+  channel: string | null;
+  author: string | null;
+  time: string | null;
+  permalink: string | null;
+  text: string;
+  relevance: string;
+};
 
 type JiraAnalysis = {
   problemSummary: string;
   keywords: string[];
   repo: string | null;
   originalJiraOutput: unknown;
+  finalAnalysis: TicketTechnicalAnalysis;
+  slackReference: {
+    available: boolean;
+    keywords: string[];
+    summary: string;
+    findings: SlackFinding[];
+    originalSlackOutput: unknown;
+  };
 };
 
 export default function TicketAnalysisPage() {
@@ -231,11 +249,324 @@ export default function TicketAnalysisPage() {
                 </p>
               </section>
 
+              <section
+                aria-labelledby="slack-reference-heading"
+                className="border-t border-black/10 pt-5"
+              >
+                <h2
+                  id="slack-reference-heading"
+                  className="text-sm font-semibold uppercase tracking-[0.08em] text-black/55"
+                >
+                  Slack references
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-black/70">
+                  {analysis.slackReference.summary}
+                </p>
+                {analysis.slackReference.findings.length > 0 ? (
+                  <ul className="mt-4 divide-y divide-black/10">
+                    {analysis.slackReference.findings.map((finding, index) => (
+                      <li
+                        key={`${finding.permalink ?? finding.time ?? "slack"}-${index}`}
+                        className="py-4"
+                      >
+                        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-xs text-black/55">
+                          {finding.channel && (
+                            <span className="font-semibold text-black/75">
+                              {finding.channel}
+                            </span>
+                          )}
+                          {finding.author && <span>{finding.author}</span>}
+                          {finding.time && <time>{finding.time}</time>}
+                        </div>
+                        <p className="mt-2 text-sm leading-relaxed">
+                          {finding.text}
+                        </p>
+                        <p className="mt-1 text-xs leading-relaxed text-black/55">
+                          {finding.relevance}
+                        </p>
+                        {finding.permalink && (
+                          <a
+                            href={finding.permalink}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="mt-2 inline-block text-xs font-medium text-emerald-900 underline decoration-emerald-900/30 underline-offset-2"
+                          >
+                            Open Slack message
+                          </a>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="mt-3 text-sm text-black/55">
+                    No Slack messages are available as references.
+                  </p>
+                )}
+              </section>
+
+              <section
+                aria-labelledby="final-analysis-heading"
+                className="border-t border-black/10 pt-5"
+              >
+                <h2
+                  id="final-analysis-heading"
+                  className="font-(--font-fashion-display) text-2xl text-black"
+                >
+                  Final technical analysis
+                </h2>
+
+                <section
+                  className="mt-5"
+                  aria-labelledby="ticket-details-heading"
+                >
+                  <h3
+                    id="ticket-details-heading"
+                    className="text-sm font-semibold uppercase tracking-[0.08em] text-black/55"
+                  >
+                    Ticket details
+                  </h3>
+                  <dl className="mt-3 grid gap-x-6 gap-y-3 text-sm sm:grid-cols-2">
+                    <div>
+                      <dt className="text-xs font-medium uppercase text-black/50">
+                        Key
+                      </dt>
+                      <dd className="mt-1 font-mono">
+                        {analysis.finalAnalysis.ticketDetails.key}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-xs font-medium uppercase text-black/50">
+                        Component
+                      </dt>
+                      <dd className="mt-1">
+                        {analysis.finalAnalysis.ticketDetails.component ||
+                          "Not specified"}
+                      </dd>
+                    </div>
+                    <div className="sm:col-span-2">
+                      <dt className="text-xs font-medium uppercase text-black/50">
+                        Title
+                      </dt>
+                      <dd className="mt-1 font-medium">
+                        {analysis.finalAnalysis.ticketDetails.title ||
+                          "Not specified"}
+                      </dd>
+                    </div>
+                    <div className="sm:col-span-2">
+                      <dt className="text-xs font-medium uppercase text-black/50">
+                        Summary
+                      </dt>
+                      <dd className="mt-1 leading-relaxed">
+                        {analysis.finalAnalysis.ticketDetails.summary ||
+                          "Not specified"}
+                      </dd>
+                    </div>
+                    <div className="sm:col-span-2">
+                      <dt className="text-xs font-medium uppercase text-black/50">
+                        Description
+                      </dt>
+                      <dd className="mt-1 whitespace-pre-wrap leading-relaxed">
+                        {analysis.finalAnalysis.ticketDetails.description ||
+                          "Not specified"}
+                      </dd>
+                    </div>
+                  </dl>
+                </section>
+
+                <section
+                  className="mt-6"
+                  aria-labelledby="expected-actual-heading"
+                >
+                  <h3
+                    id="expected-actual-heading"
+                    className="text-sm font-semibold uppercase tracking-[0.08em] text-black/55"
+                  >
+                    Expected and actual behavior
+                  </h3>
+                  <div className="mt-3 grid gap-4 sm:grid-cols-2">
+                    <div>
+                      <p className="text-xs font-medium uppercase text-black/50">
+                        Expected
+                      </p>
+                      <p className="mt-1 text-sm leading-relaxed">
+                        {analysis.finalAnalysis.problemIdentification
+                          .expectedBehavior || "Not specified"}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-medium uppercase text-black/50">
+                        Actual
+                      </p>
+                      <p className="mt-1 text-sm leading-relaxed">
+                        {analysis.finalAnalysis.problemIdentification
+                          .actualBehavior || "Not specified"}
+                      </p>
+                    </div>
+                  </div>
+                  {analysis.finalAnalysis.problemIdentification
+                    .reproductionSteps.length > 0 && (
+                    <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm">
+                      {analysis.finalAnalysis.problemIdentification.reproductionSteps.map(
+                        (step, index) => (
+                          <li key={`${index}-${step}`}>{step}</li>
+                        ),
+                      )}
+                    </ol>
+                  )}
+                </section>
+
+                <section className="mt-6" aria-labelledby="component-heading">
+                  <h3
+                    id="component-heading"
+                    className="text-sm font-semibold uppercase tracking-[0.08em] text-black/55"
+                  >
+                    Component/project
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed">
+                    {analysis.finalAnalysis.componentOrProject ||
+                      "Not specified"}
+                  </p>
+                </section>
+
+                <section className="mt-6" aria-labelledby="root-cause-heading">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h3
+                      id="root-cause-heading"
+                      className="text-sm font-semibold uppercase tracking-[0.08em] text-black/55"
+                    >
+                      Root cause
+                    </h3>
+                    <span className="text-xs text-black/50">
+                      Confidence: {analysis.finalAnalysis.rootCause.confidence}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed">
+                    {analysis.finalAnalysis.rootCause.assessment}
+                  </p>
+                  {analysis.finalAnalysis.rootCause.evidence.length > 0 && (
+                    <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-black/75">
+                      {analysis.finalAnalysis.rootCause.evidence.map(
+                        (item, index) => (
+                          <li key={`${index}-${item}`}>{item}</li>
+                        ),
+                      )}
+                    </ul>
+                  )}
+                  {analysis.finalAnalysis.rootCause.hypotheses.length > 0 && (
+                    <div className="mt-4 border-l-2 border-amber-600/50 pl-3">
+                      <p className="text-xs font-semibold uppercase tracking-[0.08em] text-amber-900">
+                        Hypotheses
+                      </p>
+                      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
+                        {analysis.finalAnalysis.rootCause.hypotheses.map(
+                          (item, index) => (
+                            <li key={`${index}-${item}`}>{item}</li>
+                          ),
+                        )}
+                      </ul>
+                    </div>
+                  )}
+                </section>
+
+                <section className="mt-6" aria-labelledby="solution-heading">
+                  <h3
+                    id="solution-heading"
+                    className="text-sm font-semibold uppercase tracking-[0.08em] text-black/55"
+                  >
+                    Suggested solution
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed">
+                    {analysis.finalAnalysis.recommendedSolution}
+                  </p>
+                  <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm">
+                    {analysis.finalAnalysis.implementationSteps.map(
+                      (step, index) => (
+                        <li key={`${index}-${step}`}>{step}</li>
+                      ),
+                    )}
+                  </ol>
+                </section>
+
+                <section className="mt-6 grid gap-6 sm:grid-cols-2">
+                  <div aria-labelledby="risks-heading">
+                    <h3
+                      id="risks-heading"
+                      className="text-sm font-semibold uppercase tracking-[0.08em] text-black/55"
+                    >
+                      Risks and dependencies
+                    </h3>
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
+                      {analysis.finalAnalysis.risksAndDependencies.map(
+                        (item, index) => (
+                          <li key={`${index}-${item}`}>{item}</li>
+                        ),
+                      )}
+                    </ul>
+                  </div>
+                  <div aria-labelledby="validation-heading">
+                    <h3
+                      id="validation-heading"
+                      className="text-sm font-semibold uppercase tracking-[0.08em] text-black/55"
+                    >
+                      Validation strategy
+                    </h3>
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
+                      {analysis.finalAnalysis.validationStrategy.map(
+                        (item, index) => (
+                          <li key={`${index}-${item}`}>{item}</li>
+                        ),
+                      )}
+                    </ul>
+                  </div>
+                </section>
+
+                <section
+                  className="mt-6"
+                  aria-labelledby="documentation-heading"
+                >
+                  <h3
+                    id="documentation-heading"
+                    className="text-sm font-semibold uppercase tracking-[0.08em] text-black/55"
+                  >
+                    Related documentation
+                  </h3>
+                  {analysis.finalAnalysis.relatedDocumentation.length > 0 ? (
+                    <ul className="mt-2 space-y-2 text-sm">
+                      {analysis.finalAnalysis.relatedDocumentation.map(
+                        (reference, index) => (
+                          <li key={`${index}-${reference.source}`}>
+                            <span className="font-medium">
+                              {reference.source}
+                            </span>
+                            <span className="text-black/60">
+                              {` - ${reference.relevance}`}
+                            </span>
+                          </li>
+                        ),
+                      )}
+                    </ul>
+                  ) : (
+                    <p className="mt-2 text-sm text-black/55">
+                      No relevant documentation was found.
+                    </p>
+                  )}
+                </section>
+
+                <details className="mt-6 border-t border-black/10 pt-4">
+                  <summary className="cursor-pointer text-sm font-semibold uppercase tracking-[0.08em] text-black/55">
+                    Prompt for code agent
+                  </summary>
+                  <pre className="mt-3 whitespace-pre-wrap wrap-break-word bg-black/3 p-4 text-sm leading-relaxed">
+                    {analysis.finalAnalysis.codeAgentPrompt}
+                  </pre>
+                </details>
+              </section>
+
               <details className="border-t border-black/10 pt-4">
                 <summary className="cursor-pointer text-sm font-medium text-black/70">
                   Original Jira tool output
                 </summary>
-                <pre className="mt-3 max-h-100 overflow-auto whitespace-pre-wrap break-words bg-black/[0.03] p-3 text-xs leading-relaxed">
+                <pre className="mt-3 max-h-100 overflow-auto whitespace-pre-wrap wrap-break-word bg-black/3 p-3 text-xs leading-relaxed">
                   {JSON.stringify(analysis.originalJiraOutput, null, 2)}
                 </pre>
               </details>

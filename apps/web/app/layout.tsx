@@ -31,7 +31,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body suppressHydrationWarning className="min-h-full flex flex-col">
         <header className="sticky top-0 z-40 border-b border-black/10 bg-[#f6efe7]/85 backdrop-blur">
           <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 md:px-8">
             <p className="text-xl font-semibold tracking-[0.08em]">AOE AI</p>

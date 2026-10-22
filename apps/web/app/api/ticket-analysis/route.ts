@@ -1,4 +1,4 @@
-import { JiraTicketAgentError } from "@/lib/agents/get_jira_ticket_agents";
+import { JiraTicketAgentError } from "@/lib/agents/get_jira_ticket_agent";
 import {
   ticketKeySchema,
   runAnalyzeTicketWorkflow,
