@@ -1,6 +1,6 @@
-import { isAbsolute } from "node:path";
 import * as z from "zod/v4";
 import { callOpenWikiTool } from "../lib/openwiki.mjs";
+import { resolveRepositoryRoot } from "../lib/repository-roots.mjs";
 
 export function registerOpenWikiTools(server) {
   server.registerTool(
@@ -11,13 +11,11 @@ export function registerOpenWikiTools(server) {
         "Search an existing repository OpenWiki or read sections from its search results through the OpenWiki MCP server. Use action=search with query; use action=read with page, sections, and the result's wiki ID when present. The repository root must be accessible on this MCP server. No generation or model call is performed.",
       inputSchema: {
         action: z.enum(["search", "read"]),
-        root: z
+        repo: z
           .string()
           .min(1)
-          .refine(isAbsolute, {
-            message: "An absolute repository root path is required.",
-          })
-          .describe("Absolute Git repository root containing openwiki/."),
+          .max(100)
+          .describe("Repository name from the MCP repository configuration."),
         query: z
           .string()
           .min(1)
@@ -64,7 +62,7 @@ export function registerOpenWikiTools(server) {
     },
     async ({
       action,
-      root,
+      repo,
       query,
       paths,
       limit,
@@ -73,6 +71,8 @@ export function registerOpenWikiTools(server) {
       sections,
       wiki,
     }) => {
+      const root = resolveRepositoryRoot(repo);
+
       if (action === "search") {
         if (!query?.trim()) {
           throw new Error("A query is required for OpenWiki search.");

@@ -22,6 +22,12 @@ pnpm dev:web
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## Jira Ticket Analysis
+
+Open [http://localhost:3000/ticket-analysis](http://localhost:3000/ticket-analysis) and enter a `GROUP-12345` or `PROD-12345` key. The Jira agent retrieves the issue through MCP and returns the original Jira tool output with a concise problem summary, Slack search keywords, and a matching repo when supported by the ticket context.
+
+The workflow uses the configured MCP server in `.vscode/mcp.json`. Start it with `pnpm mcp:server`. Jira access must be configured for that MCP server; set `JIRA_ACCEPTANCE_CRITERIA_FIELD` to the Jira custom-field ID if acceptance criteria are stored in a project-specific field. The allowed repo names for the agent are listed in `apps/web/config/repos.json` and must have matching roots in `apps/mcp/config/repositories.json`.
+
 ## Run the MCP Server
 
 ```bash
@@ -143,15 +149,15 @@ You can also pass the input as JSON with `pnpm test ingest_webpage '{"url":"http
 
 ## OpenWiki MCP Tool
 
-The `query_openwiki` tool proxies read-only retrieval to an OpenWiki MCP subprocess. It launches `openwiki mcp --host my-rag-server`, calls `openwiki_search` or `openwiki_read`, and returns the upstream content, structured data, and errors unchanged. Each request closes its client and subprocess afterward.
+The `query_openwiki` tool proxies read-only retrieval to an OpenWiki MCP subprocess. It launches `openwiki mcp --host my-rag-server`, calls `openwiki_search` or `openwiki_read`, and returns the upstream content, structured data, and errors unchanged. Each request closes its client and subprocess afterward. Pass a configured `repo` name; `apps/mcp/config/repositories.json` maps names to repository roots.
 
 Install OpenWiki v0.7.2 or another version exposing both retrieval tools on the MCP server's PATH. Set `OPENWIKI_COMMAND` to an executable path if needed, or `OPENWIKI_MCP_HOST` to override the stable lowercase host identifier. The absolute repository root must be accessible to the MCP process and contain a generated `openwiki/` directory. For containers, install OpenWiki and mount the repository; a host-only path is not accessible automatically.
 
 From `apps/mcp`, with the MCP server running:
 
 ```bash
-pnpm test openwiki '{"action":"search","root":"/absolute/path/to/repo","query":"How does the MCP server work?","limit":5}'
-pnpm test openwiki '{"action":"read","root":"/absolute/path/to/repo","page":"openwiki/quickstart.md","sections":["choose-the-right-guide-before-changing-code"]}'
+pnpm test openwiki '{"action":"search","repo":"deepagents-nextjs","query":"How does the MCP server work?","limit":5}'
+pnpm test openwiki '{"action":"read","repo":"deepagents-nextjs","page":"openwiki/quickstart.md","sections":["choose-the-right-guide-before-changing-code"]}'
 ```
 
 For search, optional `paths` boost related results and `workspace` selects a workspace. For read, use the exact page and heading anchors from search refs and include `wiki` when a result identifies a linked wiki. Search requires Node's SQLite build to support FTS5; a build without it causes an upstream search error even when reads work.

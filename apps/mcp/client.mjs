@@ -28,7 +28,7 @@ Tools and examples:
   wiki [contentId]      pnpm test wiki 1106609325
   slack <keywords...>   pnpm test slack XSS acknowledgement email
   webpage [url]         pnpm test webpage https://example.com/article
-  openwiki <json>       pnpm test openwiki '{"action":"search","root":"/path/to/repo","query":"MCP server"}'
+  openwiki <json>       pnpm test openwiki '{"action":"search","repo":"deepagents-nextjs","query":"MCP server"}'
 
 You can also pass a JSON object matching the selected tool's input schema:
   pnpm test get_jira_ticket '{"issueKey":"GROUP-132015"}'
@@ -43,7 +43,7 @@ function parseToolArguments(toolName, suppliedArguments) {
     (suppliedArguments.length !== 1 || !suppliedArguments[0].startsWith("{"))
   ) {
     throw new Error(
-      "OpenWiki requires JSON arguments with action, root, and query (search) or page and sections (read).",
+      "OpenWiki requires JSON arguments with action, repo, and query (search) or page and sections (read).",
     );
   }
 

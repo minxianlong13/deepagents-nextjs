@@ -43,76 +43,154 @@ export default function RootLayout({
 
         <div className="mx-auto flex w-full max-w-7xl flex-1">
           <aside className="hidden w-70 shrink-0 border-r border-black/10 bg-[#f4ebe2]/70 p-4 md:block">
-            <nav aria-label="Primary" className="flex flex-col gap-2">
+            <nav aria-label="Primary" className="flex flex-col gap-5">
               <Link
                 href="/"
                 className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
               >
                 Home
               </Link>
-              <Link
-                href="/search"
-                className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
-              >
-                DeepAgents Search
-              </Link>
-              <Link
-                href="/rag"
-                className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
-              >
-                RAG Chat
-              </Link>
-              <Link
-                href="/resume"
-                className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
-              >
-                Resume Tailor
-              </Link>
-              <div className="pt-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/45">
-                Manage
-              </div>
-              <Link
-                href="/manage/rag"
-                className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
-              >
-                RAG Configuration
-              </Link>
+              <section aria-labelledby="desktop-tools-heading">
+                <h2
+                  id="desktop-tools-heading"
+                  className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/45"
+                >
+                  Tool
+                </h2>
+                <div className="flex flex-col gap-2">
+                  <Link
+                    href="/ticket-analysis"
+                    className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                  >
+                    Ticket Analysis
+                  </Link>
+                  <Link
+                    href="/resume"
+                    className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                  >
+                    Resume Tailor
+                  </Link>
+                </div>
+              </section>
+              <section aria-labelledby="desktop-chat-heading">
+                <h2
+                  id="desktop-chat-heading"
+                  className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/45"
+                >
+                  Chat
+                </h2>
+                <div className="flex flex-col gap-2">
+                  <Link
+                    href="/search"
+                    className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                  >
+                    Tavily Search
+                  </Link>
+                  <Link
+                    href="/rag"
+                    className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                  >
+                    Local RAG
+                  </Link>
+                </div>
+              </section>
+              <section aria-labelledby="desktop-manage-heading">
+                <h2
+                  id="desktop-manage-heading"
+                  className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/45"
+                >
+                  Manage
+                </h2>
+                <Link
+                  href="/manage/rag"
+                  className="block rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                >
+                  RAG Config
+                </Link>
+              </section>
             </nav>
           </aside>
 
           <div className="min-w-0 flex-1">
             <div className="border-b border-black/10 bg-[#f4ebe2]/65 p-3 md:hidden">
-              <nav aria-label="Primary mobile" className="flex flex-wrap gap-2">
-                <Link
-                  href="/"
-                  className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+              <nav aria-label="Primary mobile" className="space-y-3">
+                <div className="flex flex-wrap gap-2">
+                  <Link
+                    href="/"
+                    className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                  >
+                    Home
+                  </Link>
+                </div>
+                <section
+                  aria-labelledby="mobile-tools-heading"
+                  className="grid grid-cols-[3.5rem_minmax(0,1fr)] gap-2"
                 >
-                  Home
-                </Link>
-                <Link
-                  href="/search"
-                  className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                  <h2
+                    id="mobile-tools-heading"
+                    className="pt-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-black/45"
+                  >
+                    Tool
+                  </h2>
+                  <div className="flex flex-wrap gap-2">
+                    <Link
+                      href="/ticket-analysis"
+                      className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    >
+                      Ticket Analysis
+                    </Link>
+                    <Link
+                      href="/resume"
+                      className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    >
+                      Resume Tailor
+                    </Link>
+                  </div>
+                </section>
+                <section
+                  aria-labelledby="mobile-chat-heading"
+                  className="grid grid-cols-[3.5rem_minmax(0,1fr)] gap-2"
                 >
-                  DeepAgents Search
-                </Link>
-                <Link
-                  href="/rag"
-                  className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                  <h2
+                    id="mobile-chat-heading"
+                    className="pt-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-black/45"
+                  >
+                    Chat
+                  </h2>
+                  <div className="flex flex-wrap gap-2">
+                    <Link
+                      href="/search"
+                      className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    >
+                      Tavily Search
+                    </Link>
+                    <Link
+                      href="/rag"
+                      className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    >
+                      Local RAG
+                    </Link>
+                  </div>
+                </section>
+                <section
+                  aria-labelledby="mobile-manage-heading"
+                  className="grid grid-cols-[3.5rem_minmax(0,1fr)] gap-2"
                 >
-                  RAG Chat
-                </Link>
-                <Link
-                  href="/resume"
-                  className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
-                >
-                  Resume
-                </Link>
-                <Link
-                  href="/manage/rag"
-                  className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
-                >
-                  Manage RAG
-                </Link>
+                  <h2
+                    id="mobile-manage-heading"
+                    className="pt-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-black/45"
+                  >
+                    Manage
+                  </h2>
+                  <div className="flex flex-wrap gap-2">
+                    <Link
+                      href="/manage/rag"
+                      className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    >
+                      RAG Config
+                    </Link>
+                  </div>
+                </section>
               </nav>
             </div>
             {children}

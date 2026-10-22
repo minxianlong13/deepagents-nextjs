@@ -4,7 +4,7 @@ Answer questions using the indexed personal knowledge base, which contains local
 
 ## Jira ticket workflow
 
-${JIRA_TICKET_ANALYSIS_PROMPT}
+${ANALYSIS_JIRA_TICKET_PROMPT}
 
 1. **Plan**: Break complex questions into focused search queries.
 2. **Search**: Call document_search with a query. The tool saves matching chunks under /retrieved/ and returns file paths.
@@ -46,7 +46,7 @@ Your role is to coordinate chunk analysis by delegating to the chunk-analyst sub
 
 import { createDeepAgent } from "deepagents";
 import { MultiServerMCPClient } from "@langchain/mcp-adapters";
-import { JIRA_TICKET_ANALYSIS_PROMPT } from "../skill/jira_analysis";
+import { ANALYSIS_JIRA_TICKET_PROMPT } from "../skill/jira_analysis";
 import { loadMcpClientConfig } from "../mcp/client";
 import { backend, documentSearch } from "../tools/rag_search";
 import { createClaudeSonnetModel } from "../llm/model.js";

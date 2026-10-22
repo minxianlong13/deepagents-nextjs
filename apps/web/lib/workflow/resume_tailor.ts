@@ -4,7 +4,7 @@ import {
   runCoverLetterAgent,
   runResumeTailorAgent,
   type ResumeTailorResult,
-} from "@/lib/agents/resume_tailor_agents";
+} from "@/lib/agents/tailor_resume_agents";
 
 export type ResumeTailorWorkflowResult = ResumeTailorResult & {
   fileName: string;

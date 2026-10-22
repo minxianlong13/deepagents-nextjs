@@ -14,7 +14,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import type { ResumeTailorResult } from "@/lib/agents/resume_tailor_agents";
+import type { ResumeTailorResult } from "@/lib/agents/tailor_resume_agents";
 
 export default function ResumePage() {
   const [jobDescription, setJobDescription] = useState("");

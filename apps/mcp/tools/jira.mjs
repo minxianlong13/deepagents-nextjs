@@ -26,11 +26,25 @@ export function registerJiraTools(server) {
         throw new Error("JIRA_BEARER_TOKEN is not configured");
       }
 
+      const acceptanceCriteriaField =
+        process.env.JIRA_ACCEPTANCE_CRITERIA_FIELD?.trim();
+      if (
+        acceptanceCriteriaField &&
+        !/^customfield_\d+$/.test(acceptanceCriteriaField)
+      ) {
+        throw new Error(
+          "JIRA_ACCEPTANCE_CRITERIA_FIELD must be a Jira customfield ID, for example customfield_12345",
+        );
+      }
+
       const issueUrl = new URL(
         `/rest/api/2/issue/${encodeURIComponent(issueKey)}`,
         `${jiraBaseUrl}/`,
       );
-      issueUrl.searchParams.set("fields", JIRA_FIELDS.join(","));
+      const requestedFields = acceptanceCriteriaField
+        ? [...JIRA_FIELDS, acceptanceCriteriaField]
+        : JIRA_FIELDS;
+      issueUrl.searchParams.set("fields", requestedFields.join(","));
 
       const response = await fetch(issueUrl, {
         headers: {
@@ -54,11 +68,17 @@ export function registerJiraTools(server) {
       }
 
       const issue = await response.json();
+      const fields = Object.fromEntries(
+        requestedFields.map((field) => [field, issue.fields?.[field] ?? null]),
+      );
+      if (acceptanceCriteriaField) {
+        fields.acceptanceCriteria = fields[acceptanceCriteriaField];
+        delete fields[acceptanceCriteriaField];
+      }
       const result = removeAvatarUrls({
         "ticketNo.": issueKey,
-        fields: Object.fromEntries(
-          JIRA_FIELDS.map((field) => [field, issue.fields?.[field] ?? null]),
-        ),
+        url: issueUrl.toString(),
+        fields,
       });
 
       return {
