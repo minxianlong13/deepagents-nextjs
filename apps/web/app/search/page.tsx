@@ -189,9 +189,7 @@ export default function SearchPage() {
   };
 
   return (
-    <main className="relative min-h-[calc(100vh-7.5rem)] overflow-hidden bg-[radial-gradient(circle_at_top_left,#ffe4db_0,#f9f2eb_38%,#f6efe7_64%,#efe5dc_100%)] p-4 md:p-8">
-      <div className="fashion-orb -top-32 -left-16 h-72 w-72 bg-[#ff9f85]/35" />
-      <div className="fashion-orb -right-20 top-24 h-80 w-80 bg-[#d09cff]/22" />
+    <main className="min-h-[calc(100vh-7.5rem)] p-4 md:p-8">
 
       <div className="relative mx-auto w-full max-w-7xl">
         <Card className="flex min-h-[78vh] flex-col border-black/10 bg-white/78 rise-in-delayed">

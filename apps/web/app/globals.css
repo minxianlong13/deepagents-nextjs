@@ -1,38 +1,83 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6efe7;
-  --foreground: #211910;
-  --font-fashion-display:
-    "Didot", "Bodoni MT", "Iowan Old Style", "Times New Roman", serif;
+  /* Catppuccin Latte tokens, in the shadcn/ui HSL format. */
+  --background: 225 20% 94%;
+  --foreground: 234 16% 35%;
+  --card: 0 0% 100%;
+  --card-foreground: 234 16% 35%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 234 16% 35%;
+  --primary: 266 85% 58%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 22% 92%;
+  --secondary-foreground: 234 16% 35%;
+  --muted: 220 22% 92%;
+  --muted-foreground: 233 12% 46%;
+  --accent: 231 97% 75%;
+  --accent-foreground: 234 16% 35%;
+  --destructive: 347 87% 44%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 17% 86%;
+  --input: 220 17% 86%;
+  --ring: 266 85% 58%;
+  --sidebar: 240 21% 15%;
+  --sidebar-foreground: 220 23% 92%;
+  --sidebar-primary: 231 97% 75%;
+  --sidebar-primary-foreground: 240 21% 15%;
+  --sidebar-accent: 240 15% 22%;
+  --sidebar-border: 240 15% 25%;
+  --radius: 0.75rem;
+  --surface-muted: hsl(var(--muted));
+  --font-georgia: Georgia, "Times New Roman", serif;
+  --font-fashion-display: var(--font-georgia);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #f2e9df;
-    --foreground: #211910;
-  }
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-sidebar: hsl(var(--sidebar));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-primary: hsl(var(--sidebar-primary));
+  --color-sidebar-primary-foreground: hsl(var(--sidebar-primary-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+  /* Compatibility aliases for existing page utility classes. */
+  --color-black: hsl(var(--foreground));
+  --color-white: hsl(var(--card));
+  --color-emerald-50: hsl(var(--primary) / 0.1);
+  --color-emerald-300: hsl(var(--primary) / 0.35);
+  --color-emerald-700: hsl(var(--primary));
+  --color-emerald-800: hsl(var(--primary));
+  --color-emerald-900: hsl(var(--primary));
+  --color-emerald-950: hsl(var(--primary-foreground));
+  --font-sans: var(--font-montserrat);
+  --font-serif: var(--font-georgia);
+  --font-mono: var(--font-fira-code);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family:
-    var(--font-geist-sans), "Avenir Next", "Helvetica Neue", sans-serif;
-}
-
-.fashion-orb {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(42px);
-  pointer-events: none;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 88% 4%, hsl(var(--accent) / 0.18), transparent 22rem),
+    radial-gradient(circle at 18% 72%, hsl(35 77% 49% / 0.1), transparent 26rem),
+    linear-gradient(125deg, hsl(var(--background)) 0%, hsl(var(--card)) 46%, hsl(145 20% 94%) 100%);
+  background-attachment: fixed;
+  color: hsl(var(--foreground));
+  font-family: var(--font-montserrat);
 }
 
 .rise-in {
@@ -60,29 +105,29 @@ body {
 }
 
 .markdown-content code {
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid hsl(var(--border));
   border-radius: 0.35rem;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--surface-muted);
   padding: 0.08rem 0.35rem;
   font-size: 0.86em;
 }
 
 .markdown-content pre {
   overflow-x: auto;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid hsl(var(--border));
   border-radius: 0.65rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--surface-muted);
   padding: 0.8rem;
 }
 
 .markdown-content a {
-  color: #9c3216;
+  color: hsl(var(--primary));
   text-decoration: underline;
 }
 
 .resume-markdown h1 {
   margin-top: 0;
-  border-bottom: 2px solid #211910;
+  border-bottom: 2px solid hsl(var(--border));
   padding-bottom: 0.65rem;
   font-family: var(--font-fashion-display);
   font-size: 2rem;
@@ -91,7 +136,7 @@ body {
 
 .resume-markdown h2 {
   margin-top: 1.6rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid hsl(var(--border));
   padding-bottom: 0.3rem;
   font-size: 0.8rem;
   font-weight: 700;
@@ -99,7 +144,7 @@ body {
 }
 
 .resume-markdown li::marker {
-  color: #16705c;
+  color: hsl(var(--primary));
 }
 
 @keyframes rise-in {

@@ -1,16 +1,23 @@
 import { z } from "zod";
 import {
   runGetJiraTicketAgent,
+  jiraTicketGetAgentOutputSchema,
   type JiraTicketGetAgentResult,
 } from "../agents/get_jira_ticket_agent";
 import {
   runSlackSearchAgent,
+  slackSearchAgentOutputSchema,
   type SlackSearchAgentResult,
 } from "../agents/slack_search_agent";
 import {
   runTicketTechnicalAnalysisAgent,
   type TicketTechnicalAnalysis,
 } from "../agents/ticket_analysis_agent";
+import {
+  ticketContractSchema,
+  runTicketContractAgent,
+  type TicketContract,
+} from "../agents/ticket_contract_agent";
 
 export const ticketKeySchema = z
   .string()
@@ -22,13 +29,34 @@ export const ticketKeySchema = z
     }),
   );
 
-type SlackReference = {
+export const ticketAnalysisStepSchema = z.enum([
+  "jira",
+  "contract",
+  "slack",
+  "analysis",
+]);
+
+export type TicketAnalysisStep = z.infer<typeof ticketAnalysisStepSchema>;
+
+export type SlackReference = {
   available: boolean;
   keywords: string[];
   summary: string;
   findings: SlackSearchAgentResult["findings"];
   originalSlackOutput: unknown;
 };
+
+const jiraTicketGetAgentResultSchema = jiraTicketGetAgentOutputSchema.extend({
+  originalJiraOutput: z.record(z.unknown()),
+});
+
+const slackReferenceSchema = z.object({
+  available: z.boolean(),
+  keywords: z.array(z.string()),
+  summary: z.string(),
+  findings: slackSearchAgentOutputSchema.shape.findings,
+  originalSlackOutput: z.any(),
+});
 
 async function searchSlackReference(
   keywords: string[],
@@ -59,24 +87,64 @@ async function searchSlackReference(
   }
 }
 
-export async function runAnalyzeTicketWorkflow(ticketKeyInput: string): Promise<
-  JiraTicketGetAgentResult & {
-    slackReference: SlackReference;
-    finalAnalysis: TicketTechnicalAnalysis;
+function parseJiraResult(value: unknown): JiraTicketGetAgentResult {
+  const parsed = jiraTicketGetAgentResultSchema.safeParse(value);
+  if (!parsed.success) {
+    throw new Error("The Jira result is invalid or incomplete for this step.");
   }
+  return parsed.data;
+}
+
+function parseTicketContract(value: unknown): TicketContract {
+  const parsed = ticketContractSchema.safeParse(value);
+  if (!parsed.success) {
+    throw new Error(
+      "The ticket contract is invalid or incomplete for this step.",
+    );
+  }
+  return parsed.data;
+}
+
+function parseSlackReference(value: unknown): SlackReference {
+  const parsed = slackReferenceSchema.safeParse(value);
+  if (!parsed.success) {
+    throw new Error(
+      "The Slack reference is invalid or incomplete for this step.",
+    );
+  }
+  return {
+    ...parsed.data,
+    originalSlackOutput: parsed.data.originalSlackOutput ?? null,
+  };
+}
+
+export async function runAnalyzeTicketStep(input: {
+  step: TicketAnalysisStep;
+  ticketKey?: string;
+  jira?: unknown;
+  ticketContract?: unknown;
+  slackReference?: unknown;
+}): Promise<
+  | JiraTicketGetAgentResult
+  | TicketContract
+  | SlackReference
+  | TicketTechnicalAnalysis
 > {
-  // Step 1: fetch Jira and derive a problem summary, keywords, and repo.
-  const ticketKey = ticketKeySchema.parse(ticketKeyInput);
-  const jiraAnalysis = await runGetJiraTicketAgent(ticketKey);
-
-  // Step 2: use the Jira agent's keywords to gather Slack references.
-  const slackReference = await searchSlackReference(jiraAnalysis.keywords);
-
-  // Step 3: analyze Jira, Slack, and retrieved documentation together.
-  const finalAnalysis = await runTicketTechnicalAnalysisAgent({
-    jira: jiraAnalysis,
-    slack: slackReference,
-  });
-
-  return { ...jiraAnalysis, slackReference, finalAnalysis };
+  switch (input.step) {
+    case "jira":
+      if (!input.ticketKey) {
+        throw new Error("A Jira ticket key is required for the Jira step.");
+      }
+      return runGetJiraTicketAgent(ticketKeySchema.parse(input.ticketKey));
+    case "contract":
+      return runTicketContractAgent(parseJiraResult(input.jira));
+    case "slack":
+      return searchSlackReference(parseJiraResult(input.jira).keywords);
+    case "analysis":
+      return runTicketTechnicalAnalysisAgent({
+        jira: parseJiraResult(input.jira),
+        contract: parseTicketContract(input.ticketContract),
+        slack: parseSlackReference(input.slackReference),
+      });
+  }
 }

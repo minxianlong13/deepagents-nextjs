@@ -84,11 +84,9 @@ export default function RagPage() {
   };
 
   return (
-    <main className="relative min-h-[calc(100vh-7.5rem)] overflow-hidden bg-[radial-gradient(circle_at_top_left,#dff5eb_0,#f9f2eb_38%,#f6efe7_64%,#efe5dc_100%)] p-4 md:p-8">
-      <div className="fashion-orb -top-32 -left-16 h-72 w-72 bg-[#7fd8b1]/30" />
-      <div className="fashion-orb -right-20 top-24 h-80 w-80 bg-[#d09cff]/18" />
+    <main className="min-h-[calc(100vh-7.5rem)] p-4 md:p-8">
 
-      <div className="relative mx-auto w-full max-w-4xl">
+      <div className="relative mx-auto w-full max-w-5xl">
         <Card className="flex min-h-[78vh] flex-col border-black/10 bg-white/78 rise-in-delayed">
           <CardHeader className="border-b border-black/10">
             <div className="flex items-center justify-between gap-3">

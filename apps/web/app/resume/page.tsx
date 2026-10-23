@@ -224,8 +224,8 @@ export default function ResumePage() {
   };
 
   return (
-    <main className="resume-page min-h-[calc(100vh-7.5rem)] bg-[#f2f0e9] px-4 py-7 md:px-8 md:py-10">
-      <div className="mx-auto w-full max-w-5xl rise-in">
+    <main className="resume-page min-h-[calc(100vh-7.5rem)] px-4 py-7 md:px-8 md:py-10">
+      <div className="mx-auto w-full max-w-6xl rise-in">
         <header className="mb-7 border-b border-black/15 pb-6">
           <p className="mb-2 text-xs font-semibold uppercase text-[#a63d22]">
             Career studio / Resume tailor
@@ -482,7 +482,7 @@ export default function ResumePage() {
               </article>
             ) : (
               <div className="flex min-h-60 flex-col items-center justify-center text-center">
-                <div className="mb-4 flex size-12 items-center justify-center border border-dashed border-black/25 bg-[#f2f0e9]">
+                <div className="mb-4 flex size-12 items-center justify-center border border-dashed border-[#d1d1d1] bg-[#f7f7f8]">
                   <FileText
                     className="size-5 text-black/45"
                     aria-hidden="true"

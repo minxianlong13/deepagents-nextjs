@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import { Montserrat, Fira_Code } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const fontSans = Montserrat({
   subsets: ["latin"],
+  variable: "--font-montserrat",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const fontMono = Fira_Code({
   subsets: ["latin"],
+  variable: "--font-fira-code",
 });
 
 export const metadata: Metadata = {
@@ -29,95 +29,109 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${fontSans.variable} ${fontMono.variable} h-full antialiased`}
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col">
-        <header className="sticky top-0 z-40 border-b border-black/10 bg-[#f6efe7]/85 backdrop-blur">
-          <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 md:px-8">
-            <p className="text-xl font-semibold tracking-[0.08em]">AOE AI</p>
-            <p className="text-xs uppercase tracking-[0.16em] text-black/60">
-              AI for Everyone, Everywhere
-            </p>
-          </div>
-        </header>
-
-        <div className="mx-auto flex w-full max-w-7xl flex-1">
-          <aside className="hidden w-70 shrink-0 border-r border-black/10 bg-[#f4ebe2]/70 p-4 md:block">
-            <nav aria-label="Primary" className="flex flex-col gap-5">
+        <div className="mx-auto flex w-full max-w-[1440px] flex-1">
+          <aside className="hidden w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar p-3 text-sidebar-foreground md:flex">
+            <div className="mb-6 flex items-center gap-3 px-3 py-2">
+              <div className="flex size-9 items-center justify-center rounded-xl bg-sidebar-primary text-sm font-semibold text-sidebar-primary-foreground">
+                A
+              </div>
+              <div>
+                <p className="text-sm font-semibold tracking-tight">AOE AI</p>
+                <p className="text-[10px] uppercase tracking-[0.18em] text-sidebar-foreground/40">
+                  Personal helper
+                </p>
+              </div>
+            </div>
+            <nav aria-label="Primary" className="flex flex-col gap-4">
               <Link
                 href="/"
-                className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                className="rounded-xl border border-sidebar-border border-l-2 border-l-sidebar-primary bg-sidebar-accent px-3 py-2.5 text-sm font-semibold tracking-tight text-sidebar-foreground transition hover:bg-sidebar-accent/80"
               >
                 Home
               </Link>
-              <section aria-labelledby="desktop-tools-heading">
+              <section
+                aria-labelledby="desktop-tools-heading"
+                className="border-t border-sidebar-border/70 pt-4"
+              >
                 <h2
                   id="desktop-tools-heading"
-                  className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/45"
+                  className="mb-2 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-sidebar-foreground/45"
                 >
                   Tool
                 </h2>
                 <div className="flex flex-col gap-2">
                   <Link
                     href="/ticket-analysis"
-                    className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                   >
                     Ticket Analysis
                   </Link>
                   <Link
                     href="/resume"
-                    className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                   >
                     Resume Tailor
                   </Link>
                 </div>
               </section>
-              <section aria-labelledby="desktop-chat-heading">
+              <section
+                aria-labelledby="desktop-chat-heading"
+                className="border-t border-sidebar-border/70 pt-4"
+              >
                 <h2
                   id="desktop-chat-heading"
-                  className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/45"
+                  className="mb-2 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-sidebar-foreground/45"
                 >
                   Chat
                 </h2>
                 <div className="flex flex-col gap-2">
                   <Link
                     href="/search"
-                    className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                   >
                     Tavily Search
                   </Link>
                   <Link
                     href="/rag"
-                    className="rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                   >
                     Local RAG
                   </Link>
                 </div>
               </section>
-              <section aria-labelledby="desktop-manage-heading">
+              <section
+                aria-labelledby="desktop-manage-heading"
+                className="border-t border-sidebar-border/70 pt-4"
+              >
                 <h2
                   id="desktop-manage-heading"
-                  className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/45"
+                  className="mb-2 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-sidebar-foreground/45"
                 >
                   Manage
                 </h2>
                 <Link
                   href="/manage/rag"
-                  className="block rounded-full border border-black/15 bg-white/80 px-3 py-2 text-center text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                  className="block rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                 >
                   RAG Config
                 </Link>
               </section>
             </nav>
+            <p className="mt-auto px-3 pt-8 text-[10px] uppercase tracking-[0.18em] text-sidebar-foreground/30">
+              AOE / {currentYear}
+            </p>
           </aside>
 
           <div className="min-w-0 flex-1">
-            <div className="border-b border-black/10 bg-[#f4ebe2]/65 p-3 md:hidden">
+            <div className="border-b border-sidebar-border bg-sidebar p-3 text-sidebar-foreground md:hidden">
               <nav aria-label="Primary mobile" className="space-y-3">
                 <div className="flex flex-wrap gap-2">
                   <Link
                     href="/"
-                    className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    className="rounded-xl border border-sidebar-border border-l-2 border-l-sidebar-primary bg-sidebar-accent px-3 py-1.5 text-sm font-semibold text-sidebar-foreground transition hover:bg-sidebar-accent/80"
                   >
                     Home
                   </Link>
@@ -128,20 +142,20 @@ export default function RootLayout({
                 >
                   <h2
                     id="mobile-tools-heading"
-                    className="pt-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-black/45"
+                    className="pt-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-sidebar-foreground/45"
                   >
                     Tool
                   </h2>
                   <div className="flex flex-wrap gap-2">
                     <Link
                       href="/ticket-analysis"
-                      className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                     >
                       Ticket Analysis
                     </Link>
                     <Link
                       href="/resume"
-                      className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                     >
                       Resume Tailor
                     </Link>
@@ -153,20 +167,20 @@ export default function RootLayout({
                 >
                   <h2
                     id="mobile-chat-heading"
-                    className="pt-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-black/45"
+                    className="pt-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-sidebar-foreground/45"
                   >
                     Chat
                   </h2>
                   <div className="flex flex-wrap gap-2">
                     <Link
                       href="/search"
-                      className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                     >
                       Tavily Search
                     </Link>
                     <Link
                       href="/rag"
-                      className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                     >
                       Local RAG
                     </Link>
@@ -178,14 +192,14 @@ export default function RootLayout({
                 >
                   <h2
                     id="mobile-manage-heading"
-                    className="pt-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-black/45"
+                    className="pt-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-sidebar-foreground/45"
                   >
                     Manage
                   </h2>
                   <div className="flex flex-wrap gap-2">
                     <Link
                       href="/manage/rag"
-                      className="rounded-full border border-black/15 bg-white/80 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-black/75 transition hover:border-black/30 hover:bg-white"
+                    className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                     >
                       RAG Config
                     </Link>
@@ -197,8 +211,8 @@ export default function RootLayout({
           </div>
         </div>
 
-        <footer className="border-t border-black/10 bg-[#f6efe7]/92">
-          <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4 text-xs text-black/65 md:px-8">
+        <footer className="border-t border-border bg-card">
+          <div className="mx-auto flex h-14 w-full max-w-[1440px] items-center justify-between px-4 text-xs text-muted-foreground md:px-8">
             <p>© {currentYear} AOE AI</p>
             <p>Built for clear, practical answers</p>
           </div>

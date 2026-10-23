@@ -84,8 +84,8 @@ const workflowGroups: WorkflowGroup[] = [
 
 export default function HomePage() {
   return (
-    <main className="min-h-[calc(100vh-7.5rem)] bg-[linear-gradient(135deg,#fffaf7_0%,#f7f0e7_55%,#edf3ee_100%)] px-4 py-8 md:px-8 md:py-12">
-      <div className="mx-auto w-full max-w-6xl">
+    <main className="min-h-[calc(100vh-7.5rem)] px-4 py-8 md:px-8 md:py-12">
+      <div className="mx-auto w-full max-w-7xl">
         <header className="rise-in border-b border-black/10 pb-8 md:pb-10">
           <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-black/50">
             <span

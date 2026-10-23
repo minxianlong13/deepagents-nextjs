@@ -1,13 +1,18 @@
 import { JiraTicketAgentError } from "@/lib/agents/get_jira_ticket_agent";
 import {
   ticketKeySchema,
-  runAnalyzeTicketWorkflow,
+  runAnalyzeTicketStep,
+  ticketAnalysisStepSchema,
 } from "@/lib/workflow/ticket_analysis";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
 const requestSchema = z.object({
   ticketKey: z.string(),
+  step: ticketAnalysisStepSchema,
+  jira: z.unknown().optional(),
+  ticketContract: z.unknown().optional(),
+  slackReference: z.unknown().optional(),
 });
 
 export async function POST(request: Request) {
@@ -26,7 +31,7 @@ export async function POST(request: Request) {
     if (!parsed.success) {
       return NextResponse.json(
         {
-          error: "A Jira ticket key is required.",
+          error: "A Jira ticket key and workflow step are required.",
           details: parsed.error.flatten(),
         },
         { status: 400 },
@@ -46,11 +51,18 @@ export async function POST(request: Request) {
       );
     }
 
-    const result = await runAnalyzeTicketWorkflow(ticketKey.data);
+    const result = await runAnalyzeTicketStep({
+      step: parsed.data.step,
+      ticketKey: ticketKey.data,
+      jira: parsed.data.jira,
+      ticketContract: parsed.data.ticketContract,
+      slackReference: parsed.data.slackReference,
+    });
 
     return NextResponse.json({
       ticketKey: ticketKey.data,
-      analysis: result,
+      step: parsed.data.step,
+      result,
     });
   } catch (error: unknown) {
     if (error instanceof JiraTicketAgentError) {

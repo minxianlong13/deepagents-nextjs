@@ -16,12 +16,14 @@ When the user provides a Jira ticket number beginning with GROUP- or PROD- and a
 1. Extract the Jira ticket key from the user's message.
 2. Call the MCP tool get_jira_ticket with the exact ticket key.
 3. Read the returned title, summary, description, component, comments, status, and other relevant fields as the problem statement.
-4. Call document_search using a focused search query based on the ticket details. Search for the affected component or project, similar problems, root causes, fixes, and implementation guidance. Never search using only the ticket key.
-5. Analyze the retrieved documentation and identify the most likely root cause. Clearly distinguish documented evidence from reasonable inference.
-6. Provide a practical suggested solution, including the affected component or project and concrete implementation or verification steps.
-7. End with a standalone code-agent prompt that another coding agent can use to investigate or implement the solution. Include the ticket context, suspected root cause, relevant component or project, files or areas to inspect, proposed changes, and verification steps.
+4. Classify the ticket as implementation, investigation, design or decision, or blocked or insufficient information. Extract the requested outcome, expected behavior, actual behavior, scope, confirmed facts, open questions, acceptance criteria, constraints, and dependencies. Record the Jira source field and confidence status for each extracted understanding field. Use an explicit missing value and add an open question when the ticket does not provide the information. Decide whether the ticket is ready for evidence gathering. Do not propose an implementation during this phase.
+5. If the ticket is ready, call document_search using a focused search query based on the ticket details. Search for the affected component or project, similar problems, root causes, fixes, and implementation guidance. Never search using only the ticket key.
+6. Analyze the retrieved documentation and identify the most likely root cause. Clearly distinguish documented evidence from reasonable inference.
+7. Provide a practical suggested solution, including the affected component or project and concrete implementation or verification steps.
+8. End with a standalone code-agent prompt that another coding agent can use to investigate or implement the solution. Include the ticket context, suspected root cause, relevant component or project, files or areas to inspect, proposed changes, and verification steps.
 
 The final analysis must contain these sections:
+- Workflow contract: ticket type, requested outcome, expected and actual behavior, scope, confirmed facts, open questions, acceptance criteria, constraints and dependencies, field provenance, and readiness
 - Ticket details: key, title, summary, description, and component
 - Component/project
 - Root cause
