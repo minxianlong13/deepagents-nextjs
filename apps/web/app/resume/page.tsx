@@ -227,7 +227,7 @@ export default function ResumePage() {
     <main className="resume-page min-h-[calc(100vh-7.5rem)] px-4 py-7 md:px-8 md:py-10">
       <div className="mx-auto w-full max-w-6xl rise-in">
         <header className="mb-7 border-b border-black/15 pb-6">
-          <p className="mb-2 text-xs font-semibold uppercase text-[#a63d22]">
+          <p className="mb-2 text-xs font-semibold uppercase text-destructive">
             Career studio / Resume tailor
           </p>
           <h1 className="font-(--font-fashion-display) text-4xl leading-tight md:text-5xl">
@@ -241,7 +241,7 @@ export default function ResumePage() {
 
         <form
           onSubmit={handleTailor}
-          className="border border-black/15 border-t-4 border-t-[#16705c] bg-[#fffdf8] p-4 shadow-[4px_4px_0_#1f1b16] md:p-6"
+          className="border border-border border-t-4 border-t-primary bg-card p-4 shadow-[4px_4px_0_hsl(var(--foreground))] md:p-6"
         >
           <div className="mb-4 flex items-start justify-between gap-4">
             <div>
@@ -256,7 +256,7 @@ export default function ResumePage() {
               </p>
             </div>
             <FileText
-              className="mt-1 size-5 shrink-0 text-[#16705c]"
+              className="mt-1 size-5 shrink-0 text-primary"
               aria-hidden="true"
             />
           </div>
@@ -277,7 +277,7 @@ export default function ResumePage() {
             </span>
           </div>
           {error ? (
-            <p role="alert" className="mt-3 text-sm text-[#a52b1a]">
+            <p role="alert" className="mt-3 text-sm text-destructive">
               {error}
             </p>
           ) : null}
@@ -289,7 +289,7 @@ export default function ResumePage() {
               type="submit"
               size="lg"
               disabled={!canTailor}
-              className="w-full gap-2 bg-[#153d34] hover:bg-[#153d34]/90 sm:w-auto"
+              className="w-full gap-2 bg-primary hover:bg-primary/90 sm:w-auto"
             >
               {loading ? (
                 <LoaderCircle
@@ -305,9 +305,9 @@ export default function ResumePage() {
         </form>
 
         {analysis ? (
-          <section className="mt-6 border border-black/15 bg-[#e7f1ec] p-4 md:p-5">
+          <section className="mt-6 border border-border bg-primary/10 p-4 md:p-5">
             <div className="mb-3">
-              <p className="text-xs font-semibold uppercase text-[#16705c]">
+              <p className="text-xs font-semibold uppercase text-primary">
                 Job description analysis
               </p>
               <h2 className="mt-1 text-lg font-semibold">
@@ -404,7 +404,7 @@ export default function ResumePage() {
               </div>
             ) : null}
             <details className="mt-4 border-t border-black/10 pt-3">
-              <summary className="cursor-pointer text-xs font-semibold text-[#153d34]">
+              <summary className="cursor-pointer text-xs font-semibold text-primary">
                 View extracted JSON
               </summary>
               <pre className="mt-3 overflow-x-auto bg-white/70 p-3 text-xs leading-5">
@@ -417,7 +417,7 @@ export default function ResumePage() {
         <section className="resume-printable mt-7 overflow-hidden border border-black/15 bg-white">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/15 px-4 py-4 md:px-6">
             <div>
-              <p className="text-xs font-semibold uppercase text-[#16705c]">
+              <p className="text-xs font-semibold uppercase text-primary">
                 Tailored draft
               </p>
               <h2 className="mt-1 text-xl font-semibold">Resume preview</h2>
@@ -450,7 +450,7 @@ export default function ResumePage() {
                 <Button
                   type="button"
                   onClick={handleSavePdf}
-                  className="gap-2 bg-[#153d34] hover:bg-[#153d34]/90"
+                  className="gap-2 bg-primary hover:bg-primary/90"
                 >
                   <FileDown className="size-4" aria-hidden="true" />
                   Save as PDF
@@ -463,7 +463,7 @@ export default function ResumePage() {
             <div
               role="status"
               aria-live="polite"
-              className="flex flex-wrap items-center gap-2 border-b border-[#16705c]/20 bg-[#e7f1ec] px-4 py-3 text-sm text-[#153d34] md:px-6"
+              className="flex flex-wrap items-center gap-2 border-b border-primary/20 bg-primary/10 px-4 py-3 text-sm text-primary md:px-6"
             >
               <Check className="size-4 shrink-0" aria-hidden="true" />
               <span>Saved locally:</span>
@@ -482,7 +482,7 @@ export default function ResumePage() {
               </article>
             ) : (
               <div className="flex min-h-60 flex-col items-center justify-center text-center">
-                <div className="mb-4 flex size-12 items-center justify-center border border-dashed border-[#d1d1d1] bg-[#f7f7f8]">
+                <div className="mb-4 flex size-12 items-center justify-center border border-dashed border-border bg-muted">
                   <FileText
                     className="size-5 text-black/45"
                     aria-hidden="true"
@@ -501,10 +501,10 @@ export default function ResumePage() {
         </section>
 
         {coverLetter ? (
-          <section className="mt-6 overflow-hidden border border-black/15 bg-white">
+          <section className="mt-6 overflow-hidden border border-border bg-card">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/15 px-4 py-4 md:px-6">
               <div>
-                <p className="text-xs font-semibold uppercase text-[#a63d22]">
+                <p className="text-xs font-semibold uppercase text-destructive">
                   Application letter
                 </p>
                 <h2 className="mt-1 text-xl font-semibold">Cover letter</h2>
@@ -521,7 +521,7 @@ export default function ResumePage() {
               <Button
                 type="button"
                 onClick={handleSaveCoverLetterPdf}
-                className="gap-2 bg-[#153d34] hover:bg-[#153d34]/90"
+                className="gap-2 bg-primary hover:bg-primary/90"
               >
                 <FileDown className="size-4" aria-hidden="true" />
                 Save as PDF
@@ -531,7 +531,7 @@ export default function ResumePage() {
               <div
                 role="status"
                 aria-live="polite"
-                className="flex flex-wrap items-center gap-2 border-b border-[#16705c]/20 bg-[#e7f1ec] px-4 py-3 text-sm text-[#153d34] md:px-6"
+                className="flex flex-wrap items-center gap-2 border-b border-primary/20 bg-primary/10 px-4 py-3 text-sm text-primary md:px-6"
               >
                 <Check className="size-4 shrink-0" aria-hidden="true" />
                 <span>Saved locally:</span>

@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Montserrat, Fira_Code } from "next/font/google";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Libre_Baskerville } from "next/font/google";
 import "./globals.css";
 
-const fontSans = Montserrat({
+const fontSans = Libre_Baskerville({
   subsets: ["latin"],
-  variable: "--font-montserrat",
-});
-
-const fontMono = Fira_Code({
-  subsets: ["latin"],
-  variable: "--font-fira-code",
+  variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
@@ -27,23 +23,23 @@ export default function RootLayout({
   const currentYear = new Date().getFullYear();
 
   return (
-    <html
-      lang="en"
-      className={`${fontSans.variable} ${fontMono.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${fontSans.variable} h-full antialiased`}>
       <body suppressHydrationWarning className="min-h-full flex flex-col">
-        <div className="mx-auto flex w-full max-w-[1440px] flex-1">
+        <div className="mx-auto flex w-full max-w-360 flex-1">
           <aside className="hidden w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar p-3 text-sidebar-foreground md:flex">
-            <div className="mb-6 flex items-center gap-3 px-3 py-2">
-              <div className="flex size-9 items-center justify-center rounded-xl bg-sidebar-primary text-sm font-semibold text-sidebar-primary-foreground">
-                A
+            <div className="mb-6 flex items-center justify-between gap-3 px-3 py-2">
+              <div className="flex items-center gap-3">
+                <div className="flex size-9 items-center justify-center rounded-xl bg-sidebar-primary text-sm font-semibold text-sidebar-primary-foreground">
+                  A
+                </div>
+                <div>
+                  <p className="text-sm font-semibold tracking-tight">AOE AI</p>
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-sidebar-foreground/40">
+                    Personal helper
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm font-semibold tracking-tight">AOE AI</p>
-                <p className="text-[10px] uppercase tracking-[0.18em] text-sidebar-foreground/40">
-                  Personal helper
-                </p>
-              </div>
+              <ThemeToggle />
             </div>
             <nav aria-label="Primary" className="flex flex-col gap-4">
               <Link
@@ -136,6 +132,9 @@ export default function RootLayout({
                     Home
                   </Link>
                 </div>
+                <div className="mt-3 md:hidden">
+                  <ThemeToggle />
+                </div>
                 <section
                   aria-labelledby="mobile-tools-heading"
                   className="grid grid-cols-[3.5rem_minmax(0,1fr)] gap-2"
@@ -149,13 +148,13 @@ export default function RootLayout({
                   <div className="flex flex-wrap gap-2">
                     <Link
                       href="/ticket-analysis"
-                    className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                      className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                     >
                       Ticket Analysis
                     </Link>
                     <Link
                       href="/resume"
-                    className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                      className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                     >
                       Resume Tailor
                     </Link>
@@ -174,13 +173,13 @@ export default function RootLayout({
                   <div className="flex flex-wrap gap-2">
                     <Link
                       href="/search"
-                    className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                      className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                     >
                       Tavily Search
                     </Link>
                     <Link
                       href="/rag"
-                    className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                      className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                     >
                       Local RAG
                     </Link>
@@ -199,7 +198,7 @@ export default function RootLayout({
                   <div className="flex flex-wrap gap-2">
                     <Link
                       href="/manage/rag"
-                    className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                      className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                     >
                       RAG Config
                     </Link>

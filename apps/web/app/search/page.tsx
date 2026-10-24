@@ -273,7 +273,7 @@ export default function SearchPage() {
                       className={`max-w-[85%] rounded-2xl border px-4 py-3 text-sm shadow-sm ${
                         message.role === "user"
                           ? "ml-auto border-black bg-black text-white"
-                          : "border-black/10 bg-[#fffaf6] text-black"
+                          : "border-border bg-secondary text-foreground"
                       }`}
                     >
                       {message.role === "assistant" ? (
