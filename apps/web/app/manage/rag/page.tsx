@@ -177,8 +177,8 @@ export default function RagConfigurationPage() {
               <p className="max-w-2xl text-sm leading-relaxed text-black/65">
                 Choose <code>.</code> to index all local docs plus remote
                 metadata, or choose a subfolder under <code>./docs</code>. Local
-                folders are indexed from their files; folders under
-                <code>remote</code> use their JSON metadata to fetch remote
+                folders are indexed from their files; folders under{" "}
+                <code>remote</code>{" "}use their JSON metadata to fetch remote
                 sources. Unchanged sources are skipped.
               </p>
               <label className="block max-w-xl space-y-2 text-sm font-medium">
