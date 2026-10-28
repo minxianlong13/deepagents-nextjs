@@ -24,9 +24,9 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Jira Ticket Analysis
 
-Open [http://localhost:3000/ticket-analysis](http://localhost:3000/ticket-analysis) and enter a `GROUP-12345` or `PROD-12345` key. The server calls `get_jira_ticket` once, passes the returned issue details to the configured model for a plain-language problem summary, and displays both the summary and Jira fields. This is a single request; it does not define a ticket contract, search Slack, or collect ticket evidence.
+Open [http://localhost:3000/ticket-analysis](http://localhost:3000/ticket-analysis) and enter a `GROUP-12345` or `PROD-12345` key. The server calls `get_jira_ticket` once, then the configured model uses `document_search` from the existing RAG index to refine a plain-language problem summary, Jira-derived keywords, and a project match from `apps/web/config/repos.json`. Unclear project matches are left empty. The UI displays the summary, keywords, project, issue fields, and comments as `author: body`. This is a single request; it does not define a ticket contract, search Slack, or collect ticket evidence.
 
-The workflow uses the configured MCP server in `.vscode/mcp.json`. Start it with `pnpm mcp:server`. Jira access must be configured for that MCP server; set `JIRA_ACCEPTANCE_CRITERIA_FIELD` to the Jira custom-field ID if acceptance criteria are stored in a project-specific field. The application also requires configured chat-model access.
+The workflow uses the configured MCP server in `.vscode/mcp.json`. Start it with `pnpm mcp:server`. Jira access must be configured for that MCP server; set `JIRA_ACCEPTANCE_CRITERIA_FIELD` to the Jira custom-field ID if acceptance criteria are stored in a project-specific field. It also requires chat-model access and a configured RAG/Pinecone index with OpenAI embeddings. If documentation search is unavailable, the agent is instructed to explain from Jira alone.
 
 The previous multi-step contract, Slack, and evidence workflow is not part of this active ticket-analysis path. Other tools, including Local RAG, continue to use their existing configuration independently.
 

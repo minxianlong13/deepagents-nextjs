@@ -94,6 +94,10 @@ export default function TicketAnalysisPage() {
   };
 
   const fields = Object.entries(asRecord(result?.originalJiraOutput.fields));
+  const rawComments = asRecord(
+    asRecord(result?.originalJiraOutput.fields).comment,
+  ).comments;
+  const comments: unknown[] = Array.isArray(rawComments) ? rawComments : [];
   const ticketUrl = safeExternalUrl(result?.originalJiraOutput.url);
 
   return (
@@ -230,6 +234,21 @@ export default function TicketAnalysisPage() {
                 <p className="whitespace-pre-wrap text-sm leading-relaxed text-black/85">
                   {result.problemSummary}
                 </p>
+                <p className="mt-3 text-xs text-black/65">
+                  Project: {result.projectName}
+                </p>
+                {result.keywords.length > 0 && (
+                  <div className="mt-4">
+                    <p className="text-xs font-medium uppercase text-black/50">
+                      Keywords
+                    </p>
+                    <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-black/75">
+                      {result.keywords.map((keyword, index) => (
+                        <li key={`${keyword}-${index}`}>{keyword}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </CardContent>
             </Card>
 
@@ -253,7 +272,27 @@ export default function TicketAnalysisPage() {
                         {name.replaceAll(/([A-Z])/g, " $1")}
                       </dt>
                       <dd className="whitespace-pre-wrap wrap-break-word text-sm leading-relaxed text-black/80">
-                        {formatValue(value)}
+                        {name === "comment" ? (
+                          <ul className="space-y-3">
+                            {comments.map((rawComment, index) => {
+                              const comment = asRecord(rawComment);
+                              const author = asRecord(comment.author);
+                              const name =
+                                (typeof author.displayName === "string" &&
+                                  author.displayName) ||
+                                (typeof author.name === "string" &&
+                                  author.name) ||
+                                "Unknown";
+                              return (
+                                <li key={String(comment.id ?? index)}>
+                                  {name}: {formatValue(comment.body)}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        ) : (
+                          formatValue(value)
+                        )}
                       </dd>
                     </div>
                   ))}

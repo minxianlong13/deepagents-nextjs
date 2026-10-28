@@ -11,15 +11,6 @@ import { StateBackend } from "deepagents";
 import { tool } from "langchain";
 import { z } from "zod";
 import { createOpenAIEmbeddingModel } from "../llm/model.js";
-import {
-  boundEvidence,
-  failureDetails,
-  makeEvidence,
-  makeSearchAttempt,
-  safeSourceUrl,
-  type EvidenceItem,
-  type SearchAttempt,
-} from "../workflow/ticket_evidence";
 
 const DOCS_DIRECTORY = path.resolve(process.cwd(), "../../docs");
 const REMOTE_METADATA_DIRECTORY = path.join(DOCS_DIRECTORY, "remote");
@@ -312,73 +303,6 @@ export async function retrieveDocumentation(
 ): Promise<Document[]> {
   const store = await getVectorStore();
   return store.similaritySearch(query, 4);
-}
-
-export async function captureDocumentationSearch(
-  input: {
-    query: string;
-    attempt: number;
-    refinementOf?: string | null;
-    reason?: string;
-  },
-  retrieve: (query: string) => Promise<Document[]> = retrieveDocumentation,
-): Promise<{
-  evidence: EvidenceItem[];
-  search: SearchAttempt;
-}> {
-  const startedAt = new Date().toISOString();
-  const common = { ...input, source: "documentation" as const, startedAt };
-  let timeout: ReturnType<typeof setTimeout> | undefined;
-  try {
-    const docs = await Promise.race([
-      retrieve(input.query),
-      new Promise<never>((_, reject) => {
-        timeout = setTimeout(
-          () => reject(new Error("Documentation search timed out")),
-          30_000,
-        );
-      }),
-    ]);
-    const candidates = docs.slice(0, 4).map((doc) => {
-      const source =
-        typeof doc.metadata.source === "string" && doc.metadata.source.trim()
-          ? doc.metadata.source
-          : "unknown-source";
-      return makeEvidence({
-        sourceType: "documentation",
-        locator: source,
-        url: safeSourceUrl(source),
-        content: doc.pageContent,
-        linkable: source !== "unknown-source",
-        updatedAt:
-          typeof doc.metadata.updatedAt === "string"
-            ? doc.metadata.updatedAt
-            : null,
-      });
-    });
-    const evidence = boundEvidence(candidates);
-    const partial =
-      docs.length > 4 ||
-      evidence.some((item) => item.truncated || !item.linkable) ||
-      evidence.length < candidates.length;
-    return {
-      evidence,
-      search: makeSearchAttempt({
-        ...common,
-        evidence,
-        outcome: partial ? "partial" : evidence.length ? "success" : "empty",
-        resultCount: docs.length,
-        truncated: partial,
-      }),
-    };
-  } catch (error) {
-    return {
-      evidence: [],
-      search: makeSearchAttempt({ ...common, ...failureDetails(error) }),
-    };
-  } finally {
-    if (timeout) clearTimeout(timeout);
-  }
 }
 
 export const documentSearch = tool(

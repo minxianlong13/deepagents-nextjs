@@ -1,12 +1,16 @@
 import { createDeepAgent } from "deepagents";
 import { toolStrategy } from "langchain";
+import { readFileSync } from "node:fs";
 import { z } from "zod";
 import { createDeterministicGPT6LunaModel } from "../llm/model.js";
 import { GET_JIRA_TICKET_INFO_PROMPT } from "../skill/jira_analysis";
 import { jiraInfoGet } from "../tools/jira_info_get";
+import { backend, documentSearch } from "../tools/rag_search";
 
 export const jiraTicketGetAgentOutputSchema = z.object({
   problemSummary: z.string().min(1),
+  keywords: z.array(z.string().trim().min(1).max(100)).max(8),
+  projectName: z.string(),
 });
 
 export type JiraTicketGetAgentOutput = z.infer<
@@ -56,9 +60,26 @@ export type JiraTicketGetAgentResult = JiraTicketGetAgentOutput & {
   originalJiraOutput: Record<string, unknown>;
 };
 
+function loadRepositoryNames(): string[] {
+  const repositories = JSON.parse(
+    readFileSync(new URL("../../config/repos.json", import.meta.url), "utf8"),
+  ) as unknown;
+  if (
+    !Array.isArray(repositories) ||
+    !repositories.every((repository) => typeof repository === "string")
+  ) {
+    throw new JiraTicketAgentError(
+      "The configured repository list is invalid.",
+    );
+  }
+  return repositories;
+}
+
 const jiraTicketAgent = createDeepAgent({
   name: "analyze_jira_ticket",
   model: createDeterministicGPT6LunaModel(),
+  tools: [documentSearch],
+  backend,
   systemPrompt: GET_JIRA_TICKET_INFO_PROMPT,
   responseFormat: toolStrategy(jiraTicketGetAgentOutputSchema),
 });
@@ -92,14 +113,22 @@ export async function runGetJiraTicketAgent(
     );
   }
 
-  const result = await jiraTicketAgent.invoke({
-    messages: [
-      {
-        role: "user",
-        content: JSON.stringify({ ticketKey, ticket: originalJiraOutput }),
-      },
-    ],
-  });
+  const repositories = loadRepositoryNames();
+  const result = await jiraTicketAgent.invoke(
+    {
+      messages: [
+        {
+          role: "user",
+          content: JSON.stringify({
+            ticketKey,
+            ticket: originalJiraOutput,
+            allowedProjectNames: repositories,
+          }),
+        },
+      ],
+    },
+    { recursionLimit: 20 },
+  );
 
   const parsed = jiraTicketGetAgentOutputSchema.safeParse(
     result.structuredResponse,
@@ -113,6 +142,9 @@ export async function runGetJiraTicketAgent(
   return {
     ...parsed.data,
     ticketKey,
+    projectName: repositories.includes(parsed.data.projectName)
+      ? parsed.data.projectName
+      : "",
     originalJiraOutput,
   };
 }
