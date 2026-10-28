@@ -1,86 +1,61 @@
 import { JiraTicketAgentError } from "@/lib/agents/get_jira_ticket_agent";
 import {
+  runTicketAnalysis,
   ticketKeySchema,
-  runAnalyzeTicketStep,
-  ticketAnalysisStepSchema,
 } from "@/lib/workflow/ticket_analysis";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
-const requestSchema = z.object({
-  ticketKey: z.string(),
-  step: ticketAnalysisStepSchema,
-  jira: z.unknown().optional(),
-  ticketContract: z.unknown().optional(),
-  slackReference: z.unknown().optional(),
-});
+const requestSchema = z.object({ ticketKey: z.string() });
 
 export async function POST(request: Request) {
+  let body: unknown;
   try {
-    let body: unknown;
-    try {
-      body = await request.json();
-    } catch {
-      return NextResponse.json(
-        { error: "Request body must be valid JSON." },
-        { status: 400 },
-      );
-    }
-    const parsed = requestSchema.safeParse(body);
+    body = await request.json();
+  } catch {
+    return NextResponse.json(
+      { error: "A valid JSON request is required." },
+      { status: 400 },
+    );
+  }
 
-    if (!parsed.success) {
-      return NextResponse.json(
-        {
-          error: "A Jira ticket key and workflow step are required.",
-          details: parsed.error.flatten(),
-        },
-        { status: 400 },
-      );
-    }
+  const parsed = requestSchema.safeParse(body);
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: "A Jira ticket key is required." },
+      { status: 400 },
+    );
+  }
 
-    const ticketKey = ticketKeySchema.safeParse(parsed.data.ticketKey);
-    if (!ticketKey.success) {
-      return NextResponse.json(
-        {
-          error:
-            ticketKey.error.issues[0]?.message ??
-            "Enter a Jira ticket key starting with GROUP- or PROD-.",
-          details: ticketKey.error.flatten(),
-        },
-        { status: 400 },
-      );
-    }
+  const ticketKey = ticketKeySchema.safeParse(parsed.data.ticketKey);
+  if (!ticketKey.success) {
+    return NextResponse.json(
+      {
+        error: ticketKey.error.issues[0]?.message ?? "Invalid Jira ticket key.",
+      },
+      { status: 400 },
+    );
+  }
 
-    const result = await runAnalyzeTicketStep({
-      step: parsed.data.step,
-      ticketKey: ticketKey.data,
-      jira: parsed.data.jira,
-      ticketContract: parsed.data.ticketContract,
-      slackReference: parsed.data.slackReference,
-    });
-
-    return NextResponse.json({
-      ticketKey: ticketKey.data,
-      step: parsed.data.step,
-      result,
-    });
-  } catch (error: unknown) {
+  try {
+    const result = await runTicketAnalysis(ticketKey.data);
+    return NextResponse.json({ ticketKey: ticketKey.data, result });
+  } catch (error) {
     if (error instanceof JiraTicketAgentError) {
-      const ticketNotFound = /\(404\)/.test(error.message);
+      const notFound = /\(404\)/.test(error.message);
       return NextResponse.json(
         {
-          error: ticketNotFound
+          error: notFound
             ? "Jira ticket was not found or is not accessible."
-            : "Unable to retrieve the Jira ticket. Check Jira access and try again.",
+            : "Unable to retrieve or analyze the Jira ticket. Check Jira and model configuration, then try again.",
         },
-        { status: ticketNotFound ? 404 : 502 },
+        { status: notFound ? 404 : 502 },
       );
     }
-
     return NextResponse.json(
       {
         error:
-          "Ticket analysis could not be completed. Check the MCP server and model configuration, then try again.",
+          "Unable to analyze this Jira ticket. Check the model configuration and try again.",
       },
       { status: 502 },
     );

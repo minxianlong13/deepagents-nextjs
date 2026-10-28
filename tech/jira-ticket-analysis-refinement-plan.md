@@ -1,26 +1,10 @@
 # Jira Ticket Analysis Workflow Refinement Plan
 
-The current workflow is intentionally UI-controlled and runs one server step at a time. Each completed result is kept in browser state and sent to the next step. Page-refresh persistence is out of scope.
+## Current Jira-only workflow
 
-## Current four-step implementation
+The ticket-analysis page accepts one Jira key and makes one API request. The workflow invokes `get_jira_ticket` directly, sends the retrieved issue details to the model for a concise problem explanation, and displays that explanation with the returned fields. The active flow does not invoke ticket-contract, Slack-search, or ticket-evidence code. It does not persist results across refreshes.
 
-1. **Retrieve Jira**
-   - Fetch the ticket and derive the problem summary, search keywords, and repository match.
-   - Result is displayed before the next step is enabled.
-
-2. **Define ticket contract**
-   - Classify the ticket as implementation, investigation, design or decision, or blocked.
-   - Extract the requested outcome, expected and actual behavior, scope, acceptance criteria, constraints, dependencies, open questions, and field provenance.
-
-3. **Search Slack**
-   - Search using the Jira-derived keywords.
-   - Display the Slack summary and findings, including an unavailable result when the search fails.
-
-4. **Generate technical analysis**
-   - Combine Jira, the ticket contract, Slack, and documentation research.
-   - Display the root-cause assessment, solution, risks, validation strategy, documentation, and code-agent prompt.
-
-The API requires an explicit step. Previous results are validated and reused; completed steps are not rerun by the UI.
+Earlier phases below describe the previous multi-step design and are retained as project history. They are not the current runtime behavior.
 
 ## Refinement phases
 
@@ -28,9 +12,9 @@ The API requires an explicit step. Previous results are validated and reused; co
   - Target: Define ticket types, required fields, evidence rules, and readiness criteria.
 - **Phase 2 — Improve ticket understanding** — **Complete**
   - Target: Extract a precise problem statement with field-level provenance.
-- **Phase 3 — Add UI-controlled step orchestration** — **Complete**
+- **Phase 3 — Add UI-controlled step orchestration** — **Historical; replaced by Jira-only request**
   - Target: Run one step per request and show each result before continuing.
-- **Phase 4 — Strengthen evidence collection**
+- **Phase 4 — Strengthen evidence collection** — **Historical; not used by the active ticket-analysis workflow**
   - Target: Make Jira, Slack, documentation, and research limitations explicit and source-linked.
 - **Phase 5 — Add repository reconnaissance**
   - Target: Map the ticket to concrete repositories, files, symbols, data flows, and tests.
@@ -66,13 +50,23 @@ The API requires an explicit step. Previous results are validated and reused; co
 - Removed the all-in-one `runAnalyzeTicketWorkflow` path.
 - Kept page-refresh persistence out of scope by design.
 
-## Phase 4 — Strengthen evidence collection
+## Phase 4 — Historical evidence workflow
+
+The earlier evidence workflow and its implementation artifacts remain documented in the [Phase 4 implementation plan](jira-ticket-analysis-phase-4/plan.md). The current Jira analysis route no longer uses that evidence pipeline or its Slack/contract stages.
+
+### Implementation evidence
+
+- Added a shared bounded source registry, deterministic IDs, classifications, search outcomes, conflict/gap schemas, and citation checks. Original Jira and Slack payloads remain available.
+- Captured actual retrieval results before synthesis, enforced two Slack/three documentation searches, and limited final-output repair to one tool-free pass. Ticket research uses run-local excerpts without changing RAG Chat's file contract.
+- Added source/citation browsing, query histories, research limitations, safe external links, and explicit upstream reruns. Preserved the reviewed contract and browser-only four-step orchestration.
+- Passed TypeScript, focused ESLint, MCP syntax, whitespace, offline normalization/refinement/citation/timeout assertions, backend graph upload/read with simultaneous-run isolation, runtime API probes, and mocked four-step browser checks at desktop/mobile sizes.
+- A real ticket through all four steps, live Slack authorization/failure/no-match behavior, Pinecone/OpenAI retrieval, and RAG Chat with live documentation remain credentialed release gates. Local checks do not prove model quality or source entailment. No persistent automated test files were added.
 
 ### Target
 
-Every important technical conclusion should be traceable to Jira, Slack, documentation, or repository evidence, with limitations visible to the user.
+Every important technical conclusion should be traceable to Jira, Slack, or documentation evidence, or explicitly labeled as inferred/unverified, with limitations visible to the user. Repository evidence remains Phase 5 work.
 
-### Planned outcomes
+### Implemented outcomes
 
 - Add source references to individual facts, hypotheses, root-cause evidence, and recommendations.
 - Distinguish confirmed, inferred, opinion-based, and unavailable evidence.

@@ -1,6 +1,5 @@
 import { createDeepAgent } from "deepagents";
 import { toolStrategy } from "langchain";
-import { readFileSync } from "node:fs";
 import { z } from "zod";
 import { createDeterministicGPT6LunaModel } from "../llm/model.js";
 import { GET_JIRA_TICKET_INFO_PROMPT } from "../skill/jira_analysis";
@@ -8,8 +7,6 @@ import { jiraInfoGet } from "../tools/jira_info_get";
 
 export const jiraTicketGetAgentOutputSchema = z.object({
   problemSummary: z.string().min(1),
-  keywords: z.array(z.string().min(1)).max(5),
-  repo: z.string().nullable(),
 });
 
 export type JiraTicketGetAgentOutput = z.infer<
@@ -54,24 +51,17 @@ function parseOriginalJiraOutput(content: unknown): Record<string, unknown> {
   return asRecord(content);
 }
 
-function loadRepositoryNames(): string[] {
-  const repositories = JSON.parse(
-    readFileSync(new URL("../../config/repos.json", import.meta.url), "utf8"),
-  ) as unknown;
-  if (
-    !Array.isArray(repositories) ||
-    !repositories.every((repository) => typeof repository === "string")
-  ) {
-    throw new Error(
-      "config/repos.json must contain an array of repository names.",
-    );
-  }
-  return repositories;
-}
-
 export type JiraTicketGetAgentResult = JiraTicketGetAgentOutput & {
+  ticketKey: string;
   originalJiraOutput: Record<string, unknown>;
 };
+
+const jiraTicketAgent = createDeepAgent({
+  name: "analyze_jira_ticket",
+  model: createDeterministicGPT6LunaModel(),
+  systemPrompt: GET_JIRA_TICKET_INFO_PROMPT,
+  responseFormat: toolStrategy(jiraTicketGetAgentOutputSchema),
+});
 
 export async function runGetJiraTicketAgent(
   ticketKeyInput: string,
@@ -82,49 +72,34 @@ export async function runGetJiraTicketAgent(
     .transform((key) => key.toUpperCase())
     .pipe(z.string().regex(/^(GROUP|PROD)-\d+$/))
     .parse(ticketKeyInput);
-  const repositories = loadRepositoryNames();
-  const agent = createDeepAgent({
-    name: "get_jira_ticket",
-    model: createDeterministicGPT6LunaModel(),
-    tools: [jiraInfoGet],
-    systemPrompt: GET_JIRA_TICKET_INFO_PROMPT,
-    responseFormat: toolStrategy(jiraTicketGetAgentOutputSchema),
-  });
-  const result = await agent.invoke({
+  let originalJiraOutput: Record<string, unknown>;
+  try {
+    const toolOutput = parseOriginalJiraOutput(
+      await jiraInfoGet.invoke({ issueKey: ticketKey }),
+    );
+    originalJiraOutput = asRecord(toolOutput.structuredContent);
+    if (!Object.keys(originalJiraOutput).length) {
+      originalJiraOutput = parseOriginalJiraOutput(toolOutput.content);
+    }
+  } catch (error) {
+    throw new JiraTicketAgentError(
+      error instanceof Error ? error.message : "Jira ticket retrieval failed.",
+    );
+  }
+  if (!Object.keys(originalJiraOutput).length) {
+    throw new JiraTicketAgentError(
+      "The get_jira_ticket tool returned no ticket details.",
+    );
+  }
+
+  const result = await jiraTicketAgent.invoke({
     messages: [
       {
         role: "user",
-        content: JSON.stringify({ ticketKey, repositories }),
+        content: JSON.stringify({ ticketKey, ticket: originalJiraOutput }),
       },
     ],
   });
-
-  const toolCalls = result.messages.flatMap((message) => {
-    const calls = asRecord(message).tool_calls;
-    return Array.isArray(calls) ? calls.map(asRecord) : [];
-  });
-  const jiraCalls = toolCalls.filter((call) => call.name === "get_jira_ticket");
-  if (
-    toolCalls[0]?.name !== "get_jira_ticket" ||
-    jiraCalls.length !== 1 ||
-    asRecord(jiraCalls[0]?.args).issueKey !== ticketKey
-  ) {
-    throw new JiraTicketAgentError(
-      "The Jira agent must first call get_jira_ticket exactly once with the requested ticket key.",
-    );
-  }
-
-  const jiraToolMessage = result.messages.find(
-    (message) =>
-      message.getType() === "tool" &&
-      (message as { name?: string }).name === "get_jira_ticket",
-  );
-  if (!jiraToolMessage) {
-    throw new JiraTicketAgentError(
-      "The Jira agent did not receive a get_jira_ticket result.",
-    );
-  }
-  const originalJiraOutput = parseOriginalJiraOutput(jiraToolMessage.content);
 
   const parsed = jiraTicketGetAgentOutputSchema.safeParse(
     result.structuredResponse,
@@ -137,9 +112,7 @@ export async function runGetJiraTicketAgent(
 
   return {
     ...parsed.data,
+    ticketKey,
     originalJiraOutput,
-    repo: repositories.includes(parsed.data.repo ?? "")
-      ? parsed.data.repo
-      : null,
   };
 }

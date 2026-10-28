@@ -24,9 +24,11 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Jira Ticket Analysis
 
-Open [http://localhost:3000/ticket-analysis](http://localhost:3000/ticket-analysis) and enter a `GROUP-12345` or `PROD-12345` key. The Jira agent retrieves the issue through MCP and returns the original Jira tool output with a concise problem summary, Slack search keywords, and a matching repo when supported by the ticket context. The workflow then searches Slack with those keywords and runs a technical-analysis agent that searches the configured knowledge base, assesses root cause and solution, and produces an implementation plan plus a self-contained code-agent prompt. The result includes ticket details, behavior analysis, root-cause confidence/evidence, related documentation, and Slack references.
+Open [http://localhost:3000/ticket-analysis](http://localhost:3000/ticket-analysis) and enter a `GROUP-12345` or `PROD-12345` key. The server calls `get_jira_ticket` once, passes the returned issue details to the configured model for a plain-language problem summary, and displays both the summary and Jira fields. This is a single request; it does not define a ticket contract, search Slack, or collect ticket evidence.
 
-The workflow uses the configured MCP server in `.vscode/mcp.json`. Start it with `pnpm mcp:server`. Jira access must be configured for that MCP server; set `JIRA_ACCEPTANCE_CRITERIA_FIELD` to the Jira custom-field ID if acceptance criteria are stored in a project-specific field. The allowed repo names for the agent are listed in `apps/web/config/repos.json` and must have matching roots in `apps/mcp/config/repositories.json`.
+The workflow uses the configured MCP server in `.vscode/mcp.json`. Start it with `pnpm mcp:server`. Jira access must be configured for that MCP server; set `JIRA_ACCEPTANCE_CRITERIA_FIELD` to the Jira custom-field ID if acceptance criteria are stored in a project-specific field. The application also requires configured chat-model access.
+
+The previous multi-step contract, Slack, and evidence workflow is not part of this active ticket-analysis path. Other tools, including Local RAG, continue to use their existing configuration independently.
 
 ## Run the MCP Server
 

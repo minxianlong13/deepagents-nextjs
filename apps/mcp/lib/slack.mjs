@@ -339,9 +339,21 @@ export function normalizeSlackSearchResult(result, input) {
         : rawText;
   const parsedSearch = parseSlackResults(rawResults);
   const cursorMatch = payload?.pagination_info?.match(/cursor `([^`]+)`/);
+  const knownEmpty =
+    parsedSearch.total === 0 ||
+    (Array.isArray(payload?.results) && payload.results.length === 0) ||
+    /\bno (?:messages|results|matches)(?: were)? found\b/i.test(rawResults);
 
   return {
     schema: "slack-search/v1",
+    parseStatus:
+      parsedSearch.messages.length > 0
+        ? "parsed"
+        : knownEmpty
+          ? "empty"
+          : "unparsed",
+    partial:
+      Boolean(cursorMatch) || (!parsedSearch.messages.length && !knownEmpty),
     query: {
       query: input.query ?? null,
       keywords: input.keywords ?? [],

@@ -5,11 +5,18 @@ const OPENAI_EMBEDDING_DIMENSIONS = 1024;
 const OPENAI_CHAT_MODEL = "gpt-6-luna";
 
 export function createGPT6LunaModel() {
-  return new ChatOpenAI({ model: OPENAI_CHAT_MODEL });
+  return new ChatOpenAI({
+    model: OPENAI_CHAT_MODEL,
+    modelKwargs: { reasoning_effort: "none" },
+  });
 }
 
 export function createDeterministicGPT6LunaModel() {
-  return new ChatOpenAI({ model: OPENAI_CHAT_MODEL, temperature: 0 });
+  return new ChatOpenAI({
+    model: OPENAI_CHAT_MODEL,
+    temperature: 0,
+    modelKwargs: { reasoning_effort: "none" },
+  });
 }
 
 export function createClaudeSonnetModel() {

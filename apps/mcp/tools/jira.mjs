@@ -38,7 +38,7 @@ export function registerJiraTools(server) {
       }
 
       const issueUrl = new URL(
-        `/rest/api/2/issue/${encodeURIComponent(issueKey)}`,
+        `rest/api/2/issue/${encodeURIComponent(issueKey)}`,
         `${jiraBaseUrl}/`,
       );
       const requestedFields = acceptanceCriteriaField
@@ -77,7 +77,10 @@ export function registerJiraTools(server) {
       }
       const result = removeAvatarUrls({
         "ticketNo.": issueKey,
-        url: issueUrl.toString(),
+        url: new URL(
+          `browse/${encodeURIComponent(issueKey)}`,
+          `${jiraBaseUrl}/`,
+        ).toString(),
         fields,
       });
 

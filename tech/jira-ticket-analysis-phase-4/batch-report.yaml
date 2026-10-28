@@ -1,0 +1,355 @@
+batch_id: phase-4-evidence
+status: implemented-locally-verified
+release_status: credentialed-integration-pending
+completed_tasks:
+  [
+    T001,
+    T002,
+    T003,
+    T004,
+    T005,
+    T006,
+    T007,
+    T008,
+    T009,
+    T010,
+    T011,
+    T012,
+    T013,
+    T014,
+    T015,
+    T016,
+  ]
+blocked_tasks: []
+files_changed:
+  T001:
+    - {
+        file: apps/web/lib/workflow/ticket_evidence.ts,
+        change_type: created,
+        description: Bounded shared evidence and assessment schemas,
+      }
+  T002:
+    - {
+        file: apps/web/lib/workflow/ticket_evidence.ts,
+        change_type: created,
+        description: Stable IDs and citation/text/conflict validation,
+      }
+  T003:
+    - {
+        file: apps/web/lib/agents/get_jira_ticket_agent.ts,
+        change_type: modified,
+        description: Captured Jira field/comment evidence and original response,
+      }
+    - {
+        file: apps/mcp/tools/jira.mjs,
+        change_type: modified,
+        description: Human browse URL preserving installation context,
+      }
+  T004:
+    - {
+        file: apps/mcp/lib/slack.mjs,
+        change_type: modified,
+        description: Additive understood-empty versus unparsed response metadata,
+      }
+  T005:
+    - {
+        file: apps/web/lib/tools/slack_search_messages.ts,
+        change_type: modified,
+        description: Captured messages and controlled failure/timeout envelopes,
+      }
+  T006:
+    - {
+        file: apps/web/lib/agents/slack_search_agent.ts,
+        change_type: modified,
+        description: Source-owned findings and explicit outcomes,
+      }
+    - {
+        file: apps/web/lib/workflow/ticket_analysis.ts,
+        change_type: modified,
+        description: Retained Slack reference parsing,
+      }
+  T007:
+    - {
+        file: apps/web/lib/tools/rag_search.ts,
+        change_type: modified,
+        description: Reusable retrieval/capture with existing RAG file contract preserved,
+      }
+  T008:
+    - {
+        file: apps/web/lib/agents/ticket_analysis_agent.ts,
+        change_type: modified,
+        description: Per-run bounded documentation excerpts instead of shared chunk-reader state,
+      }
+    - {
+        file: apps/web/lib/tools/rag_search.ts,
+        change_type: modified,
+        description: Await and validate existing backend uploads,
+      }
+  T009:
+    - {
+        file: apps/web/lib/agents/slack_search_agent.ts,
+        change_type: modified,
+        description: Two-attempt research session and failed-refinement retention,
+      }
+    - {
+        file: apps/web/lib/skill/jira_analysis.ts,
+        change_type: modified,
+        description: Justified refinement instructions,
+      }
+  T010:
+    - {
+        file: apps/web/lib/agents/ticket_analysis_agent.ts,
+        change_type: modified,
+        description: Three-query documentation budget and duplicate rejection,
+      }
+  T011:
+    - {
+        file: apps/web/lib/agents/ticket_contract_agent.ts,
+        change_type: modified,
+        description: Cited contract with supported confirmed facts and preserved readiness,
+      }
+    - {
+        file: apps/web/lib/agents/ticket_analysis_agent.ts,
+        change_type: modified,
+        description: Cited final assessments with conflicts/gaps/sufficiency,
+      }
+  T012:
+    - {
+        file: apps/web/lib/skill/jira_analysis.ts,
+        change_type: modified,
+        description: Central contract/analysis/repair prompts,
+      }
+    - {
+        file: apps/web/lib/agents/ticket_analysis_agent.ts,
+        change_type: modified,
+        description: Handoff includes retained sources and limitations,
+      }
+  T013:
+    - {
+        file: apps/web/lib/agents/ticket_analysis_agent.ts,
+        change_type: modified,
+        description: Final citation validation and one tool-free repair boundary,
+      }
+  T014:
+    - {
+        file: apps/web/lib/workflow/ticket_analysis.ts,
+        change_type: modified,
+        description: Cross-ticket and full carried-source validation,
+      }
+    - {
+        file: apps/web/app/api/ticket-analysis/route.ts,
+        change_type: modified,
+        description: Bounded JSON and distinct 400/502 responses,
+      }
+  T015:
+    - {
+        file: apps/web/components/ticket-evidence.tsx,
+        change_type: created,
+        description: Source registry/search/conflict/gap presentation with safe links,
+      }
+    - {
+        file: apps/web/app/ticket-analysis/page.tsx,
+        change_type: modified,
+        description: Evidence UI and explicit rerun invalidation/preservation,
+      }
+  T016:
+    - {
+        file: README.md,
+        change_type: modified,
+        description: Workflow limits and live prerequisites,
+      }
+    - {
+        file: tech/jira-ticket-analysis-refinement-plan.md,
+        change_type: modified,
+        description: Implementation evidence and pending credentialed gates,
+      }
+    - {
+        file: tech/jira-ticket-analysis-phase-4/plan.md,
+        change_type: modified,
+        description: Task completion and local verification record,
+      }
+upstream_artifacts_consumed:
+  plan: tech/jira-ticket-analysis-phase-4/plan.md
+  requirements: tech/jira-ticket-analysis-refinement-plan.md
+  checkpoints:
+    - tech/jira-ticket-analysis-phase-4/checkpoints/spec-to-plan.yaml
+    - tech/jira-ticket-analysis-phase-4/checkpoints/plan-to-tasks.yaml
+  context: Incremental feature, not a rewrite; no migration constitution or architecture artifacts supplied.
+evidence_mapping:
+  P1.1: Shared schemas and offline stable-ID/citation/text assertions
+  P1.2: Injected MCP responses and Slack failure/normalization assertions
+  P1.3: Injected document captures and actual StateBackend graph upload/read with concurrency isolation
+  P1.4: Injected session budget/duplicate/refinement assertions
+  P1.5: Synthetic final output with zero repairs, successful single repair, invalid repair rejection and contract preservation
+  P1.6: Running API probes, mocked four-step browser flow, desktop/mobile screenshots and documentation checks
+traceability:
+  - {
+      requirement: REQ-401,
+      plan_items: [P1.1, P1.2, P1.3, P1.5, P1.6],
+      tasks:
+        [
+          T001,
+          T002,
+          T003,
+          T005,
+          T006,
+          T007,
+          T008,
+          T011,
+          T012,
+          T013,
+          T014,
+          T015,
+        ],
+      status: implemented-locally-verified,
+    }
+  - {
+      requirement: REQ-402,
+      plan_items: [P1.1, P1.2, P1.5, P1.6],
+      tasks:
+        [
+          T001,
+          T002,
+          T003,
+          T004,
+          T005,
+          T006,
+          T011,
+          T012,
+          T013,
+          T014,
+          T015,
+          T016,
+        ],
+      status: implemented-locally-verified,
+    }
+  - {
+      requirement: REQ-403,
+      plan_items: [P1.1, P1.2, P1.3, P1.4, P1.6],
+      tasks:
+        [
+          T001,
+          T003,
+          T004,
+          T005,
+          T006,
+          T007,
+          T008,
+          T009,
+          T010,
+          T014,
+          T015,
+          T016,
+        ],
+      status: implemented-locally-verified,
+    }
+  - {
+      requirement: REQ-404,
+      plan_items: [P1.3, P1.4, P1.6],
+      tasks: [T007, T008, T009, T010, T014, T015, T016],
+      status: implemented-locally-verified,
+    }
+  - {
+      requirement: REQ-405,
+      plan_items: [P1.1, P1.5, P1.6],
+      tasks: [T001, T002, T011, T012, T013, T014, T015, T016],
+      status: implemented-locally-verified,
+    }
+  - {
+      requirement: REQ-406,
+      plan_items: [P1.1, P1.4, P1.5, P1.6],
+      tasks: [T001, T002, T009, T010, T011, T012, T013, T014, T015, T016],
+      status: implemented-locally-verified,
+    }
+endpoint_probes:
+  - {
+      method: POST,
+      path: /api/ticket-analysis,
+      scenario: No-keywords Slack without external calls,
+      status: 200,
+      result: PASS,
+    }
+  - {
+      method: POST,
+      path: /api/ticket-analysis,
+      scenario: Invalid/missing step/key or malformed prior state,
+      status: 400,
+      result: PASS,
+    }
+  - {
+      method: POST,
+      path: /api/ticket-analysis,
+      scenario: Cross-ticket results or incomplete contract citations,
+      status: 400,
+      result: PASS,
+    }
+  - {
+      method: POST,
+      path: /api/ticket-analysis,
+      scenario: Malformed JSON or over 2000000 bytes,
+      status: 400,
+      result: PASS,
+    }
+test_results:
+  static_commands:
+    - { command: pnpm --filter @deepagents/web exec tsc --noEmit, result: PASS }
+    - {
+        command: Focused ESLint on all changed web runtime files including ticket-evidence.tsx,
+        result: PASS,
+      }
+    - {
+        command: node --check on MCP Slack normalization and Slack/Jira tool files,
+        result: PASS,
+      }
+    - { command: git diff --check, result: PASS }
+  offline:
+    result: PASS
+    method: In-memory tsx/node assertions with injected retrieval and model outputs; virtual clock for documentation timeout
+    scenarios:
+      [
+        normalization,
+        stable-ids,
+        deduplication,
+        outcome-distinctions,
+        sanitized-failures,
+        refinement-retention,
+        query-budgets,
+        citation-validation,
+        confirmed-fact-support,
+        conflict-resolution,
+        contract-preservation,
+        one-repair-limit,
+        backend-isolation,
+      ]
+    assertion_count: null
+    notes: Direct assertions do not emit test-runner counts; no persistent automated test files were added.
+  browser:
+    result: PASS
+    method: Integrated Playwright with intercepted synthetic API responses
+    viewports: [1440x1000, 390x844]
+    scenarios:
+      [
+        four-explicit-steps,
+        citation-anchors,
+        safe-links,
+        conflict-and-gap-display,
+        keyboard-expansion,
+        no-horizontal-overflow,
+        failed-retry-preservation,
+        downstream-invalidation,
+        changed-key-guard,
+      ]
+    cleanup: Interception removed and browser state reset
+  live_integrations: NOT_RUN
+  production_build: NOT_RUN
+protocol_violation: false
+errors: []
+warnings:
+  - severity: HIGH
+    message: Release sign-off requires a real ticket through all steps, live Slack authorization/failure/no-match checks, Pinecone/OpenAI retrieval, RAG Chat and manual comparison with originals.
+  - severity: INFO
+    message: Source IDs prove internal consistency, not authenticity or entailment; carried state remains client-supplied.
+  - severity: INFO
+    message: Slack call timeout excludes connection/OAuth establishment; documentation timeout does not guarantee upstream cancellation.
+  - severity: INFO
+    message: Original carried payloads count toward the request cap and may require restarting with smaller source results.
