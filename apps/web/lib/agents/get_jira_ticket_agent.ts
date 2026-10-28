@@ -2,7 +2,7 @@ import { createDeepAgent } from "deepagents";
 import { toolStrategy } from "langchain";
 import { readFileSync } from "node:fs";
 import { z } from "zod";
-import { createDeterministicClaudeSonnetModel } from "../llm/model.js";
+import { createDeterministicGPT6LunaModel } from "../llm/model.js";
 import { GET_JIRA_TICKET_INFO_PROMPT } from "../skill/jira_analysis";
 import { jiraInfoGet } from "../tools/jira_info_get";
 
@@ -85,7 +85,7 @@ export async function runGetJiraTicketAgent(
   const repositories = loadRepositoryNames();
   const agent = createDeepAgent({
     name: "get_jira_ticket",
-    model: createDeterministicClaudeSonnetModel(),
+    model: createDeterministicGPT6LunaModel(),
     tools: [jiraInfoGet],
     systemPrompt: GET_JIRA_TICKET_INFO_PROMPT,
     responseFormat: toolStrategy(jiraTicketGetAgentOutputSchema),

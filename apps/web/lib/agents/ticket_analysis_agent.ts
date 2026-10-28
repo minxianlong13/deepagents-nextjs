@@ -1,7 +1,7 @@
 import { createDeepAgent } from "deepagents";
 import { toolStrategy } from "langchain";
 import { z } from "zod";
-import { createDeterministicClaudeSonnetModel } from "../llm/model.js";
+import { createDeterministicGPT6LunaModel } from "../llm/model.js";
 import { backend, documentSearch } from "../tools/rag_search";
 import {
   ticketContractSchema,
@@ -68,7 +68,7 @@ const chunkAnalyst = {
 
 const ticketAnalysisAgent = createDeepAgent({
   name: "ticket-technical-analysis",
-  model: createDeterministicClaudeSonnetModel(),
+  model: createDeterministicGPT6LunaModel(),
   tools: [documentSearch],
   backend,
   subagents: [chunkAnalyst],

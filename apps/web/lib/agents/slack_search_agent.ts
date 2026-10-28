@@ -1,7 +1,7 @@
 import { createDeepAgent } from "deepagents";
 import { toolStrategy } from "langchain";
 import { z } from "zod";
-import { createDeterministicClaudeSonnetModel } from "../llm/model.js";
+import { createDeterministicGPT6LunaModel } from "../llm/model.js";
 import { SLACK_SEARCH_AGENT_PROMPT } from "../skill/jira_analysis";
 import { searchSlackMessages } from "../tools/slack_search_messages";
 
@@ -30,7 +30,7 @@ export type SlackSearchAgentResult = SlackSearchAgentOutput & {
 
 const slackSearchAgent = createDeepAgent({
   name: "search_slack_messages",
-  model: createDeterministicClaudeSonnetModel(),
+  model: createDeterministicGPT6LunaModel(),
   tools: [searchSlackMessages],
   systemPrompt: SLACK_SEARCH_AGENT_PROMPT,
   responseFormat: toolStrategy(slackSearchAgentOutputSchema),

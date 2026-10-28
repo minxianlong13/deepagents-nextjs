@@ -1,7 +1,7 @@
 import { createDeepAgent } from "deepagents";
 import { toolStrategy } from "langchain";
 import { z } from "zod";
-import { createDeterministicClaudeSonnetModel } from "../llm/model.js";
+import { createDeterministicGPT6LunaModel } from "../llm/model.js";
 import {
   COVER_LETTER_INSTRUCTIONS,
   RESUME_TAILOR_INSTRUCTIONS,
@@ -33,13 +33,13 @@ const resumeTailorOutputSchema = z.object({
 export type ResumeTailorResult = z.infer<typeof resumeTailorOutputSchema>;
 
 const resumeTailorAgent = createDeepAgent({
-  model: createDeterministicClaudeSonnetModel(),
+  model: createDeterministicGPT6LunaModel(),
   systemPrompt: RESUME_TAILOR_INSTRUCTIONS,
   responseFormat: toolStrategy(resumeTailorOutputSchema),
 });
 
 const coverLetterAgent = createDeepAgent({
-  model: createDeterministicClaudeSonnetModel(),
+  model: createDeterministicGPT6LunaModel(),
   systemPrompt: COVER_LETTER_INSTRUCTIONS,
 });
 

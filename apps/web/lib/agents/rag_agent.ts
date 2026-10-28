@@ -49,7 +49,7 @@ import { MultiServerMCPClient } from "@langchain/mcp-adapters";
 import { ANALYSIS_JIRA_TICKET_PROMPT } from "../skill/jira_analysis";
 import { loadMcpClientConfig } from "../mcp/client";
 import { backend, documentSearch } from "../tools/rag_search";
-import { createClaudeSonnetModel } from "../llm/model.js";
+import { createGPT6LunaModel } from "../llm/model.js";
 
 const maxConcurrentAnalysts = 3;
 
@@ -75,7 +75,7 @@ async function createRagAgent() {
   const mcpTools = await mcpClient.getTools();
 
   return createDeepAgent({
-    model: createClaudeSonnetModel(),
+    model: createGPT6LunaModel(),
     tools: [...mcpTools, documentSearch],
     backend: backend,
     systemPrompt: instructions,

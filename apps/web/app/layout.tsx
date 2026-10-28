@@ -5,16 +5,19 @@ import { Inter, Source_Serif_4, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const fontSans = Inter({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
 const fontSerif = Source_Serif_4({
+  weight: ["400", "600", "700"],
   subsets: ["latin"],
   variable: "--font-serif",
 });
 
 const fontMono = JetBrains_Mono({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-mono",
 });
