@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { runGetJiraTicketAgent } from "../agents/get_jira_ticket_agent";
+import { runAnalyzeJiraTicketAgent } from "../agents/analysis_jira_ticket_agent";
 
 export const ticketKeySchema = z
   .string()
@@ -12,5 +13,6 @@ export const ticketKeySchema = z
   );
 
 export function runTicketAnalysis(ticketKey: string) {
-  return runGetJiraTicketAgent(ticketKeySchema.parse(ticketKey));
+  const normalizedKey = ticketKeySchema.parse(ticketKey);
+  return runGetJiraTicketAgent(normalizedKey).then(runAnalyzeJiraTicketAgent);
 }

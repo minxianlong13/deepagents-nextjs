@@ -23,7 +23,7 @@ export const searchSlackMessages = tool(
     try {
       const result = await connection.client.callTool({
         name: "search_slack_messages",
-        arguments: { keywords },
+        arguments: { keywords, query: keywords.join(" ") },
       });
       const resultRecord = asRecord(result);
       if (resultRecord.isError) {

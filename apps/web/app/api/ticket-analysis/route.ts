@@ -1,4 +1,5 @@
 import { JiraTicketAgentError } from "@/lib/agents/get_jira_ticket_agent";
+import { JiraTicketAnalysisError } from "@/lib/agents/analysis_jira_ticket_agent";
 import {
   runTicketAnalysis,
   ticketKeySchema,
@@ -51,6 +52,9 @@ export async function POST(request: Request) {
         },
         { status: notFound ? 404 : 502 },
       );
+    }
+    if (error instanceof JiraTicketAnalysisError) {
+      return NextResponse.json({ error: error.message }, { status: 502 });
     }
     return NextResponse.json(
       {

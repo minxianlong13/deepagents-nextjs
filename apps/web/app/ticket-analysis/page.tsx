@@ -12,7 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import type { JiraTicketGetAgentResult } from "@/lib/agents/get_jira_ticket_agent";
+import type { JiraTicketAnalysisResult } from "@/lib/agents/analysis_jira_ticket_agent";
 
 const ticketKeyPattern = /^(GROUP|PROD)-\d+$/;
 
@@ -54,7 +54,7 @@ function safeExternalUrl(value: unknown): string | null {
 
 export default function TicketAnalysisPage() {
   const [ticketKey, setTicketKey] = useState("");
-  const [result, setResult] = useState<JiraTicketGetAgentResult | null>(null);
+  const [result, setResult] = useState<JiraTicketAnalysisResult | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -74,7 +74,7 @@ export default function TicketAnalysisPage() {
         body: JSON.stringify({ ticketKey: normalizedKey }),
       });
       const data = (await response.json()) as {
-        result?: JiraTicketGetAgentResult;
+        result?: JiraTicketAnalysisResult;
         error?: string;
       };
       if (!response.ok)
@@ -204,7 +204,8 @@ export default function TicketAnalysisPage() {
             aria-live="polite"
             className="border-l-2 border-emerald-700 bg-white/60 px-4 py-3 text-sm text-black/65"
           >
-            Retrieving Jira details and analyzing the reported problem…
+            Retrieving the ticket, researching open questions, and drafting a
+            fix plan…
           </div>
         )}
 
@@ -249,6 +250,63 @@ export default function TicketAnalysisPage() {
                     </ul>
                   </div>
                 )}
+              </CardContent>
+            </Card>
+
+            <Card className="border-black/10 bg-white/90">
+              <CardHeader className="border-b border-black/10">
+                <CardTitle className="font-(--font-fashion-display) text-xl">
+                  Proposed fix plan
+                </CardTitle>
+                <CardDescription>{result.fixPlan.summary}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ol className="divide-y divide-black/10">
+                  {result.fixPlan.steps.map((step, index) => (
+                    <li
+                      key={`${step.title}-${index}`}
+                      className="py-4 first:pt-0 last:pb-0"
+                    >
+                      <h3 className="text-sm font-semibold">
+                        <span className="mr-2 font-mono text-black/45">
+                          {index + 1}.
+                        </span>
+                        {step.title}
+                      </h3>
+                      <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-black/75">
+                        {step.details}
+                      </p>
+                      {step.validation.length > 0 && (
+                        <div className="mt-3">
+                          <p className="text-xs font-medium uppercase text-black/50">
+                            Proposed validation
+                          </p>
+                          <ul className="mt-1 list-disc space-y-1 pl-5 text-sm text-black/75">
+                            {step.validation.map((item, itemIndex) => (
+                              <li key={`${item}-${itemIndex}`}>{item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {step.openQuestions.length > 0 && (
+                        <div className="mt-3 border-l-2 border-amber-600 pl-3">
+                          <p className="text-xs font-medium uppercase text-amber-900">
+                            Needs confirmation
+                          </p>
+                          <ul className="mt-1 list-disc space-y-1 pl-5 text-sm text-amber-950">
+                            {step.openQuestions.map(
+                              (question, questionIndex) => (
+                                <li key={`${question}-${questionIndex}`}>
+                                  {question}
+                                </li>
+                              ),
+                            )}
+                          </ul>
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ol>
               </CardContent>
             </Card>
 
