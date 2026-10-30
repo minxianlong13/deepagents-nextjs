@@ -10,12 +10,13 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
 model Conversation {
-  id        String    @id @default(cuid())
+  id        String   @id @default(cuid())
   userId    String
   title     String?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   messages Message[]
 
@@ -39,4 +40,90 @@ enum MessageRole {
   assistant
   system
   tool
+}
+
+model Candidate {
+  id          String   @id @default(cuid())
+  userId      String?
+  fullName    String
+  headline    String?
+  email       String?
+  location    String?
+  websiteUrl  String?
+  linkedinUrl String?
+  githubUrl   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  documents       CandidateDocument[]
+  workExperiences WorkExperience[]
+
+  @@index([userId])
+}
+
+model CandidateDocument {
+  id           String                @id @default(cuid())
+  candidateId  String
+  documentType CandidateDocumentType
+  title        String
+  sourcePath   String?
+  content      String                @db.Text
+  version      Int                   @default(1)
+  isActive     Boolean               @default(true)
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+
+  candidate          Candidate            @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  workExperiences    WorkExperience[]
+  experienceEvidence ExperienceEvidence[]
+
+  @@unique([candidateId, version])
+  @@index([candidateId, isActive])
+}
+
+enum CandidateDocumentType {
+  master_resume
+  career_evidence
+  portfolio
+  other
+}
+
+model WorkExperience {
+  id               String    @id @default(cuid())
+  candidateId      String
+  companyName      String
+  jobTitle         String
+  startDate        DateTime?
+  endDate          DateTime?
+  isCurrent        Boolean   @default(false)
+  location         String?
+  summary          String?   @db.Text
+  sortOrder        Int       @default(0)
+  sourceDocumentId String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  candidate      Candidate            @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  sourceDocument CandidateDocument?   @relation(fields: [sourceDocumentId], references: [id], onDelete: SetNull)
+  evidence       ExperienceEvidence[]
+
+  @@index([candidateId, sortOrder])
+  @@index([sourceDocumentId])
+}
+
+model ExperienceEvidence {
+  id               String   @id @default(cuid())
+  experienceId     String
+  content          String   @db.Text
+  evidenceType     String?
+  metrics          String?  @db.Text
+  verified         Boolean  @default(false)
+  sourceDocumentId String?
+  createdAt        DateTime @default(now())
+
+  experience     WorkExperience     @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+  sourceDocument CandidateDocument? @relation(fields: [sourceDocumentId], references: [id], onDelete: SetNull)
+
+  @@index([experienceId])
+  @@index([sourceDocumentId])
 }
