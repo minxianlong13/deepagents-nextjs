@@ -1,8 +1,14 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import TurndownService from "turndown";
 import * as z from "zod/v4";
 
 const DEFAULT_WIKI_BASE_URL = "https://wiki.cvent.com";
+const turndownService = new TurndownService({
+  bulletListMarker: "-",
+  codeBlockStyle: "fenced",
+  headingStyle: "atx",
+});
 
 function getWikiAuthHeaders() {
   const authType = (process.env.WIKI_AUTH_TYPE ?? "bearer").toLowerCase();
@@ -140,10 +146,17 @@ async function fetchWikiPage(wikiBaseUrl, contentId) {
     );
   }
 
+  const markdown = turndownService.turndown(content).trim();
+  if (!markdown) {
+    throw new Error(
+      `Wiki response for content ${contentId} was empty after HTML conversion`,
+    );
+  }
+
   return {
     contentId,
     title: wikiContent.title ?? contentId,
-    content,
+    content: markdown,
   };
 }
 
@@ -153,7 +166,7 @@ export function registerWikiTools(server) {
     {
       title: "Get Wiki Content",
       description:
-        "Fetch a Confluence page and all of its descendant pages by parent ID, retrieve their storage content, and export each page to a Markdown file.",
+        "Fetch a Confluence page and all of its descendant pages by parent ID, convert their storage HTML to Markdown, and export each page to a Markdown file.",
       inputSchema: {
         contentId: z
           .string()
