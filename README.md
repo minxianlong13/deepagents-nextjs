@@ -151,18 +151,19 @@ You can also pass the input as JSON with `pnpm test ingest_webpage '{"url":"http
 
 ## OpenWiki MCP Tool
 
-The `query_openwiki` tool proxies read-only retrieval to an OpenWiki MCP subprocess. It launches `openwiki mcp --host my-rag-server`, calls `openwiki_search` or `openwiki_read`, and returns the upstream content, structured data, and errors unchanged. Each request closes its client and subprocess afterward. Pass a configured `repo` name; `apps/mcp/config/repositories.json` maps names to repository roots.
+The `query_openwiki` tool searches OpenWiki and automatically reads the matching section references for more detail. Pass `repo` and `query`; no `action` parameter is needed. It launches `openwiki mcp --host aoe-rag-server` for read-only retrieval, groups section anchors by page and wiki ID, and returns search results alongside detailed `reads` and `readErrors`. Search failures remain tool errors; individual read failures do not discard successful reads or search references. Each upstream call closes its client and subprocess afterward. `apps/mcp/config/repositories.json` maps configured `repo` names to repository roots.
 
 Install OpenWiki v0.7.2 or another version exposing both retrieval tools on the MCP server's PATH. Set `OPENWIKI_COMMAND` to an executable path if needed, or `OPENWIKI_MCP_HOST` to override the stable lowercase host identifier. The absolute repository root must be accessible to the MCP process and contain a generated `openwiki/` directory. For containers, install OpenWiki and mount the repository; a host-only path is not accessible automatically.
 
 From `apps/mcp`, with the MCP server running:
 
 ```bash
-pnpm test openwiki '{"action":"search","repo":"deepagents-nextjs","query":"How does the MCP server work?","limit":5}'
-pnpm test openwiki '{"action":"read","repo":"deepagents-nextjs","page":"openwiki/quickstart.md","sections":["choose-the-right-guide-before-changing-code"]}'
+pnpm test openwiki '{"repo":"deepagents-nextjs","query":"How does the MCP server work?","limit":5}'
+pnpm test openwiki '{"repo":"deepagents-nextjs","workspace":"passkey","query":"architecture of passkey-event-sb service","limit":5}'
+pnpm test read_openwiki '{"repo":"deepagents-nextjs","page":"openwiki/quickstart.md","sections":["choose-the-right-guide-before-changing-code"]}'
 ```
 
-For search, optional `paths` boost related results and `workspace` selects a workspace. For read, use the exact page and heading anchors from search refs and include `wiki` when a result identifies a linked wiki. Search requires Node's SQLite build to support FTS5; a build without it causes an upstream search error even when reads work.
+Optional `paths` boost related results and `workspace` selects a workspace. The separate `read_openwiki` tool supports reading additional sections explicitly: use the exact page and heading anchors from search refs and include `wiki` when a result identifies a linked wiki. Search requires Node's SQLite build to support FTS5; a build without it causes an upstream search error even when reads work. Restart a running MCP server after updating the tool contract.
 
 OpenWiki uses the project's Node 24 runtime, so no separate Node executable override is needed. Global npm packages are separate for each asdf Node installation; install OpenWiki under the project runtime from the repository root:
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
   ArrowUpRight,
+  BookOpen,
   BriefcaseBusiness,
   Database,
   FileText,
@@ -63,6 +64,12 @@ const workflowGroups: WorkflowGroup[] = [
         description: "Ask questions over your knowledge base.",
         href: "/rag",
         icon: Database,
+      },
+      {
+        title: "OpenWiki Chat",
+        description: "Search and read repository wiki pages.",
+        href: "/wiki",
+        icon: BookOpen,
       },
     ],
   },

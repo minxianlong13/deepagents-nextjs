@@ -112,6 +112,12 @@ export default function RootLayout({
                   >
                     Local RAG
                   </Link>
+                  <Link
+                    href="/wiki"
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                  >
+                    OpenWiki
+                  </Link>
                 </div>
               </section>
               <section
@@ -198,6 +204,12 @@ export default function RootLayout({
                       className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                     >
                       Local RAG
+                    </Link>
+                    <Link
+                      href="/wiki"
+                      className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                    >
+                      OpenWiki
                     </Link>
                   </div>
                 </section>

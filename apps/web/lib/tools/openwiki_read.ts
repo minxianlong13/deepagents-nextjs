@@ -17,18 +17,23 @@ function getTextContent(value: unknown): string {
     .join("\n");
 }
 
-export const searchSlackMessages = tool(
-  async ({ keywords }) => {
+export const openWikiRead = tool(
+  async ({ repo, page, sections, wiki }) => {
     const connection = await createMcpClient();
     try {
       const result = await connection.client.callTool({
-        name: "search_slack_messages",
-        arguments: { keywords, query: keywords.join(" ") },
+        name: "read_openwiki",
+        arguments: {
+          repo,
+          page,
+          sections,
+          ...(wiki !== undefined ? { wiki } : {}),
+        },
       });
       const resultRecord = asRecord(result);
       if (resultRecord.isError) {
         throw new Error(
-          getTextContent(resultRecord.content) || "Slack search failed.",
+          getTextContent(resultRecord.content) || "OpenWiki read failed.",
         );
       }
       return JSON.stringify(resultRecord);
@@ -37,10 +42,14 @@ export const searchSlackMessages = tool(
     }
   },
   {
-    name: "search_slack_messages",
-    description: "Search Slack messages using a short list of keywords.",
+    name: "openwiki_read",
+    description:
+      "Read OpenWiki sections. Parameters: repo, page, exact section anchors, and optional wiki ID.",
     schema: z.object({
-      keywords: z.array(z.string().trim().min(1)).min(1).max(5),
+      repo: z.string().trim().min(1).max(100),
+      page: z.string().trim().min(1).max(1000),
+      sections: z.array(z.string().trim().min(1).max(500)).min(1).max(20),
+      wiki: z.string().trim().min(1).max(64).optional(),
     }),
   },
 );

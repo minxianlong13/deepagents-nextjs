@@ -5,7 +5,7 @@ import { z } from "zod";
 import { createDeterministicGPT6LunaModel } from "../llm/model.js";
 import { ANALYSIS_JIRA_CONTENT_PROMPT } from "../skill/jira_analysis";
 import { backend, documentSearch } from "../tools/rag_search";
-import { searchSlackMessages } from "../tools/slack_search_messages";
+import { searchSlackMessages } from "../tools/slack_search";
 import type { JiraTicketDetails } from "./get_jira_ticket_agent";
 
 const fixPlanStepSchema = z.object({

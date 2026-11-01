@@ -16,6 +16,7 @@ const toolAliases = {
   ingest_webpage: "ingest_webpage",
   openwiki: "query_openwiki",
   query_openwiki: "query_openwiki",
+  read_openwiki: "read_openwiki",
 };
 
 function printUsage() {
@@ -28,7 +29,7 @@ Tools and examples:
   wiki [contentId]      pnpm test wiki 1106609325
   slack <keywords...>   pnpm test slack XSS acknowledgement email
   webpage [url]         pnpm test webpage https://example.com/article
-  openwiki <json>       pnpm test openwiki '{"action":"search","repo":"deepagents-nextjs","query":"MCP server"}'
+  openwiki <json>       pnpm test openwiki '{"repo":"deepagents-nextjs","query":"MCP server"}'
 
 You can also pass a JSON object matching the selected tool's input schema:
   pnpm test get_jira_ticket '{"issueKey":"GROUP-132015"}'
@@ -39,11 +40,11 @@ You can also pass a JSON object matching the selected tool's input schema:
 
 function parseToolArguments(toolName, suppliedArguments) {
   if (
-    toolName === "query_openwiki" &&
+    ["query_openwiki", "read_openwiki"].includes(toolName) &&
     (suppliedArguments.length !== 1 || !suppliedArguments[0].startsWith("{"))
   ) {
     throw new Error(
-      "OpenWiki requires JSON arguments with action, repo, and query (search) or page and sections (read).",
+      "OpenWiki requires JSON arguments: repo and query for openwiki, or repo, page, and sections for read_openwiki.",
     );
   }
 
@@ -169,6 +170,7 @@ try {
         "get_wiki_content",
         "search_slack_messages",
         "query_openwiki",
+        "read_openwiki",
       ].includes(toolName) &&
       result.structuredContent
     ) {
