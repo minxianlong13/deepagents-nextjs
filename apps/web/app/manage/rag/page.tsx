@@ -28,6 +28,10 @@ export default function RagConfigurationPage() {
     title: string;
     url: string;
     filePath: string;
+    downloadedCount: number;
+    skippedCount: number;
+    failedRelatedPages: Array<{ url: string; error: string }>;
+    truncated: boolean;
   } | null>(null);
   const [webpageError, setWebpageError] = useState<string | null>(null);
 
@@ -126,6 +130,10 @@ export default function RagConfigurationPage() {
         title?: string;
         url?: string;
         filePath?: string;
+        downloadedCount?: number;
+        skippedCount?: number;
+        failedRelatedPages?: Array<{ url: string; error: string }>;
+        truncated?: boolean;
         error?: string;
         details?: string;
       };
@@ -140,6 +148,10 @@ export default function RagConfigurationPage() {
         title: data.title ?? "Webpage",
         url: data.url ?? webpageUrl.trim(),
         filePath: data.filePath ?? "docs/webpage",
+        downloadedCount: data.downloadedCount ?? 1,
+        skippedCount: data.skippedCount ?? 0,
+        failedRelatedPages: data.failedRelatedPages ?? [],
+        truncated: data.truncated ?? false,
       });
     } catch (caughtError) {
       setWebpageError(
@@ -340,6 +352,30 @@ export default function RagConfigurationPage() {
                   <p className="text-xs text-black/65">
                     File: <code>{webpageFile.filePath}</code>
                   </p>
+                  <p className="text-xs text-black/65">
+                    Downloaded {webpageFile.downloadedCount} page
+                    {webpageFile.downloadedCount === 1 ? "" : "s"}; skipped{" "}
+                    {webpageFile.skippedCount} existing duplicate
+                    {webpageFile.skippedCount === 1 ? "" : "s"}.
+                  </p>
+                  {webpageFile.truncated ? (
+                    <p className="text-xs text-amber-800">
+                      The related-page limit was reached; some links were not
+                      processed.
+                    </p>
+                  ) : null}
+                  {webpageFile.failedRelatedPages.length > 0 ? (
+                    <div className="text-xs text-amber-800">
+                      <p>Some related pages could not be downloaded:</p>
+                      <ul className="mt-1 list-disc space-y-1 pl-5">
+                        {webpageFile.failedRelatedPages.map((page) => (
+                          <li key={page.url} className="break-all">
+                            {page.url}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
                 </div>
               ) : null}
             </section>
