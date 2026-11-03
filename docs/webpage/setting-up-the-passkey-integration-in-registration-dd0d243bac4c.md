@@ -1,3 +1,5 @@
+<!-- source-url: https://support.cvent.com/s/communityarticle/Setting-Up-the-Passkey-Integration-in-Registration -->
+
 # Setting Up the Passkey Integration in Registration
 
 Integrating your events with Passkey can help you streamline the process of collecting travel information for your attendees. They can book their accommodations without having to provide their personal details again, while you will be able to report on both registrations and hotel reservations for your event.

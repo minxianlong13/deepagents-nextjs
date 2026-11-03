@@ -1,3 +1,5 @@
+<!-- source-url: https://support.cvent.com/s/communityarticle/The-Complete-Guide-to-Integrating-Events-with-Passkey?is_article=true&lang=en_US&searchFor=Passkey -->
+
 # The Complete Guide to Integrating Registration Events with Passkey
 
 Topic HubEvent ManagementPasskey
