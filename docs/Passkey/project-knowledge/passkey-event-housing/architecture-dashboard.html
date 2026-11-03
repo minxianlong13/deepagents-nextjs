@@ -1,0 +1,776 @@
+<title>Event Housing Architecture</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky section rail on top, single reading column of sections; tables and diagrams scroll inside their own boxes. */
+:root {
+  --bg: #f5f7f8;
+  --surface: #ffffff;
+  --ink: #14232b;
+  --muted: #566a74;
+  --line: #d8e0e4;
+  --accent: #1f6f78;      /* teal: links, active nav */
+  --brass: #a8741f;       /* room-key brass: highlights */
+  --ok: #2f7d4f; --warn: #a36a00; --crit: #b3362c;
+  --chip-bg: #e8eef0;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f171b; --surface: #162228; --ink: #e3ecef; --muted: #93a7b0; --line: #2a3a42;
+  --accent: #5fb6bf; --brass: #d9a54a; --ok: #6cc48f; --warn: #e0a33a; --crit: #ef7a6f; --chip-bg: #213139; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f171b; --surface: #162228; --ink: #e3ecef; --muted: #93a7b0; --line: #2a3a42;
+  --accent: #5fb6bf; --brass: #d9a54a; --ok: #6cc48f; --warn: #e0a33a; --crit: #ef7a6f; --chip-bg: #213139; color-scheme: dark }
+
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--f-body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header.top { padding-block: 28px 20px; display: grid; gap: 8px; }
+.eyebrow { font: 500 12px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--brass); }
+h1 { font: 700 clamp(28px, 4.4vw, 42px)/1.1 var(--f-display); margin: 0; text-wrap: balance; }
+h2 { font: 700 24px/1.2 var(--f-display); margin: 0; text-wrap: balance; }
+h3 { font: 600 16px/1.3 var(--f-body); margin: 0; }
+.lede { color: var(--muted); max-width: 68ch; margin: 0; }
+code, .mono { font-family: var(--f-mono); font-size: .88em; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+nav.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
+nav.rail .wrap { display: flex; gap: 4px; overflow-x: auto; padding-block: 8px; scrollbar-width: thin; }
+nav.rail a { flex: none; padding: 6px 12px; border-radius: 999px; text-decoration: none; color: var(--muted); font-weight: 500; font-size: 14px; }
+nav.rail a[aria-current="true"] { background: var(--chip-bg); color: var(--ink); }
+
+main { display: grid; gap: 40px; padding-block: 28px 64px; }
+section { display: grid; gap: 16px; scroll-margin-top: 72px; min-width: 0; }
+.sec-head { display: grid; gap: 4px; }
+.sec-head p { margin: 0; color: var(--muted); max-width: 72ch; }
+.src { font: 12px/1.4 var(--f-mono); color: var(--muted); }
+
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.fact { background: var(--surface); padding: 14px 16px; display: grid; gap: 2px; align-content: start; }
+.fact .k { font: 500 11px/1.2 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.fact .v { font: 700 22px/1.2 var(--f-display); font-variant-numeric: tabular-nums; }
+.fact .n { font-size: 13px; color: var(--muted); }
+
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 10px; min-width: 0; align-content: start; }
+
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font: 500 11px/1.2 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--surface); position: sticky; top: 0; }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; }
+
+.chip { display: inline-block; padding: 1px 8px; border-radius: 999px; font: 500 12px/1.6 var(--f-mono); background: var(--chip-bg); color: var(--ink); white-space: nowrap; }
+.m-GET { color: var(--accent); } .m-POST { color: var(--ok); } .m-PUT { color: var(--brass); } .m-DELETE { color: var(--crit); }
+.sev { display: inline-flex; align-items: center; gap: 6px; font: 500 12px/1.6 var(--f-mono); white-space: nowrap; }
+.sev::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.sev-High { color: var(--crit); } .sev-Medium { color: var(--warn); } .sev-Low { color: var(--muted); }
+.auth-none { color: var(--crit); }
+
+.diagram { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px; overflow-x: auto; min-width: 0; }
+.diagram pre.mermaid { margin: 0; background: transparent; }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tabs button { font: 500 13px/1 var(--f-body); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.controls input, .controls select { font: 14px var(--f-body); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); min-width: 0; }
+.controls input { flex: 1 1 220px; }
+.count { color: var(--muted); font-size: 13px; }
+
+ul.tight { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.layer { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+.layer:last-child { border-bottom: 0; }
+.layer .lk { font: 600 13px/1.4 var(--f-mono); color: var(--brass); }
+@media (max-width: 520px) { .layer { grid-template-columns: 1fr; gap: 2px; } }
+footer { color: var(--muted); font-size: 13px; padding-block: 0 40px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+html { scroll-behavior: smooth; }
+</style>
+
+<header class="wrap top">
+  <div class="eyebrow">passkey-event-housing · v1.8.2-SNAPSHOT · last release 1.8.1</div>
+  <h1>Passkey Event Housing Service</h1>
+  <p class="lede">A Java 21 Dropwizard microservice that serves hotel, room, room-category, image, GroupLink and registration-connection data for Passkey events. Owned by team Metrestick. Everything on this page is taken from <code>project-knowledge/</code>, which was derived from source.</p>
+</header>
+
+<nav class="rail" aria-label="Sections"><div class="wrap">
+  <a href="#overview">Overview</a><a href="#stack">Stack</a><a href="#architecture">Architecture</a><a href="#dependencies">Dependencies</a><a href="#database">Database</a><a href="#workflows">Workflows</a><a href="#api">API</a><a href="#entry">Entry points</a><a href="#risks">Risks</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="overview">
+  <div class="sec-head"><h2>Overview</h2><p>Key counts verified in source. Base path is <code>/{env}/passkey-event-housing/v1</code>; app port 7000, admin port 7001.</p></div>
+  <div class="facts">
+    <div class="fact"><span class="k">Registered resources</span><span class="v">9</span><span class="n">plus 1 unregistered (callbacks)</span></div>
+    <div class="fact"><span class="k">REST endpoints</span><span class="v" id="ep-count">—</span><span class="n">reachable at runtime</span></div>
+    <div class="fact"><span class="k">DAOs</span><span class="v">11</span><span class="n">4 manage their own sessions</span></div>
+    <div class="fact"><span class="k">Downstream services</span><span class="v">4</span><span class="n">event, inventory, PFU, auth</span></div>
+    <div class="fact"><span class="k">Unit test files</span><span class="v">41</span><span class="n">28 service · 13 data-access</span></div>
+    <div class="fact"><span class="k">Coverage gate</span><span class="v">70% / 68%</span><span class="n">JaCoCo, service / data-access</span></div>
+  </div>
+  <div class="grid2">
+    <div class="panel"><h3>In scope</h3><ul class="tight">
+      <li>Event hotels, rooms and block summaries (read)</li>
+      <li>GroupLink transfer setup and code mappings</li>
+      <li>Registration-provider connections and admin access codes</li>
+      <li>Room categories with assigned rooms, beds, amenities</li>
+      <li>Images in S3 with metadata in Oracle, incl. PFU two-phase upload</li>
+      <li>Room-block transfer state</li>
+    </ul></div>
+    <div class="panel"><h3>Not here</h3><ul class="tight">
+      <li>No message queues, schedulers or background workers</li>
+      <li>No database DDL (schema owned elsewhere)</li>
+      <li>Callback endpoints exist in source but are not registered</li>
+      <li>Consumers of the API are not listed in the catalog (Unknown)</li>
+    </ul></div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="sec-head"><h2>Technology stack</h2><p>Versions from POM files and <code>.tool-versions</code>.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Area</th><th>Choice</th><th>Version</th></tr></thead>
+    <tbody>
+      <tr><td>Language</td><td>Java (api and java-client target 11)</td><td class="num">21</td></tr>
+      <tr><td>Framework</td><td>Dropwizard via Cvent <code>CventApplication</code>, Jersey (Jakarta)</td><td>parent 57.0.0</td></tr>
+      <tr><td>Persistence</td><td>MyBatis XML mappers on Oracle (<code>ojdbc8</code>)</td><td class="num">18.3.0.0</td></tr>
+      <tr><td>Models</td><td>Immutables <code>@Value.Immutable</code> interfaces</td><td>managed</td></tr>
+      <tr><td>HTTP clients</td><td>Retrofit2 via <code>ClientCreator</code> + RetryInterceptor</td><td>managed</td></tr>
+      <tr><td>Auth</td><td><code>auth-service-core</code> / <code>CventAuthFeature</code></td><td class="num">16.0.2</td></tr>
+      <tr><td>Storage</td><td>AWS SDK v2 S3, region US_EAST_1</td><td>managed</td></tr>
+      <tr><td>Multipart</td><td><code>jersey-media-multipart</code></td><td class="num">3.1.10</td></tr>
+      <tr><td>Tests</td><td>JUnit 5, Mockito, Dropwizard testing, Karate</td><td>managed</td></tr>
+      <tr><td>CI/CD</td><td>Jenkins <code>dropwizardPipeline</code>, Changesets, Checkmarx</td><td>—</td></tr>
+      <tr><td>Runtime image</td><td><code>cvent-aws-java-base-21</code>, 800 MB hard limit</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="architecture">
+  <div class="sec-head"><h2>Architecture</h2><p>Classic layered service with manual wiring in <code>PasskeyEventHousingServiceApplication.run()</code>. No DI framework.</p></div>
+  <div class="panel">
+    <div class="layer"><span class="lk">Resources</span><span>JAX-RS classes under <code>resources/</code>. Auth via <code>@Authority(API_KEY)</code>; <code>/images/pfu</code> forwards the caller's Bearer token instead.</span></div>
+    <div class="layer"><span class="lk">Services</span><span>Business logic under <code>service/</code>. Providers in the same package wrap downstream clients and fail the request on error.</span></div>
+    <div class="layer"><span class="lk">DAOs</span><span><code>AbstractDao</code> subclasses join the ThreadLocal session from <code>executeInSameDbSession</code>. Connection, Admin, GroupLink and RoomCategories DAOs use the raw session factory.</span></div>
+    <div class="layer"><span class="lk">Mappers</span><span>MyBatis XML with Oracle <code>MERGE</code> upserts and PL/SQL blocks; IN lists chunked at 1000.</span></div>
+    <div class="layer"><span class="lk">Errors</span><span><code>EventHousingBaseException</code> + mappers produce <code>ErrorResponse {errorCodeType, httpRequestId}</code>. Image endpoints return plain-text errors.</span></div>
+  </div>
+  <div class="tabs" role="tablist" aria-label="Architecture diagrams" data-group="arch">
+    <button role="tab" aria-selected="true" data-target="d-system">System context</button>
+    <button role="tab" aria-selected="false" data-target="d-components">Components</button>
+    <button role="tab" aria-selected="false" data-target="d-request">Request flow</button>
+  </div>
+  <div class="diagram" id="d-system"><pre class="mermaid">%% System architecture: Passkey Event Housing Service and its runtime neighbours
+%% Source: PasskeyEventHousingServiceApplication.java, ClientCreator.java, configs/template.yaml
+flowchart LR
+    subgraph Callers["API callers (API key or Bearer)"]
+        C1["Passkey UIs / internal services"]
+        C2["Consumers of passkey-event-housing-java-client"]
+    end
+
+    subgraph Svc["passkey-event-housing-service (Dropwizard, port 7000 / admin 7001)"]
+        R["JAX-RS resources&lt;br/&gt;9 registered"]
+        S["Services + Providers"]
+        D["MyBatis DAOs&lt;br/&gt;11 DAOs, 12 mappers"]
+        R --&gt; S --&gt; D
+    end
+
+    Auth["Cvent auth-service&lt;br/&gt;(CventAuthFeature remote auth)"]
+    Ora[("Oracle Passkey TXN DB&lt;br/&gt;schemas EVENTPROFILE, GUI,&lt;br/&gt;XFER, BRIDGE, API, PERM")]
+    S3[("AWS S3&lt;br/&gt;groupmax-content bucket&lt;br/&gt;us-east-1")]
+    Ev["passkey-event service&lt;br/&gt;(events, admin, messages, images)"]
+    Inv["passkey-inventory service"]
+    Pfu["passkey-file-uploader (PFU)"]
+
+    C1 --&gt; R
+    C2 --&gt; R
+    R -. "validate API key / bearer" .-&gt; Auth
+    D --&gt; Ora
+    S --&gt; S3
+    S --&gt; Ev
+    S --&gt; Inv
+    S -- "forwards caller Bearer token" --&gt; Pfu</pre></div>
+  <div class="diagram" id="d-components" hidden><pre class="mermaid">%% Component wiring as constructed in PasskeyEventHousingServiceApplication.run() (lines 96-177)
+flowchart TB
+    subgraph Resources
+        ER[EventResource]
+        BR[BlockResource]
+        CR[ConnectionResource]
+        AR[AdminResource]
+        GR[GroupLinkResource]
+        RBR[RoomBlockTransferStateResource]
+        RCR[RoomCategoryResource]
+        ERCR[EventRoomCategoryResource]
+        IR[ImagesResource]
+    end
+    subgraph Services
+        HDS[HotelDetailsService]
+        RDS[RoomDetailsService]
+        ATS[AttendeeTypeService]
+        BS[BlockService]
+        CS[ConnectionService]
+        AS[AdminService]
+        GLS[GroupLinkService]
+        RBS[RoomBlockTransferStateService]
+        RCS[RoomCategoryService]
+        IS[ImageService]
+    end
+    subgraph Providers["Providers (remote / helper)"]
+        EP[EventProvider]
+        MP[MessageProvider]
+        IP[ImageProvider]
+        INP[InventoryProvider]
+        PFP[PfuFileProvider]
+    end
+    subgraph DAOs["DAOs (TM = TransactionManager, RAW = raw SqlSessionFactory)"]
+        HDA["HotelDetailsDataAccess (TM)"]
+        RDA["RoomDataAccess (TM)"]
+        ATA["AttendeeTypeAccess (TM)"]
+        BDA["BlockDataAccess (TM)"]
+        IDA["ImagesDataAccess (TM)"]
+        RBDA["RoomBlockTransferStateDataAccess (TM)"]
+        PDA["ParticipantDataAccess (TM)"]
+        CDA["ConnectionDataAccess (RAW)"]
+        ADA["AdminDataAccess (RAW)"]
+        GDA["GroupLinkDataAccess (RAW)"]
+        RCDA["RoomCategoriesDataAccess (RAW)"]
+    end
+
+    ER --&gt; EP &amp; MP &amp; IP &amp; INP &amp; HDS &amp; RDS &amp; BS
+    BR --&gt; BS
+    CR --&gt; CS
+    AR --&gt; AS
+    GR --&gt; GLS
+    RBR --&gt; RBS
+    RCR --&gt; RCS
+    ERCR --&gt; RCS
+    IR --&gt; IS
+
+    HDS --&gt; HDA &amp; IP &amp; BS
+    RDS --&gt; RDA &amp; ATS &amp; HDS &amp; IP
+    ATS --&gt; ATA
+    BS --&gt; BDA
+    CS --&gt; CDA
+    AS --&gt; ADA &amp; EP
+    GLS --&gt; GDA
+    RBS --&gt; RBDA
+    RCS --&gt; RCDA &amp; PDA &amp; RDA &amp; IS
+    IS --&gt; IDA &amp; PFP
+    IP --&gt; IDA
+    MP --&gt; RDA</pre></div>
+  <div class="diagram" id="d-request" hidden><pre class="mermaid">%% Generic request/response pipeline for a read endpoint, e.g. GET /events/{eventId}/hotels/{hotelId}
+%% Source: PasskeyEventHousingServiceApplication (auth feature line 101, mappers 158-168), EventResource.getHotelDetails (line 117)
+sequenceDiagram
+    autonumber
+    participant C as Caller
+    participant J as Jersey + CventAuthFeature
+    participant LC as LogContextFeature
+    participant ER as EventResource
+    participant EP as EventProvider
+    participant EV as passkey-event service
+    participant HS as HotelDetailsService
+    participant DB as Oracle
+    participant EM as ExceptionMappers
+
+    C-&gt;&gt;J: GET /{env}/passkey-event-housing/v1/events/{eventId}/hotels/{hotelId}
+    J-&gt;&gt;J: @Authority(API_KEY) -&gt; remote auth-service check
+    J-&gt;&gt;LC: populate MDC (eventId, hotelId)
+    LC-&gt;&gt;ER: getHotelDetails(eventId, hotelId, locale)
+    ER-&gt;&gt;EP: getDefaultLocale(eventId)
+    EP-&gt;&gt;EV: HTTP (Retrofit, API key + RetryInterceptor)
+    EV--&gt;&gt;EP: default locale
+    ER-&gt;&gt;HS: getHotelDetails(...)
+    HS-&gt;&gt;DB: executeInSameDbSession: hotel, images, amenities, rewards
+    DB--&gt;&gt;HS: rows
+    HS--&gt;&gt;ER: HotelDetails (Immutable)
+    ER--&gt;&gt;C: 200 JSON
+    alt EventHousingBaseException / DaoException / GroupLinkException / validation
+        ER-&gt;&gt;EM: exception
+        EM--&gt;&gt;C: status + ErrorResponse {errorCodeType, httpRequestId}
+    end</pre></div>
+  <p class="src">Source: diagrams/system-architecture.mmd, component-relationships.mmd, api-request-flow.mmd</p>
+</section>
+
+<section id="dependencies">
+  <div class="sec-head"><h2>Dependencies</h2><p>Modules from POMs; runtime services from <code>ClientCreator</code> and config.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Downstream</th><th>Used for</th><th>Auth</th><th>In catalog</th></tr></thead>
+    <tbody>
+      <tr><td>passkey-event service</td><td>Default locale, WebInfo creation, messages, block room images</td><td>Service API key</td><td>Yes</td></tr>
+      <tr><td>passkey-inventory service</td><td>Block → event, hotel, room type</td><td>Service API key</td><td>Yes</td></tr>
+      <tr><td>passkey-file-uploader (PFU)</td><td>Download uploaded image files</td><td>Caller's Bearer token</td><td>No</td></tr>
+      <tr><td>auth-service</td><td>Validate inbound API keys and tokens</td><td>—</td><td>Yes (API)</td></tr>
+      <tr><td>Oracle</td><td>All housing data, many schemas</td><td>DB pool, max 50</td><td>—</td></tr>
+      <tr><td>AWS S3 (groupmax-content)</td><td>Image bytes, keyed by MD5</td><td>AWS SDK</td><td>No</td></tr>
+    </tbody>
+  </table></div>
+  <div class="diagram"><pre class="mermaid">%% Build-time and runtime dependencies. Source: pom.xml files, catalog-info.yaml, ClientCreator.java
+flowchart LR
+    subgraph Maven["Maven modules (revision 1.8.2-SNAPSHOT)"]
+        API[passkey-event-housing-api]
+        SH[passkey-event-housing-shared]
+        DA[passkey-event-housing-data-access]
+        SVC[passkey-event-housing-service]
+        JC[passkey-event-housing-java-client]
+        IT[passkey-event-housing-integration-test]
+    end
+    SVC --&gt; DA
+    SVC --&gt; API
+    SVC --&gt; SH
+    DA --&gt; API
+    DA --&gt; SH
+    JC --&gt; API
+    JC --&gt; SH
+    IT --&gt; JC
+    IT --&gt; API
+    SH --&gt; API
+
+    subgraph Runtime["Runtime dependencies"]
+        EVS["passkey-event service&lt;br/&gt;(eventService.endpoint)"]
+        INV["passkey-inventory service&lt;br/&gt;(inventoryService.endpoint)"]
+        PFU["passkey-file-uploader&lt;br/&gt;(fileUploaderService.endpoint)"]
+        AUTH["auth-service&lt;br/&gt;(authConfig.authServiceEndpoint)"]
+        ORA[("Oracle TXN DB")]
+        S3[("S3 groupmax-content")]
+        CB[("Couchbase&lt;br/&gt;declared, callbacks only, unused at runtime")]
+    end
+    SVC --&gt; EVS &amp; INV &amp; PFU &amp; AUTH &amp; ORA &amp; S3
+    DA -.-&gt; CB</pre></div>
+  <p class="src">Declared but unused: passkey-hotel-java-client 1.0.45, passkey-subblock-data-java-client 1.0.18. Couchbase serves only the dead callback code.</p>
+</section>
+
+<section id="database">
+  <div class="sec-head"><h2>Database</h2><p>Oracle tables referenced by mapper XML. No DDL in the repo, so relationships are inferred (Confidence Medium).</p></div>
+  <div class="grid2">
+    <div class="panel"><h3>Main schemas</h3><ul class="tight">
+      <li><code>EVENTPROFILE</code>: participants, participation, room types, blocks, room categories</li>
+      <li><code>XFER</code>: GroupLink transfer definitions, mapping values, block transfer state</li>
+      <li><code>BRIDGE</code>: registration access codes and partner associations</li>
+      <li><code>GUI</code>: S3 image metadata, business text</li>
+    </ul></div>
+    <div class="panel"><h3>Write rules</h3><ul class="tight">
+      <li>Upserts use <code>MERGE</code>, so most writes are re-runnable</li>
+      <li>Image delete and renumber share one session</li>
+      <li>Connection link and delete run in one explicit transaction</li>
+      <li>GroupLink setup commits each statement separately</li>
+    </ul></div>
+  </div>
+  <div class="diagram"><pre class="mermaid">%% Entity-relationship view of the Oracle tables this service reads/writes.
+%% Columns are only those referenced in mapper XML; relationships are INFERRED from join/where columns (confidence: Medium).
+%% No DDL exists in this repo. Dots in table names replaced by underscores for Mermaid.
+erDiagram
+    EVENTPROFILE_PARTICIPANT {
+        number PARTICIPANTID PK
+        number GLPARTICIPANTSETUPSTATUSID
+        number PKGLUSERID
+        date PKGLTIMESTAMP
+    }
+    EVENTPROFILE_PARTICIPATION {
+        number PARTICIPANTID "hotel"
+        number EVENTID
+        number EVTHTPARTICPATIONSETUPSTATUSID
+    }
+    EVENTPROFILE_ROOMTYPE {
+        number ROOMTYPEID PK
+        number HOTELID
+        number EVENTID
+        number GROUPLINKROOMTYPESETUPSTATUSID
+    }
+    EVENTPROFILE_BLOCK {
+        number BLOCKID PK
+        number ROOMTYPEID
+        number GROUPTYPEID
+        number HOTELID
+        number EVENTID
+        number GROUPLINKBLOCKSETUPSTATUSID
+        number GROUPLINKGROUPSETUPSTATUSID
+    }
+    EVENTPROFILE_EVENTROOMCATEGORY {
+        number EVENTROOMCATEGORYID PK "SEQ_PK_EVENTROOMCATEGORY"
+        number EVENTID
+        number HOTELID
+        string NAMETEXTID "RCELN_id"
+        string DESCRIPTIONTEXTID "RCELD_id"
+        number SORTTYPEID
+        number ISENABLED
+        number LIBRARYID
+        number ISENABLEBED
+        number ISENABLEAMENITY
+    }
+    EVENTPROFILE_EVENTROOMCATEGORYASSIGNMENT {
+        number EVENTROOMCATEGORYID FK
+        number ROOMTYPEID FK
+        number SORTORDER
+    }
+    EVENTPROFILE_EVENTROOMCATEGORYBED {
+        number EVENTROOMCATEGORYID FK
+        number BEDID FK
+        number QUANTITY
+    }
+    EVENTPROFILE_EVENTROOMCATEGORYAMENITY {
+        number EVENTROOMCATEGORYID FK
+        number AMENITYID FK
+    }
+    EVENTPROFILE_BED {
+        number BEDID PK
+    }
+    EVENTPROFILE_AMENITY {
+        number AMENITYID PK
+    }
+    GUI_S3IMAGEMETADATA {
+        number IMAGEID PK "IMAGEMETADATA_ID seq"
+        number EVENTID
+        number PARTICIPANTID
+        number ROOMTYPEID
+        string MD5HASH
+        number IMAGETYPEID
+        string EXTENSION
+        number IMAGESTATUS "0 draft, 1 active"
+        number IMAGENUMBER
+        number IMAGEWIDTH
+        number IMAGEHEIGHT
+        string IMAGENAME
+    }
+    GUI_BUSINESSTEXT {
+        string BUSINESSTEXTID "localized text"
+    }
+    XFER_TRANSFERDEFINITION {
+        number TRANSFERDEFINITIONID PK "XFERDEF_XFERDEFID_SEQ"
+        number VENDORSYSTEMID
+        number HOTELID
+        number EVENTID
+        number TRANSFERDIRECTIONID "1 out, 2 in"
+        date TRANSFERPERIODSTARTTIME
+        date TRANSFERPERIODENDTIME
+    }
+    XFER_GLMAPPINGVALUES {
+        number VENDORSYSTEMID
+        number HOTELID
+        number EVENTID
+        number GROUPTYPEID
+        number ROOMTYPEID
+        number BLOCKID
+        number MAPPINGID
+        number SEQUENCENUMBER
+        string VALUE
+    }
+    XFER_ROOM_BLOCK_XFER_STATE {
+        number EVENT_ID
+        number HOTEL_ID
+        number APPROACH_ID
+        number PROVIDER_ID
+        number RATE_ID
+    }
+    BRIDGE_REG_ACCESS_CODE {
+        number REG_ACCESS_CODE_ID PK
+        number EVENT_ID
+        string REG_ACCESS_CODE
+    }
+    BRIDGE_PARTNER_ACCESS_CODE_ASSOC {
+        number REG_ACCESS_CODE_ID FK
+    }
+    BRIDGE_REGEVENT {
+        number REGEVENTID
+    }
+    BRIDGE_REGACCESS {
+        number REGEVENTID
+        number STATUS
+    }
+
+    EVENTPROFILE_PARTICIPANT ||--o{ EVENTPROFILE_PARTICIPATION : "hotel participates in events"
+    EVENTPROFILE_PARTICIPATION ||--o{ EVENTPROFILE_ROOMTYPE : "hotel in event has room types"
+    EVENTPROFILE_ROOMTYPE ||--o{ EVENTPROFILE_BLOCK : "room type has blocks"
+    EVENTPROFILE_PARTICIPATION ||--o{ EVENTPROFILE_EVENTROOMCATEGORY : "hotel in event has categories"
+    EVENTPROFILE_EVENTROOMCATEGORY ||--o{ EVENTPROFILE_EVENTROOMCATEGORYASSIGNMENT : assigns
+    EVENTPROFILE_ROOMTYPE ||--o{ EVENTPROFILE_EVENTROOMCATEGORYASSIGNMENT : "assigned to"
+    EVENTPROFILE_EVENTROOMCATEGORY ||--o{ EVENTPROFILE_EVENTROOMCATEGORYBED : has
+    EVENTPROFILE_BED ||--o{ EVENTPROFILE_EVENTROOMCATEGORYBED : "used in"
+    EVENTPROFILE_EVENTROOMCATEGORY ||--o{ EVENTPROFILE_EVENTROOMCATEGORYAMENITY : has
+    EVENTPROFILE_AMENITY ||--o{ EVENTPROFILE_EVENTROOMCATEGORYAMENITY : "used in"
+    EVENTPROFILE_EVENTROOMCATEGORY ||--o{ GUI_BUSINESSTEXT : "name/description text"
+    EVENTPROFILE_PARTICIPANT ||--o{ GUI_S3IMAGEMETADATA : "event/hotel images"
+    EVENTPROFILE_PARTICIPATION ||--o{ XFER_TRANSFERDEFINITION : "GroupLink transfer"
+    EVENTPROFILE_PARTICIPATION ||--o{ XFER_GLMAPPINGVALUES : "GroupLink mappings"
+    EVENTPROFILE_PARTICIPATION ||--o| XFER_ROOM_BLOCK_XFER_STATE : "transfer state"
+    BRIDGE_REG_ACCESS_CODE ||--o{ BRIDGE_PARTNER_ACCESS_CODE_ASSOC : "partner link"
+    BRIDGE_REGEVENT ||--o{ BRIDGE_REGACCESS : "reg access"</pre></div>
+  <p class="src">Source: diagrams/er-diagram.mmd · data-model.md</p>
+</section>
+
+<section id="workflows">
+  <div class="sec-head"><h2>Workflows</h2><p>All work is synchronous inside the HTTP request.</p></div>
+  <div class="tabs" role="tablist" aria-label="Workflow diagrams" data-group="wf">
+    <button role="tab" aria-selected="true" data-target="w-gl">GroupLink setup</button>
+    <button role="tab" aria-selected="false" data-target="w-img">Image upload</button>
+    <button role="tab" aria-selected="false" data-target="w-conn">Connection</button>
+    <button role="tab" aria-selected="false" data-target="w-life">Image lifecycle</button>
+  </div>
+  <div class="diagram" id="w-gl"><pre class="mermaid">%% GroupLink setup: POST /passkey-event-housing/v1/grouplink
+%% Source: GroupLinkResource.createGroupLinkSetup (line 57), GroupLinkService, GroupLinkDataAccess, GroupLinkMapper.xml
+%% Each DAO write opens its own auto-commit session -&gt; the sequence is NOT atomic.
+sequenceDiagram
+    autonumber
+    participant Client
+    participant GLR as GroupLinkResource
+    participant GLS as GroupLinkService
+    participant GLD as GroupLinkDataAccess
+    participant DB as Oracle (XFER / EVENTPROFILE)
+
+    Client-&gt;&gt;GLR: POST /grouplink (GroupLinkSetupRequest, API key)
+    GLR-&gt;&gt;GLS: resolve vendor system
+    GLS-&gt;&gt;GLD: getVendorSystem(vendorSystemId)
+    alt not found
+        GLS-&gt;&gt;GLD: getVendorSystemByHotelId(hotelId)
+    end
+    alt still not found
+        GLR--&gt;&gt;Client: 400 VendorSystemNotFound (GroupLinkException)
+    end
+    GLS-&gt;&gt;GLS: compute transfer window&lt;br/&gt;event-zone midnight..23:59:59 -&gt; America/New_York
+    opt outbound transfer type &gt; 0
+        GLS-&gt;&gt;GLD: createTransferDefinition(direction=1)
+        GLD-&gt;&gt;DB: MERGE XFER.TRANSFERDEFINITION
+    end
+    opt inbound transfer type &gt; 0
+        GLS-&gt;&gt;GLD: createTransferDefinition(direction=2)
+        GLD-&gt;&gt;DB: MERGE XFER.TRANSFERDEFINITION
+    end
+    opt request.complete
+        GLS-&gt;&gt;GLD: approveEvent(statusId=101)
+        GLD-&gt;&gt;DB: UPDATE PARTICIPANT + PARTICIPATION
+    end
+    GLS-&gt;&gt;GLD: createMappings(meeting, room, rate, occupancy rates, guarantee, pre-code, sub-event, reason, source)
+    GLD-&gt;&gt;DB: MERGE XFER.GLMAPPINGVALUES (PL/SQL block)
+    opt externalEventId provided
+        GLS-&gt;&gt;GLD: updateExternalEventMapping
+        GLD-&gt;&gt;DB: MERGE XFER.EXTERNALEVENTXREF
+    end
+    opt approveBlocks and rooms not empty
+        GLS-&gt;&gt;GLD: approveBlocks
+        GLD-&gt;&gt;DB: UPDATE ROOMTYPE + BLOCK
+    end
+    GLR--&gt;&gt;Client: 204 No Content</pre></div>
+  <div class="diagram" id="w-img" hidden><pre class="mermaid">%% Image upload paths. Source: ImagesResource.java, ImageService.java, ImagesMapper.xml, PfuFileProvider.java
+sequenceDiagram
+    autonumber
+    participant Client
+    participant IR as ImagesResource
+    participant IS as ImageService
+    participant PFU as passkey-file-uploader
+    participant DB as Oracle GUI.S3IMAGEMETADATA
+    participant S3 as AWS S3 (groupmax-content)
+
+    rect rgba(127,127,127,0.08)
+    note over Client,S3: Path A: direct multipart upload -&gt; ACTIVE image
+    Client-&gt;&gt;IR: POST /events/{eventId}/images (multipart file + data, API key)
+    IR-&gt;&gt;IS: saveImage
+    IS-&gt;&gt;IS: validate type / size (10 MB) / extension, TIFF -&gt; JPEG, MD5
+    IS-&gt;&gt;DB: isUsed(md5)? (dedupe S3 object)
+    IS-&gt;&gt;DB: IMAGEMETADATA_ID.NEXTVAL, next IMAGENUMBER = max+1
+    IS-&gt;&gt;DB: MERGE row (IMAGESTATUS=1)
+    alt object not yet in S3
+        IS-&gt;&gt;S3: PutObject
+        alt S3 failure
+            IS-&gt;&gt;DB: delete row (compensation)
+        end
+    end
+    IR--&gt;&gt;Client: 200/201 ImageResponse
+    end
+
+    rect rgba(127,127,127,0.08)
+    note over Client,S3: Path B: PFU two-phase -&gt; DRAFT then activate
+    Client-&gt;&gt;IR: POST /events/{eventId}/images/pfu (Authorization: Bearer ...)
+    IR-&gt;&gt;IS: saveImageFromPfu(rawHeader, request)
+    IS-&gt;&gt;IS: strip "Bearer " -&gt; BearerTokenHeader
+    IS-&gt;&gt;PFU: downloadFile(bearer, fileId)
+    PFU--&gt;&gt;IS: bytes + Content-Disposition filename
+    IS-&gt;&gt;DB: MERGE row (IMAGESTATUS=0, IMAGENUMBER=id)
+    IS-&gt;&gt;S3: PutObject (if new MD5)
+    IR--&gt;&gt;Client: 201 draft ImageResponse
+    Client-&gt;&gt;IR: POST /events/{eventId}/images/{imageId} or /bulk
+    IR-&gt;&gt;IS: saveExisting / saveExistingBulk
+    IS-&gt;&gt;DB: draft -&gt; activate in place, or active -&gt; copy metadata
+    IR--&gt;&gt;Client: ImageResponse
+    end</pre></div>
+  <div class="diagram" id="w-conn" hidden><pre class="mermaid">%% Registration-provider connection: POST /passkey-event-housing/v1/connections
+%% Source: ConnectionResource.linkEvent (line 49), ConnectionService.linkEvent (line 32), ConnectionDataAccess.linkEventAndRegProvider (line 92)
+flowchart TD
+    A["POST /connections&lt;br/&gt;ConnectionRequest (partnerId, accessCode)"] --&gt; B{"validatePartnerId"}
+    B -- invalid --&gt; E1["400 InvalidPartner"]
+    B -- valid --&gt; C["getEventConnectionInfoFromEventCode&lt;br/&gt;(BRIDGE.REG_ACCESS_CODE lookup)"]
+    C -- code unknown --&gt; E2["InvalidAccessCodeException"]
+    C --&gt; D{"existing connection&lt;br/&gt;for eventId + partnerId?"}
+    D -- "yes and connected to code" --&gt; R1["return existing Connection"]
+    D -- "no / not connected" --&gt; F["linkEventAndRegProvider&lt;br/&gt;one explicit transaction"]
+    F --&gt; F1["MERGE PARTICIPATION + PARTICIPANT_EVENTS&lt;br/&gt;(+ sister-property hotels)"]
+    F1 --&gt; F2["BRIDGE.REGEVENT / REGACCESS records"]
+    F2 --&gt; F3["EVENTINFO.EVENTFLAGS update"]
+    F3 --&gt; F4["PARTNER_ACCESS_CODE_ASSOC insert"]
+    F4 --&gt; F5["associate partner default callbacks&lt;br/&gt;(API.CALLBACKASSOC)"]
+    F5 --&gt; G{"SQLException?"}
+    G -- yes --&gt; RB["rollback -&gt; DaoException"]
+    G -- no --&gt; CM["commit -&gt; Connection"]</pre></div>
+  <div class="diagram" id="w-life" hidden><pre class="mermaid">%% Asynchronous / deferred behaviour.
+%% VERIFIED: the service has no message queue, scheduler, or background worker; every request is synchronous.
+%% The only deferred flows are (1) the two-phase PFU image lifecycle and (2) the unregistered callback feature.
+stateDiagram-v2
+    [*] --&gt; Draft: POST /images/pfu&lt;br/&gt;IMAGESTATUS=0
+    [*] --&gt; Active: POST /images (multipart)&lt;br/&gt;IMAGESTATUS=1
+    Draft --&gt; Active: POST /images/:imageId or /bulk&lt;br/&gt;(activate in place)
+    Active --&gt; Active: POST /images/:imageId&lt;br/&gt;(copy to new row)
+    Active --&gt; Deleted: DELETE /images/:imageId&lt;br/&gt;renumber partition, then delete S3 object if unused
+    Draft --&gt; Deleted: DELETE /images/:imageId
+    Deleted --&gt; [*]
+
+    state "Callback feature (dead code)" as CBX {
+        [*] --&gt; Stored: CallbackResource POST /callbacks&lt;br/&gt;(NOT registered in run())
+        Stored --&gt; Consumed: GET /callbacks/verify/:acknumber
+    }</pre></div>
+  <p class="src">Details: business-workflows.md</p>
+</section>
+
+<section id="api">
+  <div class="sec-head"><h2>API endpoints</h2><p>Paths are relative to <code>/{env}/passkey-event-housing/v1</code>. Auth is the service API key unless marked. <code>.../room-categories</code> is short for <code>/events/{eventId}/hotels/{hotelId}/room-categories</code>.</p></div>
+  <div class="controls">
+    <label class="mono" for="q" hidden>Filter endpoints</label>
+    <input id="q" type="search" placeholder="Filter by path or purpose" aria-label="Filter endpoints by path or purpose">
+    <select id="m" aria-label="HTTP method"><option value="">All methods</option><option>GET</option><option>POST</option><option>PUT</option><option>DELETE</option></select>
+    <select id="g" aria-label="Resource"></select>
+    <span class="count" id="count"></span>
+  </div>
+  <div class="tbl" style="max-height: 560px;"><table>
+    <thead><tr><th>Method</th><th>Path</th><th>Purpose</th><th>Resource</th></tr></thead>
+    <tbody id="ep"></tbody>
+  </table></div>
+  <p class="src">Source: api-reference.md (the RAML spec in the repo covers only 5 paths).</p>
+</section>
+
+<section id="entry">
+  <div class="sec-head"><h2>Entry points</h2><p>Where to start reading code.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>What</th><th>File</th></tr></thead>
+    <tbody>
+      <tr><td>Main class and wiring</td><td><code>passkey-event-housing-service/…/PasskeyEventHousingServiceApplication.java</code></td></tr>
+      <tr><td>Downstream clients</td><td><code>…/util/ClientCreator.java</code></td></tr>
+      <tr><td>URL constants</td><td><code>passkey-event-housing-shared/…/constants/ApiConstants.java</code></td></tr>
+      <tr><td>Error codes</td><td><code>…/constants/RegistrationErrorCodeType.java</code></td></tr>
+      <tr><td>Transactions</td><td><code>passkey-event-housing-data-access/…/transaction/TransactionManager.java</code></td></tr>
+      <tr><td>SQL</td><td><code>passkey-event-housing-data-access/src/main/resources/…/mapper/*.xml</code></td></tr>
+      <tr><td>Config template</td><td><code>passkey-event-housing-service/configs/template.yaml</code></td></tr>
+      <tr><td>Integration tests</td><td><code>passkey-event-housing-integration-test/</code> (Karate)</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="risks">
+  <div class="sec-head"><h2>Risks and known issues</h2><p>Found by reading code; not from an issue tracker.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Severity</th><th>Issue</th><th>Area</th></tr></thead>
+    <tbody>
+      <tr><td><span class="sev sev-High">High</span></td><td>Literal credentials committed in <code>configs/dev.yaml</code> (values not reproduced)</td><td>Security</td></tr>
+      <tr><td><span class="sev sev-High">High</span></td><td>Exception mappers call <code>Optional.get()</code> on an empty Optional when an exception has no error code</td><td>Correctness</td></tr>
+      <tr><td><span class="sev sev-High">High</span></td><td>GroupLink setup is not atomic; each write auto-commits</td><td>Data integrity</td></tr>
+      <tr><td><span class="sev sev-Medium">Medium</span></td><td>Access log includes request and response bodies</td><td>Security</td></tr>
+      <tr><td><span class="sev sev-Medium">Medium</span></td><td><code>approveBlocks</code> updates BLOCK by GROUPTYPEID only (needs review)</td><td>Correctness</td></tr>
+      <tr><td><span class="sev sev-Medium">Medium</span></td><td>Image numbers can collide under concurrent uploads</td><td>Correctness</td></tr>
+      <tr><td><span class="sev sev-Medium">Medium</span></td><td>Health check always reports healthy</td><td>Operations</td></tr>
+      <tr><td><span class="sev sev-Medium">Medium</span></td><td>Category delete and image cleanup commit separately; admin participant loop has no rollback</td><td>Data integrity</td></tr>
+      <tr><td><span class="sev sev-Low">Low</span></td><td>Image endpoints return plain-text 500s with exception messages; bad PFU auth header gives 500</td><td>API</td></tr>
+      <tr><td><span class="sev sev-Low">Low</span></td><td>Error-code enum statuses (404) differ from statuses sent (400)</td><td>API</td></tr>
+      <tr><td><span class="sev sev-Low">Low</span></td><td>Dead callback code, unused client dependencies, stale RAML and README, legacy Dockerfile</td><td>Drift</td></tr>
+      <tr><td><span class="sev sev-Low">Low</span></td><td>DB pool <code>applicationName</code> is <code>passkey-bridge-service</code></td><td>Operations</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Details and evidence: known-issues-roadmap.md</p>
+</section>
+
+</main>
+<footer class="wrap">Generated 2026-11-02 from the passkey-event-housing repository. Facts marked Inferred or Unknown in the Markdown docs keep those labels here.</footer>
+
+<script>
+const EP = [
+  ["GET","/events/{eventId}/hotels","List hotels for an event (paged, locale)","Event"],
+  ["GET","/events/{eventId}/hotels/{hotelId}","Hotel details; 404 HotelNotFound","Event"],
+  ["GET","/events/{eventId}/hotels/{hotelId}/commerce-shutoff","Commerce shutoff date only","Event"],
+  ["GET","/events/{eventId}/hotels/{hotelId}/rooms","Rooms for a hotel; attendee-type filter (EQ only)","Event"],
+  ["GET","/events/{eventId}/hotels/{hotelId}/rooms/{roomId}","Single room","Event"],
+  ["GET","/events/{eventId}/rooms/{blockId}","Room by block, via inventory service","Event"],
+  ["GET","/events/{eventId}/blocks-summary","Event block summaries (API key or Bearer)","Event"],
+  ["GET","/blocks-summary","Block summaries by blockIds","Block"],
+  ["POST","/connections","Connect registration provider by access code","Connection"],
+  ["DELETE","/connections/{accessCode}","Remove connection; 404 if none","Connection"],
+  ["POST","/admin/codes/event/{eventId}","Create event API access code","Admin"],
+  ["PUT","/admin/connections/{eventId}","Associate participants and create WebInfo; 201","Admin"],
+  ["POST","/grouplink","GroupLink setup; 204, 400 VendorSystemNotFound","GroupLink"],
+  ["POST","/grouplink/blocks","Per-block meeting codes and approval; 204","GroupLink"],
+  ["GET","/grouplink/event/{eventId}/hotel/{hotelId}","GroupLink setup details","GroupLink"],
+  ["GET","/grouplink/event/{eventId}/hotel/{hotelId}/external-codes","External event codes","GroupLink"],
+  ["GET","/grouplink/pre-code-events","Events by pre-code (max 100)","GroupLink"],
+  ["POST","/roomblock/transfer/state","Upsert transfer state; 204","Transfer state"],
+  ["GET","/roomblock/transfer/state/event/{eventId}/hotel/{hotelId}","Read transfer state","Transfer state"],
+  ["DELETE","/roomblock/transfer/state/event/{eventId}/hotel/{hotelId}","Delete transfer state; 204","Transfer state"],
+  ["GET","/events/{eventId}/room-categories/rooms","All hotels' categories for an event","Room categories"],
+  ["GET",".../room-categories","List categories","Room categories"],
+  ["GET",".../room-categories/rooms","Categories with assigned rooms","Room categories"],
+  ["GET",".../room-categories/rooms/blocks/{blockId}","Category for a block (204 if none)","Room categories"],
+  ["GET",".../room-categories/rooms/room-types/{roomTypeId}","Category for a room type (204 if none)","Room categories"],
+  ["POST",".../room-categories","Create category","Room categories"],
+  ["GET",".../room-categories/{categoryId}","Read category","Room categories"],
+  ["PUT",".../room-categories/{categoryId}","Update category","Room categories"],
+  ["DELETE",".../room-categories/{categoryId}","Delete category and its images","Room categories"],
+  ["GET",".../room-categories/{categoryId}/rooms","List assigned rooms","Room categories"],
+  ["PUT",".../room-categories/{categoryId}/rooms","Bulk upsert assigned rooms","Room categories"],
+  ["GET",".../room-categories/{categoryId}/rooms/{roomId}","Read assigned room","Room categories"],
+  ["PUT",".../room-categories/{categoryId}/rooms/{roomId}","Upsert assigned room","Room categories"],
+  ["DELETE",".../room-categories/{categoryId}/rooms/{roomId}","Remove assigned room","Room categories"],
+  ["GET",".../room-categories/{categoryId}/beds","List beds","Room categories"],
+  ["PUT",".../room-categories/{categoryId}/beds","Replace beds","Room categories"],
+  ["PUT",".../room-categories/{categoryId}/beds/{bedId}","Upsert bed","Room categories"],
+  ["DELETE",".../room-categories/{categoryId}/beds/{bedId}","Delete bed; 204","Room categories"],
+  ["GET",".../room-categories/{categoryId}/amenities","List amenities","Room categories"],
+  ["PUT",".../room-categories/{categoryId}/amenities","Replace amenities","Room categories"],
+  ["PUT",".../room-categories/{categoryId}/amenities/{amenityId}","Add amenity","Room categories"],
+  ["DELETE",".../room-categories/{categoryId}/amenities/{amenityId}","Delete amenity","Room categories"],
+  ["POST","/events/{eventId}/images","Multipart upload of an active image","Images"],
+  ["POST","/events/{eventId}/images/{imageId}","Activate draft or copy active image","Images"],
+  ["POST","/events/{eventId}/images/bulk","Bulk activate or copy","Images"],
+  ["POST","/events/{eventId}/images/pfu","Draft image from PFU file; no local auth, Bearer forwarded; 201","Images"],
+  ["PUT","/events/{eventId}/images","Reorder images; 204","Images"],
+  ["GET","/events/{eventId}/images","List images (imageType + one scope param)","Images"],
+  ["DELETE","/events/{eventId}/images/{imageId}","Delete and renumber; 204","Images"]
+];
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+const groups = [...new Set(EP.map(e => e[3]))];
+const g = document.getElementById("g"), q = document.getElementById("q"), m = document.getElementById("m");
+g.innerHTML = '<option value="">All resources</option>' + groups.map(x => `<option>${esc(x)}</option>`).join("");
+document.getElementById("ep-count").textContent = EP.length;
+function render() {
+  const t = q.value.trim().toLowerCase(), mv = m.value, gv = g.value;
+  const rows = EP.filter(e => (!mv || e[0] === mv) && (!gv || e[3] === gv) && (!t || (e[1] + " " + e[2]).toLowerCase().includes(t)));
+  document.getElementById("ep").innerHTML = rows.map(e =>
+    `<tr><td><span class="chip m-${e[0]}">${e[0]}</span></td><td><code>${esc(e[1])}</code></td><td>${esc(e[2])}</td><td>${esc(e[3])}</td></tr>`).join("") ||
+    '<tr><td colspan="4">No endpoints match. Clear the filter to see all.</td></tr>';
+  document.getElementById("count").textContent = `${rows.length} of ${EP.length}`;
+}
+[q, m, g].forEach(el => el.addEventListener("input", render));
+render();
+
+document.querySelectorAll(".tabs").forEach(tabs => {
+  const btns = [...tabs.querySelectorAll("button")];
+  btns.forEach(b => b.addEventListener("click", () => {
+    btns.forEach(x => { x.setAttribute("aria-selected", x === b ? "true" : "false"); document.getElementById(x.dataset.target).hidden = x !== b; });
+  }));
+});
+
+const links = [...document.querySelectorAll("nav.rail a")];
+const io = "IntersectionObserver" in window ? new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + e.target.id ? "true" : "false")); });
+}, { rootMargin: "-40% 0px -55% 0px" }) : null;
+if (io) document.querySelectorAll("main section").forEach(s => io.observe(s));
+</script>

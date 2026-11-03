@@ -1,0 +1,30 @@
+%% Logical entities across upstream services. This app has no database of its own.
+%% Source: src/types/upstream/*.ts, src/server/data/event-link.ts. Verified at commit 61e748e.
+erDiagram
+  CORE_ACCOUNT ||--o{ PASSKEY_PARTICIPANT : "IMS mapping"
+  CORE_ACCOUNT ||--o{ CORE_EVENT : owns
+  CORE_EVENT ||--o{ RECORD_A_EVENT_INTEGRATION : "event-data"
+  RECORD_A_EVENT_INTEGRATION ||--o| RECORD_B_PLATFORM_INTEGRATION : "integrationId = A.id"
+  RECORD_B_PLATFORM_INTEGRATION }o--|| PASSKEY_EVENT : "resourceId"
+  PASSKEY_PARTICIPANT ||--o{ PASSKEY_EVENT : "housingBillPartId"
+  PASSKEY_EVENT ||--o{ HOTEL : "event hotels"
+  HOTEL ||--o{ ROOM_TYPE : has
+  PASSKEY_EVENT ||--o{ ATTENDEE_GROUP_TYPE : has
+  PASSKEY_EVENT ||--o{ INVENTORY_ROW : "inventory search"
+  CORE_EVENT ||--o{ HOTEL_REQUEST : "HotelRequestDetails"
+  RECORD_A_EVENT_INTEGRATION {
+    string id
+    string eventId
+    string product
+    string resourceId
+  }
+  RECORD_B_PLATFORM_INTEGRATION {
+    string integrationId
+    number linkedParticipantId
+    string accountMappingId
+    string regLinkIntegrationState
+  }
+  PASSKEY_EVENT {
+    number eventId
+    number housingBillPartId
+  }

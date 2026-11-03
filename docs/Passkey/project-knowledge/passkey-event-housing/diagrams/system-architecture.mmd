@@ -1,0 +1,30 @@
+%% System architecture: Passkey Event Housing Service and its runtime neighbours
+%% Source: PasskeyEventHousingServiceApplication.java, ClientCreator.java, configs/template.yaml
+flowchart LR
+    subgraph Callers["API callers (API key or Bearer)"]
+        C1["Passkey UIs / internal services"]
+        C2["Consumers of passkey-event-housing-java-client"]
+    end
+
+    subgraph Svc["passkey-event-housing-service (Dropwizard, port 7000 / admin 7001)"]
+        R["JAX-RS resources<br/>9 registered"]
+        S["Services + Providers"]
+        D["MyBatis DAOs<br/>11 DAOs, 12 mappers"]
+        R --> S --> D
+    end
+
+    Auth["Cvent auth-service<br/>(CventAuthFeature remote auth)"]
+    Ora[("Oracle Passkey TXN DB<br/>schemas EVENTPROFILE, GUI,<br/>XFER, BRIDGE, API, PERM")]
+    S3[("AWS S3<br/>groupmax-content bucket<br/>us-east-1")]
+    Ev["passkey-event service<br/>(events, admin, messages, images)"]
+    Inv["passkey-inventory service"]
+    Pfu["passkey-file-uploader (PFU)"]
+
+    C1 --> R
+    C2 --> R
+    R -. "validate API key / bearer" .-> Auth
+    D --> Ora
+    S --> S3
+    S --> Ev
+    S --> Inv
+    S -- "forwards caller Bearer token" --> Pfu

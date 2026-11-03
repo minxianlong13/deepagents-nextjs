@@ -1,0 +1,24 @@
+%% A linked-event GET route, for example /api/events/{eventId}/room-nights-pickup?evtstub=...
+%% Source: src/app/api/events/[eventId]/*/route.ts, src/lib/checkLinkedPasskeyEventAccess.ts,
+%% src/lib/route-utils.ts:82-92. Verified at commit 61e748e.
+sequenceDiagram
+  participant C as Client hook
+  participant M as middleware.ts
+  participant R as Route handler
+  participant G as checkLinkedPasskeyEventAccess
+  participant D as Data module
+  participant U as Upstream service
+  C->>M: GET with evtstub and filters
+  M->>R: authenticated request
+  R->>R: getAuthContext isLoggedIn, else 401
+  R->>R: Zod safeParse params, else 400
+  R->>G: guard(evtstub, eventId)
+  G->>G: checkCoreEventAccess (cached 1 h)
+  G->>G: getLinkedPasskeyEventId equals eventId, else 403
+  R->>D: get ViewModel
+  D->>U: parallel calls with chosen token
+  U-->>D: JSON
+  D->>D: parse upstream schema, map, parse ViewModel
+  D-->>R: ViewModel
+  R-->>C: 200 JSON
+  Note over R: Errors go to handleRouteError: 401/403/404/409 pass through, other ServiceError 502, unknown 500

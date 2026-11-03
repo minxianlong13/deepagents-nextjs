@@ -1,0 +1,44 @@
+%% GroupLink setup: POST /passkey-event-housing/v1/grouplink
+%% Source: GroupLinkResource.createGroupLinkSetup (line 57), GroupLinkService, GroupLinkDataAccess, GroupLinkMapper.xml
+%% Each DAO write opens its own auto-commit session -> the sequence is NOT atomic.
+sequenceDiagram
+    autonumber
+    participant Client
+    participant GLR as GroupLinkResource
+    participant GLS as GroupLinkService
+    participant GLD as GroupLinkDataAccess
+    participant DB as Oracle (XFER / EVENTPROFILE)
+
+    Client->>GLR: POST /grouplink (GroupLinkSetupRequest, API key)
+    GLR->>GLS: resolve vendor system
+    GLS->>GLD: getVendorSystem(vendorSystemId)
+    alt not found
+        GLS->>GLD: getVendorSystemByHotelId(hotelId)
+    end
+    alt still not found
+        GLR-->>Client: 400 VendorSystemNotFound (GroupLinkException)
+    end
+    GLS->>GLS: compute transfer window<br/>event-zone midnight..23:59:59 -> America/New_York
+    opt outbound transfer type > 0
+        GLS->>GLD: createTransferDefinition(direction=1)
+        GLD->>DB: MERGE XFER.TRANSFERDEFINITION
+    end
+    opt inbound transfer type > 0
+        GLS->>GLD: createTransferDefinition(direction=2)
+        GLD->>DB: MERGE XFER.TRANSFERDEFINITION
+    end
+    opt request.complete
+        GLS->>GLD: approveEvent(statusId=101)
+        GLD->>DB: UPDATE PARTICIPANT + PARTICIPATION
+    end
+    GLS->>GLD: createMappings(meeting, room, rate, occupancy rates, guarantee, pre-code, sub-event, reason, source)
+    GLD->>DB: MERGE XFER.GLMAPPINGVALUES (PL/SQL block)
+    opt externalEventId provided
+        GLS->>GLD: updateExternalEventMapping
+        GLD->>DB: MERGE XFER.EXTERNALEVENTXREF
+    end
+    opt approveBlocks and rooms not empty
+        GLS->>GLD: approveBlocks
+        GLD->>DB: UPDATE ROOMTYPE + BLOCK
+    end
+    GLR-->>Client: 204 No Content

@@ -1,0 +1,18 @@
+%% Registration-provider connection: POST /passkey-event-housing/v1/connections
+%% Source: ConnectionResource.linkEvent (line 49), ConnectionService.linkEvent (line 32), ConnectionDataAccess.linkEventAndRegProvider (line 92)
+flowchart TD
+    A["POST /connections<br/>ConnectionRequest (partnerId, accessCode)"] --> B{"validatePartnerId"}
+    B -- invalid --> E1["400 InvalidPartner"]
+    B -- valid --> C["getEventConnectionInfoFromEventCode<br/>(BRIDGE.REG_ACCESS_CODE lookup)"]
+    C -- code unknown --> E2["InvalidAccessCodeException"]
+    C --> D{"existing connection<br/>for eventId + partnerId?"}
+    D -- "yes and connected to code" --> R1["return existing Connection"]
+    D -- "no / not connected" --> F["linkEventAndRegProvider<br/>one explicit transaction"]
+    F --> F1["MERGE PARTICIPATION + PARTICIPANT_EVENTS<br/>(+ sister-property hotels)"]
+    F1 --> F2["BRIDGE.REGEVENT / REGACCESS records"]
+    F2 --> F3["EVENTINFO.EVENTFLAGS update"]
+    F3 --> F4["PARTNER_ACCESS_CODE_ASSOC insert"]
+    F4 --> F5["associate partner default callbacks<br/>(API.CALLBACKASSOC)"]
+    F5 --> G{"SQLException?"}
+    G -- yes --> RB["rollback -> DaoException"]
+    G -- no --> CM["commit -> Connection"]

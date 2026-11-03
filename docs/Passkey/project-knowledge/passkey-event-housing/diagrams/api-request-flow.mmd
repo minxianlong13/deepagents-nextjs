@@ -1,0 +1,30 @@
+%% Generic request/response pipeline for a read endpoint, e.g. GET /events/{eventId}/hotels/{hotelId}
+%% Source: PasskeyEventHousingServiceApplication (auth feature line 101, mappers 158-168), EventResource.getHotelDetails (line 117)
+sequenceDiagram
+    autonumber
+    participant C as Caller
+    participant J as Jersey + CventAuthFeature
+    participant LC as LogContextFeature
+    participant ER as EventResource
+    participant EP as EventProvider
+    participant EV as passkey-event service
+    participant HS as HotelDetailsService
+    participant DB as Oracle
+    participant EM as ExceptionMappers
+
+    C->>J: GET /{env}/passkey-event-housing/v1/events/{eventId}/hotels/{hotelId}
+    J->>J: @Authority(API_KEY) -> remote auth-service check
+    J->>LC: populate MDC (eventId, hotelId)
+    LC->>ER: getHotelDetails(eventId, hotelId, locale)
+    ER->>EP: getDefaultLocale(eventId)
+    EP->>EV: HTTP (Retrofit, API key + RetryInterceptor)
+    EV-->>EP: default locale
+    ER->>HS: getHotelDetails(...)
+    HS->>DB: executeInSameDbSession: hotel, images, amenities, rewards
+    DB-->>HS: rows
+    HS-->>ER: HotelDetails (Immutable)
+    ER-->>C: 200 JSON
+    alt EventHousingBaseException / DaoException / GroupLinkException / validation
+        ER->>EM: exception
+        EM-->>C: status + ErrorResponse {errorCodeType, httpRequestId}
+    end

@@ -1,0 +1,68 @@
+%% Component wiring as constructed in PasskeyEventHousingServiceApplication.run() (lines 96-177)
+flowchart TB
+    subgraph Resources
+        ER[EventResource]
+        BR[BlockResource]
+        CR[ConnectionResource]
+        AR[AdminResource]
+        GR[GroupLinkResource]
+        RBR[RoomBlockTransferStateResource]
+        RCR[RoomCategoryResource]
+        ERCR[EventRoomCategoryResource]
+        IR[ImagesResource]
+    end
+    subgraph Services
+        HDS[HotelDetailsService]
+        RDS[RoomDetailsService]
+        ATS[AttendeeTypeService]
+        BS[BlockService]
+        CS[ConnectionService]
+        AS[AdminService]
+        GLS[GroupLinkService]
+        RBS[RoomBlockTransferStateService]
+        RCS[RoomCategoryService]
+        IS[ImageService]
+    end
+    subgraph Providers["Providers (remote / helper)"]
+        EP[EventProvider]
+        MP[MessageProvider]
+        IP[ImageProvider]
+        INP[InventoryProvider]
+        PFP[PfuFileProvider]
+    end
+    subgraph DAOs["DAOs (TM = TransactionManager, RAW = raw SqlSessionFactory)"]
+        HDA["HotelDetailsDataAccess (TM)"]
+        RDA["RoomDataAccess (TM)"]
+        ATA["AttendeeTypeAccess (TM)"]
+        BDA["BlockDataAccess (TM)"]
+        IDA["ImagesDataAccess (TM)"]
+        RBDA["RoomBlockTransferStateDataAccess (TM)"]
+        PDA["ParticipantDataAccess (TM)"]
+        CDA["ConnectionDataAccess (RAW)"]
+        ADA["AdminDataAccess (RAW)"]
+        GDA["GroupLinkDataAccess (RAW)"]
+        RCDA["RoomCategoriesDataAccess (RAW)"]
+    end
+
+    ER --> EP & MP & IP & INP & HDS & RDS & BS
+    BR --> BS
+    CR --> CS
+    AR --> AS
+    GR --> GLS
+    RBR --> RBS
+    RCR --> RCS
+    ERCR --> RCS
+    IR --> IS
+
+    HDS --> HDA & IP & BS
+    RDS --> RDA & ATS & HDS & IP
+    ATS --> ATA
+    BS --> BDA
+    CS --> CDA
+    AS --> ADA & EP
+    GLS --> GDA
+    RBS --> RBDA
+    RCS --> RCDA & PDA & RDA & IS
+    IS --> IDA & PFP
+    IP --> IDA
+    MP --> RDA

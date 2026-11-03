@@ -1,0 +1,26 @@
+%% Link and unlink workflow. Source: src/app/events/housing/actions.ts:118,151 and
+%% src/server/data/event-link.ts:274-304,489,530. Verified at commit 61e748e.
+flowchart TD
+  Start(["Planner picks a Passkey event"]) --> A1["linkPasskeyRoomBlock action"]
+  A1 --> V{"Session + Zod args valid?"}
+  V -- no --> E1["Return error result"]
+  V -- yes --> G["checkCoreEventAccess +<br/>checkPasskeyEventAccess"]
+  G -- denied --> E2["Return FORBIDDEN"]
+  G -- ok --> P["In parallel: resolve inputs<br/>and list existing integrations"]
+  P --> D{"Passkey link already exists?"}
+  D -- yes --> E3["Return CONFLICT 409"]
+  D -- no --> CA["Create Record A in event-data"]
+  CA --> CB["Create Record B in passkey-integration"]
+  CB -- ok --> R["revalidatePath; page renders linked"]
+  CB -- fails --> RB["Delete Record A (rollback)"]
+  RB -- "rollback fails" --> O["Log orphan Record A"]
+  RB --> E4["Return error result"]
+
+  U(["Owner clicks Unlink"]) --> U1["unlinkPasskeyRoomBlock action"]
+  U1 --> U2["checkCoreEventAccess"]
+  U2 --> U3{"Record A found?"}
+  U3 -- no --> UA["already-unlinked (success)"]
+  U3 -- yes --> U4["requireOwnershipOfLinkedEvent"]
+  U4 -- denied --> E5["Return FORBIDDEN"]
+  U4 -- ok --> U5["Delete every Record A,<br/>then each Record B best-effort"]
+  U5 --> R

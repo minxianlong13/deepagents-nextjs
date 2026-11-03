@@ -1,0 +1,47 @@
+%% System architecture: Housing BFF (Next.js) between the planner browser and upstream services.
+%% Source: src/middleware.ts, src/app/, src/lib/upstream-client.ts:58-70. Verified at commit 61e748e.
+flowchart LR
+  Browser["Planner browser<br/>React client components"]
+  subgraph BFF["Housing app: Next.js 15 BFF on AWS ECS Fargate"]
+    MW["middleware.ts<br/>auth + evtstub"]
+    Page["RSC page<br/>/events/housing"]
+    Actions["Server actions<br/>actions.ts"]
+    Routes["GET API routes<br/>/api/events/..."]
+    Guards["Access guards<br/>src/lib/check*"]
+    Composers["Composers<br/>src/server/data"]
+    Fetchers["Fetchers<br/>src/data/service"]
+    Tokens["requireIdentity + bearer-token"]
+  end
+  subgraph Core["Cvent core"]
+    CoreEvent["core-event"]
+    EventData["event-data"]
+    UserAPI["User API"]
+    MyCvent["my-cvent-service"]
+    IMS["IMS"]
+    Auth["AUTH_SERVICE"]
+  end
+  subgraph Passkey["Passkey services"]
+    PKSvc["passkey-event, -hotel, -inventory,<br/>-event-housing, -room-type-data,<br/>-integration"]
+    PKKey["passkey-authentication,<br/>passkey-reporting"]
+  end
+  Browser --> MW
+  MW --> Page
+  MW --> Routes
+  Browser -- "server action call" --> Actions
+  Page --> Guards
+  Routes --> Guards
+  Actions --> Guards
+  Guards --> Composers
+  Page --> Composers
+  Routes --> Composers
+  Actions --> Composers
+  Composers --> Fetchers
+  Fetchers --> Tokens
+  Tokens -- "mint server tokens" --> Auth
+  Fetchers -- "cookie token" --> CoreEvent
+  Fetchers -- "cookie token" --> UserAPI
+  Fetchers -- "cookie token" --> MyCvent
+  Fetchers -- "decorated server token" --> EventData
+  Fetchers -- "API_KEY" --> IMS
+  Fetchers -- "server token" --> PKSvc
+  Fetchers -- "API_KEY" --> PKKey

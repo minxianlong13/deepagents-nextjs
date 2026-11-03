@@ -1,0 +1,16 @@
+%% Asynchronous / deferred behaviour.
+%% VERIFIED: the service has no message queue, scheduler, or background worker; every request is synchronous.
+%% The only deferred flows are (1) the two-phase PFU image lifecycle and (2) the unregistered callback feature.
+stateDiagram-v2
+    [*] --> Draft: POST /images/pfu<br/>IMAGESTATUS=0
+    [*] --> Active: POST /images (multipart)<br/>IMAGESTATUS=1
+    Draft --> Active: POST /images/:imageId or /bulk<br/>(activate in place)
+    Active --> Active: POST /images/:imageId<br/>(copy to new row)
+    Active --> Deleted: DELETE /images/:imageId<br/>renumber partition, then delete S3 object if unused
+    Draft --> Deleted: DELETE /images/:imageId
+    Deleted --> [*]
+
+    state "Callback feature (dead code)" as CBX {
+        [*] --> Stored: CallbackResource POST /callbacks<br/>(NOT registered in run())
+        Stored --> Consumed: GET /callbacks/verify/:acknumber
+    }

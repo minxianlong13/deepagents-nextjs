@@ -1,0 +1,32 @@
+%% Build-time and runtime dependencies. Source: pom.xml files, catalog-info.yaml, ClientCreator.java
+flowchart LR
+    subgraph Maven["Maven modules (revision 1.8.2-SNAPSHOT)"]
+        API[passkey-event-housing-api]
+        SH[passkey-event-housing-shared]
+        DA[passkey-event-housing-data-access]
+        SVC[passkey-event-housing-service]
+        JC[passkey-event-housing-java-client]
+        IT[passkey-event-housing-integration-test]
+    end
+    SVC --> DA
+    SVC --> API
+    SVC --> SH
+    DA --> API
+    DA --> SH
+    JC --> API
+    JC --> SH
+    IT --> JC
+    IT --> API
+    SH --> API
+
+    subgraph Runtime["Runtime dependencies"]
+        EVS["passkey-event service<br/>(eventService.endpoint)"]
+        INV["passkey-inventory service<br/>(inventoryService.endpoint)"]
+        PFU["passkey-file-uploader<br/>(fileUploaderService.endpoint)"]
+        AUTH["auth-service<br/>(authConfig.authServiceEndpoint)"]
+        ORA[("Oracle TXN DB")]
+        S3[("S3 groupmax-content")]
+        CB[("Couchbase<br/>declared, callbacks only, unused at runtime")]
+    end
+    SVC --> EVS & INV & PFU & AUTH & ORA & S3
+    DA -.-> CB

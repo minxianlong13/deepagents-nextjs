@@ -1,0 +1,42 @@
+%% Image upload paths. Source: ImagesResource.java, ImageService.java, ImagesMapper.xml, PfuFileProvider.java
+sequenceDiagram
+    autonumber
+    participant Client
+    participant IR as ImagesResource
+    participant IS as ImageService
+    participant PFU as passkey-file-uploader
+    participant DB as Oracle GUI.S3IMAGEMETADATA
+    participant S3 as AWS S3 (groupmax-content)
+
+    rect rgba(127,127,127,0.08)
+    note over Client,S3: Path A: direct multipart upload -> ACTIVE image
+    Client->>IR: POST /events/{eventId}/images (multipart file + data, API key)
+    IR->>IS: saveImage
+    IS->>IS: validate type / size (10 MB) / extension, TIFF -> JPEG, MD5
+    IS->>DB: isUsed(md5)? (dedupe S3 object)
+    IS->>DB: IMAGEMETADATA_ID.NEXTVAL, next IMAGENUMBER = max+1
+    IS->>DB: MERGE row (IMAGESTATUS=1)
+    alt object not yet in S3
+        IS->>S3: PutObject
+        alt S3 failure
+            IS->>DB: delete row (compensation)
+        end
+    end
+    IR-->>Client: 200/201 ImageResponse
+    end
+
+    rect rgba(127,127,127,0.08)
+    note over Client,S3: Path B: PFU two-phase -> DRAFT then activate
+    Client->>IR: POST /events/{eventId}/images/pfu (Authorization: Bearer ...)
+    IR->>IS: saveImageFromPfu(rawHeader, request)
+    IS->>IS: strip "Bearer " -> BearerTokenHeader
+    IS->>PFU: downloadFile(bearer, fileId)
+    PFU-->>IS: bytes + Content-Disposition filename
+    IS->>DB: MERGE row (IMAGESTATUS=0, IMAGENUMBER=id)
+    IS->>S3: PutObject (if new MD5)
+    IR-->>Client: 201 draft ImageResponse
+    Client->>IR: POST /events/{eventId}/images/{imageId} or /bulk
+    IR->>IS: saveExisting / saveExistingBulk
+    IS->>DB: draft -> activate in place, or active -> copy metadata
+    IR-->>Client: ImageResponse
+    end

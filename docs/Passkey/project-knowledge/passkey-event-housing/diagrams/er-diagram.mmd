@@ -1,0 +1,139 @@
+%% Entity-relationship view of the Oracle tables this service reads/writes.
+%% Columns are only those referenced in mapper XML; relationships are INFERRED from join/where columns (confidence: Medium).
+%% No DDL exists in this repo. Dots in table names replaced by underscores for Mermaid.
+erDiagram
+    EVENTPROFILE_PARTICIPANT {
+        number PARTICIPANTID PK
+        number GLPARTICIPANTSETUPSTATUSID
+        number PKGLUSERID
+        date PKGLTIMESTAMP
+    }
+    EVENTPROFILE_PARTICIPATION {
+        number PARTICIPANTID "hotel"
+        number EVENTID
+        number EVTHTPARTICPATIONSETUPSTATUSID
+    }
+    EVENTPROFILE_ROOMTYPE {
+        number ROOMTYPEID PK
+        number HOTELID
+        number EVENTID
+        number GROUPLINKROOMTYPESETUPSTATUSID
+    }
+    EVENTPROFILE_BLOCK {
+        number BLOCKID PK
+        number ROOMTYPEID
+        number GROUPTYPEID
+        number HOTELID
+        number EVENTID
+        number GROUPLINKBLOCKSETUPSTATUSID
+        number GROUPLINKGROUPSETUPSTATUSID
+    }
+    EVENTPROFILE_EVENTROOMCATEGORY {
+        number EVENTROOMCATEGORYID PK "SEQ_PK_EVENTROOMCATEGORY"
+        number EVENTID
+        number HOTELID
+        string NAMETEXTID "RCELN_id"
+        string DESCRIPTIONTEXTID "RCELD_id"
+        number SORTTYPEID
+        number ISENABLED
+        number LIBRARYID
+        number ISENABLEBED
+        number ISENABLEAMENITY
+    }
+    EVENTPROFILE_EVENTROOMCATEGORYASSIGNMENT {
+        number EVENTROOMCATEGORYID FK
+        number ROOMTYPEID FK
+        number SORTORDER
+    }
+    EVENTPROFILE_EVENTROOMCATEGORYBED {
+        number EVENTROOMCATEGORYID FK
+        number BEDID FK
+        number QUANTITY
+    }
+    EVENTPROFILE_EVENTROOMCATEGORYAMENITY {
+        number EVENTROOMCATEGORYID FK
+        number AMENITYID FK
+    }
+    EVENTPROFILE_BED {
+        number BEDID PK
+    }
+    EVENTPROFILE_AMENITY {
+        number AMENITYID PK
+    }
+    GUI_S3IMAGEMETADATA {
+        number IMAGEID PK "IMAGEMETADATA_ID seq"
+        number EVENTID
+        number PARTICIPANTID
+        number ROOMTYPEID
+        string MD5HASH
+        number IMAGETYPEID
+        string EXTENSION
+        number IMAGESTATUS "0 draft, 1 active"
+        number IMAGENUMBER
+        number IMAGEWIDTH
+        number IMAGEHEIGHT
+        string IMAGENAME
+    }
+    GUI_BUSINESSTEXT {
+        string BUSINESSTEXTID "localized text"
+    }
+    XFER_TRANSFERDEFINITION {
+        number TRANSFERDEFINITIONID PK "XFERDEF_XFERDEFID_SEQ"
+        number VENDORSYSTEMID
+        number HOTELID
+        number EVENTID
+        number TRANSFERDIRECTIONID "1 out, 2 in"
+        date TRANSFERPERIODSTARTTIME
+        date TRANSFERPERIODENDTIME
+    }
+    XFER_GLMAPPINGVALUES {
+        number VENDORSYSTEMID
+        number HOTELID
+        number EVENTID
+        number GROUPTYPEID
+        number ROOMTYPEID
+        number BLOCKID
+        number MAPPINGID
+        number SEQUENCENUMBER
+        string VALUE
+    }
+    XFER_ROOM_BLOCK_XFER_STATE {
+        number EVENT_ID
+        number HOTEL_ID
+        number APPROACH_ID
+        number PROVIDER_ID
+        number RATE_ID
+    }
+    BRIDGE_REG_ACCESS_CODE {
+        number REG_ACCESS_CODE_ID PK
+        number EVENT_ID
+        string REG_ACCESS_CODE
+    }
+    BRIDGE_PARTNER_ACCESS_CODE_ASSOC {
+        number REG_ACCESS_CODE_ID FK
+    }
+    BRIDGE_REGEVENT {
+        number REGEVENTID
+    }
+    BRIDGE_REGACCESS {
+        number REGEVENTID
+        number STATUS
+    }
+
+    EVENTPROFILE_PARTICIPANT ||--o{ EVENTPROFILE_PARTICIPATION : "hotel participates in events"
+    EVENTPROFILE_PARTICIPATION ||--o{ EVENTPROFILE_ROOMTYPE : "hotel in event has room types"
+    EVENTPROFILE_ROOMTYPE ||--o{ EVENTPROFILE_BLOCK : "room type has blocks"
+    EVENTPROFILE_PARTICIPATION ||--o{ EVENTPROFILE_EVENTROOMCATEGORY : "hotel in event has categories"
+    EVENTPROFILE_EVENTROOMCATEGORY ||--o{ EVENTPROFILE_EVENTROOMCATEGORYASSIGNMENT : assigns
+    EVENTPROFILE_ROOMTYPE ||--o{ EVENTPROFILE_EVENTROOMCATEGORYASSIGNMENT : "assigned to"
+    EVENTPROFILE_EVENTROOMCATEGORY ||--o{ EVENTPROFILE_EVENTROOMCATEGORYBED : has
+    EVENTPROFILE_BED ||--o{ EVENTPROFILE_EVENTROOMCATEGORYBED : "used in"
+    EVENTPROFILE_EVENTROOMCATEGORY ||--o{ EVENTPROFILE_EVENTROOMCATEGORYAMENITY : has
+    EVENTPROFILE_AMENITY ||--o{ EVENTPROFILE_EVENTROOMCATEGORYAMENITY : "used in"
+    EVENTPROFILE_EVENTROOMCATEGORY ||--o{ GUI_BUSINESSTEXT : "name/description text"
+    EVENTPROFILE_PARTICIPANT ||--o{ GUI_S3IMAGEMETADATA : "event/hotel images"
+    EVENTPROFILE_PARTICIPATION ||--o{ XFER_TRANSFERDEFINITION : "GroupLink transfer"
+    EVENTPROFILE_PARTICIPATION ||--o{ XFER_GLMAPPINGVALUES : "GroupLink mappings"
+    EVENTPROFILE_PARTICIPATION ||--o| XFER_ROOM_BLOCK_XFER_STATE : "transfer state"
+    BRIDGE_REG_ACCESS_CODE ||--o{ BRIDGE_PARTNER_ACCESS_CODE_ASSOC : "partner link"
+    BRIDGE_REGEVENT ||--o{ BRIDGE_REGACCESS : "reg access"

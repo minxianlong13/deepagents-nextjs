@@ -21,15 +21,20 @@ export const openWikiSearch = tool(
   async ({ repo, query, workspace, paths, limit }) => {
     const connection = await createMcpClient();
     try {
+      const toolArguments = {
+        repo,
+        query,
+        ...(workspace !== undefined ? { workspace } : {}),
+        ...(paths !== undefined ? { paths } : {}),
+        ...(limit !== undefined ? { limit } : {}),
+      };
+      console.log(
+        "query_openwiki arguments:",
+        JSON.stringify(toolArguments, null, 2),
+      );
       const result = await connection.client.callTool({
         name: "query_openwiki",
-        arguments: {
-          repo,
-          query,
-          ...(workspace !== undefined ? { workspace } : {}),
-          ...(paths !== undefined ? { paths } : {}),
-          ...(limit !== undefined ? { limit } : {}),
-        },
+        arguments: toolArguments,
       });
       const resultRecord = asRecord(result);
       if (resultRecord.isError) {

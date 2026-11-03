@@ -1,0 +1,23 @@
+%% Asynchronous behaviour. There are no queues or background jobs in this repo; async work is
+%% RSC streaming, client refetches, and token refresh. Source: section server/ components,
+%% src/hooks/, src/lib/bearer-token.ts, src/app/events/housing/actions.ts. Verified at commit 61e748e.
+sequenceDiagram
+  participant B as Browser
+  participant S as RSC page
+  participant T as bearer-token cache
+  participant A as AUTH_SERVICE
+  participant UP as Upstreams
+  B->>S: GET /events/housing?evtstub=...
+  S->>T: get server token
+  alt token missing or past 80% of lifetime
+    T->>A: mint from API_KEY
+    A-->>T: token
+  end
+  S->>UP: start section reads (promises)
+  S-->>B: shell streamed first
+  UP-->>S: section data
+  S-->>B: sections stream in (Suspense)
+  B->>S: filter change via GET route (hooks)
+  S-->>B: new ViewModel
+  B->>S: server action (link, unlink, magic link)
+  S-->>B: ActionResult, revalidatePath re-renders page

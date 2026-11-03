@@ -1,0 +1,45 @@
+%% Composer to upstream service dependencies. Source: imports in src/server/data/*.ts and
+%% src/lib/check*.ts. Verified at commit 61e748e.
+flowchart LR
+  subgraph Composers["src/server/data"]
+    EL["event-link"]
+    EV["events"]
+    HO["hotels"]
+    EM["event-map"]
+    IN["inventory"]
+    BP["booking-pace"]
+    RS["registration-summary"]
+    RF["room-block-data-filters"]
+    PU["passkey-user-profile"]
+  end
+  subgraph Guards["src/lib guards"]
+    CCA["checkCoreEventAccess"]
+    CPA["checkPasskeyEventAccess"]
+    CLA["checkLinkedPasskeyEventAccess"]
+  end
+  CPA --> EV
+  CLA --> CCA
+  CLA --> EL
+  CCA --> coreEvent["core-event"]
+  EL --> eventData["event-data"]
+  EL --> ims["IMS"]
+  EL --> pkEvent["passkey-event"]
+  EL --> pkIntegration["passkey-integration"]
+  EV --> ims
+  EV --> pkEvent
+  HO --> pkEvent
+  HO --> pkHotel["passkey-hotel"]
+  EM --> pkEvent
+  EM --> pkHotel
+  IN --> pkInventory["passkey-inventory"]
+  BP --> pkEvent
+  BP --> pkReporting["passkey-reporting"]
+  RS --> coreEvent
+  RS --> user["User API"]
+  RF --> pkEvent
+  RF --> pkEventHousing["passkey-event-housing"]
+  RF --> pkHotel
+  RF --> pkRoomType["passkey-room-type-data"]
+  PU --> myCvent["my-cvent-service"]
+  PU --> pkAuth["passkey-authentication"]
+  PU --> pkEvent
