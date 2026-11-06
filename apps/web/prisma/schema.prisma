@@ -57,6 +57,7 @@ model Candidate {
 
   documents       CandidateDocument[]
   workExperiences WorkExperience[]
+  skills          CandidateSkill[]
 
   @@index([userId])
 }
@@ -76,6 +77,7 @@ model CandidateDocument {
   candidate          Candidate            @relation(fields: [candidateId], references: [id], onDelete: Cascade)
   workExperiences    WorkExperience[]
   experienceEvidence ExperienceEvidence[]
+  skillEvidence      SkillEvidence[]
 
   @@unique([candidateId, version])
   @@index([candidateId, isActive])
@@ -106,6 +108,7 @@ model WorkExperience {
   candidate      Candidate            @relation(fields: [candidateId], references: [id], onDelete: Cascade)
   sourceDocument CandidateDocument?   @relation(fields: [sourceDocumentId], references: [id], onDelete: SetNull)
   evidence       ExperienceEvidence[]
+  skillEvidence  SkillEvidence[]
 
   @@index([candidateId, sortOrder])
   @@index([sourceDocumentId])
@@ -124,6 +127,55 @@ model ExperienceEvidence {
   experience     WorkExperience     @relation(fields: [experienceId], references: [id], onDelete: Cascade)
   sourceDocument CandidateDocument? @relation(fields: [sourceDocumentId], references: [id], onDelete: SetNull)
 
+  @@index([experienceId])
+  @@index([sourceDocumentId])
+}
+
+model Skill {
+  id             String   @id @default(cuid())
+  name           String
+  normalizedName String   @unique
+  category       String?
+  createdAt      DateTime @default(now())
+
+  candidateSkills CandidateSkill[]
+
+  @@index([category])
+}
+
+model CandidateSkill {
+  id                String    @id @default(cuid())
+  candidateId       String
+  skillId           String
+  proficiency       String?
+  yearsOfExperience Float?
+  lastUsedAt        DateTime?
+  verified          Boolean   @default(false)
+  notes             String?   @db.Text
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  candidate Candidate       @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  skill     Skill           @relation(fields: [skillId], references: [id], onDelete: Restrict)
+  evidence  SkillEvidence[]
+
+  @@unique([candidateId, skillId])
+  @@index([skillId])
+}
+
+model SkillEvidence {
+  id               String   @id @default(cuid())
+  candidateSkillId String
+  experienceId     String?
+  content          String   @db.Text
+  sourceDocumentId String?
+  createdAt        DateTime @default(now())
+
+  candidateSkill CandidateSkill     @relation(fields: [candidateSkillId], references: [id], onDelete: Cascade)
+  experience     WorkExperience?    @relation(fields: [experienceId], references: [id], onDelete: SetNull)
+  sourceDocument CandidateDocument? @relation(fields: [sourceDocumentId], references: [id], onDelete: SetNull)
+
+  @@index([candidateSkillId])
   @@index([experienceId])
   @@index([sourceDocumentId])
 }

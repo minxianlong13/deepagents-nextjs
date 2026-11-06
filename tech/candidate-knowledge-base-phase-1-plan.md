@@ -6,7 +6,7 @@ Build a normalized candidate knowledge base from `basic_resume.md` using Neon an
 
 The first phase focuses only on reliable candidate data. Semantic search, job comparison, and resume generation are postponed.
 
-**Current status:** Phase 1 and Phase 2 database schemas and migrations are complete. Candidate data import is still pending.
+**Current status:** Phase 1, Phase 2, and Phase 3 database schemas and migrations are complete. Candidate data import (profile, work history, and skills) is still pending.
 
 ## Phase 1 schema
 
@@ -78,13 +78,13 @@ Stores the shared skill dictionary.
 
 - `id`
 - `name`
-- `normalizedName`
+- `normalizedName` (unique)
 - `category`
 - `createdAt`
 
 ### `CandidateSkill`
 
-Connects a candidate to a skill and stores candidate-specific details.
+Connects a candidate to a skill and stores candidate-specific details. A candidate can link to a given skill only once (`candidateId` + `skillId` is unique).
 
 - `id`
 - `candidateId`
@@ -94,10 +94,12 @@ Connects a candidate to a skill and stores candidate-specific details.
 - `lastUsedAt`
 - `verified`
 - `notes`
+- `createdAt`
+- `updatedAt`
 
 ### `SkillEvidence`
 
-Stores evidence supporting a candidate’s skill.
+Stores evidence supporting a candidate’s skill. `experienceId` is optional so evidence can come from a specific role or from the resume at large.
 
 - `id`
 - `candidateSkillId`
@@ -171,14 +173,29 @@ The migration creates:
 - Cascade deletion from a candidate to work experiences and from a work experience to its evidence.
 - Indexes for candidate work-history ordering and source-document lookup.
 
-### Phase 3: Skills
+### Phase 3: Skills — Complete
 
 Target: normalize and manage candidate skills.
 
-- Create canonical `Skill` records.
-- Connect the candidate through `CandidateSkill`.
-- Add supporting `SkillEvidence`.
-- Prevent duplicate skill names through normalized values.
+- [x] Create canonical `Skill` records.
+- [x] Connect the candidate through `CandidateSkill`.
+- [x] Add supporting `SkillEvidence`.
+- [x] Prevent duplicate skill names through normalized values.
+- [ ] Import candidate skills from `basic_resume.md`.
+
+Migration applied: `20261103230527_add_candidate_skills`
+
+The migration creates:
+
+- `Skill`, a shared dictionary with a unique `normalizedName` so the same skill cannot be inserted twice under different casing or spacing, plus an index on `category`.
+- `CandidateSkill`, linking `Candidate` to `Skill` with a unique `(candidateId, skillId)` pair so a candidate cannot claim the same skill twice. Deleting a candidate cascades to their skills; deleting a `Skill` is restricted while any candidate references it.
+- `SkillEvidence`, linked to `CandidateSkill` and optionally to `WorkExperience` and `CandidateDocument`. Evidence cascades with its candidate skill; the experience and source-document references are set to null if those records are removed.
+- Indexes for candidate-skill lookup by skill, and evidence lookup by candidate skill, experience, and source document.
+
+Notes:
+
+- `CandidateSkill` includes `createdAt` and `updatedAt` because it is a mutable record (proficiency, years, and verification can change), in line with the Phase 5 timestamp requirement.
+- `proficiency` is stored as free text for now; a controlled vocabulary can be introduced in Phase 5 if needed.
 
 ### Phase 4: Education
 
@@ -227,7 +244,7 @@ When candidate data is stable, reintroduce `KnowledgeChunk` to support semantic 
 - [x] The Phase 1 candidate tables are stored in Neon through Prisma.
 - [ ] `basic_resume.md` is preserved as a source document.
 - [x] Work history is separated from individual evidence.
-- [ ] Skills are normalized and connected to the candidate.
+- [x] Skills are normalized and connected to the candidate.
 - [ ] Education is stored independently.
 - [x] Candidate documents can be traced back to their candidate.
 - [x] No job-description, project, vector-search, or resume-generation tables are required in Phase 1.
