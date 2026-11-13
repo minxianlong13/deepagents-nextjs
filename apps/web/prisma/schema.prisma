@@ -179,3 +179,65 @@ model SkillEvidence {
   @@index([experienceId])
   @@index([sourceDocumentId])
 }
+
+enum TradingBroker {
+  wealthsimple
+  ibkr
+}
+
+enum TradingAccountType {
+  non_registered
+}
+
+enum TradingInstrumentType {
+  stock
+  etf
+}
+
+model TradingAccount {
+  id           String             @id @default(cuid())
+  name         String
+  broker       TradingBroker
+  accountType  TradingAccountType
+  currency     String             @db.VarChar(3)
+  initialFund  Decimal            @db.Decimal(20, 8)
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+
+  positions Position[]
+
+  @@index([broker, accountType])
+}
+
+model TradingInstrument {
+  id             String                @id @default(cuid())
+  symbol         String
+  name           String
+  instrumentType TradingInstrumentType
+  currency       String                @db.VarChar(3)
+  isActive       Boolean               @default(true)
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+
+  positions Position[]
+
+  @@unique([symbol, currency])
+  @@index([isActive])
+}
+
+model Position {
+  id                   String            @id @default(cuid())
+  tradingAccountId     String
+  tradingInstrumentId  String
+  quantity             Decimal           @db.Decimal(20, 8)
+  averageCost          Decimal           @db.Decimal(20, 8)
+  currentPrice         Decimal?          @db.Decimal(20, 8)
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+
+  tradingAccount    TradingAccount    @relation(fields: [tradingAccountId], references: [id], onDelete: Cascade)
+  tradingInstrument TradingInstrument @relation(fields: [tradingInstrumentId], references: [id], onDelete: Restrict)
+
+  @@unique([tradingAccountId, tradingInstrumentId])
+  @@index([tradingInstrumentId])
+}

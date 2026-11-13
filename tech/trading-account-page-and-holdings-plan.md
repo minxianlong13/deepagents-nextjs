@@ -51,6 +51,40 @@ Each holding will display:
 
 The page will not display a chart in this phase. Empty states should explain when an account has no holdings, and missing market prices should be shown as unavailable rather than treated as zero.
 
+## Management page
+
+The first management page is available at:
+
+```text
+/manage/trading
+```
+
+It provides separate forms and lists for:
+
+- creating and editing trading accounts
+- creating and editing stock or ETF instruments
+- viewing the number of positions associated with each record
+- activating or deactivating instruments
+
+The page uses `/api/manage/trading` for reads and mutations. It does not provide deletion yet. Account or instrument currency changes are rejected once positions exist, preventing existing holdings from becoming inconsistent with their currency. The current endpoint uses parameterized Prisma raw SQL temporarily because the checked-in Prisma Client has not yet been regenerated for these models; it can be replaced with typed Prisma delegates once client generation is available.
+
+## Phase 1 contract decisions
+
+Phase 1 is complete with the following MVP decisions:
+
+- Trading accounts are system-level records for the MVP. No `userId` column is stored, and no sentinel value such as `-1` is used.
+- The initial broker values are `wealthsimple` and `ibkr`.
+- The initial account type is `non_registered`, while the database representation should remain extensible for future account types.
+- Account currency is a required ISO 4217-style code. The first supported value is `CAD`.
+- Instrument currency is also stored and must match the account currency. No exchange field is included.
+- Quantity, average cost, and current price use precise decimal values. This supports whole-share ETFs now and fractional quantities later.
+- `currentPrice` is nullable because market-price ingestion is not part of this MVP.
+- Cost basis, market value, unrealized return, and total holdings are derived values. They should be calculated by the domain/application layer rather than persisted as independently editable columns.
+- Realized return is explicitly deferred because there are no trade records in this phase.
+- No performance snapshots, charts, orders, or executions are part of the MVP.
+
+These decisions are the input for Phase 2 schema work.
+
 ## Data model
 
 ### `TradingAccount`
@@ -59,7 +93,6 @@ Represents the account and its single operating currency.
 
 ```text
 id
-userId
 name
 broker
 accountType
@@ -101,11 +134,7 @@ tradingAccountId
 tradingInstrumentId
 quantity
 averageCost
-costBasis
 currentPrice
-marketValue
-unrealizedReturn
-unrealizedReturnPercent
 createdAt
 updatedAt
 ```
@@ -116,7 +145,7 @@ Constraints:
 unique(tradingAccountId, tradingInstrumentId)
 ```
 
-All monetary values use `Decimal` and PostgreSQL `NUMERIC`; JavaScript floating-point values must not be used for calculations.
+All monetary values use `Decimal` and PostgreSQL `NUMERIC`; JavaScript floating-point values must not be used for calculations. `costBasis`, `marketValue`, and return fields are derived rather than stored independently.
 
 Recommended calculations:
 
@@ -175,16 +204,16 @@ The page should consume an application service rather than querying Prisma direc
 
 ## Phased implementation plan
 
-### Phase 1: Confirm the MVP contract
+### Phase 1: Confirm the MVP contract — Complete
 
 - Confirm account fields and supported broker/account-type values.
-- Confirm whether the account is associated with the existing local user identifier or a future user table.
+- Confirm that account ownership is intentionally omitted until a user model exists.
 - Confirm precision and nullability rules for quantity and current price.
 - Document that realized return and trade history are deferred.
 
-Deliverable: finalized domain and database contract.
+Deliverable: finalized domain and database contract, recorded in the Phase 1 contract decisions section above.
 
-### Phase 2: Add the Prisma schema
+### Phase 2: Add the Prisma schema — Complete
 
 - Add `TradingAccount`.
 - Add `TradingInstrument`.
@@ -193,16 +222,17 @@ Deliverable: finalized domain and database contract.
 - Add Decimal fields using explicit PostgreSQL precision and scale.
 - Add the account/instrument currency consistency rule to the domain layer; Prisma cannot fully enforce this cross-table rule with a normal relation.
 
-Deliverable: updated `apps/web/prisma/schema.prisma`.
+Deliverable: updated `apps/web/prisma/schema.prisma` with the MVP trading models, enums, relations, indexes, and Decimal fields.
 
-### Phase 3: Create and validate the migration
+### Phase 3: Create and validate the migration — Applied
 
-- Generate an additive migration under `apps/web/prisma/migrations/`.
+- Add an additive migration under `apps/web/prisma/migrations/`.
 - Preserve the existing candidate-related schema changes in the worktree.
-- Run Prisma formatting and validation.
-- Generate the Prisma client.
+- Run Prisma formatting and validation when the local Prisma CLI/runtime is available.
+- Generate the Prisma client after the migration is reviewed.
+- Apply the migration to Neon through the normal deployment workflow.
 
-Deliverable: migration that creates only the MVP trading tables and indexes.
+Deliverable: `20261105130000_add_trading_account_holdings/migration.sql`, which creates only the MVP trading tables, enums, indexes, and foreign keys. It has been applied to Neon and recorded in Prisma migration history. The installed Prisma CLI still needs to be repaired before client generation can run normally.
 
 ### Phase 4: Implement domain calculations
 
@@ -227,15 +257,24 @@ Deliverable: unit-tested trading domain calculations.
 
 Deliverable: server-side account query used by the page.
 
-### Phase 6: Build the account page
+### Phase 6: Build the management and account pages — Management page implemented
 
+- Add `/manage/trading` for account and instrument management.
+- Add `/api/manage/trading` for validated create, list, and update operations.
 - Add `/trading/accounts/[accountId]`.
 - Build summary cards for initial fund and total holdings.
 - Build the holdings table.
 - Add loading, empty, unavailable-price, and not-found states.
 - Do not add charting dependencies or performance visualizations.
 
-Deliverable: functional no-chart trading account page.
+Current deliverables:
+
+- `/manage/trading` provides account and instrument create/edit forms.
+- `/api/manage/trading` provides list, create, and update operations.
+- Existing-position currency changes are rejected by the API.
+- Management navigation is available from the home page and desktop/mobile navigation.
+
+Remaining deliverable: the read-only no-chart trading account page at `/trading/accounts/[accountId]`.
 
 ### Phase 7: Test and verify
 

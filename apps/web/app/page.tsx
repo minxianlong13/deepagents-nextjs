@@ -85,6 +85,12 @@ const workflowGroups: WorkflowGroup[] = [
         href: "/manage/rag",
         icon: Settings2,
       },
+      {
+        title: "Trading Accounts",
+        description: "Manage trading accounts and instruments.",
+        href: "/manage/trading",
+        icon: Settings2,
+      },
     ],
   },
 ];

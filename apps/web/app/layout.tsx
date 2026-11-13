@@ -136,6 +136,12 @@ export default function RootLayout({
                 >
                   RAG Config
                 </Link>
+                <Link
+                  href="/manage/trading"
+                  className="block rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                >
+                  Trading Accounts
+                </Link>
               </section>
             </nav>
             <p className="mt-auto px-3 pt-8 text-[10px] uppercase tracking-[0.18em] text-sidebar-foreground/30">
@@ -229,6 +235,12 @@ export default function RootLayout({
                       className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                     >
                       RAG Config
+                    </Link>
+                    <Link
+                      href="/manage/trading"
+                      className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                    >
+                      Trading Accounts
                     </Link>
                   </div>
                 </section>
