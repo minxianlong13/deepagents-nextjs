@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:trading": "node --import tsx --test lib/trading/**/*.test.ts"
   },
   "dependencies": {
     "@langchain/anthropic": "^1.5.6",

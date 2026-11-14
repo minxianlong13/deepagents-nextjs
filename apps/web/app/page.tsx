@@ -45,6 +45,12 @@ const workflowGroups: WorkflowGroup[] = [
         href: "/resume",
         icon: FileText,
       },
+      {
+        title: "Trading Accounts",
+        description: "Review account holdings and current values.",
+        href: "/trading/accounts",
+        icon: BriefcaseBusiness,
+      },
     ],
   },
   {

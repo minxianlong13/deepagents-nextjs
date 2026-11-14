@@ -1,6 +1,7 @@
 "use client";
 
 import { Children, useEffect, useState, type ReactNode } from "react";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -114,7 +115,7 @@ export default function TradingManagementPage() {
 
         <div className="grid gap-6 lg:grid-cols-2">
           <RecordCard title="Trading accounts" empty="No trading accounts yet." loading={loading}>
-            {accounts.map((account) => <div key={account.id} className="flex items-center justify-between gap-3 border-t border-black/10 py-3"><div><p className="font-medium">{account.name}</p><p className="text-xs text-black/55">{account.broker === "ibkr" ? "IBKR" : "Wealthsimple"} · {account.currency} · {account._count.positions} position{account._count.positions === 1 ? "" : "s"}</p></div><Button type="button" variant="secondary" size="sm" onClick={() => { setEditingAccountId(account.id); setAccountForm({ name: account.name, broker: account.broker, accountType: account.accountType, currency: account.currency, initialFund: account.initialFund }); }}>Edit</Button></div>)}
+            {accounts.map((account) => <div key={account.id} className="flex items-center justify-between gap-3 border-t border-black/10 py-3"><div><Link href={`/trading/accounts/${account.id}`} className="font-medium hover:underline">{account.name}</Link><p className="text-xs text-black/55">{account.broker === "ibkr" ? "IBKR" : "Wealthsimple"} · {account.currency} · {account._count.positions} position{account._count.positions === 1 ? "" : "s"}</p></div><Button type="button" variant="secondary" size="sm" onClick={() => { setEditingAccountId(account.id); setAccountForm({ name: account.name, broker: account.broker, accountType: account.accountType, currency: account.currency, initialFund: account.initialFund }); }}>Edit</Button></div>)}
           </RecordCard>
           <RecordCard title="Trading instruments" empty="No trading instruments yet." loading={loading}>
             {instruments.map((instrument) => <div key={instrument.id} className="flex items-center justify-between gap-3 border-t border-black/10 py-3"><div><div className="flex items-center gap-2"><p className="font-medium">{instrument.symbol}</p><Badge variant={instrument.isActive ? "accent" : "default"}>{instrument.isActive ? "Active" : "Inactive"}</Badge></div><p className="text-xs text-black/55">{instrument.name} · {instrument.currency} · {instrument._count.positions} position{instrument._count.positions === 1 ? "" : "s"}</p></div><Button type="button" variant="secondary" size="sm" onClick={() => { setEditingInstrumentId(instrument.id); setInstrumentForm({ symbol: instrument.symbol, name: instrument.name, instrumentType: instrument.instrumentType, currency: instrument.currency, isActive: instrument.isActive }); }}>Edit</Button></div>)}

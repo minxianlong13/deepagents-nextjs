@@ -234,16 +234,16 @@ Deliverable: updated `apps/web/prisma/schema.prisma` with the MVP trading models
 
 Deliverable: `20261105130000_add_trading_account_holdings/migration.sql`, which creates only the MVP trading tables, enums, indexes, and foreign keys. It has been applied to Neon and recorded in Prisma migration history. The installed Prisma CLI still needs to be repaired before client generation can run normally.
 
-### Phase 4: Implement domain calculations
+### Phase 4: Implement domain calculations — Complete
 
 - Add Decimal-safe money/value objects or calculation helpers.
 - Implement cost basis, market value, unrealized return, and account total calculations.
 - Reject positions whose instrument currency differs from the account currency.
 - Reject negative quantity, negative cost, and invalid account/instrument associations.
 
-Deliverable: unit-tested trading domain calculations.
+Deliverable: unit-tested trading domain calculations in `apps/web/lib/trading/domain/`. Calculations use Prisma Decimal values; price-dependent amounts stay unavailable if any position lacks a price. Currency, association, and nonnegative value rules are validated before use.
 
-### Phase 5: Implement repositories and read services
+### Phase 5: Implement repositories and read services — Complete
 
 - Define repository interfaces for accounts, instruments, and positions.
 - Implement Prisma-backed repositories.
@@ -255,9 +255,9 @@ Deliverable: unit-tested trading domain calculations.
   - total unrealized return
 - Keep Prisma types mapped to application/domain DTOs.
 
-Deliverable: server-side account query used by the page.
+Deliverable: `getTradingAccount` in `apps/web/lib/trading/application/`, backed by injectable repository interfaces and Prisma raw-SQL repository adapters. Account and position values are mapped to application DTOs with decimal strings; derived totals are calculated through the domain layer.
 
-### Phase 6: Build the management and account pages — Management page implemented
+### Phase 6: Build the management and account pages — Complete
 
 - Add `/manage/trading` for account and instrument management.
 - Add `/api/manage/trading` for validated create, list, and update operations.
@@ -273,8 +273,12 @@ Current deliverables:
 - `/api/manage/trading` provides list, create, and update operations.
 - Existing-position currency changes are rejected by the API.
 - Management navigation is available from the home page and desktop/mobile navigation.
+- `/trading/accounts/[accountId]` displays account summary and a no-chart holdings table through the Phase 5 read service.
+- `/trading/accounts` lists available accounts and links to each account holdings page.
+- Account management records link to their read-only holdings page.
+- Loading, no-holdings, missing-price, and account-not-found states are included.
 
-Remaining deliverable: the read-only no-chart trading account page at `/trading/accounts/[accountId]`.
+The Phase 6 management and account pages are complete.
 
 ### Phase 7: Test and verify
 
