@@ -38,6 +38,17 @@ describe("refreshPositionPrices", () => {
     assert.deepEqual(updates.map((u) => [u.positionId, u.price]), [["p1", "12.5"], ["p2", "12.5"]]);
     assert.equal(results?.[0]?.status, "updated");
     assert.equal(results?.[0]?.status === "updated" && results[0].previousPrice, "9");
+    assert.equal(results?.[0]?.status === "updated" && results[0].sourceLabel, "example.com");
+  });
+
+  it("accepts a labelled source without a URL", async () => {
+    const { repositories, updates } = setup();
+    const results = await refreshPositionPrices("a1", repositories, {
+      getQuote: async (i) => good(i.symbol, { sourceUrl: null, sourceLabel: "EODHD daily close" }),
+    });
+    assert.equal(updates.length, 2);
+    assert.equal(results?.[0]?.status === "updated" && results[0].sourceLabel, "EODHD daily close");
+    assert.equal(results?.[0]?.status === "updated" && results[0].sourceUrl, null);
   });
 
   it("keeps the old price and reports a failure for bad or failed quotes, without blocking others", async () => {
@@ -47,7 +58,8 @@ describe("refreshPositionPrices", () => {
       [{ currency: "USD" }, /USD/],
       [{ price: "0" }, /valid positive/],
       [{ price: "-1" }, /valid positive/],
-      [{ sourceUrl: null }, /source/],
+      [{ sourceUrl: null, sourceLabel: null }, /source/],
+      [{ sourceUrl: null, sourceLabel: "  " }, /source/],
     ];
     for (const [quote, reason] of cases) {
       const { repositories, updates } = setup();

@@ -1,4 +1,4 @@
-import type { PositionChange, TradeSide } from "../domain";
+import type { GridSizingMode, GridSpacingMode, PositionChange, TradeSide } from "../domain";
 
 export interface TradingAccountRecord {
   id: string;
@@ -100,4 +100,40 @@ export interface EarningRepository {
   /** Earnings for the account, most recently received first. */
   findByAccountId(accountId: string): Promise<EarningRecord[]>;
   create(input: Omit<EarningRecord, "id"> & { accountId: string }): Promise<void>;
+}
+
+export interface GridStrategyRecord {
+  accountId: string;
+  instrumentId: string;
+  anchorPrice: string;
+  spacingMode: GridSpacingMode;
+  stepValue: string;
+  sizingMode: GridSizingMode;
+  sizeValue: string;
+  levelsPerSide: number;
+}
+
+export interface GridStrategyRepository {
+  find(accountId: string, instrumentId: string): Promise<GridStrategyRecord | null>;
+  /** Creates the holding's grid or replaces its settings. */
+  save(record: GridStrategyRecord): Promise<void>;
+}
+
+/** One trading session's prices for an instrument. */
+export interface DailyBar {
+  /** Trading date (YYYY-MM-DD). */
+  date: string;
+  open: string;
+  high: string;
+  low: string;
+  close: string;
+  previousClose: string | null;
+  /** True for the official end-of-day bar; false for a live snapshot that may still change. */
+  isFinal: boolean;
+  /** When a live snapshot was observed (ISO-8601 UTC); null for official bars. */
+  observedAt: string | null;
+}
+
+export interface DailyBarProvider {
+  getLatestDailyBar(instrument: Pick<TradingInstrumentRecord, "symbol" | "currency">): Promise<DailyBar>;
 }

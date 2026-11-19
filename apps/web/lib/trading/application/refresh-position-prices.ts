@@ -13,7 +13,10 @@ export interface PriceQuote {
   currency: string;
   /** When the source says the price was observed, if it reported one. */
   asOf: string | null;
+  /** Public page the price can be checked on; null when the source has no browsable page. */
   sourceUrl: string | null;
+  /** Human-readable source for quotes from a trusted data API (e.g. "EODHD daily close"). */
+  sourceLabel?: string | null;
 }
 
 /** Looks up the latest market price for an instrument. Implementations may be slow or fail. */
@@ -36,7 +39,8 @@ export type PriceRefreshResult =
       previousPrice: string | null;
       price: string;
       asOf: string | null;
-      sourceUrl: string;
+      sourceUrl: string | null;
+      sourceLabel: string;
     }
   | { positionId: string; symbol: string; status: "failed"; reason: string };
 
@@ -82,7 +86,8 @@ export async function refreshPositionPrices(
     if (!PRICE_PATTERN.test(quote.price) || decimal(quote.price).isZero()) {
       return fail(`Quote price "${quote.price}" is not a valid positive price`);
     }
-    if (!quote.sourceUrl) {
+    const sourceLabel = quote.sourceLabel?.trim() || (quote.sourceUrl ? hostname(quote.sourceUrl) : null);
+    if (!sourceLabel) {
       return fail("Quote did not cite a source");
     }
 
@@ -95,8 +100,17 @@ export async function refreshPositionPrices(
       price: quote.price,
       asOf: quote.asOf,
       sourceUrl: quote.sourceUrl,
+      sourceLabel,
     };
   });
+}
+
+function hostname(url: string): string | null {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return null;
+  }
 }
 
 async function mapWithConcurrency<T, R>(items: readonly T[], limit: number, fn: (item: T) => Promise<R>): Promise<R[]> {

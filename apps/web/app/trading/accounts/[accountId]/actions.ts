@@ -14,7 +14,7 @@ import {
   createPrismaEarningRepositories,
   createPrismaPriceRefreshRepositories,
   createPrismaTradeRepositories,
-  createSearchAgentQuoteProvider,
+  createMarketQuoteProvider,
 } from "@/lib/trading/infrastructure";
 
 export type TradeActionState =
@@ -76,7 +76,7 @@ export async function refreshPrices(_previous: PriceRefreshActionState, formData
 
   let results: PriceRefreshResult[] | null;
   try {
-    results = await refreshPositionPrices(accountId, createPrismaPriceRefreshRepositories(), createSearchAgentQuoteProvider());
+    results = await refreshPositionPrices(accountId, createPrismaPriceRefreshRepositories(), createMarketQuoteProvider());
   } catch (error) {
     console.error("Failed to refresh position prices", { accountId, error });
     return { status: "error", message: "Prices could not be refreshed. Please try again." };

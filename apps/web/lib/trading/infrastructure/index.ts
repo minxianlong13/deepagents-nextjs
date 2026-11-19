@@ -9,10 +9,14 @@ import { PrismaPositionWriteRepository } from "./repositories/prisma-position-wr
 import { PrismaTradeRepository } from "./repositories/prisma-trade-repository";
 import { PrismaTradingAccountRepository } from "./repositories/prisma-trading-account-repository";
 import { PrismaTradingInstrumentRepository } from "./repositories/prisma-trading-instrument-repository";
-import { SearchAgentQuoteProvider } from "./search-agent-quote-provider";
+import type { GridReportRepositories } from "../application/grid-report";
+import type { DailyBarProvider } from "../application/repositories";
+import { EodhdDailyBarProvider } from "./eodhd-daily-bar-provider";
+import { EodhdQuoteProvider } from "./eodhd-quote-provider";
+import { PrismaGridStrategyRepository } from "./repositories/prisma-grid-strategy-repository";
 
 export { EodhdMarketData } from "./eodhd-market-data";
-export type { EodhdMarketDataOptions, EtfDailyPrices, HistoricalDailyPrice, MarketDataSymbol } from "./eodhd-market-data";
+export type { EodhdMarketDataOptions, EtfDailyPrices, HistoricalDailyPrice, MarketDataSymbol, RealTimeQuote } from "./eodhd-market-data";
 
 export function createPrismaTradingRepositories(): TradingAccountReadRepositories & {
   instruments: PrismaTradingInstrumentRepository;
@@ -43,8 +47,9 @@ export function createPrismaPriceRefreshRepositories(): PriceRefreshRepositories
   };
 }
 
-export function createSearchAgentQuoteProvider(): PriceQuoteProvider {
-  return new SearchAgentQuoteProvider();
+/** Default provider for refreshing holding prices: EODHD's latest daily close. */
+export function createMarketQuoteProvider(): PriceQuoteProvider {
+  return new EodhdQuoteProvider();
 }
 
 export function createPrismaEarningRepositories(): EarningRepositories {
@@ -53,4 +58,13 @@ export function createPrismaEarningRepositories(): EarningRepositories {
     instruments: new PrismaTradingInstrumentRepository(),
     earnings: new PrismaEarningRepository(),
   };
+}
+
+export function createPrismaGridReportRepositories(): GridReportRepositories {
+  return { ...createPrismaTradingRepositories(), grids: new PrismaGridStrategyRepository() };
+}
+
+/** Latest session bar for grid reports: EODHD's official daily bar, or the live day bar when newer. */
+export function createDailyBarProvider(): DailyBarProvider {
+  return new EodhdDailyBarProvider();
 }

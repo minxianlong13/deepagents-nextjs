@@ -21,6 +21,20 @@ export interface HistoricalDailyPrice {
   volume: string | null;
 }
 
+export interface RealTimeQuote {
+  /** EODHD ticker with exchange suffix, e.g. "XEQT.TO". */
+  code: string;
+  /** Latest traded price (EODHD's `close` field on the live endpoint). */
+  price: string;
+  previousClose: string | null;
+  /** The session's open, high, and low so far; null when EODHD omits them. */
+  open: string | null;
+  high: string | null;
+  low: string | null;
+  /** When the price was observed, as an ISO-8601 UTC timestamp. */
+  observedAt: string;
+}
+
 export interface EtfDailyPrices {
   symbol: MarketDataSymbol;
   prices: HistoricalDailyPrice[];
@@ -39,7 +53,7 @@ export class EodhdMarketData {
   private readonly fetchImpl: typeof fetch;
 
   constructor(options: EodhdMarketDataOptions = {}) {
-    this.apiToken = options.apiToken ?? process.env.EODHD_API_KEY ?? "";
+    this.apiToken = options.apiToken ?? process.env.EODHD_API_TOKEN ?? "";
     this.baseUrl = options.baseUrl ?? DEFAULT_BASE_URL;
     this.fetchImpl = options.fetchImpl ?? fetch;
   }
@@ -75,6 +89,7 @@ export class EodhdMarketData {
 
   async getHistoricalDailyPrices(
     symbol: Pick<MarketDataSymbol, "symbol" | "exchange">,
+    options: { lookbackDays?: number } = {},
   ): Promise<HistoricalDailyPrice[]> {
     const ticker = symbol.symbol.trim();
     const exchange = toEodhdExchange(symbol.exchange);
@@ -83,7 +98,7 @@ export class EodhdMarketData {
 
     const to = new Date();
     const from = new Date(to);
-    from.setUTCDate(from.getUTCDate() - HISTORY_LOOKBACK_DAYS);
+    from.setUTCDate(from.getUTCDate() - (options.lookbackDays ?? HISTORY_LOOKBACK_DAYS));
     const response = await this.request(
       `/api/eod/${encodeURIComponent(`${ticker}.${exchange}`)}`,
       {
@@ -98,17 +113,52 @@ export class EodhdMarketData {
     return response
       .flatMap((item) => {
         if (!isRecord(item)) return [];
+        // EODHD returns prices and volume as JSON numbers.
         const date = stringValue(item.date);
-        const open = stringValue(item.open);
-        const high = stringValue(item.high);
-        const low = stringValue(item.low);
-        const close = stringValue(item.close);
+        const open = numericString(item.open);
+        const high = numericString(item.high);
+        const low = numericString(item.low);
+        const close = numericString(item.close);
         if (!date || !open || !high || !low || !close) return [];
         return [
-          { date, open, high, low, close, volume: nullableString(item.volume) },
+          { date, open, high, low, close, volume: numericString(item.volume) },
         ];
       })
       .slice(0, MAX_DAILY_PRICES);
+  }
+
+  /**
+   * Fetches EODHD's live (delayed) quote. Returns null when EODHD has no live data for the
+   * ticker (it reports "NA" fields), so callers can fall back to the daily close.
+   */
+  async getRealTimeQuote(
+    symbol: Pick<MarketDataSymbol, "symbol" | "exchange">,
+  ): Promise<RealTimeQuote | null> {
+    const ticker = symbol.symbol.trim();
+    const exchange = toEodhdExchange(symbol.exchange);
+    if (!ticker || !exchange)
+      throw new Error("Resolved symbol and exchange are required");
+
+    const response = await this.request(
+      `/api/real-time/${encodeURIComponent(`${ticker}.${exchange}`)}`,
+    );
+    if (!isRecord(response)) return null;
+
+    const price = numericString(response.close);
+    const timestamp = typeof response.timestamp === "number" && Number.isFinite(response.timestamp)
+      ? response.timestamp
+      : null;
+    if (!price || timestamp === null) return null;
+
+    return {
+      code: stringValue(response.code) ?? `${ticker}.${exchange}`,
+      price,
+      previousClose: numericString(response.previousClose),
+      open: numericString(response.open),
+      high: numericString(response.high),
+      low: numericString(response.low),
+      observedAt: new Date(timestamp * 1000).toISOString(),
+    };
   }
 
   /** Resolves an ETF name, then fetches its 500 most recent daily prices. */
@@ -186,4 +236,15 @@ function stringValue(value: unknown): string | null {
 
 function nullableString(value: unknown): string | null {
   return stringValue(value);
+}
+
+/** Accepts a finite JSON number or numeric string and returns a plain (non-exponent) decimal string. */
+function numericString(value: unknown): string | null {
+  if (typeof value === "number") {
+    if (!Number.isFinite(value)) return null;
+    const text = String(value);
+    return /e/i.test(text) ? value.toFixed(8).replace(/\.?0+$/, "") : text;
+  }
+  const text = stringValue(value);
+  return text && /^-?\d+(\.\d+)?$/.test(text) ? text : null;
 }

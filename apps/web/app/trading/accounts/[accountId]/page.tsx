@@ -6,14 +6,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { getTradingAccount, type TradingAccountDetails } from "@/lib/trading/application";
 import { createPrismaTradingRepositories } from "@/lib/trading/infrastructure";
 import { EarningsButton, type EarningRow } from "./earnings-dialog";
+import { formatMaybeMoney, formatMoney, formatPercent, formatQuantity, formatReturnPercent, formatSignedMoney, tone } from "./format";
+import { GridButton } from "./grid-dialog";
 import { RefreshPricesButton } from "./refresh-prices-button";
 import { TradeButton, type TradeInstrumentOption } from "./trade-dialog";
 import { TradeHistoryButton, type TradeHistoryRow, type TradeHistorySummary } from "./trade-history-dialog";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
-// Price refresh runs a web-search agent per holding from a Server Action on this page.
-export const maxDuration = 300;
+// Price refresh calls a market-data API per holding from a Server Action on this page.
+export const maxDuration = 60;
 
 type PageProps = { params: Promise<{ accountId: string }> };
 
@@ -136,7 +138,7 @@ export default async function TradingAccountPage({ params }: PageProps) {
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full min-w-[1160px] border-collapse text-left text-sm">
+                <table className="w-full min-w-[1220px] border-collapse text-left text-sm">
                   <thead className="bg-black/[0.025] text-xs text-black/55">
                     <tr>
                       <th scope="col" className="px-4 py-3 font-medium">Instrument</th>
@@ -169,6 +171,7 @@ export default async function TradingAccountPage({ params }: PageProps) {
                             <TradeButton {...tradeProps} side="buy" defaultInstrumentId={position.instrumentId} className="h-8 px-3" />
                             <TradeButton {...tradeProps} side="sell" defaultInstrumentId={position.instrumentId} className="h-8 px-3" />
                             <TradeHistoryButton {...historyProps} defaultInstrumentId={position.instrumentId} className="h-8 px-3" />
+                            <GridButton accountId={account.id} instrumentId={position.instrumentId} symbol={position.symbol} className="h-8 px-3" />
                           </div>
                         </td>
                       </tr>
@@ -262,43 +265,6 @@ function SummaryCard({ label, value, note, tone, action }: { label: string; valu
       {note ? <CardContent className="pt-0 text-xs leading-relaxed text-black/50">{note}</CardContent> : null}
     </Card>
   );
-}
-
-function formatMoney(value: string, currency: string): string {
-  const fixed = new Prisma.Decimal(value).toFixed(2);
-  const [whole, fraction] = fixed.split(".");
-  const grouped = whole!.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return `${currency} ${grouped}.${fraction}`;
-}
-
-function formatSignedMoney(value: string, currency: string): string {
-  const amount = new Prisma.Decimal(value);
-  if (amount.isZero()) return formatMoney("0", currency);
-  return `${amount.isNegative() ? "−" : "+"}${formatMoney(amount.abs().toString(), currency)}`;
-}
-
-function formatReturnPercent(change: string, base: string): string {
-  const baseAmount = new Prisma.Decimal(base);
-  if (baseAmount.isZero()) return "n/a";
-  const percent = new Prisma.Decimal(change).div(baseAmount).mul(100);
-  return `${percent.isNegative() ? "" : "+"}${percent.toFixed(2)}%`;
-}
-
-function tone(value: string): "gain" | "loss" | "flat" {
-  const amount = new Prisma.Decimal(value);
-  return amount.isZero() ? "flat" : amount.isNegative() ? "loss" : "gain";
-}
-
-function formatMaybeMoney(value: string | null, currency: string): string {
-  return value === null ? "Unavailable" : formatMoney(value, currency);
-}
-
-function formatQuantity(value: string): string {
-  return new Prisma.Decimal(value).toFixed();
-}
-
-function formatPercent(value: string | null): string {
-  return value === null ? "Unavailable" : `${new Prisma.Decimal(value).toFixed(2)}%`;
 }
 
 function earningKindLabel(kind: string): string {

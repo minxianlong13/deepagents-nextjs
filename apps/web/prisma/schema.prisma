@@ -203,6 +203,16 @@ enum TradingEarningKind {
   stock_lending
 }
 
+enum GridSpacingMode {
+  percent
+  amount
+}
+
+enum GridSizingMode {
+  shares
+  amount
+}
+
 model TradingAccount {
   id           String             @id @default(cuid())
   name         String
@@ -216,6 +226,7 @@ model TradingAccount {
   positions Position[]
   trades    Trade[]
   earnings  TradingEarning[]
+  grids     GridStrategy[]
 
   @@index([broker, accountType])
 }
@@ -233,6 +244,7 @@ model TradingInstrument {
   positions Position[]
   trades    Trade[]
   earnings  TradingEarning[]
+  grids     GridStrategy[]
 
   @@unique([symbol, currency])
   @@index([isActive])
@@ -291,5 +303,29 @@ model TradingEarning {
   tradingInstrument TradingInstrument? @relation(fields: [tradingInstrumentId], references: [id], onDelete: Restrict)
 
   @@index([tradingAccountId, receivedAt])
+  @@index([tradingInstrumentId])
+}
+
+/// Saved grid settings for one holding. Levels are derived from these; nothing is stored per level.
+model GridStrategy {
+  id                  String          @id @default(cuid())
+  tradingAccountId    String
+  tradingInstrumentId String
+  /// Price the ladder is built from; levels stay fixed until this changes.
+  anchorPrice         Decimal         @db.Decimal(20, 8)
+  spacingMode         GridSpacingMode
+  /// Percent between levels, or a fixed price step, depending on spacingMode.
+  stepValue           Decimal         @db.Decimal(20, 8)
+  sizingMode          GridSizingMode
+  /// Shares per level, or cash per level, depending on sizingMode.
+  sizeValue           Decimal         @db.Decimal(20, 8)
+  levelsPerSide       Int
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+
+  tradingAccount    TradingAccount    @relation(fields: [tradingAccountId], references: [id], onDelete: Cascade)
+  tradingInstrument TradingInstrument @relation(fields: [tradingInstrumentId], references: [id], onDelete: Restrict)
+
+  @@unique([tradingAccountId, tradingInstrumentId])
   @@index([tradingInstrumentId])
 }

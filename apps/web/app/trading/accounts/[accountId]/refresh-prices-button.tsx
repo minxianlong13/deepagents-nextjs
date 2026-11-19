@@ -20,7 +20,7 @@ export function RefreshPricesButton({ accountId, disabled }: { accountId: string
       </form>
 
       {pending ? (
-        <p className="text-xs text-black/55" aria-live="polite">Searching the web for each holding&rsquo;s latest price. This can take a minute.</p>
+        <p className="text-xs text-black/55" aria-live="polite">Fetching each holding&rsquo;s latest close from EODHD…</p>
       ) : null}
 
       {!pending && state.status === "error" ? <p role="alert" className="text-xs text-red-700">{state.message}</p> : null}
@@ -40,10 +40,14 @@ export function RefreshPricesButton({ accountId, disabled }: { accountId: string
                     <span className="tabular-nums text-black/70">
                       {result.previousPrice ? `${trim(result.previousPrice)} → ` : ""}{trim(result.price)}
                     </span>
-                    {result.asOf ? <span className="text-black/50">as of {result.asOf}</span> : null}
-                    <a href={result.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-black/50 underline underline-offset-2 hover:text-black">
-                      source
-                    </a>
+                    {result.asOf ? <span className="text-black/50">as of {formatAsOf(result.asOf)}</span> : null}
+                    {result.sourceUrl ? (
+                      <a href={result.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-black/50 underline underline-offset-2 hover:text-black">
+                        {result.sourceLabel}
+                      </a>
+                    ) : (
+                      <span className="text-black/50">{result.sourceLabel}</span>
+                    )}
                   </>
                 ) : (
                   <span className="text-red-700">Not updated: {result.reason}</span>
@@ -55,6 +59,15 @@ export function RefreshPricesButton({ accountId, disabled }: { accountId: string
       ) : null}
     </div>
   );
+}
+
+/** Shows timestamps in the viewer's local time; date-only values (daily closes) are shown as-is. */
+function formatAsOf(value: string): string {
+  if (!value.includes("T")) return value;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime())
+    ? value
+    : date.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
 }
 
 function trim(value: string): string {
