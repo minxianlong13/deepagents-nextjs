@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { parseQuoteResponse } from "./parse-quote-response";
+import { parseQuoteResponse } from "../parse-quote-response";
 
 describe("parseQuoteResponse", () => {
   it("reads a fenced JSON block after prose", () => {

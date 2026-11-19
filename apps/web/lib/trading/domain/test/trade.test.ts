@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { applyTrade } from "./trade";
+import { applyTrade } from "../trade";
 
 describe("applyTrade", () => {
   it("opens a new position at the trade price", () => {

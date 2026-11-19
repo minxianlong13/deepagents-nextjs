@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { EarningRejectedError, recordEarning, type EarningRepositories } from "./record-earning";
-import type { EarningRecord } from "./repositories";
+import { EarningRejectedError, recordEarning, type EarningRepositories } from "../record-earning";
+import type { EarningRecord } from "../repositories";
 
 function setup() {
   const created: Array<Omit<EarningRecord, "id"> & { accountId: string }> = [];

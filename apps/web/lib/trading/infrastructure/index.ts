@@ -11,6 +11,9 @@ import { PrismaTradingAccountRepository } from "./repositories/prisma-trading-ac
 import { PrismaTradingInstrumentRepository } from "./repositories/prisma-trading-instrument-repository";
 import { SearchAgentQuoteProvider } from "./search-agent-quote-provider";
 
+export { TwelveDataMarketData } from "./twelve-data-market-data";
+export type { EtfDailyPrices, HistoricalDailyPrice, MarketDataSymbol, TwelveDataMarketDataOptions } from "./twelve-data-market-data";
+
 export function createPrismaTradingRepositories(): TradingAccountReadRepositories & {
   instruments: PrismaTradingInstrumentRepository;
 } {

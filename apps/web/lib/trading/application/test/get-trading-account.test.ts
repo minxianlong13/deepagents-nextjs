@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { getTradingAccount } from "./get-trading-account";
-import type { TradingAccountReadRepositories } from "./get-trading-account";
+import { getTradingAccount } from "../get-trading-account";
+import type { TradingAccountReadRepositories } from "../get-trading-account";
 
 const base = {
   accounts: {

@@ -30,7 +30,7 @@ function buildPrompt(instrument: Pick<TradingInstrumentRecord, "symbol" | "name"
     `- Name: ${instrument.name}`,
     `- ${listing}`,
     "",
-    "Use internet_search with topic \"finance\". Prefer the most recent last-traded or closing price from a reputable quote page.",
+    "Use market_data_search first with the ETF name to resolve the ticker and exchange and obtain its daily prices from Twelve Data. Use the most recent returned closing price and its date. Use internet_search with topic \"finance\" only if the market-data tool fails, and prefer a reputable quote page in that fallback.",
     "Do not write a report. Do not estimate or guess. Reply with ONLY one JSON object in a ```json fenced block:",
     "```json",
     `{"symbol":"${instrument.symbol}","price":"<decimal number, no currency symbol>","currency":"<3-letter code of the quoted price>","asOf":"<ISO-8601 time or date of the quote, or null>","sourceUrl":"<URL of the page the price came from>"}`,

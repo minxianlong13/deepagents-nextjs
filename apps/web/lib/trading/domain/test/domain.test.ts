@@ -5,7 +5,7 @@ import {
   calculatePositionValues,
   validateInitialFund,
   validatePosition,
-} from "./index";
+} from "../index";
 
 describe("trading domain calculations", () => {
   it("calculates position values without floating-point drift", () => {

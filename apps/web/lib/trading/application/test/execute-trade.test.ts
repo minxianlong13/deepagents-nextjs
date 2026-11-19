@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import type { PositionChange } from "../domain";
-import { executeTrade, TradeRejectedError, type TradeRepositories } from "./execute-trade";
-import type { PositionRecord, TradeRecordInput } from "./repositories";
+import type { PositionChange } from "../../domain";
+import { executeTrade, TradeRejectedError, type TradeRepositories } from "../execute-trade";
+import type { PositionRecord, TradeRecordInput } from "../repositories";
 
 function setup(options: { position?: PositionRecord | null; instrumentCurrency?: string; isActive?: boolean } = {}) {
   const writes: PositionChange[] = [];
