@@ -20,6 +20,15 @@ const base = {
       ? [{ id: "position-1", tradingAccountId: accountId, tradingInstrumentId: "instrument-1", quantity: "2", averageCost: "10.25", currentPrice: "12" }]
       : [],
   },
+  trades: {
+    findByAccountId: async (accountId: string) => accountId === "account-1"
+      ? [
+          { id: "t1", tradingInstrumentId: "instrument-1", side: "buy" as const, quantity: "3", price: "10.25", fee: "0", executedAt: new Date() },
+          { id: "t2", tradingInstrumentId: "instrument-1", side: "sell" as const, quantity: "1", price: "13", fee: "0.5", executedAt: new Date() },
+        ]
+      : [],
+  },
+  earnings: { findByAccountId: async () => [] },
 } satisfies TradingAccountReadRepositories;
 
 describe("getTradingAccount", () => {
@@ -33,6 +42,64 @@ describe("getTradingAccount", () => {
     assert.equal(result?.totalCostBasis, "20.5");
     assert.equal(result?.totalMarketValue, "24");
     assert.equal(result?.totalUnrealizedReturn, "3.5");
+  });
+
+  it("derives cash, total fund, and realized return from the trade history", async () => {
+    const result = await getTradingAccount("account-1", base);
+    assert.equal(result?.cashBalance, "981.75");   // 1000 − 30.75 + 13 − 0.5
+    assert.equal(result?.totalFund, "1005.75");    // cash + 24 market value
+    assert.equal(result?.totalReturn, "5.75");
+    assert.equal(result?.realizedReturn, "2.25");  // 13 − 0.5 − 10.25
+    assert.equal(result?.totalFees, "0.5");
+    assert.equal(result?.tradeCount, 2);
+  });
+
+  it("returns trade history newest first with per-trade realized return", async () => {
+    const repositories = {
+      ...base,
+      trades: {
+        findByAccountId: async () => [
+          { id: "t1", tradingInstrumentId: "instrument-1", side: "buy" as const, quantity: "3", price: "10.25", fee: "0", executedAt: new Date("2026-11-01T15:00:00Z") },
+          { id: "t2", tradingInstrumentId: "instrument-1", side: "sell" as const, quantity: "1", price: "13", fee: "0.5", executedAt: new Date("2026-11-10T15:00:00Z") },
+        ],
+      },
+    } satisfies TradingAccountReadRepositories;
+    const result = await getTradingAccount("account-1", repositories);
+    assert.deepEqual(result?.trades.map((t) => [t.id, t.symbol, t.realizedReturn, t.quantityAfter]), [
+      ["t2", "ABC", "2.25", "2"],
+      ["t1", "ABC", null, "3"],
+    ]);
+    assert.equal(result?.trades[0]?.executedAt, "2026-11-10T15:00:00.000Z");
+  });
+
+  it("adds earnings to cash and total fund but not to realized return", async () => {
+    const repositories = {
+      ...base,
+      earnings: {
+        findByAccountId: async () => [
+          { id: "e1", kind: "stock_lending" as const, amount: "4.25", tradingInstrumentId: "instrument-1", receivedAt: new Date("2026-11-15T00:00:00Z"), note: null },
+          { id: "e2", kind: "stock_lending" as const, amount: "0.75", tradingInstrumentId: null, receivedAt: new Date("2026-11-01T00:00:00Z"), note: "misc" },
+        ],
+      },
+    } satisfies TradingAccountReadRepositories;
+    const result = await getTradingAccount("account-1", repositories);
+    assert.equal(result?.totalEarnings, "5");
+    assert.equal(result?.cashBalance, "986.75");
+    assert.equal(result?.totalFund, "1010.75");
+    assert.equal(result?.totalReturn, "10.75");
+    assert.equal(result?.realizedReturn, "2.25");
+    assert.deepEqual(result?.earnings.map((e) => [e.id, e.symbol]), [["e1", "ABC"], ["e2", null]]);
+  });
+
+  it("leaves total fund unavailable while a price is missing", async () => {
+    const repositories = {
+      ...base,
+      positions: { findByAccountId: async (accountId: string) => [{ id: "position-1", tradingAccountId: accountId, tradingInstrumentId: "instrument-1", quantity: "2", averageCost: "10.25", currentPrice: null }] },
+    } satisfies TradingAccountReadRepositories;
+    const result = await getTradingAccount("account-1", repositories);
+    assert.equal(result?.totalFund, null);
+    assert.equal(result?.totalReturn, null);
+    assert.equal(result?.cashBalance, "981.75");
   });
 
   it("returns null when the account does not exist", async () => {

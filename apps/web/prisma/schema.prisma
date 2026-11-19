@@ -194,6 +194,15 @@ enum TradingInstrumentType {
   etf
 }
 
+enum TradeSide {
+  buy
+  sell
+}
+
+enum TradingEarningKind {
+  stock_lending
+}
+
 model TradingAccount {
   id           String             @id @default(cuid())
   name         String
@@ -205,6 +214,8 @@ model TradingAccount {
   updatedAt    DateTime           @updatedAt
 
   positions Position[]
+  trades    Trade[]
+  earnings  TradingEarning[]
 
   @@index([broker, accountType])
 }
@@ -220,6 +231,8 @@ model TradingInstrument {
   updatedAt      DateTime              @updatedAt
 
   positions Position[]
+  trades    Trade[]
+  earnings  TradingEarning[]
 
   @@unique([symbol, currency])
   @@index([isActive])
@@ -239,5 +252,44 @@ model Position {
   tradingInstrument TradingInstrument @relation(fields: [tradingInstrumentId], references: [id], onDelete: Restrict)
 
   @@unique([tradingAccountId, tradingInstrumentId])
+  @@index([tradingInstrumentId])
+}
+
+model Trade {
+  id                  String    @id @default(cuid())
+  tradingAccountId    String
+  tradingInstrumentId String
+  side                TradeSide
+  quantity            Decimal   @db.Decimal(20, 8)
+  price               Decimal   @db.Decimal(20, 8)
+  fee                 Decimal   @default(0) @db.Decimal(20, 8)
+  /// When the trade was executed at the broker (UTC), as entered by the user.
+  executedAt          DateTime
+  createdAt           DateTime  @default(now())
+
+  tradingAccount    TradingAccount    @relation(fields: [tradingAccountId], references: [id], onDelete: Cascade)
+  tradingInstrument TradingInstrument @relation(fields: [tradingInstrumentId], references: [id], onDelete: Restrict)
+
+  @@index([tradingAccountId, executedAt])
+  @@index([tradingInstrumentId])
+}
+
+/// Income credited to an account outside of trades, such as stock lending payouts.
+model TradingEarning {
+  id                  String             @id @default(cuid())
+  tradingAccountId    String
+  kind                TradingEarningKind
+  amount              Decimal            @db.Decimal(20, 8)
+  /// The instrument the income relates to (e.g. the lent stock), if any.
+  tradingInstrumentId String?
+  /// When the income was received (UTC).
+  receivedAt          DateTime
+  note                String?
+  createdAt           DateTime           @default(now())
+
+  tradingAccount    TradingAccount     @relation(fields: [tradingAccountId], references: [id], onDelete: Cascade)
+  tradingInstrument TradingInstrument? @relation(fields: [tradingInstrumentId], references: [id], onDelete: Restrict)
+
+  @@index([tradingAccountId, receivedAt])
   @@index([tradingInstrumentId])
 }
