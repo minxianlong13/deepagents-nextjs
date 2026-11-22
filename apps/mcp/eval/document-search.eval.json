@@ -1,0 +1,192 @@
+{
+  "description": "Retrieval evaluation set for document_search. expectedSources are substrings matched against each result's source; any one match counts as a hit. Leave expectedSources empty for questions the knowledge base should not answer.",
+  "questions": [
+    {
+      "id": "help-sync-not-working",
+      "category": "help",
+      "question": "Passkey is not syncing with my Cvent registration event, what should I check?",
+      "expectedSources": ["webpage/why-isn-t-passkey-connecting-or-syncing-with-my-cvent-event"]
+    },
+    {
+      "id": "help-cancel-registration-cascade",
+      "category": "help",
+      "question": "If an attendee cancels their registration, does their hotel booking get cancelled as well?",
+      "expectedSources": ["webpage/if-a-registration-is-canceled-will-the-associated-passkey-booking"]
+    },
+    {
+      "id": "help-cancel-booking-cascade",
+      "category": "help",
+      "question": "Does cancelling a Passkey hotel reservation also cancel the attendee's registration?",
+      "expectedSources": ["webpage/if-a-passkey-booking-is-canceled-will-the-registration-get-canceled"]
+    },
+    {
+      "id": "help-synced-fields",
+      "category": "help",
+      "question": "Which attendee fields are kept in sync between Passkey and Cvent Registration?",
+      "expectedSources": ["webpage/which-fields-are-synced-between-passkey-and-registration"]
+    },
+    {
+      "id": "help-email-data-tag",
+      "category": "help",
+      "question": "How can I show an attendee's hotel reservation details in a registration email?",
+      "expectedSources": ["webpage/which-data-tag-pulls-reservation-details-from-passkey"]
+    },
+    {
+      "id": "help-resync-button",
+      "category": "help",
+      "question": "When do I need to press re-sync for a Passkey integrated event?",
+      "expectedSources": ["webpage/when-should-i-use-the-re-sync-button"]
+    },
+    {
+      "id": "help-roommates",
+      "category": "help",
+      "question": "Can attendees request to share a hotel room with a roommate when registration is integrated with Passkey?",
+      "expectedSources": ["webpage/can-i-set-up-roommate-requests"]
+    },
+    {
+      "id": "help-access-codes",
+      "category": "help",
+      "question": "How do I restrict a room block so only certain attendee types can book it?",
+      "expectedSources": ["webpage/enabling-access-codes-for-attendee-types-in-passkey"]
+    },
+    {
+      "id": "help-connect-events",
+      "category": "help",
+      "question": "What are the steps to connect a registration event to a Passkey event using the open event URL?",
+      "expectedSources": [
+        "webpage/setting-up-the-passkey-integration-in-registration",
+        "webpage/the-complete-guide-to-integrating-registration-events-with-passkey"
+      ]
+    },
+    {
+      "id": "help-multiple-rooms",
+      "category": "help",
+      "question": "Can one registrant reserve more than one hotel room for the same event?",
+      "expectedSources": ["webpage/can-a-registrant-book-several-rooms"]
+    },
+    {
+      "id": "adr-403-vs-404",
+      "category": "adr",
+      "question": "Why does the housing integration return 403 instead of 404 when the caller has no access to an event?",
+      "expectedSources": ["passkey-cvent-core-integration/adr/ADR-0003"]
+    },
+    {
+      "id": "adr-bearer-tokens",
+      "category": "adr",
+      "question": "What kinds of bearer tokens does the Cvent core integration mint and what is each one used for?",
+      "expectedSources": ["passkey-cvent-core-integration/adr/ADR-0002"]
+    },
+    {
+      "id": "adr-get-only-retries",
+      "category": "adr",
+      "question": "Are POST requests to upstream services retried, or only GET requests?",
+      "expectedSources": ["passkey-cvent-core-integration/adr/ADR-0009"]
+    },
+    {
+      "id": "adr-upstream-auth-502",
+      "category": "adr",
+      "question": "How are 401 and 403 errors from upstream APIs reported to callers of the housing integration?",
+      "expectedSources": ["passkey-cvent-core-integration/adr/ADR-0007"]
+    },
+    {
+      "id": "adr-link-rollback",
+      "category": "adr",
+      "question": "What happens if creating the second record fails while linking a Passkey event to a Cvent event?",
+      "expectedSources": [
+        "passkey-cvent-core-integration/adr/ADR-0005",
+        "passkey-cvent-core-integration/data-model.md",
+        "wiki/Passkey/wiki-1191973962"
+      ]
+    },
+    {
+      "id": "adr-no-di",
+      "category": "adr",
+      "question": "Does the event housing service use a dependency injection framework like Guice or Spring?",
+      "expectedSources": ["passkey-event-housing/adr/001-manual-wiring-no-di"]
+    },
+    {
+      "id": "adr-transactions",
+      "category": "adr",
+      "question": "How are database transactions shared across DAO calls in the event housing service?",
+      "expectedSources": ["passkey-event-housing/adr/003-threadlocal-transaction-manager"]
+    },
+    {
+      "id": "adr-image-dedupe",
+      "category": "adr",
+      "question": "How does event housing avoid storing the same uploaded image twice in S3?",
+      "expectedSources": ["passkey-event-housing/adr/006-s3-image-storage-md5-dedupe"]
+    },
+    {
+      "id": "repo-clamav",
+      "category": "repository",
+      "question": "Which Passkey service scans uploaded files for malware and where does it run?",
+      "expectedSources": ["passkey-repo-clamav/", "wiki/Passkey/wiki-414551042"]
+    },
+    {
+      "id": "repo-screenshot",
+      "category": "repository",
+      "question": "Is there a service that generates screenshots of websites on demand?",
+      "expectedSources": ["passkey-repo-screenshot-service/"]
+    },
+    {
+      "id": "wiki-rdk2-profiling",
+      "category": "wiki",
+      "question": "How can I take a NodeJS heap snapshot of an RDK2 BFF in a pre-prod environment?",
+      "expectedSources": ["wiki/Passkey/wiki-615108254"]
+    },
+    {
+      "id": "wiki-mfe-auth-cookies",
+      "category": "wiki",
+      "question": "Which cookies does the Resdesk login set for authentication across CDF microfrontends?",
+      "expectedSources": ["wiki/Passkey/wiki-651386673"]
+    },
+    {
+      "id": "wiki-file-uploader-ownership",
+      "category": "wiki",
+      "question": "What is the File Uploader responsible for in contract PDF text extraction and PCI tokenization?",
+      "expectedSources": ["wiki/Passkey/wiki-1177693231", "wiki/Passkey/wiki-1201287108"]
+    },
+    {
+      "id": "wiki-docker-windows",
+      "category": "wiki",
+      "question": "How do I set up Docker on a Windows laptop for local development, including enabling virtualization?",
+      "expectedSources": ["wiki/Passkey/wiki-89724356"]
+    },
+    {
+      "id": "remote-deepagents-subagents",
+      "category": "remote",
+      "question": "How do I define subagents for a deep agent in LangChain JavaScript?",
+      "expectedSources": ["docs.langchain.com/oss/javascript/deepagents/subagents"]
+    },
+    {
+      "id": "remote-deepagents-backends",
+      "category": "remote",
+      "question": "What filesystem backends can a deep agent use to store files?",
+      "expectedSources": ["docs.langchain.com/oss/javascript/deepagents/backends"]
+    },
+    {
+      "id": "negative-recipe",
+      "category": "negative",
+      "question": "What is a good recipe for chocolate cake?",
+      "expectedSources": []
+    },
+    {
+      "id": "negative-geography",
+      "category": "negative",
+      "question": "What is the capital of France?",
+      "expectedSources": []
+    },
+    {
+      "id": "negative-stripe",
+      "category": "negative",
+      "question": "How do I configure Stripe webhook signing secrets for subscription billing?",
+      "expectedSources": []
+    },
+    {
+      "id": "negative-ios",
+      "category": "negative",
+      "question": "How do I publish an iOS app to the Apple App Store with TestFlight?",
+      "expectedSources": []
+    }
+  ]
+}

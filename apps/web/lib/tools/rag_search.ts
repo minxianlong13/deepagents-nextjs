@@ -4,7 +4,6 @@ import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { Document } from "@langchain/core/documents";
-import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { PineconeStore } from "@langchain/pinecone";
 import { Pinecone as PineconeClient } from "@pinecone-database/pinecone";
 import { StateBackend } from "deepagents";
@@ -12,11 +11,18 @@ import { tool } from "langchain";
 import { z } from "zod";
 import { createOpenAIEmbeddingModel } from "../llm/model.js";
 import { createMcpClient } from "../mcp/client";
+import { chunkDocument } from "../rag/markdown_chunker";
 
 const DOCS_DIRECTORY = path.resolve(process.cwd(), "../../docs");
 const REMOTE_METADATA_DIRECTORY = path.join(DOCS_DIRECTORY, "remote");
-const DOCUMENT_NAMESPACE = "documents";
-const MANIFEST_NAMESPACE = "rag-manifest";
+// Override to build a new index side by side, for example after a chunking
+// change. The MCP server's RAG_DOCUMENT_NAMESPACE must point at the same one.
+// "documents" / "rag-manifest" hold the previous fixed-size chunks.
+const DOCUMENT_NAMESPACE = process.env.RAG_DOCUMENT_NAMESPACE ?? "documents-v2";
+const MANIFEST_NAMESPACE =
+  process.env.RAG_MANIFEST_NAMESPACE ?? "rag-manifest-v2";
+// Bump when chunking changes so unchanged sources are re-indexed too.
+const CHUNKER_VERSION = "headings-v1";
 const INDEX_NAME = "aoe-langchain-docs";
 const MANIFEST_VECTOR = [1, ...Array(1023).fill(0)];
 
@@ -188,14 +194,16 @@ async function loadDocuments(folderName: string): Promise<Document[]> {
   return docs;
 }
 
-async function splitDocuments(documents: Document[]): Promise<Document[]> {
-  const splitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 1000,
-    chunkOverlap: 200,
-  });
-  const splitDocs = await splitter.splitDocuments(documents);
-  console.log(`Split into ${splitDocs.length} chunks.`);
-  return splitDocs;
+async function splitDocument(document: Document): Promise<Document[]> {
+  const source = String(document.metadata.source);
+  const chunks = await chunkDocument(source, document.pageContent);
+  return chunks.map(
+    ({ text, title, section }) =>
+      new Document({
+        pageContent: text,
+        metadata: { source, ...(title ? { title } : {}), ...(section ? { section } : {}) },
+      }),
+  );
 }
 
 async function createVectorStore() {
@@ -239,12 +247,16 @@ export async function indexKnowledgeBase(folderName: string) {
   let indexedSources = 0;
   let skippedSources = 0;
   let indexedChunks = 0;
-  const batchSize = 8;
+  // OpenAIEmbeddings and PineconeStore both retry rate-limit errors with
+  // backoff, so batches go out back to back instead of after a fixed sleep.
+  const batchSize = 96;
 
   for (const document of documents) {
     const source = String(document.metadata.source);
+    // Including the chunker version re-indexes every source when chunking
+    // changes, even if the source text did not.
     const sourceHash = createHash("sha256")
-      .update(document.pageContent)
+      .update(`${CHUNKER_VERSION}\n${document.pageContent}`)
       .digest("hex");
     const manifestId = createHash("sha256").update(source).digest("hex");
     const existing = await manifestNamespace.fetch([manifestId]);
@@ -263,17 +275,13 @@ export async function indexKnowledgeBase(folderName: string) {
         .deleteMany(existingMetadata.chunkIds);
     }
 
-    const chunks = await splitDocuments([document]);
+    const chunks = await splitDocument(document);
     const chunkIds = chunks.map((_, index) => `${manifestId}-${index}`);
     for (let index = 0; index < chunks.length; index += batchSize) {
       const batch = chunks.slice(index, index + batchSize);
       await vectorStore.addDocuments(batch, {
         ids: chunkIds.slice(index, index + batch.length),
       });
-
-      if (index + batchSize < chunks.length) {
-        await new Promise((resolve) => setTimeout(resolve, 10_000));
-      }
     }
 
     await manifestNamespace.upsert([
@@ -340,6 +348,9 @@ export async function retrieveDocumentation(
 export const documentSearch = tool(
   async ({ query }) => {
     const retrievedDocs = await retrieveDocumentation(query);
+    if (retrievedDocs.length === 0) {
+      return "No relevant documentation found in the knowledge base for this query. Continue without documentation evidence and say so in the answer.";
+    }
     const batchId = crypto.randomUUID().slice(0, 8);
     const uploads: Array<[string, Uint8Array]> = [];
     const savedPaths: string[] = [];

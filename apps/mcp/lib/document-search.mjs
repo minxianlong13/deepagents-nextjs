@@ -3,7 +3,9 @@ import { Pinecone } from "@pinecone-database/pinecone";
 // These must match the indexing side in apps/web/lib/tools/rag_search.ts and
 // apps/web/lib/llm/model.js, otherwise query vectors will not line up.
 const INDEX_NAME = process.env.RAG_PINECONE_INDEX ?? "aoe-langchain-docs";
-const DOCUMENT_NAMESPACE = "documents";
+// "documents-v2" holds heading-based chunks; "documents" is the previous
+// fixed-size index, kept for rollback.
+const DOCUMENT_NAMESPACE = process.env.RAG_DOCUMENT_NAMESPACE ?? "documents-v2";
 const EMBEDDING_MODEL = "text-embedding-3-small";
 const EMBEDDING_DIMENSIONS = 1024;
 // LangChain's PineconeStore stores chunk text under this metadata key.

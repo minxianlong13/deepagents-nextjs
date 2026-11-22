@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "node server.mjs",
-    "test": "node client.mjs"
+    "test": "node client.mjs",
+    "eval": "node eval/run.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",

@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:trading": "node --import tsx --test lib/trading/**/*.test.ts"
+    "test:trading": "node --import tsx --test lib/trading/**/*.test.ts",
+    "test:rag": "node --import tsx --test lib/rag/*.test.ts",
+    "index:kb": "tsx scripts/index-knowledge-base.ts"
   },
   "dependencies": {
     "@langchain/anthropic": "^1.5.6",
