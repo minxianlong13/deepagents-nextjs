@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "deepagents-local-mcp": {
+      "type": "http",
+      "url": "${DEEPAGENTS_MCP_URL:-http://127.0.0.1:8787/mcp}",
+      "headers": {
+        "Authorization": "Bearer ${MCP_AUTH_TOKEN:-}"
+      }
+    }
+  }
+}

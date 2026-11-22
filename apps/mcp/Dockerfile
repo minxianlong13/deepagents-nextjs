@@ -22,6 +22,9 @@ USER pwuser
 
 COPY --from=deps --chown=pwuser:pwuser /app/node_modules ./node_modules
 COPY --chown=pwuser:pwuser server.mjs client.mjs package.json ./
+COPY --chown=pwuser:pwuser lib ./lib
+COPY --chown=pwuser:pwuser tools ./tools
+COPY --chown=pwuser:pwuser config ./config
 
 EXPOSE 8080
 

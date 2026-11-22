@@ -56,6 +56,19 @@ async function getConfiguredServers() {
   return servers;
 }
 
+// Adds "Authorization: Bearer $MCP_AUTH_TOKEN" unless the config already sets
+// an Authorization header, so the token stays out of mcp.json.
+function withAuthHeader(
+  headers: Record<string, string> | undefined,
+): Record<string, string> | undefined {
+  const token = process.env.MCP_AUTH_TOKEN?.trim();
+  const hasAuth = Object.keys(headers ?? {}).some(
+    (key) => key.toLowerCase() === "authorization",
+  );
+  if (!token || hasAuth) return headers;
+  return { ...headers, Authorization: `Bearer ${token}` };
+}
+
 export async function loadMcpClientConfig() {
   const servers = await getConfiguredServers();
 
@@ -66,7 +79,7 @@ export async function loadMcpClientConfig() {
         {
           transport: server.type ?? "http",
           url: server.url,
-          headers: server.headers,
+          headers: withAuthHeader(server.headers),
         },
       ]),
     ),
@@ -94,11 +107,7 @@ export async function createMcpClient(
     );
   }
 
-  const headers = server.headers
-    ? Object.fromEntries(
-        Object.entries(server.headers).map(([key, value]) => [key, value]),
-      )
-    : undefined;
+  const headers = withAuthHeader(server.headers);
   const transport = new StreamableHTTPClientTransport(new URL(server.url), {
     requestInit: headers ? { headers } : undefined,
   });

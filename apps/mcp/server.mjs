@@ -10,6 +10,8 @@ import { registerSlackTools } from "./tools/slack.mjs";
 import { registerWikiTools } from "./tools/wiki.mjs";
 import { registerWebpageTools } from "./tools/webpage.mjs";
 import { registerOpenWikiTools } from "./tools/openwiki.mjs";
+import { registerDocumentSearchTools } from "./tools/document-search.mjs";
+import { createHash, timingSafeEqual } from "node:crypto";
 
 // Respect Cloud Run's PORT env var (8080) or fall back to MCP_PORT (local dev), then default to 8787.
 const PORT = Number.parseInt(
@@ -33,12 +35,46 @@ function createServer() {
   registerWikiTools(server);
   registerWebpageTools(server);
   registerOpenWikiTools(server);
+  registerDocumentSearchTools(server);
 
   return server;
 }
 
+// When MCP_AUTH_TOKEN is set, every /mcp request must send
+// "Authorization: Bearer <token>". Leave it unset only for local development.
+const MCP_AUTH_TOKEN = process.env.MCP_AUTH_TOKEN?.trim() || undefined;
+
+function digest(value) {
+  return createHash("sha256").update(value).digest();
+}
+
+function requireBearerToken(req, res, next) {
+  if (!MCP_AUTH_TOKEN) return next();
+
+  const header = req.get("authorization") ?? "";
+  const match = /^Bearer\s+(.+)$/i.exec(header);
+  // Compare fixed-length digests so the check is constant time.
+  if (match && timingSafeEqual(digest(match[1].trim()), digest(MCP_AUTH_TOKEN))) {
+    return next();
+  }
+
+  res.status(401).set("WWW-Authenticate", "Bearer").json({
+    jsonrpc: "2.0",
+    error: { code: -32001, message: "Unauthorized" },
+    id: null,
+  });
+}
+
+if (!MCP_AUTH_TOKEN) {
+  console.warn(
+    "MCP_AUTH_TOKEN is not set: the /mcp endpoint accepts unauthenticated requests.",
+  );
+}
+
 const app = createMcpExpressApp({ host: HOST });
 registerSlackOAuthCallback(app);
+
+app.use(MCP_PATH, requireBearerToken);
 
 app.post(MCP_PATH, async (req, res) => {
   const server = createServer();

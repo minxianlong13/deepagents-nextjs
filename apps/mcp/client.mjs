@@ -17,6 +17,8 @@ const toolAliases = {
   openwiki: "query_openwiki",
   query_openwiki: "query_openwiki",
   read_openwiki: "read_openwiki",
+  docs: "document_search",
+  document_search: "document_search",
 };
 
 function printUsage() {
@@ -30,6 +32,7 @@ Tools and examples:
   slack <keywords...>   pnpm test slack XSS acknowledgement email
   webpage [url]         pnpm test webpage https://example.com/article
   openwiki <json>       pnpm test openwiki '{"repo":"deepagents-nextjs","query":"MCP server"}'
+  docs <query...>       pnpm test docs how does passkey registration work
 
 You can also pass a JSON object matching the selected tool's input schema:
   pnpm test get_jira_ticket '{"issueKey":"GROUP-132015"}'
@@ -91,6 +94,10 @@ function parseToolArguments(toolName, suppliedArguments) {
     return { contentId: suppliedArguments[0] };
   }
 
+  if (toolName === "document_search") {
+    return { query: suppliedArguments.join(" ") };
+  }
+
   if (toolName === "ingest_webpage") {
     if (suppliedArguments.length !== 1) {
       throw new Error(
@@ -122,7 +129,12 @@ const client = new Client({
   name: "deepagents-mcp-local-client",
   version: "0.1.0",
 });
-const transport = new StreamableHTTPClientTransport(new URL(serverUrl));
+const authToken = process.env.MCP_AUTH_TOKEN?.trim();
+const transport = new StreamableHTTPClientTransport(new URL(serverUrl), {
+  requestInit: authToken
+    ? { headers: { Authorization: `Bearer ${authToken}` } }
+    : undefined,
+});
 
 try {
   await client.connect(transport);

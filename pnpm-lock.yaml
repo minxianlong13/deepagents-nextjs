@@ -16,6 +16,9 @@ importers:
       '@mozilla/readability':
         specifier: ^0.6.0
         version: 0.6.0
+      '@pinecone-database/pinecone':
+        specifier: ^5.1.2
+        version: 5.1.2
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2

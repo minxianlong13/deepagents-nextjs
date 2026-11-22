@@ -11,6 +11,7 @@ import { StateBackend } from "deepagents";
 import { tool } from "langchain";
 import { z } from "zod";
 import { createOpenAIEmbeddingModel } from "../llm/model.js";
+import { createMcpClient } from "../mcp/client";
 
 const DOCS_DIRECTORY = path.resolve(process.cwd(), "../../docs");
 const REMOTE_METADATA_DIRECTORY = path.join(DOCS_DIRECTORY, "remote");
@@ -298,11 +299,42 @@ export async function indexKnowledgeBase(folderName: string) {
 
 export const backend = new StateBackend();
 
+type RetrievedChunk = {
+  source: string;
+  score: number | null;
+  text: string;
+};
+
+// Retrieval runs on the MCP server's document_search tool so that agents
+// outside this app (for example code agents) share the same search.
 export async function retrieveDocumentation(
   query: string,
-): Promise<Document[]> {
-  const store = await getVectorStore();
-  return store.similaritySearch(query, 4);
+): Promise<RetrievedChunk[]> {
+  const connection = await createMcpClient();
+  try {
+    const result = await connection.client.callTool({
+      name: "document_search",
+      arguments: { query },
+    });
+    if (result.isError) {
+      const content = Array.isArray(result.content) ? result.content : [];
+      const message = content
+        .filter((item) => item.type === "text")
+        .map((item) => item.text)
+        .join("\n");
+      throw new Error(message || "MCP document_search failed.");
+    }
+
+    const structured = result.structuredContent as
+      | { results?: RetrievedChunk[] }
+      | undefined;
+    if (!Array.isArray(structured?.results)) {
+      throw new Error("MCP document_search returned no structured results.");
+    }
+    return structured.results;
+  } finally {
+    await connection.close().catch(() => undefined);
+  }
 }
 
 export const documentSearch = tool(
@@ -315,7 +347,8 @@ export const documentSearch = tool(
 
     retrievedDocs.forEach((doc, index) => {
       const path = `/retrieved/${batchId}/chunk_${index + 1}.md`;
-      const content = `# Source: ${doc.metadata.source ?? "unknown"}\n\n${doc.pageContent}`;
+      const score = doc.score === null ? "n/a" : doc.score.toFixed(3);
+      const content = `# Source: ${doc.source}\n\nScore: ${score}\n\n${doc.text}`;
       uploads.push([path, encoder.encode(content)]);
       savedPaths.push(path);
     });

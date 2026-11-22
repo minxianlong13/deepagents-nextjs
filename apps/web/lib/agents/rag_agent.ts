@@ -72,7 +72,12 @@ const chunkAnalystSubagent = {
 
 async function createRagAgent() {
   const mcpClient = new MultiServerMCPClient(await loadMcpClientConfig());
-  const mcpTools = await mcpClient.getTools();
+  // documentSearch wraps the MCP document_search tool and saves chunks under
+  // /retrieved/ for chunk-analyst, so drop the raw MCP copy to avoid a
+  // duplicate tool name.
+  const mcpTools = (await mcpClient.getTools()).filter(
+    (mcpTool: { name: string }) => mcpTool.name !== documentSearch.name,
+  );
 
   return createDeepAgent({
     model: createGPT6LunaModel(),
