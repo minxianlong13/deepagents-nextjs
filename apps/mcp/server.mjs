@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import "dotenv/config";
+import "./lib/env.mjs";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { createMcpExpressApp } from "@modelcontextprotocol/sdk/server/express.js";

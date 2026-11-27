@@ -9,7 +9,7 @@
 // Ranking metrics use raw search results; threshold metrics apply minScore
 // the same way the MCP tool does.
 
-import "dotenv/config";
+import "../lib/env.mjs";
 import { readFile, writeFile } from "node:fs/promises";
 import { searchDocuments } from "../lib/document-search.mjs";
 import { resolveDefaultMinScore } from "../tools/document-search.mjs";
