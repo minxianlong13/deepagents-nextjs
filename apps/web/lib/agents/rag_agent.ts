@@ -49,7 +49,7 @@ import { MultiServerMCPClient } from "@langchain/mcp-adapters";
 import { ANALYSIS_JIRA_TICKET_PROMPT } from "../skill/jira_analysis";
 import { loadMcpClientConfig } from "../mcp/client";
 import { backend, documentSearch } from "../tools/rag_search";
-import { createGPT6LunaModel } from "../llm/model.js";
+import { createChatModel } from "../llm/model.js";
 
 const maxConcurrentAnalysts = 3;
 
@@ -80,7 +80,7 @@ async function createRagAgent() {
   );
 
   return createDeepAgent({
-    model: createGPT6LunaModel(),
+    model: createChatModel("gpt-6-luna"),
     tools: [...mcpTools, documentSearch],
     backend: backend,
     systemPrompt: instructions,

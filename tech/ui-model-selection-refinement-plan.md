@@ -13,6 +13,62 @@ Allow users to select an approved AI model from the UI and have the selected mod
 - Access and capability validation
 - Usage and error feedback
 
+## Implementation progress
+
+Last updated: 2026-11-28
+
+Current status: partial implementation. Dynamic model selection is working for
+resume tailoring and cover-letter generation. Other workflows still use their
+existing defaults.
+
+### Completed
+
+- Added a server-side allowlist/catalog in `apps/web/lib/llm/catalog.ts`.
+- Expanded the catalog with curated OpenAI, Anthropic, and Google chat models.
+- Added provider-aware model construction through `createChatModel` and
+  `createDeterministicChatModel` in `apps/web/lib/llm/model.js`.
+- Added Google provider support through `ChatGoogleGenerativeAI`.
+- Added the System Settings page at `/manage/settings`.
+- Added separate model settings for resume tailoring and cover-letter
+  generation.
+- Added server-side validation for selected model IDs.
+- Persisted System Settings selections in cookies.
+- Added per-run model selectors to the Resume page.
+- Passed the selected models through the resume API and workflow.
+- Displayed the models used in completed resume results.
+- Removed unused provider-specific chat-model wrapper functions.
+- Added an inset select chevron and shared select styling.
+- TypeScript, ESLint, and `git diff --check` pass. ESLint still reports one
+  pre-existing Prisma warning.
+
+### Partially complete
+
+- Phase 1: the catalog and defaults exist, but capability metadata, availability
+  status, and the complete workflow-default matrix are not defined yet.
+- Phase 2: the server catalog and allowlist exist, but environment-based
+  enable/disable controls and provider availability checks are not implemented.
+- Phase 3: the selector UI exists for resume workflows, but it is not yet a
+  reusable component and is not available in every workflow.
+- Phase 4: request-level selection and the provider factory are complete for
+  resume and cover-letter generation only.
+- Phase 5: deterministic settings are preserved, but workflow-specific
+  tool-calling and structured-output capability validation is still needed.
+- Phase 6: selected model IDs are visible in resume results, but usage metrics,
+  fallback behavior, and server-side cost/latency records are not implemented.
+
+### Remaining work
+
+- Decide which additional workflows support dynamic selection: Jira analysis,
+  RAG, search, OpenWiki, and any future Slack workflow.
+- Add capability metadata and validate models against each workflow contract.
+- Add enabled/disabled model configuration and provider availability checks.
+- Extract a reusable model-selector component.
+- Add usage, latency, token, error, and fallback records.
+- Add tests for every approved model, invalid IDs, missing IDs, incompatible
+  capabilities, provider failures, and default behavior.
+- Decide whether the feature needs authentication, per-user settings, or a
+  feature flag before production rollout.
+
 ## Recommended model catalog
 
 The UI should display friendly names while the server uses stable model IDs.

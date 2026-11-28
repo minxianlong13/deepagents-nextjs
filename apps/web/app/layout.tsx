@@ -143,6 +143,12 @@ export default function RootLayout({
                   RAG Config
                 </Link>
                 <Link
+                  href="/manage/settings"
+                  className="block rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                >
+                  System Settings
+                </Link>
+                <Link
                   href="/manage/trading"
                   className="block rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                 >
@@ -247,6 +253,12 @@ export default function RootLayout({
                       className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
                     >
                       RAG Config
+                    </Link>
+                    <Link
+                      href="/manage/settings"
+                      className="rounded-lg px-3 py-1.5 text-sm font-medium text-sidebar-foreground/70 transition hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                    >
+                      System Settings
                     </Link>
                     <Link
                       href="/manage/trading"

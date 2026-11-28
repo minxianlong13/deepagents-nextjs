@@ -2,7 +2,7 @@ import { createDeepAgent } from "deepagents";
 import { tool, toolStrategy } from "langchain";
 import { readFileSync } from "node:fs";
 import { z } from "zod";
-import { createDeterministicGPT6LunaModel } from "../llm/model.js";
+import { createDeterministicChatModel } from "../llm/model.js";
 import { ANALYSIS_JIRA_CONTENT_PROMPT } from "../skill/jira_analysis";
 import { backend, documentSearch } from "../tools/rag_search";
 import { searchSlackMessages } from "../tools/slack_search";
@@ -107,7 +107,7 @@ export async function runAnalyzeJiraTicketAgent(
   const repositories = loadRepositoryNames();
   const jiraTicketAgent = createDeepAgent({
     name: "analyze_jira_ticket",
-    model: createDeterministicGPT6LunaModel(),
+    model: createDeterministicChatModel("gpt-6-luna"),
     tools: [documentSearch, createStageSlackSearchTool()],
     backend,
     systemPrompt: ANALYSIS_JIRA_CONTENT_PROMPT,

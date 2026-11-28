@@ -5,6 +5,7 @@ import {
   runResumeTailorAgent,
   type ResumeTailorResult,
 } from "@/lib/agents/tailor_resume_agent";
+import type { ChatModelId } from "@/lib/llm/catalog";
 
 export type ResumeTailorWorkflowResult = ResumeTailorResult & {
   fileName: string;
@@ -12,6 +13,10 @@ export type ResumeTailorWorkflowResult = ResumeTailorResult & {
   coverLetter: string;
   coverLetterFileName: string;
   coverLetterFilePath: string;
+  selectedModels: {
+    resumeTailoring: ChatModelId;
+    coverLetter: ChatModelId;
+  };
 };
 
 function toFileNamePart(value: string | null, fallback: string) {
@@ -39,13 +44,21 @@ async function saveMarkdown(fileName: string, markdown: string) {
 
 export async function runResumeTailorWorkflow(
   jobDescription: string,
+  models: {
+    resumeTailoring: ChatModelId;
+    coverLetter: ChatModelId;
+  },
 ): Promise<ResumeTailorWorkflowResult> {
   const masterResume = await readFile(
     new URL("../resume/basic_resume.md", import.meta.url),
     "utf8",
   );
 
-  const result = await runResumeTailorAgent(masterResume, jobDescription);
+  const result = await runResumeTailorAgent(
+    masterResume,
+    jobDescription,
+    models.resumeTailoring,
+  );
   const company = toFileNamePart(result.companyName, "Company_Not_Specified");
   const role = toFileNamePart(result.jobTitle, "Role_Not_Specified");
   const resumeFile = await saveMarkdown(
@@ -59,6 +72,7 @@ export async function runResumeTailorWorkflow(
     companyName: result.companyName,
     jobTitle: result.jobTitle,
     tailoredResume: result.tailoredResume,
+    modelId: models.coverLetter,
   });
   const coverLetterFile = await saveMarkdown(
     `Xianlong_Min_CoverLetter_${company}_${role}.md`,
@@ -72,5 +86,6 @@ export async function runResumeTailorWorkflow(
     coverLetter,
     coverLetterFileName: coverLetterFile.fileName,
     coverLetterFilePath: coverLetterFile.filePath,
+    selectedModels: models,
   };
 }

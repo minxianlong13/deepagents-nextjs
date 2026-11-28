@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Check,
   Clipboard,
@@ -16,6 +16,9 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import type { ResumeTailorResult } from "@/lib/agents/tailor_resume_agent";
 
+type ModelSelection = { resumeTailoring: string; coverLetter: string };
+type Model = { id: string; label: string };
+
 export default function ResumePage() {
   const [jobDescription, setJobDescription] = useState("");
   const [markdown, setMarkdown] = useState("");
@@ -26,6 +29,25 @@ export default function ResumePage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [modelSelection, setModelSelection] = useState<ModelSelection>({
+    resumeTailoring: "gpt-6-luna",
+    coverLetter: "gpt-6-luna",
+  });
+  const [models, setModels] = useState<Model[]>([]);
+  const [selectedModels, setSelectedModels] = useState<ModelSelection | null>(null);
+
+  useEffect(() => {
+    fetch("/api/manage/model-selection", { cache: "no-store" })
+      .then(async (response) => {
+        if (!response.ok) return;
+        const data = (await response.json()) as { models?: Model[]; selection?: ModelSelection };
+        if (data.selection) setModelSelection(data.selection);
+        setModels(data.models ?? []);
+      })
+      .catch(() => {
+        // The server still validates the fallback defaults on submission.
+      });
+  }, []);
 
   const canTailor = jobDescription.trim().length >= 50 && !loading;
 
@@ -45,7 +67,11 @@ export default function ResumePage() {
       const response = await fetch("/api/resume/tailor", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ jobDescription }),
+        body: JSON.stringify({
+          jobDescription,
+          resumeTailoringModelId: modelSelection.resumeTailoring,
+          coverLetterModelId: modelSelection.coverLetter,
+        }),
       });
       const data = (await response.json()) as {
         companyName?: string | null;
@@ -59,6 +85,7 @@ export default function ResumePage() {
         filePath?: string;
         coverLetterFileName?: string;
         coverLetterFilePath?: string;
+        selectedModels?: ModelSelection;
         error?: string;
       };
 
@@ -80,6 +107,7 @@ export default function ResumePage() {
       setSavedCoverLetterPath(
         data.coverLetterFilePath ?? data.coverLetterFileName ?? "",
       );
+      setSelectedModels(data.selectedModels ?? modelSelection);
     } catch (caughtError) {
       setError(
         caughtError instanceof Error
@@ -276,6 +304,30 @@ export default function ResumePage() {
               {jobDescription.length.toLocaleString()} / 30,000
             </span>
           </div>
+          <div className="mt-4 grid gap-3 border-t border-black/10 pt-4 text-sm sm:grid-cols-2">
+            <label className="space-y-1 font-medium">
+              Resume model
+              <select
+                className="form-select bg-white"
+                value={modelSelection.resumeTailoring}
+                onChange={(event) => setModelSelection({ ...modelSelection, resumeTailoring: event.target.value })}
+                disabled={loading}
+              >
+                {models.map((model) => <option key={model.id} value={model.id}>{model.label}</option>)}
+              </select>
+            </label>
+            <label className="space-y-1 font-medium">
+              Cover-letter model
+              <select
+                className="form-select bg-white"
+                value={modelSelection.coverLetter}
+                onChange={(event) => setModelSelection({ ...modelSelection, coverLetter: event.target.value })}
+                disabled={loading}
+              >
+                {models.map((model) => <option key={model.id} value={model.id}>{model.label}</option>)}
+              </select>
+            </label>
+          </div>
           {error ? (
             <p role="alert" className="mt-3 text-sm text-destructive">
               {error}
@@ -315,6 +367,14 @@ export default function ResumePage() {
               </h2>
             </div>
             <dl className="grid gap-4 sm:grid-cols-2">
+              {selectedModels ? (
+                <div className="sm:col-span-2">
+                  <dt className="text-xs font-semibold uppercase text-black/50">Models used</dt>
+                  <dd className="mt-1 text-sm">
+                    Resume: {models.find((model) => model.id === selectedModels.resumeTailoring)?.label ?? selectedModels.resumeTailoring} · Cover letter: {models.find((model) => model.id === selectedModels.coverLetter)?.label ?? selectedModels.coverLetter}
+                  </dd>
+                </div>
+              ) : null}
               <div>
                 <dt className="text-xs font-semibold uppercase text-black/50">
                   Company

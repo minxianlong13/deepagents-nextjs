@@ -97,6 +97,12 @@ const workflowGroups: WorkflowGroup[] = [
         href: "/manage/trading",
         icon: Settings2,
       },
+      {
+        title: "System Settings",
+        description: "Configure application-wide AI and system behavior.",
+        href: "/manage/settings",
+        icon: Settings2,
+      },
     ],
   },
 ];

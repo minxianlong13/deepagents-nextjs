@@ -1,7 +1,8 @@
 import { createDeepAgent } from "deepagents";
 import { toolStrategy } from "langchain";
 import { z } from "zod";
-import { createDeterministicGPT6LunaModel } from "../llm/model.js";
+import { createDeterministicChatModel } from "../llm/model.js";
+import type { ChatModelId } from "../llm/catalog";
 import {
   COVER_LETTER_INSTRUCTIONS,
   RESUME_TAILOR_INSTRUCTIONS,
@@ -32,16 +33,20 @@ const resumeTailorOutputSchema = z.object({
 
 export type ResumeTailorResult = z.infer<typeof resumeTailorOutputSchema>;
 
-const resumeTailorAgent = createDeepAgent({
-  model: createDeterministicGPT6LunaModel(),
-  systemPrompt: RESUME_TAILOR_INSTRUCTIONS,
-  responseFormat: toolStrategy(resumeTailorOutputSchema),
-});
+function createResumeTailorAgent(modelId: ChatModelId) {
+  return createDeepAgent({
+    model: createDeterministicChatModel(modelId),
+    systemPrompt: RESUME_TAILOR_INSTRUCTIONS,
+    responseFormat: toolStrategy(resumeTailorOutputSchema),
+  });
+}
 
-const coverLetterAgent = createDeepAgent({
-  model: createDeterministicGPT6LunaModel(),
-  systemPrompt: COVER_LETTER_INSTRUCTIONS,
-});
+function createCoverLetterAgent(modelId: ChatModelId) {
+  return createDeepAgent({
+    model: createDeterministicChatModel(modelId),
+    systemPrompt: COVER_LETTER_INSTRUCTIONS,
+  });
+}
 
 function normalizeMessageContent(content: unknown): string {
   if (typeof content === "string") {
@@ -72,8 +77,9 @@ function normalizeMessageContent(content: unknown): string {
 export async function runResumeTailorAgent(
   masterResume: string,
   jobDescription: string,
+  modelId: ChatModelId,
 ): Promise<ResumeTailorResult> {
-  const result = await resumeTailorAgent.invoke({
+  const result = await createResumeTailorAgent(modelId).invoke({
     messages: [
       {
         role: "user",
@@ -104,8 +110,9 @@ export async function runCoverLetterAgent(input: {
   companyName: string | null;
   jobTitle: string | null;
   tailoredResume: string;
+  modelId: ChatModelId;
 }): Promise<string> {
-  const result = await coverLetterAgent.invoke({
+  const result = await createCoverLetterAgent(input.modelId).invoke({
     messages: [
       {
         role: "user",
